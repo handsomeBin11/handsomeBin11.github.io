@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>结构体 | X's blogs</title><meta name="keywords" content="C语言理论部分"><meta name="author" content="X-exp"><meta name="copyright" content="X-exp"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="为蛇么有结构体？如果你想连续存放一些数据，你可以用数组，但前提条件是数组必须每个元素的值都是相同类型的 但如果你想存放一些不同类型的数据，把它们弄成一个整体—-出现了结构体。 1234567891011121314151617181920212223#include &lt;stdio.h&gt;int main(int argc, char const* argv[])&amp;#123;    str">
+<meta property="og:type" content="article">
+<meta property="og:title" content="结构体">
+<meta property="og:url" content="http://example.com/2021/04/18/%E7%BB%93%E6%9E%84%E4%BD%93/index.html">
+<meta property="og:site_name" content="X&#39;s blogs">
+<meta property="og:description" content="为蛇么有结构体？如果你想连续存放一些数据，你可以用数组，但前提条件是数组必须每个元素的值都是相同类型的 但如果你想存放一些不同类型的数据，把它们弄成一个整体—-出现了结构体。 1234567891011121314151617181920212223#include &lt;stdio.h&gt;int main(int argc, char const* argv[])&amp;#123;    str">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-04-18T13:05:38.000Z">
+<meta property="article:modified_time" content="2021-04-23T02:10:21.239Z">
+<meta property="article:author" content="X-exp">
+<meta property="article:tag" content="C语言理论部分">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/04/18/%E7%BB%93%E6%9E%84%E4%BD%93/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '结构体',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-23 10:10:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/xinde.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">124</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">28</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">X's blogs</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">结构体</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-18T13:05:38.000Z" title="发表于 2021-04-18 21:05:38">2021-04-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-23T02:10:21.239Z" title="更新于 2021-04-23 10:10:21">2021-04-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C%E8%AF%AD%E8%A8%80%E7%90%86%E8%AE%BA%E9%83%A8%E5%88%86/">C语言理论部分</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="结构体"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="为蛇么有结构体？"><a href="#为蛇么有结构体？" class="headerlink" title="为蛇么有结构体？"></a>为蛇么有结构体？</h2><p>如果你想连续存放一些数据，你可以用数组，但前提条件是数组必须每个元素的值都是相同类型的</p>
+<p>但如果你想存放一些不同类型的数据，把它们弄成一个整体—-出现了结构体。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">date</span> &#123;</span></span><br><span class="line">      <span class="keyword">int</span> month;</span><br><span class="line">      <span class="keyword">int</span> day;</span><br><span class="line">      <span class="keyword">int</span> year;</span><br><span class="line">    &#125;;<span class="comment">//⚠️这里有分号</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">date</span> <span class="title">today</span>;</span><span class="comment">//定义 struct date 类型的变量 today</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">    today.month = <span class="number">07</span>;</span><br><span class="line">    today.day=<span class="number">31</span>;</span><br><span class="line">    today.year=<span class="number">2014</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;today&#x27;s data is %i-%i-%i\n&quot;</span>,today.year,today.month,today.day);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="声明在函数外还是内？"><a href="#声明在函数外还是内？" class="headerlink" title="声明在函数外还是内？"></a>声明在函数外还是内？</h3><ul>
+<li><p>如果你想只在某个函数里使用，就定义在函数里，就像上面的main函数里一样。</p>
+</li>
+<li><p>如果你想在程序的每一处都能够使用，那么你就定义在外面如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="class"><span class="keyword">struct</span> <span class="title">date</span> &#123;</span></span><br><span class="line">      <span class="keyword">int</span> month;</span><br><span class="line">      <span class="keyword">int</span> day;</span><br><span class="line">      <span class="keyword">int</span> year;</span><br><span class="line">    &#125;;<span class="comment">//⚠️这里有分号</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="声明结构的形式–3种形式"><a href="#声明结构的形式–3种形式" class="headerlink" title="声明结构的形式–3种形式"></a>声明结构的形式–3种形式</h4><ul>
+<li><p>~~~c<br>struct point{<br>  int x;<br>  int y;<br>};</p>
+<p>struct point p1,p2;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ~~~c</span><br><span class="line">  struct&#123;//无名的</span><br><span class="line">    int x;</span><br><span class="line">    int y;</span><br><span class="line">  &#125;p1,p2;</span><br><span class="line">  //相当于说，我将来就用 p1 p2 两个变量就行，不需要定义其他变量了。</span><br><span class="line">  //也就是，以后除了 p1 和 p2 不能定义其他的变量了</span><br><span class="line">  //相当于一次性产品</span><br></pre></td></tr></table></figure></li>
+<li><p>~~~c<br>struct point{<br>  int x;<br>  int y;<br>}p1,p2;<br>//相当于说，定义的时候顺便定义了 p1 p2<br>//以后你想用该结构变量的时候，还是可以采用 struct point *** 的形式来定义的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 结构变量的内存形式</span><br><span class="line"></span><br><span class="line">[![B6DmXE.png](https://www.helloimg.com/images/2021/04/18/B6DmXE.png)](https://www.helloimg.com/image/B6DmXE)</span><br><span class="line"></span><br><span class="line">#### 结构的初始化</span><br><span class="line"></span><br><span class="line">~~~c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">struct date &#123;</span><br><span class="line">      int month;</span><br><span class="line">      int day;</span><br><span class="line">      int year;</span><br><span class="line">&#125;;//⚠️这里有分号</span><br><span class="line">int main(int argc, char const* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    struct date today = &#123; 04,20,2021&#125;;</span><br><span class="line">   </span><br><span class="line">    today.month = 07;</span><br><span class="line">    today.day=31;</span><br><span class="line">    today.year=2014;</span><br><span class="line"></span><br><span class="line">    printf(&quot;today&#x27;s data is %i-%i-%i\n&quot;,today.year,today.month,today.day);</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/B6Dt89"><img src="https://www.helloimg.com/images/2021/04/18/B6Dt89.png" alt="B6Dt89.png"></a></p>
+<blockquote>
+<p>如图，当你花括号里这样定义的时候，编译器会自动帮你一一对应赋值结构中的变量。</p>
+</blockquote>
+<p>如果你想指定的几个赋值的话！采用    <strong>.神马</strong>   的方式来进行赋值</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">date</span> <span class="title">thismonth</span> =</span> &#123;.month = <span class="number">6</span>,.year = <span class="number">2014</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当然，你没有赋值的变量会像数组那样，自动赋 0 值</p>
+</blockquote>
+<h4 id="访问结构中的成员"><a href="#访问结构中的成员" class="headerlink" title="访问结构中的成员"></a>访问结构中的成员</h4><p>结构和数组的情况有点像</p>
+<ul>
+<li><p>数组用下标的方式访问里面的成员</p>
+<ul>
+<li> arr[ 3 ] = 10;</li>
+</ul>
+</li>
+<li><p>结构 用 . 运算符 和 名字来访问其成员</p>
+<ul>
+<li>today.day</li>
+<li>student.Name</li>
+<li>p1.x</li>
+<li>p1.y</li>
+</ul>
+</li>
+</ul>
+<h4 id="结构运算"><a href="#结构运算" class="headerlink" title="结构运算"></a>结构运算</h4><ul>
+<li><p>要访问整个结构，直接用结构变量的名字</p>
+</li>
+<li><p>结构可以做</p>
+<ul>
+<li><p>赋值</p>
+</li>
+<li><p>取地址</p>
+</li>
+<li><p>传递给函数的参数</p>
+</li>
+<li><p>~~~c<br>p1 = (struct point){5,10};//强制转换<br>//相当于 p1.x = 5 p1.y = 10</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ~~~c</span><br><span class="line">  p1 = p2; //可以相互赋值</span><br><span class="line">  //相当于</span><br><span class="line">  // p1.x = p2.x</span><br><span class="line">  // p1.y = p2.y</span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">date</span> <span class="title">today</span> =</span> &#123; <span class="number">04</span>,<span class="number">20</span>,<span class="number">2021</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">date</span> <span class="title">day</span>;</span><span class="comment">//定义了一个day变量，但我没有赋值</span></span><br><span class="line"></span><br><span class="line">    day = today;<span class="comment">//直接赋值给day，这里是数组做不到的</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;today&#x27;s data is %i-%i-%i\n&quot;</span>,day.year,day.month,day.day);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;today&#x27;s data is %i-%i-%i\n&quot;</span>,today.year,today.month,today.day);</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">today&#x27;s data is 2021-4-20  相同</span></span><br><span class="line"><span class="comment">today&#x27;s data is 2021-4-20</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="结构指针"><a href="#结构指针" class="headerlink" title="结构指针"></a>结构指针</h4><p>注意⚠️，结构的名称不是变量的地址（这里和数组是不同的），所以说加要取地址运算符。</p>
+</li>
+</ul>
+<h3 id="结构与函数"><a href="#结构与函数" class="headerlink" title="结构与函数"></a>结构与函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numberOfDays</span><span class="params">( struct date d )</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>整个结构是可以作为参数传入函数的</li>
+<li>这时候，是在函数内新建了一个<strong>新的</strong>结构变量（克隆体），然后把调用者的值复制进去</li>
+<li>也可以<strong>返回一个结构</strong></li>
+<li>这与数组完全不同</li>
+</ul>
+<h4 id="指向结构的指针"><a href="#指向结构的指针" class="headerlink" title="指向结构的指针"></a>指向结构的指针</h4><span id="more"></span>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">date</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> month;</span><br><span class="line">    <span class="keyword">int</span> day</span><br><span class="line">    <span class="keyword">int</span> year;</span><br><span class="line">&#125;myday;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">date</span> *<span class="title">p</span> =</span> &amp;myday;<span class="comment">//因为结构不像数组是地址，所以得取地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方式1 有点麻烦</span></span><br><span class="line">(*p).month = <span class="number">12</span>;<span class="comment">//*p就是那个结构myday</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方式2 </span></span><br><span class="line">p -&gt; month  = <span class="number">12</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="结构中的结构"><a href="#结构中的结构" class="headerlink" title="结构中的结构"></a>结构中的结构</h3><h4 id="结构数组"><a href="#结构数组" class="headerlink" title="结构数组"></a>结构数组</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">date</span> <span class="title">dates</span>[100];</span><span class="comment">//定义了struct date 类型的 名为dates结构变量的数组</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">date</span> <span class="title">dates</span>[] =</span> &#123; <span class="comment">//给这个结构变量数组赋初始值赋值</span></span><br><span class="line">  &#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">2005</span>&#125;,&#123;<span class="number">2</span>,<span class="number">4</span>,<span class="number">2005</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>相当于说把，</p>
+<ul>
+<li><p>{4,5,2005}分别对应结构中的每一个成员作为数组中一个元素</p>
+</li>
+<li><p>{2,4,2005} 分别对应结构中的每一个成员作为数组中一个元素</p>
+</li>
+</ul>
+</blockquote>
+<h5 id="结构数组如何取某个元素"><a href="#结构数组如何取某个元素" class="headerlink" title="结构数组如何取某个元素"></a>结构数组如何取某个元素</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dates[i].神马<span class="comment">//神马🐎表示结构中定义的成员</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="嵌套的结构"><a href="#嵌套的结构" class="headerlink" title="嵌套的结构"></a>嵌套的结构</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">point</span>&#123;</span></span><br><span class="line">  <span class="keyword">int</span> x;</span><br><span class="line">  <span class="keyword">int</span> y;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rectangle</span>&#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">point</span> <span class="title">pt1</span>;</span><span class="comment">//⚠️</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">point</span> <span class="title">pt2</span>;</span><span class="comment">//⚠️</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rectangle</span> <span class="title">r</span>;</span></span><br><span class="line"><span class="comment">//就可以定义</span></span><br><span class="line">r.pt1.x; r.pt2.x;</span><br><span class="line">r.pt1.y; r.pt2.y</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>什么意思呢？</p>
+<ul>
+<li>首先我们定义了一个struct point <strong>类型</strong>。该类型<strong>里有</strong> x 和 y 两个变量。</li>
+<li>实际含义是 整个point 能表达一个点，就是坐标轴 x 和 y 。</li>
+<li>我们又定义了一个struct rectangle（矩形） <strong>类型</strong> 。该类型<strong>里有</strong>两个点。pt1 和 pt2</li>
+<li>因为两个点就能确定一个矩形！！所以我们定义这个变量只要考虑两个成员即可。</li>
+</ul>
+</blockquote>
+<ul>
+<li>定义struct rectangle 类型的<strong>变量</strong> r。</li>
+<li>r.pt1.x 就代表 rectangle 里面的一个点r.pt1的x轴坐标为…..</li>
+<li>r.pt2.y 就代表 rectangle 里面的一个点r.pt2的y轴坐标为…..</li>
+</ul>
+<h4 id="结构变量定义的几种等价形式"><a href="#结构变量定义的几种等价形式" class="headerlink" title="结构变量定义的几种等价形式"></a>结构变量定义的几种等价形式</h4><p>变量定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rectangle</span> <span class="title">r</span>, *<span class="title">rp</span>;</span></span><br><span class="line"></span><br><span class="line">rp = &amp;r;<span class="comment">//取出r的地址给了struct rectangle 类型指针 rp接收</span></span><br></pre></td></tr></table></figure>
+
+<p>如下的4种形式都是等价的</p>
+<ul>
+<li><p> r . pt1 . x   —–常规写法</p>
+</li>
+<li><p> rp -&gt; pt1.x </p>
+</li>
+</ul>
+<p>  <a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKZhXT"><img src="https://www.helloimg.com/images/2021/04/23/BKZhXT.md.png" alt="BKZhXT.md.png"></a></p>
+<ul>
+<li><p>经过 rp = &amp;r 之后，rp得到了r的地址</p>
+</li>
+<li><p>此时 rp 就是那个 r</p>
+</li>
+<li><p>所以有 rp 所指的那个pt1的 x（rp-&gt;pt1.x）</p>
+</li>
+<li><p>rp -&gt; pt1.x  ====  r . pt1 . x</p>
+</li>
+<li><p>(r . rpt1 ) . x </p>
+</li>
+<li><p>(rp -&gt; pt1).x </p>
+</li>
+</ul>
+<h3 id="类型的定义"><a href="#类型的定义" class="headerlink" title="类型的定义"></a>类型的定义</h3><h4 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h4><p>它是用来给c里<strong>已有的</strong>的<strong>数据类型</strong>起一个新名字。</p>
+<ul>
+<li><p>比如</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Length;</span><br></pre></td></tr></table></figure></li>
+<li><p>相等于说，我用 Length 取代了<strong>已经有的数据类型</strong> int</p>
+</li>
+<li><p>由此我们可以写出一下程序</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Length a,b,len; <span class="comment">// 等价于 int a,b,len;</span></span><br><span class="line">Length arr[<span class="number">100</span>]; <span class="comment">// 等价于 int arr[100];</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="typedef用于结构体"><a href="#typedef用于结构体" class="headerlink" title="typedef用于结构体"></a>typedef用于结构体</h4><p>声明新的类型的名字</p>
+<ul>
+<li>新的名字是某种类型的别名</li>
+<li>改善了程序的可读性</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Adate</span></span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">  <span class="keyword">int</span> month;</span><br><span class="line">  <span class="keyword">int</span> day;</span><br><span class="line">  <span class="keyword">int</span> year; </span><br><span class="line">&#125;Date;</span><br><span class="line"></span><br><span class="line">Date d = &#123;<span class="number">4</span>,<span class="number">23</span>,<span class="number">2021</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKZu8K"><img src="https://www.helloimg.com/images/2021/04/23/BKZu8K.jpg" alt="BKZu8K.jpg"></a></p>
+<ul>
+<li>你可以想象成，从typedef 开始到最后那个花括号为止，是原来的类型。</li>
+<li>新的类型名就是那<strong>最后</strong>那<strong>一个</strong>单词。</li>
+<li>也就是Date 代表了 从typedef 到 Date<strong>之间的</strong>所有东西。</li>
+<li>当 Date d 的时候 ==== 声明了 struct Adate 类型的<strong>变量 d</strong> 。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">  <span class="keyword">int</span> month;</span><br><span class="line">  <span class="keyword">int</span> day;</span><br><span class="line">  <span class="keyword">int</span> year; </span><br><span class="line">&#125;Date;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>等价于 这样的一个struct命名为 Date ，也就是Date直接就是一个变量了</li>
+<li>至于说struct 名为啥不关心了，以后都不会用了，只用一次。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> *<span class="keyword">char</span>[<span class="number">10</span>] Strings;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>代表 Strings 是 含有 10个字符指针的数组<strong>类型</strong></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">X-exp</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/04/18/%E7%BB%93%E6%9E%84%E4%BD%93/">http://example.com/2021/04/18/%E7%BB%93%E6%9E%84%E4%BD%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">X's blogs</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C%E8%AF%AD%E8%A8%80%E7%90%86%E8%AE%BA%E9%83%A8%E5%88%86/">C语言理论部分</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/04/19/%E4%B8%89%E5%A4%A9%E6%89%93%E9%B1%BC%E4%B8%A4%E5%A4%A9%E6%99%92%E7%BD%91/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">三天打鱼两天晒网</div></div></a></div><div class="next-post pull-right"><a href="/2021/04/16/%E5%AD%97%E7%AC%A6%E4%B8%B2/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">字符串</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/04/25/全局变量/" title="全局变量"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-25</div><div class="title">全局变量</div></div></a></div><div><a href="/2021/04/22/多级指针/" title="多级指针"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-22</div><div class="title">多级指针</div></div></a></div><div><a href="/2021/04/28/宏/" title="宏"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-28</div><div class="title">宏</div></div></a></div><div><a href="/2021/04/22/指针和多维数组/" title="指针和多维数组"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-22</div><div class="title">指针和多维数组</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/null" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">X-exp</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">124</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">28</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Just do it.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E8%9B%87%E4%B9%88%E6%9C%89%E7%BB%93%E6%9E%84%E4%BD%93%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">为蛇么有结构体？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%9C%A8%E5%87%BD%E6%95%B0%E5%A4%96%E8%BF%98%E6%98%AF%E5%86%85%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">声明在函数外还是内？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E7%BB%93%E6%9E%84%E7%9A%84%E5%BD%A2%E5%BC%8F%E2%80%933%E7%A7%8D%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">声明结构的形式–3种形式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E7%BB%93%E6%9E%84%E4%B8%AD%E7%9A%84%E6%88%90%E5%91%98"><span class="toc-number">1.1.2.</span> <span class="toc-text">访问结构中的成员</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E8%BF%90%E7%AE%97"><span class="toc-number">1.1.3.</span> <span class="toc-text">结构运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E6%8C%87%E9%92%88"><span class="toc-number">1.1.4.</span> <span class="toc-text">结构指针</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%B8%8E%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">结构与函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E5%90%91%E7%BB%93%E6%9E%84%E7%9A%84%E6%8C%87%E9%92%88"><span class="toc-number">1.2.1.</span> <span class="toc-text">指向结构的指针</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%B8%AD%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.</span> <span class="toc-text">结构中的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E6%95%B0%E7%BB%84"><span class="toc-number">1.3.1.</span> <span class="toc-text">结构数组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E6%95%B0%E7%BB%84%E5%A6%82%E4%BD%95%E5%8F%96%E6%9F%90%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">结构数组如何取某个元素</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B5%8C%E5%A5%97%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.2.</span> <span class="toc-text">嵌套的结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E7%9A%84%E5%87%A0%E7%A7%8D%E7%AD%89%E4%BB%B7%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.3.3.</span> <span class="toc-text">结构变量定义的几种等价形式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.4.</span> <span class="toc-text">类型的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#typedef"><span class="toc-number">1.4.1.</span> <span class="toc-text">typedef</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#typedef%E7%94%A8%E4%BA%8E%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">1.4.2.</span> <span class="toc-text">typedef用于结构体</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/30/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/06/30/hello-world/" title="Hello World">Hello World</a><time datetime="2021-06-30T12:51:40.443Z" title="发表于 2021-06-30 20:51:40">2021-06-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/06/%E6%95%B0%E5%AD%97%E5%8A%A0%E5%AF%86/" title="数字加密"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字加密"/></a><div class="content"><a class="title" href="/2021/06/06/%E6%95%B0%E5%AD%97%E5%8A%A0%E5%AF%86/" title="数字加密">数字加密</a><time datetime="2021-06-06T15:44:16.000Z" title="发表于 2021-06-06 23:44:16">2021-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8E%92%E5%BA%8F/" title="字符串排序"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="字符串排序"/></a><div class="content"><a class="title" href="/2021/06/05/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8E%92%E5%BA%8F/" title="字符串排序">字符串排序</a><time datetime="2021-06-05T14:58:29.000Z" title="发表于 2021-06-05 22:58:29">2021-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/04/%E5%AE%8F-1/" title="宏"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="宏"/></a><div class="content"><a class="title" href="/2021/06/04/%E5%AE%8F-1/" title="宏">宏</a><time datetime="2021-06-04T13:12:29.000Z" title="发表于 2021-06-04 21:12:29">2021-06-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/03/%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9/" title="计算平均成绩"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算平均成绩"/></a><div class="content"><a class="title" href="/2021/06/03/%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9/" title="计算平均成绩">计算平均成绩</a><time datetime="2021-06-03T13:18:05.000Z" title="发表于 2021-06-03 21:18:05">2021-06-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By X-exp</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
