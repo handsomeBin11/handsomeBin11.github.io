@@ -125,7 +125,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">187</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">188</span></a>
 
   </li>
   </ul>
@@ -151,6 +151,108 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/13/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/13/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">冒泡排序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-13 21:23:39" itemprop="dateCreated datePublished" datetime="2021-04-13T21:23:39+08:00">2021-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-24 00:33:16" itemprop="dateModified" datetime="2024-01-24T00:33:16+08:00">2024-01-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">C语言编程题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="情况一：内循环正序"><a href="#情况一：内循环正序" class="headerlink" title="情况一：内循环正序"></a>情况一：内循环正序</h3><p>原理图如下：</p>
+<p><img src="https://ae01.alicdn.com/kf/Ufc4c54376e734a18ae30dba0fe896a22E.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/U3c14a79519f744eda5041c4135bb6e0fy.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/U08c8d803114a485f88173eeccad59a9aA.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/Udee9cade9d024c82a5d2d9a5541057e01.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/Ucd656c7d876444c6ba5e2926a6a4d132V.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/U7e1dddbf64f5484c8807908ea0ad97e1v.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/U681bc84c61ec4999b0181492a09f926cb.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/U767d7922396f49e09592a83b58f9cf55S.jpg"></p>
+<ul>
+<li><p>看图可以看出小轮也就是j那轮循环 一开始就是n-1 n-2 n-3 n-4   而 1 2 3 4 增长的特性满足i每次递增的特性，所以 为 n - i</p>
+</li>
+<li><p>大轮循环就是天蓝色框的，显然，图中有5个数，只需要循环 4次。所以得出结论：<strong>n 个数字只需要 n-1轮外循环即可</strong>。</p>
+<p>由此可以写出以下程序</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line"> &#123;</span><br><span class="line">   <span class="type">int</span> arr[] = &#123;<span class="number">23</span>,<span class="number">533</span>,<span class="number">1</span>,<span class="number">46</span>,<span class="number">324</span>,<span class="number">5</span>,<span class="number">89</span>,<span class="number">21</span>&#125;;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">7</span>; i++)<span class="comment">//n个只需要n-1轮</span></span><br><span class="line">   &#123;</span><br><span class="line">     <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">8</span>-i; j++) &#123; <span class="comment">// n - i 轮</span></span><br><span class="line"><span class="comment">//         printf(&quot;i = %d,j = %d\n&quot;,i,j);</span></span><br><span class="line">       <span class="keyword">if</span> ( arr[j<span class="number">-1</span>] &gt; arr[j] ) &#123;</span><br><span class="line">         <span class="type">int</span> t = arr[j];</span><br><span class="line">         arr[j] = arr[j<span class="number">-1</span>];</span><br><span class="line">         arr[j<span class="number">-1</span>] = t;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">7</span>; i++) &#123;<span class="comment">//数组是从0开始存的，所以下标要从0开始输出。⚠️</span></span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,arr[i]);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">     </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="情况二：内循环倒叙"><a href="#情况二：内循环倒叙" class="headerlink" title="情况二：内循环倒叙"></a>情况二：内循环倒叙</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> arr[] = &#123;<span class="number">23</span>,<span class="number">533</span>,<span class="number">1</span>,<span class="number">46</span>,<span class="number">324</span>,<span class="number">5</span>,<span class="number">89</span>,<span class="number">21</span>&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) <span class="comment">//同样外层循环 n-1轮</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">7</span>; j &gt;= i; j--) &#123;<span class="comment">//内层循环 n-i</span></span><br><span class="line">      <span class="keyword">if</span> ( arr[j<span class="number">-1</span>] &gt; arr[j] ) &#123;</span><br><span class="line">        <span class="type">int</span> t = arr[j<span class="number">-1</span>];</span><br><span class="line">        arr[j<span class="number">-1</span>] = arr[j];</span><br><span class="line">        arr[j] = t;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,arr[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下是每轮循环中输出 i 和 j的值的变换</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span>,j = <span class="number">7</span>       <span class="number">7</span>次小循环 = <span class="number">7</span> - i（<span class="number">0</span>）</span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">6</span></span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">5</span></span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">4</span></span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">3</span></span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">2</span></span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">1</span></span><br><span class="line"> ----------------  ☝️第一大轮 </span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">7</span>       <span class="number">6</span>次小循环 = <span class="number">7</span> - i（<span class="number">1</span>）</span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">6</span></span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">5</span></span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">4</span></span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">3</span></span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">2</span></span><br><span class="line">--------------       第二大轮</span><br><span class="line">i = <span class="number">2</span>,j = <span class="number">7</span>        <span class="number">5</span>次小循环 = <span class="number">7</span> - i（<span class="number">2</span>）</span><br><span class="line">i = <span class="number">2</span>,j = <span class="number">6</span></span><br><span class="line">i = <span class="number">2</span>,j = <span class="number">5</span></span><br><span class="line">i = <span class="number">2</span>,j = <span class="number">4</span></span><br><span class="line">i = <span class="number">2</span>,j = <span class="number">3</span></span><br><span class="line">--------------       第三大轮</span><br><span class="line">i = <span class="number">3</span>,j = <span class="number">7</span>        <span class="number">4</span>次小循环 = <span class="number">7</span> - i（<span class="number">3</span>）</span><br><span class="line">i = <span class="number">3</span>,j = <span class="number">6</span></span><br><span class="line">i = <span class="number">3</span>,j = <span class="number">5</span></span><br><span class="line">i = <span class="number">3</span>,j = <span class="number">4</span></span><br><span class="line">--------------       第四大轮</span><br><span class="line">i = <span class="number">4</span>,j = <span class="number">7</span>        <span class="number">3</span>次小循环 = <span class="number">7</span> - i（<span class="number">4</span>）</span><br><span class="line">i = <span class="number">4</span>,j = <span class="number">6</span></span><br><span class="line">i = <span class="number">4</span>,j = <span class="number">5</span></span><br><span class="line">--------------       第五大轮</span><br><span class="line">i = <span class="number">5</span>,j = <span class="number">7</span>        <span class="number">2</span>次小循环 = <span class="number">7</span> - i（<span class="number">5</span>）</span><br><span class="line">i = <span class="number">5</span>,j = <span class="number">6</span></span><br><span class="line">--------------      第六大轮 = <span class="number">7</span> -  i（<span class="number">6</span>）</span><br><span class="line">i = <span class="number">6</span>,j = <span class="number">7</span>         <span class="number">1</span>次小循环</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>内层循环倒着来，恰好满足外层没轮加值，内层每次减值，所以只需写 j &gt;&#x3D; i </p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+    
+      <div>
+  
+   </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -986,118 +1088,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/04/%E6%B1%82%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%80%92%E6%95%B0%E5%BA%8F%E5%88%97%E7%9A%84%E9%83%A8%E5%88%86%E5%92%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/04/%E6%B1%82%E5%B9%B3%E6%96%B9%E4%B8%8E%E5%80%92%E6%95%B0%E5%BA%8F%E5%88%97%E7%9A%84%E9%83%A8%E5%88%86%E5%92%8C/" class="post-title-link" itemprop="url">求平方与倒数序列的部分和(以及相同类型题总结)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-04 15:13:03" itemprop="dateCreated datePublished" datetime="2021-04-04T15:13:03+08:00">2021-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-24 00:33:23" itemprop="dateModified" datetime="2024-01-24T00:33:23+08:00">2024-01-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">C语言编程题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/cuA7a4"><img src="https://z3.ax1x.com/2021/04/03/cuA7a4.png" alt="cuA7a4.png"></a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> m,n;</span><br><span class="line">  <span class="type">double</span> sum=<span class="number">0.0</span>;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;m,&amp;n);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = m; i &lt;= n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">      sum+= (i*i) + <span class="number">1.0</span>/i;    </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;sum = %.6f&quot;</span>,sum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>分析</p>
-<ol>
-<li>实质上 从n 到 m的循环，把n的都看成一项。—每一轮加一&gt; 加到m</li>
-<li>该题不需要考虑第一项和第二项的问题，除非有正负号的问题。</li>
-<li>每一轮都加到sum里面去。</li>
-<li>最后一起输出即可。</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/cKkyRI"><img src="https://z3.ax1x.com/2021/04/04/cKkyRI.png" alt="cKkyRI.png"></a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     *    输入 N 求从根号1 到 根号N 的和</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> N;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;N);</span><br><span class="line">    <span class="type">double</span> sum = <span class="number">0.0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">      sum+=<span class="built_in">sqrt</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sum = %.2lf\n&quot;</span>,sum);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意⚠️： sqrt（ ） 输进去 int 返回出来的是double 并且不会报错，因为int &lt; double .</p>
-<p>所以不用纠结类型转换的问题</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *  本题要求编写程序，计算序列 1!+2!+3!+⋯ 的前N项之和。</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line">  <span class="type">int</span> N;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;N);</span><br><span class="line">  <span class="type">int</span> total = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="type">int</span> partSum = <span class="number">1</span>;<span class="comment">//每一轮都从一开始累乘  ⚠️⚠️⚠️⚠️⚠️⚠️这一步是经典</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; j++)<span class="comment">//每一轮都是从1 走到i </span></span><br><span class="line">    &#123;</span><br><span class="line">          partSum = partSum *  j;<span class="comment">//累加到里面去</span></span><br><span class="line">    &#125;</span><br><span class="line">    total += partSum;<span class="comment">//每一次将分和加到总和里面去</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,total);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>解释：下图</p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/cK8hwj"><img src="https://z3.ax1x.com/2021/04/04/cK8hwj.jpg" alt="cK8hwj.jpg"></a></p>
-<ul>
-<li>因为涉及到一轮循环实现不了，由此想出应该是用两轮循环。<ul>
-<li>第一大轮从1 到 N</li>
-<li>第二小轮 要考虑从 1 到  上一轮的 ℹ️</li>
-</ul>
-</li>
-<li>重点来了，因为每次要从1 开始乘到 ℹ️ ， 那么需要有一个<strong>变量</strong>存放每一次从 1 到 ℹ️  的结果。考虑到不是每一次都得像 ℹ️  * j ，而是要下一轮的值要 ✖️ 上一轮的乘积。比如 ： 4！  （1 *  2）*3 *4  也就是说，乘到3那个位置的时候，需要的是 1 和 2 的乘积 再 乘 3。</li>
-<li>每次小循环结束🔚之后，我们就会拿到 一个 partSum ，那么每次将partSum 加到 那个 total 里面去….</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/cKYZWt"><img src="https://z3.ax1x.com/2021/04/04/cKYZWt.png" alt="cKYZWt.png"></a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> N;</span><br><span class="line">  <span class="type">int</span> Sum = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;N);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">     Sum+=<span class="built_in">pow</span>(<span class="number">2</span>,i);  </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;result = %d\n&quot;</span>,Sum);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>5<br>result &#x3D; 62a</p>
-</blockquote>
-
-      
-    </div>
-    
-    
-    
-    
-      <div>
-  
-   </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1169,7 +1159,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-count">188</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
