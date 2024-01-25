@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="闲来无事，用c++编写了一个管理系统～ 该程序只是用到了c++基础阶段的内容来完成的！后续会更新为面向对象的方式编写。 设计思路如下👇：  123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用C++编写通讯录管理系统">
+<meta property="og:url" content="http://example.com/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F(1)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="闲来无事，用c++编写了一个管理系统～ 该程序只是用到了c++基础阶段的内容来完成的！后续会更新为面向对象的方式编写。 设计思路如下👇：  123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.helloimg.com/images/2022/01/23/G6ZhzY.png">
+<meta property="article:published_time" content="2022-01-22T16:02:36.000Z">
+<meta property="article:modified_time" content="2024-01-23T16:33:31.538Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2022/01/23/G6ZhzY.png">
+
+<link rel="canonical" href="http://example.com/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F(1)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>用C++编写通讯录管理系统 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">47</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">187</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F(1)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用C++编写通讯录管理系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-23 00:02:36" itemprop="dateCreated datePublished" datetime="2022-01-23T00:02:36+08:00">2022-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-24 00:33:31" itemprop="dateModified" datetime="2024-01-24T00:33:31+08:00">2024-01-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>闲来无事，用c++编写了一个管理系统～</p>
+<p>该程序只是用到了c++基础阶段的内容来完成的！后续会更新为面向对象的方式编写。</p>
+<p>设计思路如下👇：</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G6ZhzY"><img src="https://www.helloimg.com/images/2022/01/23/G6ZhzY.png" alt="G6ZhzY.png"></a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">//设计联系人结构体</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX  1000  <span class="comment">//方便日后扩展</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">int</span> m_Sex; <span class="comment">// 1 男 2 女</span></span><br><span class="line">    <span class="type">int</span> m_Age;</span><br><span class="line">    std::string m_number;</span><br><span class="line">    std::string m_adress;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//设计通讯录结构体</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Adressbooks</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Person</span> personArray[MAX]; <span class="comment">//存放通讯录的每个person类型的数据的数组</span></span><br><span class="line">    <span class="type">int</span> m_Size;<span class="comment">//通讯录有多少人</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showMenu</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">addPerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showPerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">delePerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">isExit</span><span class="params">( Adressbooks *pAdressbooks,std::string name )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">findPerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">modifyPerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">cleanAllPerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Adressbooks abs; <span class="comment">//整个通讯录类型的变量</span></span><br><span class="line">    abs.m_Size = <span class="number">0</span>;<span class="comment">//初始化通讯录里面的人</span></span><br><span class="line">    <span class="comment">//显示菜单</span></span><br><span class="line">    <span class="type">int</span> select = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="built_in">showMenu</span>();</span><br><span class="line">        std::cin &gt;&gt; select;</span><br><span class="line">        <span class="keyword">switch</span> (select) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">addPerson</span>( &amp;abs );<span class="comment">//传递地址</span></span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//添加联系人</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="built_in">showPerson</span>(&amp;abs); <span class="comment">//显示联系人</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="built_in">delePerson</span>( &amp;abs );<span class="comment">//删除</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="built_in">findPerson</span>(&amp;abs);</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//查找联系人</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="built_in">modifyPerson</span>(&amp;abs);</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//修改联系人</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">                <span class="built_in">cleanAllPerson</span>( &amp;abs );</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//清空联系人</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;欢迎您下次使用！&quot;</span> &lt;&lt;std::endl;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//直接退出通讯录</span></span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//退出通讯录4</span></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">cleanAllPerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    pAdressbooks-&gt;m_Size = <span class="number">0</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;通讯录已清空&quot;</span> &lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">modifyPerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    std::string name;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入你要修改的姓名&quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; name;</span><br><span class="line">    <span class="type">int</span> flag = <span class="built_in">isExit</span>( pAdressbooks,name);</span><br><span class="line">    <span class="keyword">if</span> ( flag != <span class="number">-1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//姓名</span></span><br><span class="line">        std::string Nname;</span><br><span class="line">        std::cin &gt;&gt; Nname;</span><br><span class="line">        pAdressbooks-&gt;personArray[flag].name = Nname;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> sex = <span class="number">0</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入性别：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; 1 - 男  2 - 女&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="comment">//性别</span></span><br><span class="line">        std::cin &gt;&gt; sex;</span><br><span class="line">        <span class="keyword">while</span> ( <span class="literal">true</span> ) &#123;</span><br><span class="line">            <span class="keyword">if</span> (sex == <span class="number">1</span> || sex == <span class="number">2</span>) &#123;</span><br><span class="line">                pAdressbooks-&gt;personArray[flag].m_Sex = sex;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//年龄</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入年龄：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">int</span> age = <span class="number">0</span>;</span><br><span class="line">        std::cin &gt;&gt; age;</span><br><span class="line">        pAdressbooks-&gt;personArray[flag].m_Age = age;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//联系电话</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入联系电话 ：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::string phone = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        std::cin &gt;&gt; phone;</span><br><span class="line">        pAdressbooks-&gt;personArray[flag].m_number = phone;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//家庭住址</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入家庭住址： &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::string  address;</span><br><span class="line">        std::cin &gt;&gt; address;</span><br><span class="line">        pAdressbooks-&gt;personArray[flag].m_adress = address;</span><br><span class="line"></span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;查无此人！！！你找错了&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">findPerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    std::string Per_name;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;你要找谁？：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cin &gt;&gt; Per_name;</span><br><span class="line">    <span class="type">int</span> flag = <span class="built_in">isExit</span>(pAdressbooks,Per_name);</span><br><span class="line">    <span class="keyword">if</span> ( flag != <span class="number">-1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;姓名：&quot;</span> &lt;&lt; pAdressbooks-&gt;personArray[flag].name &lt;&lt; <span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;性别：&quot;</span> &lt;&lt; pAdressbooks-&gt;personArray[flag].m_Sex &lt;&lt; <span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;年龄：&quot;</span> &lt;&lt; pAdressbooks-&gt;personArray[flag].m_Age &lt;&lt; <span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;电话：&quot;</span> &lt;&lt; pAdressbooks-&gt;personArray[flag].m_number &lt;&lt; <span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;住址：&quot;</span> &lt;&lt; pAdressbooks-&gt;personArray[flag].m_adress &lt;&lt;<span class="string">&quot;\t&quot;</span> ;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;查找成功!!!!!!!!!&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;查无此人！！！你找错了&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">delePerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    std::string Per_name;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入要删除的姓名：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cin &gt;&gt; Per_name;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> flag = <span class="built_in">isExit</span>( pAdressbooks,Per_name );<span class="comment">//把值给flag</span></span><br><span class="line">    <span class="keyword">if</span> ( flag != <span class="number">-1</span> ) <span class="comment">//线性表的删除元素操作</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = flag ; i &lt; pAdressbooks-&gt;m_Size ;  i++) &#123;</span><br><span class="line">            pAdressbooks-&gt;personArray[i]=pAdressbooks-&gt;personArray[i+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        pAdressbooks-&gt;m_Size--;<span class="comment">//记得要减少</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;删除成功！！！！&quot;</span> &lt;&lt;std::endl;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;查无此人！！！你找错了&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//检测联系人是否存在的功能</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">isExit</span><span class="params">( Adressbooks *pAdressbooks , std::string Pname )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; pAdressbooks-&gt;m_Size; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( pAdressbooks-&gt;personArray[i].name == Pname )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> i; <span class="comment">//找到了返回缩影</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//找不到返回-1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//显示所有联系人</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showPerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//判断是否为空</span></span><br><span class="line">    <span class="keyword">if</span> ( pAdressbooks-&gt;m_Size == <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;当前没有卵联系人了！&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; pAdressbooks-&gt;m_Size; ++i) &#123;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;姓名：&quot;</span>&lt;&lt;pAdressbooks-&gt;personArray[i].name &lt;&lt;std::endl;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;性别：&quot;</span>&lt;&lt;(pAdressbooks-&gt;personArray[i].m_Sex == <span class="number">1</span> ? <span class="string">&quot;男&quot;</span> : <span class="string">&quot;女&quot;</span>) &lt;&lt;std::endl;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;年龄：&quot;</span>&lt;&lt;pAdressbooks-&gt;personArray[i].m_Age &lt;&lt;std::endl;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;电话：&quot;</span>&lt;&lt;pAdressbooks-&gt;personArray[i].m_number &lt;&lt;std::endl;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;地址：&quot;</span>&lt;&lt;pAdressbooks-&gt;personArray[i].m_adress &lt;&lt;std::endl;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;------------------------------------------&quot;</span>&lt;&lt;std::endl;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">addPerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 思路：添加联系人前先判断通讯录是否已满，如果满了就不再添加，</span></span><br><span class="line"><span class="comment">     * 未满情况将新联系人信息逐个加入到通讯录</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="keyword">if</span> ( pAdressbooks-&gt;m_Size == MAX ) <span class="comment">//判断是否为满</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cout&lt;&lt; <span class="string">&quot;我快要爆炸了！！！，您不能继续添加了&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//姓名</span></span><br><span class="line">        std::string name;</span><br><span class="line">        std::cout&lt;&lt; <span class="string">&quot;输入姓名: &quot;</span>&lt;&lt; std::endl;</span><br><span class="line">        std::cin &gt;&gt; name;</span><br><span class="line">        pAdressbooks-&gt;personArray[pAdressbooks-&gt;m_Size].name = name;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//性别</span></span><br><span class="line">        <span class="type">int</span> sex = <span class="number">0</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入性别：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; 1 - 男  2 - 女&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            std::cin &gt;&gt; sex;</span><br><span class="line">            <span class="keyword">if</span> (sex == <span class="number">1</span> || sex == <span class="number">2</span>) <span class="comment">//如果是 1 和 2 才让进来</span></span><br><span class="line">            &#123;</span><br><span class="line">                pAdressbooks-&gt;personArray[pAdressbooks-&gt;m_Size].m_Sex = sex;</span><br><span class="line">                <span class="keyword">break</span>;<span class="comment">//如果输入正确就可以出去</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//年龄</span></span><br><span class="line">        <span class="type">int</span> age;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入你活了多少年了 : &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cin &gt;&gt; age;</span><br><span class="line">        pAdressbooks-&gt;personArray[pAdressbooks-&gt;m_Size].m_Age = age;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//联系电话</span></span><br><span class="line">        std::string numPhone;</span><br><span class="line">        std::cout&lt;&lt; <span class="string">&quot;输入你电话号码！&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cin &gt;&gt; numPhone;</span><br><span class="line">        pAdressbooks-&gt;personArray[pAdressbooks-&gt;m_Size].m_number = numPhone;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//地址</span></span><br><span class="line">        std::string Adress;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;输入你的地址 ：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cin &gt;&gt; Adress;</span><br><span class="line">        pAdressbooks-&gt;personArray[pAdressbooks-&gt;m_Size].m_adress = Adress;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//更新通讯录人数</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;添加成功 !&quot;</span> &lt;&lt;std::endl;</span><br><span class="line">        pAdressbooks-&gt;m_Size++;</span><br><span class="line">        clearerr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showMenu</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;***************************&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  1、添加联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  2、显示联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  3、删除联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  4、查找联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  5、修改联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  6、清空联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  0、退出通讯录  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;***************************&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+    
+    
+    
+    
+      <div>
+  
+    <div>  <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>  </div>
+
+来源: Marmalade's Blog
+文章作者: lijunliang
+文章链接: https://marmalade.vip/hexothemebeautify4.html
+本文章著作权归作者所有，任何形式的转载都请注明出处。
+  
+   </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/19/226-%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91(1)/" rel="prev" title="226. 翻转二叉树">
+      <i class="fa fa-chevron-left"></i> 226. 翻转二叉树
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="next" title="用C++编写通讯录管理系统">
+      用C++编写通讯录管理系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="John Doe"
+      src="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

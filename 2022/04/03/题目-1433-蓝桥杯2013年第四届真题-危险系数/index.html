@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="题目描述 问题描述抗日战争时期，冀中平原的地道战曾发挥重要作用。地道的多个站点间有通道连接，形成了庞大的网络。但也有隐患，当敌人发现了某个站点后，其它站点间可能因此会失去联系。我们来定义一个危险系数DF(x,y)：DF(x,y)：对于两个站点x和y (x !&#x3D; y), 如果能找到一个站点z，当z被敌人破坏后，x和y不连通，那么我们称z为关于x,y的关键点。相应的，对于任意一对站点x和y，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="题目 1433: 蓝桥杯2013年第四届真题-危险系数">
+<meta property="og:url" content="http://example.com/2022/04/03/%E9%A2%98%E7%9B%AE-1433-%E8%93%9D%E6%A1%A5%E6%9D%AF2013%E5%B9%B4%E7%AC%AC%E5%9B%9B%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%8D%B1%E9%99%A9%E7%B3%BB%E6%95%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目描述 问题描述抗日战争时期，冀中平原的地道战曾发挥重要作用。地道的多个站点间有通道连接，形成了庞大的网络。但也有隐患，当敌人发现了某个站点后，其它站点间可能因此会失去联系。我们来定义一个危险系数DF(x,y)：DF(x,y)：对于两个站点x和y (x !&#x3D; y), 如果能找到一个站点z，当z被敌人破坏后，x和y不连通，那么我们称z为关于x,y的关键点。相应的，对于任意一对站点x和y，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.helloimg.com/images/2022/04/03/RJkQKb.jpg">
+<meta property="article:published_time" content="2022-04-03T12:37:08.000Z">
+<meta property="article:modified_time" content="2024-01-23T16:33:29.557Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="蓝桥杯">
+<meta property="article:tag" content="图的遍历">
+<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="DFS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2022/04/03/RJkQKb.jpg">
+
+<link rel="canonical" href="http://example.com/2022/04/03/%E9%A2%98%E7%9B%AE-1433-%E8%93%9D%E6%A1%A5%E6%9D%AF2013%E5%B9%B4%E7%AC%AC%E5%9B%9B%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%8D%B1%E9%99%A9%E7%B3%BB%E6%95%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>题目 1433: 蓝桥杯2013年第四届真题-危险系数 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">47</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">187</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/03/%E9%A2%98%E7%9B%AE-1433-%E8%93%9D%E6%A1%A5%E6%9D%AF2013%E5%B9%B4%E7%AC%AC%E5%9B%9B%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%8D%B1%E9%99%A9%E7%B3%BB%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          题目 1433: 蓝桥杯2013年第四届真题-危险系数
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-03 20:37:08" itemprop="dateCreated datePublished" datetime="2022-04-03T20:37:08+08:00">2022-04-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-24 00:33:29" itemprop="dateModified" datetime="2024-01-24T00:33:29+08:00">2024-01-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86-BFS-DFS-%E8%93%9D%E6%A1%A5%E6%9D%AF/" itemprop="url" rel="index"><span itemprop="name">图的遍历,BFS,DFS,蓝桥杯</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>题目描述</p>
+<p>问题描述<br>抗日战争时期，冀中平原的地道战曾发挥重要作用。<br>地道的多个站点间有通道连接，形成了庞大的网络。但也有隐患，当敌人发现了某个站点后，其它站点间可能因此会失去联系。<br>我们来定义一个危险系数DF(x,y)：DF(x,y)：<br>对于两个站点x和y (x !&#x3D; y), 如果能找到一个站点z，当z被敌人破坏后，x和y不连通，那么我们称z为关于x,y的关键点。相应的，对于任意一对站点x和y，危险系数DF(x,y)就表示为这两点之间的关键点个数。<br>本题的任务是：已知网络结构，求两站点之间的危险系数。 </p>
+<p>输入</p>
+<p>输入数据第一行包含2个整数n(2 &lt; &#x3D; n &lt; &#x3D; 1000), m(0 &lt; &#x3D; m &lt; &#x3D; 2000),分别代表站点数，通道数；<br>接下来m行，每行两个整数 u,v (1 &lt; &#x3D; u, v &lt; &#x3D; n; u !&#x3D; v)代表一条通道；<br>最后1行，两个数u,v，代表询问两点之间的危险系数DF(u, v)。 </p>
+<p>输出</p>
+<p>一个整数，如果询问的两点不连通则输出-1. </p>
+<p>样例输入复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">7 6</span><br><span class="line">1 3</span><br><span class="line">2 3</span><br><span class="line">3 4</span><br><span class="line">3 5</span><br><span class="line">4 5</span><br><span class="line">5 6</span><br><span class="line">1 6</span><br></pre></td></tr></table></figure>
+
+<p>样例输出复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>显然这是图的遍历的问题，采用DFS会比较简单。</p>
+<p>首先应该分析出，关键点的意思，<strong>点的访问次数</strong>和到<strong>达目的的路径长度</strong>一样就是关键点。换而言之，每次到达终点<strong>必须经过的点</strong>就是关键点。我画个图大家理解下：</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RJkQKb"><img src="https://www.helloimg.com/images/2022/04/03/RJkQKb.jpg" alt="RJkQKb.jpg"></a></p>
+<p>上图中，1和6为开始点和终点。你可以画一下路线，不论如何走，必须经过红色的 3 和 5 。</p>
+<p>那么经过3 和 5 的路径有</p>
+<ul>
+<li><p>1 - 3 - <strong>5</strong> - 6</p>
+</li>
+<li><p>1 - 3 - 4 - <strong>5</strong> - 6</p>
+</li>
+</ul>
+<p>所以可以推出 : 必经点 &#x3D;&#x3D;&#x3D; 路径 这个等式。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;queue&quot;</span></span></span><br><span class="line"><span class="type">int</span> n,m,u,v,routing=<span class="number">0</span>,key=<span class="number">-1</span>;<span class="comment">//站点数，通道数</span></span><br><span class="line"><span class="type">int</span> visited[<span class="number">1000</span>],vis_cnt[<span class="number">1000</span>];<span class="comment">//参观标记数组和参观个数</span></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; gap[<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//输入通道数和点数</span></span><br><span class="line">    std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">       std::cin &gt;&gt; u &gt;&gt; v; <span class="comment">//输入通道数和点数</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">//因为无向图是对称矩阵，可以双向输入</span></span><br><span class="line">       gap[u].<span class="built_in">push_back</span>(v);</span><br><span class="line">       gap[v].<span class="built_in">push_back</span>(u);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//输入目标</span></span><br><span class="line">    std::cin &gt;&gt; u &gt;&gt; v;</span><br><span class="line">    <span class="built_in">dfs</span>(u);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( vis_cnt[i]==routing &amp;&amp; routing != <span class="number">0</span> )</span><br><span class="line">        &#123;</span><br><span class="line">            key++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; key &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;<span class="comment">//v是终点</span></span><br><span class="line">    <span class="keyword">if</span> ( x == v )<span class="comment">//找到终点</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//循环结点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            vis_cnt[i]+=visited[i];<span class="comment">//对应的位置cnt++</span></span><br><span class="line">        &#125;</span><br><span class="line">        routing++;<span class="comment">//对应的路线++（从起到到终点的）</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    visited[x] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//运用邻接表来的思维</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; gap[x].<span class="built_in">size</span>(); ++i) &#123;<span class="comment">//遍历每一条邻表</span></span><br><span class="line">        <span class="keyword">if</span> ( visited[gap[x][i]]==<span class="number">0</span> )<span class="comment">//如果你传进来的当前链表x以后某个结点没有访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">dfs</span>(gap[x][i]);<span class="comment">//跳到当前这个结点链表开始往后访问</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    visited[x]=<span class="number">0</span>;<span class="comment">//重制为0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+    
+    
+    
+    
+      <div>
+  
+    <div>  <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>  </div>
+
+来源: Marmalade's Blog
+文章作者: lijunliang
+文章链接: https://marmalade.vip/hexothemebeautify4.html
+本文章著作权归作者所有，任何形式的转载都请注明出处。
+  
+   </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" rel="tag"># 蓝桥杯</a>
+              <a href="/tags/%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/" rel="tag"># 图的遍历</a>
+              <a href="/tags/BFS/" rel="tag"># BFS</a>
+              <a href="/tags/DFS/" rel="tag"># DFS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA(1)/" rel="prev" title="穿越雷区">
+      <i class="fa fa-chevron-left"></i> 穿越雷区
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/03/%E9%A2%98%E7%9B%AE-1433-%E8%93%9D%E6%A1%A5%E6%9D%AF2013%E5%B9%B4%E7%AC%AC%E5%9B%9B%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%8D%B1%E9%99%A9%E7%B3%BB%E6%95%B0(1)/" rel="next" title="题目 1433: 蓝桥杯2013年第四届真题-危险系数">
+      题目 1433: 蓝桥杯2013年第四届真题-危险系数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">分析</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="John Doe"
+      src="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

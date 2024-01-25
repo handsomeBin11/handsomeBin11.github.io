@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="时间复杂度分析推导大O阶的方法 用常数1取代运行时间中的所加法常数。 在修改后的运行次函数中，只保留最高项。 如果最高项存在且不是1，则去掉这个相乘的常数。   实际上分析算法的时间复杂度可没那么简单，我们还需要多看例子。  常数阶123int sum &#x3D; 0;n&#x3D;100;&#x2F;&#x2F; 执行一次sum &#x3D; (1+n)*100&#x2F;2;&#x2F;&#x2F; 执行一次prinft(&quot;%d&quot;,sum);&#x2F;&#x2F; 执">
+<meta property="og:type" content="article">
+<meta property="og:title" content="复杂度分析">
+<meta property="og:url" content="http://example.com/2020/12/12/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="时间复杂度分析推导大O阶的方法 用常数1取代运行时间中的所加法常数。 在修改后的运行次函数中，只保留最高项。 如果最高项存在且不是1，则去掉这个相乘的常数。   实际上分析算法的时间复杂度可没那么简单，我们还需要多看例子。  常数阶123int sum &#x3D; 0;n&#x3D;100;&#x2F;&#x2F; 执行一次sum &#x3D; (1+n)*100&#x2F;2;&#x2F;&#x2F; 执行一次prinft(&quot;%d&quot;,sum);&#x2F;&#x2F; 执">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/12/rZ1GlD.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/12/rZGVl8.jpg">
+<meta property="article:published_time" content="2020-12-12T12:58:04.000Z">
+<meta property="article:modified_time" content="2024-01-23T16:33:18.217Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/12/rZ1GlD.png">
+
+<link rel="canonical" href="http://example.com/2020/12/12/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>复杂度分析 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">47</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">187</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/12/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          复杂度分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-12 20:58:04" itemprop="dateCreated datePublished" datetime="2020-12-12T20:58:04+08:00">2020-12-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-24 00:33:18" itemprop="dateModified" datetime="2024-01-24T00:33:18+08:00">2024-01-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h2><h3 id="推导大O阶的方法"><a href="#推导大O阶的方法" class="headerlink" title="推导大O阶的方法"></a>推导大O阶的方法</h3><ol>
+<li>用常数1取代运行时间中的所加法常数。</li>
+<li>在修改后的运行次函数中，只保留最高项。</li>
+<li>如果最高项存在且不是1，则去掉这个相乘的常数。</li>
+</ol>
+<blockquote>
+<p>实际上分析算法的时间复杂度可没那么简单，我们还需要多看例子。</p>
+</blockquote>
+<h3 id="常数阶"><a href="#常数阶" class="headerlink" title="常数阶"></a>常数阶</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> sum = <span class="number">0</span>;n=<span class="number">100</span>;<span class="comment">// 执行一次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行一次</span></span><br><span class="line">prinft(<span class="string">&quot;%d&quot;</span>,sum);<span class="comment">// 执行一次</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>执行了3次对不对？根据我们刚才的理论，第一步就是用常数1取代加法常数。</p>
+<p>所以结论应该是 <strong>O(1)</strong> 而不是 <strong>O(3)</strong>  更不是不是<strong>O(100)</strong></p>
+</blockquote>
+<p>另外如果是这种情况</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> sum = <span class="number">0</span>;n=<span class="number">100</span>;<span class="comment">// 执行一次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行1次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行2次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行3次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行4次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行5次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行6次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行7次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行8次</span></span><br><span class="line">prinft(<span class="string">&quot;%d&quot;</span>,sum);<span class="comment">// 执行一次</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上也就是3次和8次的差距，这种问题无关大小(n的大小),执行恒定时间的，所以就叫做常数阶。</p>
+</blockquote>
+<h3 id="线性阶"><a href="#线性阶" class="headerlink" title="线性阶"></a>线性阶</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<blockquote>
+<p>复杂度为O(n)</p>
+</blockquote>
+<h3 id="对数阶"><a href="#对数阶" class="headerlink" title="对数阶"></a>对数阶</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>( count &lt; n )</span><br><span class="line">&#123;</span><br><span class="line">    count= count*<span class="number">2</span>;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>每次count*2之后离 n 就更近了一步， 2的x次 &#x3D; log以2为底x的对数。</p>
+<p>所以复杂度为<strong>O(logn)</strong></p>
+</blockquote>
+<h3 id="平方阶"><a href="#平方阶" class="headerlink" title="平方阶"></a>平方阶</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// O(1)		</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>O(n^2)</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// O(1)		</span></span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>同理 O(m*n)</p>
+</blockquote>
+<p>注意⚠️</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; n; ++j)<span class="comment">//注意这里是j=i </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// O(1)		</span></span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下图给出说明</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rZ1GlD"><img src="https://s3.ax1x.com/2020/12/12/rZ1GlD.png" alt="rZ1GlD.png"></a></p>
+<h4 id="在函数中"><a href="#在函数中" class="headerlink" title="在函数中"></a>在函数中</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">&#123;	</span><br><span class="line">	 function(i);	</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">function</span><span class="params">(<span class="type">int</span> count)</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="built_in">printf</span>(<span class="string">&quot;hey&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以分开理解</p>
+<ul>
+<li>首先funtion函数的复杂度为<strong>O(1)</strong></li>
+<li>然后for循环是<strong>O（n）</strong></li>
+<li>相加之后根据规则 舍去常数项，其实还是<strong>O（n）</strong></li>
+</ul>
+</blockquote>
+<p>那如果是下面这种形式呢？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">function</span><span class="params">(<span class="type">int</span> count)</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; ++j)<span class="comment">//注意这里是j=i </span></span><br><span class="line">		&#123;</span><br><span class="line">				<span class="comment">//这里复杂度为O(1)的步骤</span></span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>根据刚才的理论，应该为O(n^2)</p>
+</blockquote>
+<p>对于相对复杂的语句</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">n++;<span class="comment">//1</span></span><br><span class="line">function(n);<span class="comment">// n</span></span><br><span class="line"><span class="type">int</span> i,j;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; ++j)<span class="comment">//这里是(n^2)</span></span><br><span class="line">&#123;</span><br><span class="line">		funtion(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) <span class="comment">// n(n+1)/2</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; n; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// O(1)		</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rZGVl8"><img src="https://s3.ax1x.com/2020/12/12/rZGVl8.jpg" alt="rZGVl8.jpg"></a></p>
+
+    </div>
+    
+    
+    
+    
+      <div>
+  
+    <div>  <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>  </div>
+
+来源: Marmalade's Blog
+文章作者: lijunliang
+文章链接: https://marmalade.vip/hexothemebeautify4.html
+本文章著作权归作者所有，任何形式的转载都请注明出处。
+  
+   </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/05/%E9%93%BE%E8%A1%A8%E7%9A%84%E6%B7%BB%E5%8A%A0/" rel="prev" title="链表的添加">
+      <i class="fa fa-chevron-left"></i> 链表的添加
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/14/%E7%BA%BF%E6%80%A7%E8%A1%A8/" rel="next" title="线性表">
+      线性表 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">时间复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BC%E5%A4%A7O%E9%98%B6%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">推导大O阶的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E6%95%B0%E9%98%B6"><span class="nav-number">1.2.</span> <span class="nav-text">常数阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E9%98%B6"><span class="nav-number">1.3.</span> <span class="nav-text">线性阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E9%98%B6"><span class="nav-number">1.4.</span> <span class="nav-text">对数阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E6%96%B9%E9%98%B6"><span class="nav-number">1.5.</span> <span class="nav-text">平方阶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E5%87%BD%E6%95%B0%E4%B8%AD"><span class="nav-number">1.5.1.</span> <span class="nav-text">在函数中</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="John Doe"
+      src="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="静态链表思想在早期高级语言BASIC，Fortran ..中，由于没有指针，想和C语言一样实现链表之类的功能该怎么办，于是聪明的前辈们用数组实现了‘链表’。 这种方式叫静态链表，也叫游标实现法。 存储结构12345typedef struct&amp;#123;    ElemType data;    int cur;&amp;#125;Component,StaticLinkList[MAXSIZE];">
+<meta property="og:type" content="article">
+<meta property="og:title" content="静态链表详解">
+<meta property="og:url" content="http://example.com/2020/12/22/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="静态链表思想在早期高级语言BASIC，Fortran ..中，由于没有指针，想和C语言一样实现链表之类的功能该怎么办，于是聪明的前辈们用数组实现了‘链表’。 这种方式叫静态链表，也叫游标实现法。 存储结构12345typedef struct&amp;#123;    ElemType data;    int cur;&amp;#125;Component,StaticLinkList[MAXSIZE];">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/21/rBwmjO.md.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/21/rBBcBF.md.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/21/rBBcBF.md.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/21/rB2rex.md.jpg">
+<meta property="article:published_time" content="2020-12-22T14:15:09.000Z">
+<meta property="article:modified_time" content="2024-01-23T16:33:29.096Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/21/rBwmjO.md.jpg">
+
+<link rel="canonical" href="http://example.com/2020/12/22/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8%E8%AF%A6%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>静态链表详解 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">47</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">187</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/22/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          静态链表详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-22 22:15:09" itemprop="dateCreated datePublished" datetime="2020-12-22T22:15:09+08:00">2020-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-24 00:33:29" itemprop="dateModified" datetime="2024-01-24T00:33:29+08:00">2024-01-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="静态链表思想"><a href="#静态链表思想" class="headerlink" title="静态链表思想"></a>静态链表思想</h3><p>在早期高级语言BASIC，Fortran ..中，由于没有指针，想和C语言一样实现链表之类的功能该怎么办，于是聪明的前辈们用数组实现了‘链表’。</p>
+<p>这种方式叫静态链表，也叫游标实现法。</p>
+<h4 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="type">int</span> cur;</span><br><span class="line">&#125;Component,StaticLinkList[MAXSIZE];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一个存储数据的东西和一个游标，当游标为0的时候没有指向</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rBwmjO"><img src="https://s3.ax1x.com/2020/12/21/rBwmjO.md.jpg" alt="rBwmjO.md.jpg"></a></p>
+<p>规则是这样的，你暂且可以把数组看成‘小房子’，里面存的值看成‘人’（其实是数据），0号小房子里面不放‘人’存的是第一个未被使用的节点下标（备用链表），而最后一个小房子也就是999哪，存放的是第一个<strong>有值的</strong>节点下标。</p>
+<p>接下来按照这个图来初始化一下数组吧</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">InitList</span><span class="params">( StaticLinkList space )</span><span class="comment">//初始化</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; MAXSIZE<span class="number">-1</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        space[i].cur = i+<span class="number">1</span>;<span class="comment">//第i个元素的房子知道第i+1号</span></span><br><span class="line">    &#125;</span><br><span class="line">    space[MAXSIZE<span class="number">-1</span>].cur = <span class="number">0</span>;<span class="comment">//最后一位为0也就是</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="进一步解释"><a href="#进一步解释" class="headerlink" title="进一步解释"></a>进一步解释</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rBBcBF"><img src="https://s3.ax1x.com/2020/12/21/rBBcBF.md.jpg" alt="rBBcBF.md.jpg"></a></p>
+<p>接上面的，游戏规则是每个房间里都有一个牌子（cur），比如当小明进入该房间的时候就会知道他的下一个房间是几号，显然这是3号，他就能找到浩浩。同理，浩浩能找到小张……但第0号房间不放人，它这个房间的作用是始终记录第一个空的房间号，例如这里是8号房空。而最后一个房间也存着第一个人进入房间的号牌。</p>
+<blockquote>
+<p>写类malloc函数</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Malloc_SLL</span><span class="params">( StaticLinkList space )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i=space[<span class="number">0</span>].cur;<span class="comment">//0号位置上永远知道待插入的第一个位置(空房间)8</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( space[<span class="number">0</span>].cur )</span><br><span class="line">    &#123;</span><br><span class="line">        space[<span class="number">0</span>].cur=space[i].cur;<span class="comment">//备用位置上的元素肯定知道它的下一个在哪,也就是下一个重新放回第0个位置上</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> i;<span class="comment">//值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>int i&#x3D;space[0].cur; 的意思是因为0号房间总是知道那个房间是空的，所以先把空的那个房间的房号告诉i，然后判断这个房间是否存在，如果存在则要把你要用的这个房间的房号告诉第0号房间，它会通过你要用的房间存储你这个房间放的下一个房间的房号。（因为每个房间都知道下一个房间在哪）。告诉0房后返回你要用的房号即可。你用就好啦！！！😊</p>
+<h4 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rBBcBF"><img src="https://s3.ax1x.com/2020/12/21/rBBcBF.md.jpg" alt="rBBcBF.md.jpg"></a></p>
+<p>如果要在张和王中间插入小赵，那就有意思了！</p>
+<p>我告诉小赵：你呀先回到8号房间里，我帮你搞定。接着我到小张那里告诉他你的下一个房间号牌不是4号吗，这点小钱，意思意思，你把号牌改成8号。收了钱的小张把号牌改了。接着我跑到小赵的8号房那里告诉他，你把号牌改成4号房。这样就在大家都不知情的情况下次序发生了改变。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rB2rex"><img src="https://s3.ax1x.com/2020/12/21/rB2rex.md.jpg" alt="rB2rex.md.jpg"></a></p>
+<span id="more"></span>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">InitListInsert</span><span class="params">( StaticLinkList L,<span class="type">int</span> i,ElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> j,k,l;</span><br><span class="line">    k = MAXSIZE<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span> ( i&lt;<span class="number">1</span> || i&gt;Lislength(L)+<span class="number">1</span>)<span class="comment">//要插入的i小于1或者大于链表长度的最后一个位置</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">    j=Malloc_SLL(L);<span class="comment">//函数给出一个新位置赋值给j</span></span><br><span class="line">    <span class="keyword">if</span> ( j )</span><br><span class="line">    &#123;</span><br><span class="line">        L[j].data = e;<span class="comment">//新变量的组装</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> l = <span class="number">1</span>; l &lt; i<span class="number">-1</span>; ++l)</span><br><span class="line">        &#123;</span><br><span class="line">            k=L[k].cur;<span class="comment">//因为最后一个元素知道第一个元素在哪，所以从最后开始到要找的前一个停下</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        L[j].cur=L[k].cur;<span class="comment">//把自己的下标改成要插入的位置后一个元素的地址</span></span><br><span class="line">        L[k].cur=j;<span class="comment">//通知前面大哥把自己的下一个改成新节点</span></span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ERROR;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>L[j].cur&#x3D;L[k].cur; 就相当于把自己的房间号先改成你要插入的位置的，因为该位置知道它后面的位置，赋值该位置就相当于给他下一个房间的位置。相当于把自己房间号改成4号那一步。</p>
+<p>L[k].cur&#x3D;j; 的意思就是给点钱意思意思，告诉前面那个大哥把下一房间号给改成8号。</p>
+</blockquote>
+<h4 id="链表的长度"><a href="#链表的长度" class="headerlink" title="链表的长度"></a>链表的长度</h4><ul>
+<li>先设定一个计数器</li>
+<li>从最后一个位置开始找</li>
+<li>不断的往后迭代看是否存在以下个</li>
+<li>计数器++ </li>
+<li>最后计数器的值是几就代表有多少个节点。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Lislength</span><span class="params">( StaticLinkList L)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">0</span>;<span class="comment">//计数器</span></span><br><span class="line">    <span class="type">int</span> i = L[MAXSIZE<span class="number">-1</span>].cur;<span class="comment">//从最后一个开始，因为最后一个知道第一个在哪</span></span><br><span class="line">    <span class="keyword">while</span>(i)<span class="comment">//非0就是true</span></span><br><span class="line">    &#123;</span><br><span class="line">        i = L[i].cur;<span class="comment">//第L的第i个位置上的cur赋值给i</span></span><br><span class="line">        j++;<span class="comment">//计数器++代表累计一次</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">ListDelete</span><span class="params">( StaticLinkList L,<span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="type">int</span> k,j;</span><br><span class="line">     <span class="keyword">if</span> ( i&lt;<span class="number">0</span>||i&gt;Lislength(L))</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">return</span> ERROR;</span><br><span class="line">     &#125;</span><br><span class="line">     k = MAXSIZE<span class="number">-1</span>;</span><br><span class="line">     <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; i<span class="number">-1</span>; ++j)<span class="comment">//找到i-1位置上</span></span><br><span class="line">     &#123;</span><br><span class="line">         k = L[k].cur;<span class="comment">//最后一个知道第一个在哪 第一个知道第二个在哪依次类推有种迭代的意思</span></span><br><span class="line">     &#125;</span><br><span class="line">     j=L[k].cur;<span class="comment">//你找到的要删除的元素号码赋值给了j</span></span><br><span class="line">     L[k].cur=L[j].cur;<span class="comment">//告诉最后一个元素删除的这个元素才是第一个元素</span></span><br><span class="line">  	 Free_SSL(L, j);</span><br><span class="line">     <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>j&#x3D;L[k].cur; 把你要删除的号牌先给了j，这里是k是最后一个房间号码牌，它知道第一个有值房间的号牌，现在我们假设要删除一号，所以没有走循环，k值为999.cur &#x3D;1 紧接着， L[k].cur&#x3D;L[j].cur;你要告诉最后一个房间现在删除的位置（因为它知道下一个在哪）才是你要优先考虑的房间。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Free_SSL</span><span class="params">(StaticLinkList space,<span class="type">int</span> k)</span></span><br><span class="line">&#123;</span><br><span class="line">    space[k].cur=space[<span class="number">0</span>].cur;<span class="comment">//告诉计算机你原来那个的下一个备用链表改成我这个删除的</span></span><br><span class="line">    space[<span class="number">0</span>].cur = k;<span class="comment">//第一个位置记录的是下一个空位因该是谁改成谁</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>space[k].cur&#x3D;space[0].cur 的意思是原来0号房间存放着第一个备用链表的位置，相当于原来存备用链表的等级降低了一等级，房号赋值要改成的这个你要删除的这个的（下一个，因为当前节点存下一个地址的嘛）</p>
+<p>space[0].cur &#x3D; k;的意思就是把当前节点k给了0号房间，这样0号房间才能优先考虑它</p>
+</blockquote>
+
+    </div>
+    
+    
+    
+    
+      <div>
+  
+    <div>  <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>  </div>
+
+来源: Marmalade's Blog
+文章作者: lijunliang
+文章链接: https://marmalade.vip/hexothemebeautify4.html
+本文章著作权归作者所有，任何形式的转载都请注明出处。
+  
+   </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/18/%E9%93%BE%E8%A1%A8%E7%9A%84%E8%AF%A6%E8%A7%A3/" rel="prev" title="链表的详解">
+      <i class="fa fa-chevron-left"></i> 链表的详解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/13/%E5%8D%95%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" rel="next" title="单向循环链表">
+      单向循环链表 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">静态链表思想</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%A7%A3%E9%87%8A"><span class="nav-number">1.3.</span> <span class="nav-text">进一步解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.</span> <span class="nav-text">插入操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="nav-number">1.5.</span> <span class="nav-text">链表的长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">1.6.</span> <span class="nav-text">删除</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="John Doe"
+      src="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
