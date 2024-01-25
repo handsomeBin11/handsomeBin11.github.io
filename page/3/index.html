@@ -61,6 +61,13 @@
 	        
 			</ul>
 		</nav>
+
+		<nav>
+            总文章数 187
+        </nav>
+
+
+
 		<nav class="header-smart-menu">
     		
     			
@@ -158,6 +165,11 @@
   <div class="article-inner">
     
       <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
         
   
     <h1 itemprop="name">
@@ -263,6 +275,7 @@
       
       <div class="clearfix"></div>
     </div>
+
   </div>
 </article>
 
@@ -290,6 +303,11 @@
   <div class="article-inner">
     
       <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
         
   
     <h1 itemprop="name">
@@ -378,6 +396,7 @@
       
       <div class="clearfix"></div>
     </div>
+
   </div>
 </article>
 
@@ -405,6 +424,11 @@
   <div class="article-inner">
     
       <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
         
   
     <h1 itemprop="name">
@@ -493,6 +517,7 @@
       
       <div class="clearfix"></div>
     </div>
+
   </div>
 </article>
 
@@ -520,6 +545,11 @@
   <div class="article-inner">
     
       <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
         
   
     <h1 itemprop="name">
@@ -873,6 +903,7 @@
       
       <div class="clearfix"></div>
     </div>
+
   </div>
 </article>
 
@@ -900,6 +931,11 @@
   <div class="article-inner">
     
       <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
         
   
     <h1 itemprop="name">
@@ -1253,120 +1289,7 @@
       
       <div class="clearfix"></div>
     </div>
-  </div>
-</article>
 
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-530-二叉搜索树的最小绝对差(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/02/26/530-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE(1)/">530. 二叉搜索树的最小绝对差</a>
-    </h1>
-  
-
-        
-        <a href="/2022/02/26/530-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE(1)/" class="archive-article-date">
-  	<time datetime="2022-02-26T03:55:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给你一个二叉搜索树的根节点 root ，返回 树中任意两不同节点值之间的最小差值 。</p>
-<p>差值是一个正数，其数值等于两值之差的绝对值。</p>
-<p>示例 1：</p>
-<p>输入：root &#x3D; [4,2,6,1,3]<br>输出：1<br>示例 2：</p>
-<p>输入：root &#x3D; [1,0,48,null,null,12,49]<br>输出：1</p>
-<p>提示：</p>
-<p>树中节点的数目范围是 [2, 104]<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 105</p>
-<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>根据提示，该树是一个二叉搜索树。所以很容易想到利用性质来。</p>
-<p>二叉搜索树的中序遍历结果为一个有序数列。</p>
-<p>所以思路是:</p>
-<ul>
-<li>创建一个vector 来存储遍历后的结果集。</li>
-<li>常规的二叉树的中序遍历函数结果保存到事先创好的数组中。</li>
-<li>遍历数组 利用temp零时保存后一个减前一个的结果。</li>
-<li>不断刷新min值直到找出min。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; ret;    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">inorder</span><span class="params">( TreeNode* root )</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ( root == <span class="literal">nullptr</span> ) <span class="comment">//空为退出</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//常规中序遍历</span></span><br><span class="line">        <span class="built_in">inorder</span>( root-&gt;left );</span><br><span class="line">        ret.<span class="built_in">push_back</span>(root -&gt; val); <span class="comment">//值加到数组的末尾去</span></span><br><span class="line">        <span class="built_in">inorder</span>( root-&gt;right );</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getMinimumDifference</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> min = INT_MAX; <span class="comment">//有新的就顶掉</span></span><br><span class="line">        <span class="built_in">inorder</span>(root);<span class="comment">//中序遍历</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; ret.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> temp =ret[i] - ret[i<span class="number">-1</span>]; </span><br><span class="line">            <span class="keyword">if</span> ( temp &lt; min )</span><br><span class="line">            &#123;</span><br><span class="line">                 min = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> min;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树的简单题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/02/26/530-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
   </div>
 </article>
 
@@ -1394,6 +1317,11 @@
   <div class="article-inner">
     
       <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
         
   
     <h1 itemprop="name">
@@ -1481,6 +1409,127 @@
       
       <div class="clearfix"></div>
     </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-530-二叉搜索树的最小绝对差(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/02/26/530-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE(1)/">530. 二叉搜索树的最小绝对差</a>
+    </h1>
+  
+
+        
+        <a href="/2022/02/26/530-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE(1)/" class="archive-article-date">
+  	<time datetime="2022-02-26T03:55:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>给你一个二叉搜索树的根节点 root ，返回 树中任意两不同节点值之间的最小差值 。</p>
+<p>差值是一个正数，其数值等于两值之差的绝对值。</p>
+<p>示例 1：</p>
+<p>输入：root &#x3D; [4,2,6,1,3]<br>输出：1<br>示例 2：</p>
+<p>输入：root &#x3D; [1,0,48,null,null,12,49]<br>输出：1</p>
+<p>提示：</p>
+<p>树中节点的数目范围是 [2, 104]<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 105</p>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>根据提示，该树是一个二叉搜索树。所以很容易想到利用性质来。</p>
+<p>二叉搜索树的中序遍历结果为一个有序数列。</p>
+<p>所以思路是:</p>
+<ul>
+<li>创建一个vector 来存储遍历后的结果集。</li>
+<li>常规的二叉树的中序遍历函数结果保存到事先创好的数组中。</li>
+<li>遍历数组 利用temp零时保存后一个减前一个的结果。</li>
+<li>不断刷新min值直到找出min。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; ret;    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">inorder</span><span class="params">( TreeNode* root )</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ( root == <span class="literal">nullptr</span> ) <span class="comment">//空为退出</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//常规中序遍历</span></span><br><span class="line">        <span class="built_in">inorder</span>( root-&gt;left );</span><br><span class="line">        ret.<span class="built_in">push_back</span>(root -&gt; val); <span class="comment">//值加到数组的末尾去</span></span><br><span class="line">        <span class="built_in">inorder</span>( root-&gt;right );</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getMinimumDifference</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> min = INT_MAX; <span class="comment">//有新的就顶掉</span></span><br><span class="line">        <span class="built_in">inorder</span>(root);<span class="comment">//中序遍历</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; ret.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> temp =ret[i] - ret[i<span class="number">-1</span>]; </span><br><span class="line">            <span class="keyword">if</span> ( temp &lt; min )</span><br><span class="line">            &#123;</span><br><span class="line">                 min = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> min;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树的简单题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/02/26/530-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE(1)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
   </div>
 </article>
 
@@ -1508,6 +1557,11 @@
   <div class="article-inner">
     
       <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
         
   
     <h1 itemprop="name">
@@ -1629,6 +1683,7 @@
       
       <div class="clearfix"></div>
     </div>
+
   </div>
 </article>
 
@@ -1656,6 +1711,11 @@
   <div class="article-inner">
     
       <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
         
   
     <h1 itemprop="name">
@@ -1777,6 +1837,7 @@
       
       <div class="clearfix"></div>
     </div>
+
   </div>
 </article>
 
@@ -1804,6 +1865,11 @@
   <div class="article-inner">
     
       <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
         
   
     <h1 itemprop="name">
@@ -1893,6 +1959,7 @@
       
       <div class="clearfix"></div>
     </div>
+
   </div>
 </article>
 
@@ -1927,17 +1994,25 @@
         </div>
       </div>
       <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2024 凌千夜
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
-  </div>
+ <div class="outer">
+   <div id="footer-info">
+     <div class="footer-left">
+       &copy; 2024 凌千夜
+     </div>
+     <div class="footer-right">
+         <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+     </div>
+   </div>
+   <div calss="count-span">
+     <span id="busuanzi_container_site_pv">
+         总访问量: <span id="busuanzi_value_site_pv"></span>
+   </div>
+ </div>
 </footer>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
     </div>
     <script>
 	var yiliaConfig = {
@@ -2057,11 +2132,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2074,6 +2149,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C语言编程题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2093,10 +2172,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言编程题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">历年真题</a>
               </li>
              
@@ -2113,11 +2188,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2129,11 +2204,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2145,11 +2220,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
