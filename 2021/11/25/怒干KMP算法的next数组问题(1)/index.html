@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="想必很多同学跟我一样被KMP算法当中的最关键的next数组所困扰。我在理解的时候可是伤了很多脑细胞，而我在翻阅资料的时候很多教材和博客中这块一笔带过，next这里恰恰才是KMP的精髓，所以我将从底层挖掘它的基本原理。当我真正get到的时候，瞬间豁然开朗，头脑中冒出一堆 妙啊～～在此，膜拜🙏三位大神 D.E.Knuth,J.H.Morris和V.R.Pratt 。这种思想打破了传动暴力匹配时候的时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怒干KMP算法的next数组问题">
+<meta property="og:url" content="http://example.com/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98(1)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="想必很多同学跟我一样被KMP算法当中的最关键的next数组所困扰。我在理解的时候可是伤了很多脑细胞，而我在翻阅资料的时候很多教材和博客中这块一笔带过，next这里恰恰才是KMP的精髓，所以我将从底层挖掘它的基本原理。当我真正get到的时候，瞬间豁然开朗，头脑中冒出一堆 妙啊～～在此，膜拜🙏三位大神 D.E.Knuth,J.H.Morris和V.R.Pratt 。这种思想打破了传动暴力匹配时候的时">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GZjjHC.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GZjhPS.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GoCq60.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GoCD5P.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GoZPJQ.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GoGFiD.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GoGTP5.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GoGwfr.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GoRGh6.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GoR1b5.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GoRtk1.jpg">
+<meta property="og:image" content="https://www.helloimg.com/images/2021/11/25/GoRwRX.jpg">
+<meta property="article:published_time" content="2021-11-25T07:11:40.000Z">
+<meta property="article:modified_time" content="2024-01-23T16:33:31.275Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.helloimg.com/images/2021/11/25/GZjjHC.jpg">
+
+<link rel="canonical" href="http://example.com/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98(1)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>怒干KMP算法的next数组问题 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">47</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">187</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98(1)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          怒干KMP算法的next数组问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-25 15:11:40" itemprop="dateCreated datePublished" datetime="2021-11-25T15:11:40+08:00">2021-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-24 00:33:31" itemprop="dateModified" datetime="2024-01-24T00:33:31+08:00">2024-01-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>想必很多同学跟我一样被KMP算法当中的最关键的next数组所困扰。我在理解的时候可是伤了很多脑细胞，而我在翻阅资料的时候很多教材和博客中这块一笔带过，next这里恰恰才是KMP的精髓，所以我将从底层挖掘它的基本原理。当我真正get到的时候，瞬间豁然开朗，头脑中冒出一堆 妙啊～～在此，膜拜🙏三位大神 D.E.Knuth,J.H.Morris和V.R.Pratt 。这种思想打破了传动暴力匹配时候的时间消耗，能快速把字串回溯到准确的位置上，省掉了很多无用功。</p>
+<h3 id="我们来先看代码"><a href="#我们来先看代码" class="headerlink" title="我们来先看代码"></a>我们来先看代码</h3><blockquote>
+<p>这里我采用三位大神的论文中阐述的 next 数组下标从0开始。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">get_next</span><span class="params">(String T, <span class="type">int</span> *next)</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i,k;</span><br><span class="line">	i = <span class="number">1</span>,k = <span class="number">0</span>;</span><br><span class="line"> 	next[<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//初始化为1</span></span><br><span class="line"> 	<span class="keyword">while</span>( i &lt; T[<span class="number">0</span>] )<span class="comment">//T[0]存储的是长度，也即是i还没走到头的时候</span></span><br><span class="line"> 	&#123;</span><br><span class="line"> 		<span class="keyword">if</span> ( k = <span class="number">0</span> || T[i] == T[j])<span class="comment">//如果相等或者k回溯到0时候进来</span></span><br><span class="line"> 		&#123;</span><br><span class="line"> 			k++;</span><br><span class="line"> 			j++</span><br><span class="line"> 			next[i] = k;</span><br><span class="line"> 		&#125;<span class="keyword">else</span></span><br><span class="line"> 		&#123;</span><br><span class="line"> 			k = next[k];</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当时这里k &#x3D; next[k]; 我就感到很困惑。。。不过看了我下面的解释你很快就会理解。</p>
+</blockquote>
+<p>如果你想要理解的更快的话，我建议你像我一样跟着代码自己手算一遍。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GZjjHC"><img src="https://www.helloimg.com/images/2021/11/25/GZjjHC.jpg" alt="GZjjHC.jpg"></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GZjhPS"><img src="https://www.helloimg.com/images/2021/11/25/GZjhPS.jpg" alt="GZjhPS.jpg"></a></p>
+<p>⚠️：从图中的规律可以观察到，i 是会不断向前走，k在不匹配i的时候会回溯。那么上图中的k 从 4 回溯到了 2 这是什么原理呢？</p>
+<span id="more"></span>
+
+<p>按照标准的数学公式来总结的话推到过程应该是面这样</p>
+<blockquote>
+<p>因为在P[j]之前已经有P[0 ~ k-1] &#x3D;&#x3D; p[j-k ~ j-1]。（next[j] &#x3D;&#x3D; k）</p>
+<p>这时候现有P[k] &#x3D;&#x3D; P[j]，我们是不是可以得到P[0 ~ k-1] + P[k] &#x3D;&#x3D; p[j-k ~ j-1] + P[j]。</p>
+<p>即：P[0 ~ k] &#x3D;&#x3D; P[j-k ~ j]，即next[j+1] &#x3D;&#x3D; k + 1 &#x3D;&#x3D; next[j] + 1。</p>
+</blockquote>
+<p>是不是和我当初看到这串公式一样一头雾水。我画个图你可能就会理解了！！👇</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GoCq60"><img src="https://www.helloimg.com/images/2021/11/25/GoCq60.jpg" alt="GoCq60.jpg"></a></p>
+<p>假设当前到20，意味当前19项已经完成。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GoCD5P"><img src="https://www.helloimg.com/images/2021/11/25/GoCD5P.jpg" alt="GoCD5P.jpg"></a></p>
+<p>那么我们假设 next[19] &#x3D; 9 –&gt;立即推出 19项之前有<strong>8项</strong>相等。也就是上图⬆️中的蓝框位置。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GoZPJQ"><img src="https://www.helloimg.com/images/2021/11/25/GoZPJQ.jpg" alt="GoZPJQ.jpg"></a></p>
+<p>当 9 和 19 相等的时候是理想状态，说明可以把蓝框里的内容扩大—&gt;next[20] &#x3D; 10 </p>
+<p>重点是如果不相等的时候怎么办，如果回溯！</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GoGFiD"><img src="https://www.helloimg.com/images/2021/11/25/GoGFiD.jpg" alt="GoGFiD.jpg"></a></p>
+<p>如果不相等的情况我们假设 next[9] &#x3D; 5 –&gt; 推出蓝框前4个元素相等。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GoGTP5"><img src="https://www.helloimg.com/images/2021/11/25/GoGTP5.jpg" alt="GoGTP5.jpg"></a></p>
+<p>上图这样，左边蓝框中有两个黄色相等。又因为右边的蓝框和左边的一样，所以右边也存在两个相等的黄框</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GoGwfr"><img src="https://www.helloimg.com/images/2021/11/25/GoGwfr.jpg" alt="GoGwfr.jpg"></a></p>
+<p>由此可以推出 这四个黄色的方框一定相等。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GoRGh6"><img src="https://www.helloimg.com/images/2021/11/25/GoRGh6.jpg" alt="GoRGh6.jpg"></a></p>
+<p>那么可以推出 最左侧的黄方框 和 最右侧的黄方框相等 又由于9 和19 刚刚已经失配了。显然k指针应当指向5号位置才能与前面的黄框连起来构成 next[20] &#x3D; 6 。所以这就是k回溯到5号的真正原因。</p>
+<p>那么如果 5号和 19号 还是失配呢</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GoR1b5"><img src="https://www.helloimg.com/images/2021/11/25/GoR1b5.jpg" alt="GoR1b5.jpg"></a></p>
+<p>此时再假设 next[5] &#x3D; 3.  —-&gt; 前面有两个元素相等。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GoRtk1"><img src="https://www.helloimg.com/images/2021/11/25/GoRtk1.jpg" alt="GoRtk1.jpg"></a></p>
+<p>刚刚推出 最左边和最右边两个黄方框相等，里面的两个元素相等，故可以推出四个湖蓝色方框相等。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GoRwRX"><img src="https://www.helloimg.com/images/2021/11/25/GoRwRX.jpg" alt="GoRwRX.jpg"></a></p>
+<p>所以只能判断 3 号 和19 号是否相等了，如果相等可以和前面的连成一片。根据此原理依次类推即可。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>根据前面的推到，这个步骤很想递归是不是，其实它就是类似的递归的思想。每次k都回溯到前一个相等的模块的后一个位置上去，为了能和前面融合。不得不感叹❕，这三位大神的思想之高度</p>
+
+    </div>
+    
+    
+    
+    
+      <div>
+  
+    <div>  <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>  </div>
+
+来源: Marmalade's Blog
+文章作者: lijunliang
+文章链接: https://marmalade.vip/hexothemebeautify4.html
+本文章著作权归作者所有，任何形式的转载都请注明出处。
+  
+   </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/14/%E9%93%BE%E9%98%9F%E5%88%97/" rel="prev" title="链队列">
+      <i class="fa fa-chevron-left"></i> 链队列
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98/" rel="next" title="怒干KMP算法的next数组问题">
+      怒干KMP算法的next数组问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E6%9D%A5%E5%85%88%E7%9C%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">我们来先看代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="John Doe"
+      src="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="数据库查询总结数据库对于我来说很难受，或许是我天生对表格不敏感吧。。。导致我学起来很是费劲，不过whatever!让我们来总结几个常用语句吧！ 在使用某库的时候别忘了要use 库名哦～ 基础查询语法：select  查询列表 from 表名特点是：  查询列表可以是：表中的字段，常量值，表达式，函数 查询的结果是一个虚拟的表格  查询表中的某个字段SELECT 字段1，字段2，字段n  from">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql 数据库">
+<meta property="og:url" content="http://example.com/2024/01/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据库查询总结数据库对于我来说很难受，或许是我天生对表格不敏感吧。。。导致我学起来很是费劲，不过whatever!让我们来总结几个常用语句吧！ 在使用某库的时候别忘了要use 库名哦～ 基础查询语法：select  查询列表 from 表名特点是：  查询列表可以是：表中的字段，常量值，表达式，函数 查询的结果是一个虚拟的表格  查询表中的某个字段SELECT 字段1，字段2，字段n  from">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-23T16:33:20.037Z">
+<meta property="article:modified_time" content="2024-01-23T16:33:20.241Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Mysql">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2024/01/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Mysql 数据库 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">47</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">187</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mysql 数据库
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-01-24 00:33:20" itemprop="dateCreated datePublished" datetime="2024-01-24T00:33:20+08:00">2024-01-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="数据库查询总结"><a href="#数据库查询总结" class="headerlink" title="数据库查询总结"></a>数据库查询总结</h2><p>数据库对于我来说很难受，或许是我天生对表格不敏感吧。。。导致我学起来很是费劲，不过whatever!让我们来总结几个常用语句吧！</p>
+<p>在使用某库的时候别忘了要use 库名哦～</p>
+<h4 id="基础查询"><a href="#基础查询" class="headerlink" title="基础查询"></a>基础查询</h4><h6 id="语法：select-查询列表-from-表名"><a href="#语法：select-查询列表-from-表名" class="headerlink" title="语法：select  查询列表 from 表名"></a>语法：select  查询列表 from 表名</h6><p>特点是：</p>
+<ol>
+<li>查询列表可以是：表中的字段，常量值，表达式，函数</li>
+<li>查询的结果是一个虚拟的表格</li>
+</ol>
+<h6 id="查询表中的某个字段"><a href="#查询表中的某个字段" class="headerlink" title="查询表中的某个字段"></a>查询表中的某个字段</h6><p>SELECT 字段1，字段2，字段n  from 表名</p>
+<h6 id="查询所以字段"><a href="#查询所以字段" class="headerlink" title="查询所以字段"></a>查询所以字段</h6><p>SELECT * from 表名</p>
+<h6 id="起别名"><a href="#起别名" class="headerlink" title="起别名"></a>起别名</h6><p>Select  last_name 姓,first_name 名 from 表</p>
+<p>Select  last_name as 姓,first_name  as 名 from 表</p>
+<h6 id="去重-distinct"><a href="#去重-distinct" class="headerlink" title="去重 distinct"></a>去重 distinct</h6><p>例如：查询员工表中涉及到的所有的部门编号</p>
+<p>很多员工来自相同部门所以去除重复, distinct要放在select后字段前</p>
+<p>Select  distinct department_id FROM employees;</p>
+<span id="more"></span>
+
+<h6 id="连接字段"><a href="#连接字段" class="headerlink" title="连接字段"></a>连接字段</h6><p>案例：查询员工名和姓连接成一个字段，并显示为 姓名</p>
+<p>Select concat(last_name,first_name) from 表名 </p>
+<h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h4><p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">            查询列表</span><br><span class="line">from </span><br><span class="line">            表名</span><br><span class="line">where</span><br><span class="line">            筛选条件;</span><br></pre></td></tr></table></figure>
+
+<p>分类：</p>
+<ol>
+<li><p>按条件表达式筛选：&gt; &lt; &#x3D; !&#x3D; &lt;&gt; &gt;&#x3D; &lt;&#x3D;</p>
+</li>
+<li><p>按逻辑表达式：用于连接条件表达式 ：&amp;&amp; || !<br>and or not</p>
+</li>
+<li><p>模糊查询： like    between  and     in   is null</p>
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><p>案例1: 查询工资z在10000到20000之间的员工名、工资以及奖金</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">   last_name,</span><br><span class="line">   salary,</span><br><span class="line">   commission_pct</span><br><span class="line">FROM</span><br><span class="line">   employees</span><br><span class="line">WHERE</span><br><span class="line">   salary&gt;=10000 AND salary&lt;=20000;</span><br></pre></td></tr></table></figure>
+
+<h4 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h4><p>like  一般是和通配符一起使用，所谓通配符有两种</p>
+<p>第一种: % 可以多个字符，包含0个字符</p>
+<p>第二种 _ 单个字符</p>
+<h4 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h4><p>查询员工名中包含字符a的员工信息</p>
+<p>分析：注意问题中写到’的员工信息’，暗示所有员工的所有字段所以  是 * 号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">   *</span><br><span class="line">from</span><br><span class="line">   employees</span><br><span class="line">where</span><br><span class="line">   last_name like &#x27;%a%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>查询员工名中第三个字符为e，第五个字符为a的员工名和工资</p>
+<p>分析： ‘的员工名和工资’</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select</span><br><span class="line">   last_name,</span><br><span class="line">   salary</span><br><span class="line">FROM</span><br><span class="line">   employees</span><br><span class="line">WHERE</span><br><span class="line">   last_name LIKE &#x27;__n_l%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>查询员工名中第二个字符为_的员工名</p>
+<p>分析：’的员工名‘ ，如果我们写筛选条件是 _ _ %的时候编译器无法识别是第二个，所以要用到‘分割符’—&gt;$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">   last_name</span><br><span class="line">FROM</span><br><span class="line">   employees</span><br><span class="line">WHERE</span><br><span class="line">   last_name LIKE &#x27;_$_%&#x27; ESCAPE &#x27;$&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>between and </p>
+<p>①使用between and 可以提高语句的简洁度<br>②包含临界值<br>③两个临界值不要调换顺序</p>
+<p>查询员工编号在100到120之间的员工信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">   *</span><br><span class="line">FROM</span><br><span class="line">   employees</span><br><span class="line">WHERE</span><br><span class="line">   employee_id BETWEEN 120 AND 100;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果我们要实现的是 ： 查询员工的工种编号是 IT_PROG、AD_VP、AD_PRES中的一个员工名和工种编号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">   last_name,</span><br><span class="line">   job_id</span><br><span class="line">FROM</span><br><span class="line">   employees</span><br><span class="line">WHERE</span><br><span class="line">   job_id = &#x27;IT_PROT&#x27; OR job_id = &#x27;AD_VP&#x27; OR JOB_ID =&#x27;AD_PRES&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>这样写代码过于孬种不简洁，于是我们引入了  In 字句 来表示某字段的值是否属于in列表中的某一项。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">   last_name,</span><br><span class="line">   job_id</span><br><span class="line">FROM</span><br><span class="line">   employees</span><br><span class="line">WHERE</span><br><span class="line">   job_id IN( &#x27;IT_PROT&#x27; ,&#x27;AD_VP&#x27;,&#x27;AD_PRES&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>Is null  用is null 或者 is not null 判断某些字段是否是空值</p>
+<p>案例1：查询没有奖金的员工名和奖金率</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">         last_name</span><br><span class="line">         Commissioner_pct</span><br><span class="line">from </span><br><span class="line">         employees</span><br><span class="line">where </span><br><span class="line">         commission_pct is null;</span><br></pre></td></tr></table></figure>
+
+<p>案例1：查询有奖金的员工名和奖金率</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">   last_name,</span><br><span class="line">   commission_pct</span><br><span class="line">FROM</span><br><span class="line">   employees</span><br><span class="line">WHERE</span><br><span class="line">   commission_pct IS NOT NULL;</span><br></pre></td></tr></table></figure>
+
+<p>查询没有奖金的员工名和奖金率(安全等于)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">   last_name,</span><br><span class="line">   commission_pct</span><br><span class="line">FROM</span><br><span class="line">   employees</span><br><span class="line">WHERE</span><br><span class="line">   commission_pct&lt;=&gt; null; </span><br></pre></td></tr></table></figure>
+
+<h5 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h5><p>案例一：查询查询各job_id的员工工资的最大值，最小值，平均值，总和，并按job_id升序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT </span><br><span class="line">    MAX(salary), MIN(salary), AVG(salary), SUM(salary)</span><br><span class="line">FROM</span><br><span class="line">    employees</span><br><span class="line">ORDER BY job_id;</span><br></pre></td></tr></table></figure>
+
+<p>案例#2.查询员工最高工资和最低工资的差距（DIFFERENCE）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT MAX(salary)-MIN(salary) DIFFRENCE</span><br><span class="line">FROM employees;</span><br></pre></td></tr></table></figure>
+
+<p>3.查询各个管理者手下员工的最低工资，其中最低工资不能低于6000，没有管理者的员工不计算在内</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT </span><br><span class="line">    MIN(salary) 最低工资, manager_id</span><br><span class="line">FROM</span><br><span class="line">    employees</span><br><span class="line">WHERE</span><br><span class="line">    manager_id IS NOT NULL</span><br><span class="line">GROUP BY manager_id</span><br><span class="line">HAVING MIN(salary) &gt;= 6000;</span><br></pre></td></tr></table></figure>
+
+<p>group by  与 from 之间用where子句， 分组后, 添加筛选条件用的是having 字句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT </span><br><span class="line">    department_id, COUNT(*), AVG(salary)</span><br><span class="line">FROM</span><br><span class="line">    employees</span><br><span class="line">group by department_id</span><br><span class="line">order by avg(salary) desc;</span><br></pre></td></tr></table></figure>
+
+<p>5.选择具有各个job_id的员工人数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT </span><br><span class="line">    COUNT(*) 人数, job_id</span><br><span class="line">FROM</span><br><span class="line">    employees</span><br><span class="line">GROUP BY job_id;</span><br></pre></td></tr></table></figure>
+
+<h4 id="分组查询的格式"><a href="#分组查询的格式" class="headerlink" title="分组查询的格式"></a>分组查询的格式</h4><blockquote>
+<p>select 查询列表<br>from 表<br>【where 筛选条件】<br>group by 分组的字段<br>【order by 排序的字段】;</p>
+</blockquote>
+<p>特点：<br>1、和分组函数一同查询的字段必须是group by后出现的字段<br>2、筛选分为两类：分组前筛选和分组后筛选</p>
+<p>如果能分组前筛选尽量分组前筛选，能提高效率。</p>
+<p>案例：查询哪个部门的员工个数&gt;5</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT COUNT(*),department_id</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY department_id</span><br><span class="line">HAVING COUNT(*)&gt;5;</span><br></pre></td></tr></table></figure>
+
+<p>案例：每个工种有奖金的员工的最高工资&gt;6000的工种编号和最高工资,按最高工资升序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT </span><br><span class="line">    MAX(salary) 最高工资, job_id</span><br><span class="line">FROM</span><br><span class="line">    employees</span><br><span class="line">WHERE</span><br><span class="line">    commission_pct IS NOT NULL</span><br><span class="line">GROUP BY job_id</span><br><span class="line">HAVING 最高工资 &gt; 6000</span><br><span class="line">order by MAX(salary);</span><br></pre></td></tr></table></figure>
+
+<p>案例：查询每个工种每个部门的最低工资,并按最低工资降序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT MIN(salary),job_id,department_id</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY department_id,job_id</span><br><span class="line">ORDER BY MIN(salary) DESC;</span><br></pre></td></tr></table></figure>
+
+<p>注意：group by 可以对对个字段进行分组。</p>
+</li>
+</ol>
+
+    </div>
+    
+    
+    
+    
+      <div>
+  
+    <div>  <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>  </div>
+
+来源: Marmalade's Blog
+文章作者: lijunliang
+文章链接: https://marmalade.vip/hexothemebeautify4.html
+本文章著作权归作者所有，任何形式的转载都请注明出处。
+  
+   </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/24/%20%E6%9F%A5%E6%89%BE%E4%B9%A6%E7%B1%8D/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/24/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">数据库查询总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.0.1.</span> <span class="nav-text">基础查询</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%EF%BC%9Aselect-%E6%9F%A5%E8%AF%A2%E5%88%97%E8%A1%A8-from-%E8%A1%A8%E5%90%8D"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">语法：select  查询列表 from 表名</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">查询表中的某个字段</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E4%BB%A5%E5%AD%97%E6%AE%B5"><span class="nav-number">1.0.1.0.3.</span> <span class="nav-text">查询所以字段</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%B5%B7%E5%88%AB%E5%90%8D"><span class="nav-number">1.0.1.0.4.</span> <span class="nav-text">起别名</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8E%BB%E9%87%8D-distinct"><span class="nav-number">1.0.1.0.5.</span> <span class="nav-text">去重 distinct</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%AD%97%E6%AE%B5"><span class="nav-number">1.0.1.0.6.</span> <span class="nav-text">连接字段</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.0.2.</span> <span class="nav-text">条件查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">1.0.3.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.0.4.</span> <span class="nav-text">模糊查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-1"><span class="nav-number">1.0.5.</span> <span class="nav-text">案例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.0.5.1.</span> <span class="nav-text">分组查询</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.0.6.</span> <span class="nav-text">分组查询的格式</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="John Doe"
+      src="https://www.helloimg.com/images/2021/11/27/GFaK55.jpg">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">187</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
