@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 187
+            总文章数 188
         </nav>
 
 
@@ -166,6 +166,152 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-JAVA网络编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/09/03/JAVA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">JAVA网络编程</a>
+    </h1>
+  
+
+        
+        <a href="/2024/09/03/JAVA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2024-09-03T15:04:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><h3 id="单发连接"><a href="#单发连接" class="headerlink" title="单发连接"></a>单发连接</h3><p><strong>客户端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//目标是： 客户端实现</span></span><br><span class="line">        <span class="comment">//1 . 创建一个发送端对象 --人</span></span><br><span class="line">        <span class="type">DatagramSocket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个数据包对象封装要发送的数据，韭菜盘子，装韭菜</span></span><br><span class="line">        <span class="type">byte</span>[] bytes = <span class="string">&quot;我是客户端，请好好学习，高薪就业&quot;</span>.getBytes();<span class="comment">//先写成数组</span></span><br><span class="line">        <span class="type">DatagramPacket</span> <span class="variable">packet</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramPacket</span>(bytes, bytes.length, InetAddress.getLocalHost(), <span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//发送这个数据包(把韭菜抛出去)</span></span><br><span class="line">        socket.send(packet);</span><br><span class="line"></span><br><span class="line">        socket.close();<span class="comment">//管道关闭</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>服务端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Server</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;============服务器启动成功了============&quot;</span>);</span><br><span class="line">        <span class="comment">//1、创建接受端对象 --&gt; 人</span></span><br><span class="line">        <span class="type">DatagramSocket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>(<span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、创建一个数 据包对象，负责接受数据 ---&gt; 空盘子</span></span><br><span class="line">        <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">64</span>];</span><br><span class="line">        <span class="type">DatagramPacket</span> <span class="variable">packet</span> <span class="operator">=</span> <span class="keyword">new</span>  <span class="title class_">DatagramPacket</span>(buffer, buffer.length);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、开始使用数据包接受数据</span></span><br><span class="line">        socket.receive(packet);</span><br><span class="line">        <span class="comment">//为了把剩下的无用的东西都不显示，需要裁剪一下</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> packet.getLength();<span class="comment">//得到了实际拿到的长度</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//4、看接受的数据</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">rs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(buffer,<span class="number">0</span>,length);<span class="comment">//从0 到 长度的位置截取</span></span><br><span class="line">        System.out.println(<span class="string">&quot;服务端收到&quot;</span>+rs);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多发多收"><a href="#多发多收" class="headerlink" title="多发多收"></a>多发多收</h3><p><strong>客户端</strong></p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//目标是： 客户端实现</span></span><br><span class="line">        <span class="comment">//1 . 创建一个发送端对象 --人</span></span><br><span class="line">        <span class="type">DatagramSocket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>();</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span>  <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;请输入：&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> sc.nextLine();<span class="comment">//接受到数组</span></span><br><span class="line">            <span class="comment">//如果等于exit的时候就退出循环</span></span><br><span class="line">            <span class="keyword">if</span> (msg.equals(<span class="string">&quot;exit&quot;</span>))&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;退出！！&quot;</span>);</span><br><span class="line">                <span class="comment">//关流</span></span><br><span class="line">                socket.close();</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//创建一个数据包对象封装要发送的数据，韭菜盘子，装韭菜</span></span><br><span class="line">            <span class="type">byte</span>[] bytes = msg.getBytes();<span class="comment">//先写成数组</span></span><br><span class="line">            <span class="type">DatagramPacket</span> <span class="variable">packet</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramPacket</span>(bytes, bytes.length, InetAddress.getLocalHost(), <span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//发送这个数据包(把韭菜抛出去)</span></span><br><span class="line">            socket.send(packet);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>服务端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Server</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;============服务器启动成功了============&quot;</span>);</span><br><span class="line">        <span class="comment">//1、创建接受端对象 --&gt; 人</span></span><br><span class="line">        <span class="type">DatagramSocket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>(<span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、创建一个数 据包对象，负责接受数据 ---&gt; 空盘子</span></span><br><span class="line">        <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">64</span>];</span><br><span class="line">        <span class="type">DatagramPacket</span> <span class="variable">packet</span> <span class="operator">=</span> <span class="keyword">new</span>  <span class="title class_">DatagramPacket</span>(buffer, buffer.length);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="comment">//3、开始使用数据包接受数据</span></span><br><span class="line">            socket.receive(packet);</span><br><span class="line">            <span class="comment">//为了不回把剩下的么用的东西都显示完成需要裁剪一下</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> packet.getLength();<span class="comment">//得到了实际拿到的长度</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//顺便拿一下客户端的的ip地址和端口</span></span><br><span class="line">            System.out.println(<span class="string">&quot;对方ip&quot;</span>+packet.getAddress().getHostAddress());</span><br><span class="line">            System.out.println(<span class="string">&quot;对方端口&quot;</span>+packet.getPort());</span><br><span class="line">            <span class="comment">//4、看接受的数据</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">rs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(buffer,<span class="number">0</span>,length);<span class="comment">//从0 到 长度的位置截取</span></span><br><span class="line">            System.out.println(<span class="string">&quot;服务端收到：&quot;</span>+rs);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="单发"><a href="#单发" class="headerlink" title="单发"></a>单发</h3><p><strong>客户端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//创建socket对象，请求服务端的socket管道连接</span></span><br><span class="line">        Socket socket= <span class="keyword">new</span> <span class="title class_">Socket</span>(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="number">6666</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//从socket 通信管道中得到一个字节输出流</span></span><br><span class="line">        <span class="type">OutputStream</span> <span class="variable">os</span> <span class="operator">=</span> socket.getOutputStream();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把低级字节输出流包装成特殊的数据输出流</span></span><br><span class="line">        <span class="type">DataOutputStream</span> <span class="variable">dos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataOutputStream</span>(os);</span><br><span class="line"></span><br><span class="line">        dos.writeUTF(<span class="string">&quot;这里是客户端，我是tcp通讯发来的～！！！！&quot;</span>);</span><br><span class="line">        dos.flush();<span class="comment">//刷新</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>服务端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Server1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;================服务端启动================&quot;</span>);</span><br><span class="line">        <span class="comment">//注册端口</span></span><br><span class="line">        <span class="type">ServerSocket</span> <span class="variable">serverSocket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerSocket</span>(<span class="number">6666</span>);</span><br><span class="line">        <span class="comment">//开始等待客户端管道中的一个字节输入流</span></span><br><span class="line">        <span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> serverSocket.accept();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//从socket通信管道中得到一个字节输入流</span></span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> socket.getInputStream();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把字节输入流包装的高级一点</span></span><br><span class="line">        <span class="type">DataInputStream</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataInputStream</span>(is);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//接受数据</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> dis.readUTF();</span><br><span class="line">        System.out.println(<span class="string">&quot;服务端收到：&quot;</span>+msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="多发多收-1"><a href="#多发多收-1" class="headerlink" title="多发多收"></a>多发多收</h3><p><strong>客户端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//创建socket对象，请求服务端的socket管道连接</span></span><br><span class="line">        Socket socket= <span class="keyword">new</span> <span class="title class_">Socket</span>(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="number">6666</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//从socket 通信管道中得到一个字节输出流</span></span><br><span class="line">        <span class="type">OutputStream</span> <span class="variable">os</span> <span class="operator">=</span> socket.getOutputStream();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把低级字节输出流包装成特殊的数据输出流</span></span><br><span class="line">        <span class="type">DataOutputStream</span> <span class="variable">dos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataOutputStream</span>(os);</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="comment">//从这开始不断的发</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;请说：&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> sc.next();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;exit&quot;</span>.equals(msg))&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;退出～～～&quot;</span>);</span><br><span class="line">                <span class="comment">//关流--&gt;关闭管道</span></span><br><span class="line">                socket.close();</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            dos.writeUTF(msg);</span><br><span class="line">            dos.flush();<span class="comment">//刷新</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>服务端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Server2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;================服务端启动================&quot;</span>);</span><br><span class="line">        <span class="comment">//注册端口</span></span><br><span class="line">        <span class="type">ServerSocket</span> <span class="variable">serverSocket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerSocket</span>(<span class="number">6666</span>);</span><br><span class="line">        <span class="comment">//开始等待客户端管道中的一个字节输入流</span></span><br><span class="line">        <span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> serverSocket.accept();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//从socket通信管道中得到一个字节输入流</span></span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> socket.getInputStream();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把字节输入流包装的高级一点</span></span><br><span class="line">        <span class="type">DataInputStream</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataInputStream</span>(is);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//不断的接受</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="comment">//接受数据</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> dis.readUTF();</span><br><span class="line">            System.out.println(<span class="string">&quot;服务端收到：&quot;</span>+msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>存在的问题</p>
+<ol>
+<li>当多开客户端的时候，只能收到一个发的信息。</li>
+<li>当客户端停止程序的时候，服务端会报错。</li>
+</ol>
+</blockquote>
+<p>对于<strong>2</strong>的解决方案 <strong>加try catch 语句</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Server2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;================服务端启动================&quot;</span>);</span><br><span class="line">            <span class="comment">//注册端口</span></span><br><span class="line">            <span class="type">ServerSocket</span> <span class="variable">serverSocket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerSocket</span>(<span class="number">6666</span>);</span><br><span class="line">            <span class="comment">//开始等待客户端管道中的一个字节输入流</span></span><br><span class="line">            <span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> serverSocket.accept();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//从socket通信管道中得到一个字节输入流</span></span><br><span class="line">            <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> socket.getInputStream();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//把字节输入流包装的高级一点</span></span><br><span class="line">            <span class="type">DataInputStream</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataInputStream</span>(is);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="comment">//不断的接受</span></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="comment">//接受数据</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> dis.readUTF();</span><br><span class="line">                System.out.println(<span class="string">&quot;服务端收到：&quot;</span> + msg);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;有人可是离线了啊？！！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>对于<strong>1</strong>的解决方案</p>
+<blockquote>
+<p>使用多线程的方式</p>
+</blockquote>
+<p><strong>客户端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Server3</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;================服务端启动================&quot;</span>);</span><br><span class="line">        <span class="comment">//注册端口</span></span><br><span class="line">        <span class="type">ServerSocket</span> <span class="variable">serverSocket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerSocket</span>(<span class="number">6666</span>);</span><br><span class="line">        <span class="comment">//开始等待客户端管道中的一个字节输入流</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> serverSocket.accept();</span><br><span class="line">            <span class="comment">//开启一个线程</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">ServerReadertThread</span>(socket).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>线程</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServerReadertThread</span> <span class="keyword">extends</span> <span class="title class_">Thread</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Socket socket;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ServerReadertThread</span><span class="params">(Socket socket)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.socket = socket;<span class="comment">//每次传进来都赋值成员变量</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//从socket通信管道中得到一个字节输入流</span></span><br><span class="line">            <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> socket.getInputStream();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//把字节输入流包装的高级一点</span></span><br><span class="line">            <span class="type">DataInputStream</span> <span class="variable">dis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataInputStream</span>(is);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//不断的接受</span></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="comment">//接受数据</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> dis.readUTF();</span><br><span class="line">                System.out.println(<span class="string">&quot;服务端收到：&quot;</span>+msg);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVA基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JAVA基础//" class="article-tag-list-link color2">JAVA基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/09/03/JAVA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-JS事件案例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1109,114 +1255,6 @@
 
 
   
-    <article id="post-2022蓝桥杯真题《顺子日期》(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/10/2022%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%9F%E9%A2%98%E3%80%8A%E9%A1%BA%E5%AD%90%E6%97%A5%E6%9C%9F%E3%80%8B(1)/">2022蓝桥杯真题《顺子日期》</a>
-    </h1>
-  
-
-        
-        <a href="/2022/04/10/2022%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%9F%E9%A2%98%E3%80%8A%E9%A1%BA%E5%AD%90%E6%97%A5%E6%9C%9F%E3%80%8B(1)/" class="archive-article-date">
-  	<time datetime="2022-04-10T13:27:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>小明特别喜欢顺子。顺子指的就是连续的三个数字：123、456 等。顺子日</p>
-<p>期指的就是在日期的 <strong>yyyymmdd</strong> 表示法中，存在任意连续的三位数是一个顺</p>
-<p>子的日期。例如 20220123 就是一个顺子日期，因为它出现了一个顺子：123； </p>
-<p>而 20221023 则不是一个顺子日期，它一个顺子也没有。小明想知道在整个 2022</p>
-<p>年份中，一共有多少个顺子日期。</p>
-<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>思路： 先搞定后四位弄成字符串组合上2022 然后对于整体进行检查是否满足条件</p>
-<ul>
-<li>先解决后四位的问题，2022<strong>0123</strong>。月好说，每个月有多少天事先定义一个const的数组出来，一会 循环调用即可，省去了在代码中构思一个月有几天的问题。</li>
-<li>后四位如何解决？ 弄一个函数，将月和日拆分送进去。构成字符串，然后检查，如果两位，那就反转一下成为正常顺序，如果是一位前面补0。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  main.cpp</span></span><br><span class="line"><span class="comment">//  顺子日期</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Bing on 2022/4/10.</span></span><br><span class="line"><span class="comment">//  Copyright © 2022 Bing. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//定义一个一年每个月表示的数组，注意2022年是闰年 2月28天</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> month[] = &#123; <span class="number">0</span>, <span class="number">31</span>, <span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>&#125;;</span><br><span class="line"><span class="function">string <span class="title">toString</span><span class="params">( <span class="type">int</span> n )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string ret = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">while</span> ( n )<span class="comment">//n不为0时</span></span><br><span class="line">    &#123;</span><br><span class="line">        ret += n%<span class="number">10</span> + <span class="string">&#x27;0&#x27;</span>;<span class="comment">//拿到最后一位并上&#x27;0&#x27;成为字符串</span></span><br><span class="line">        n/=<span class="number">10</span>; <span class="comment">//撇去最后一位</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//此时 顺序是反的 --&gt; 比如 12  -&gt;  21</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( ret.<span class="built_in">size</span>() &gt;= <span class="number">2</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">reverse</span>( ret.<span class="built_in">begin</span>() , ret.<span class="built_in">end</span>());</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        ret = <span class="string">&quot;0&quot;</span> + ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">checkNum</span><span class="params">(string date)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; date.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( date[i] == date[i<span class="number">-1</span>]+<span class="number">1</span> &amp;&amp; date[i]+<span class="number">1</span> == date[i+<span class="number">1</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    string year = <span class="string">&quot;2022&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历月，遍历日</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> mon = <span class="number">1</span>; mon &lt;= <span class="number">12</span>; ++mon) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> dy = <span class="number">1</span>; dy &lt;= month[mon] ; ++dy) &#123;<span class="comment">//遍历当月有几天</span></span><br><span class="line">            <span class="comment">//把年月日拼接为一整个字符串</span></span><br><span class="line">            string s = year+ <span class="built_in">toString</span>(mon)+<span class="built_in">toString</span>(dy);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//检查</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">checkNum</span>(s))</span><br><span class="line">            &#123;</span><br><span class="line">                cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">               count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; count &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">蓝桥杯</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">普通类型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/蓝桥杯-普通类型//" class="article-tag-list-link color4">蓝桥杯,普通类型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/10/2022%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%9F%E9%A2%98%E3%80%8A%E9%A1%BA%E5%AD%90%E6%97%A5%E6%9C%9F%E3%80%8B(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1366,6 +1404,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -1394,15 +1436,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">

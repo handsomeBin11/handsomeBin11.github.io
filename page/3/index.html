@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 187
+            总文章数 188
         </nav>
 
 
@@ -166,6 +166,144 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-图(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/29/%E5%9B%BE(1)/">图</a>
+    </h1>
+  
+
+        
+        <a href="/2022/03/29/%E5%9B%BE(1)/" class="archive-article-date">
+  	<time datetime="2022-03-29T13:12:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><h2 id="BFS-–-广度优先搜索🔍"><a href="#BFS-–-广度优先搜索🔍" class="headerlink" title="BFS – 广度优先搜索🔍"></a>BFS – 广度优先搜索🔍</h2><h3 id="邻接矩阵的广度遍历算法"><a href="#邻接矩阵的广度遍历算法" class="headerlink" title="邻接矩阵的广度遍历算法"></a>邻接矩阵的广度遍历算法</h3><p>思路：就是利用队列将访问的顶点入队，然后出队的时候把与该顶点相连的顶点都拉进队…. 如此往复。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFSTraverse</span><span class="params">(MGraph G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line">    Queue Q;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//先把顶点都默认为没访问</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">InitQueue</span>(&amp;Q);<span class="comment">//初始化一个队列</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//对每个顶点做循环</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visited[i])<span class="comment">//如果没有访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            visited[i] = TRUE;<span class="comment">//那么当前被访问了</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,G.vexs[i]);<span class="comment">//输出被访问的</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//把被访问的入队</span></span><br><span class="line">            <span class="built_in">EnQueue</span>(&amp;Q,i);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> ( !<span class="built_in">QueueEmpty</span>(Q) )<span class="comment">//如果队列不为空</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//我出去的时候就要把相连的顶点拉进来</span></span><br><span class="line">                <span class="built_in">DeQueue</span>(&amp;Q,&amp;i);</span><br><span class="line">                <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; G.numVertexes; ++j) &#123;<span class="comment">//寻找出去相连的点</span></span><br><span class="line">                    <span class="keyword">if</span> ( G.arc[i][j] == <span class="number">1</span> &amp;&amp; !visited[j] )<span class="comment">//当前顶点存在 并且 没被访问过</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="comment">//进来就是找到了</span></span><br><span class="line">                        <span class="comment">//先标记一下</span></span><br><span class="line">                        visited[j] = TRUE;</span><br><span class="line"></span><br><span class="line">                        <span class="comment">//打印出来</span></span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,G.vexs[j]);</span><br><span class="line"></span><br><span class="line">                        <span class="comment">//拉进队列里来</span></span><br><span class="line">                        <span class="built_in">EnQueue</span>(&amp;Q,j);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="邻接表的广度优先法"><a href="#邻接表的广度优先法" class="headerlink" title="邻接表的广度优先法"></a>邻接表的广度优先法</h3><h4 id="有必要说的结构体"><a href="#有必要说的结构体" class="headerlink" title="有必要说的结构体"></a>有必要说的结构体</h4><p>我觉得还是有必要说一下结构体的定义，有些繁杂,有三段。</p>
+<p>1. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 邻接表结构****************** */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">EdgeNode</span> <span class="comment">/* 构造普通的结点，有对应下标，有next指针 */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> adjvex;    <span class="comment">/* 邻接点域,存储该顶点对应的下标 */</span></span><br><span class="line">    <span class="type">int</span> weight;        <span class="comment">/* 用于存储权值,对于非网图可以不需要 */</span></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">EdgeNode</span> *next; <span class="comment">/* 链域,指向下一个邻接点 */</span></span><br><span class="line">&#125;EdgeNode;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这个相当于构造普通的带指针的结点，那什么是普通呢？看下图，黄色框起来的。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/ReXCjA"><img src="https://www.helloimg.com/images/2022/03/27/ReXCjA.jpg" alt="ReXCjA.jpg"></a></p>
+<p>2. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">VertexNode</span> <span class="comment">/* 构造开头那个，开头比较特殊需要单独定义一下 */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> in;    <span class="comment">/* 顶点入度 */</span></span><br><span class="line">    <span class="type">char</span> data; <span class="comment">/* 顶点域,存储顶点信息 */</span></span><br><span class="line">    EdgeNode *firstedge;<span class="comment">/* 边表头指针 */</span></span><br><span class="line">&#125;VertexNode, AdjList[MAXVEX];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里就容易理解了，开头的结点情况比较特殊，它要存储一些关于它这一溜的度呀、数据、以及头指针。</p>
+</blockquote>
+<p>3. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span><span class="comment">//大局观，也就是放眼整张图 看看有多少顶点多少条边</span></span><br><span class="line">&#123;</span><br><span class="line">    AdjList adjList;</span><br><span class="line">    <span class="type">int</span> numVertexes,numEdges; <span class="comment">/* 图中当前顶点数和边数 */</span></span><br><span class="line">&#125;graphAdjList,*GraphAdjList;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>所谓的大局观，需要把刚刚定义的头指针串起来，组成整张表。这里存的就是总的顶点数，和边的数。</p>
+</blockquote>
+<p>最后总的来看一下哈</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/Reedeo"><img src="https://www.helloimg.com/images/2022/03/27/Reedeo.png" alt="Reedeo.png"></a></p>
+<h4 id="遍历算法"><a href="#遍历算法" class="headerlink" title="遍历算法"></a>遍历算法</h4><p>大体思路：当你建立好邻接链表的时候可以观察到，其实就是一个大数组把一个个小数组串起来。如下图：</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RxBOXt"><img src="https://www.helloimg.com/images/2022/03/29/RxBOXt.jpg" alt="RxBOXt.jpg"></a></p>
+<ul>
+<li><p>当到了链表的第一个位置的时候会先出队，并且指针指向第一个的下一个结点。比如0号A，当A出队的时候指针会指向A的下一个元素，由此p会沿着该链表一直走下去看看是否有未被访问过的元素，如果有则先入队。</p>
+</li>
+<li><p>如果说该链表走完了，则从队列中出队列一个元素，例如，处理完A后，B会出列，那么指针会走到B的下一个位置遍历整个链表。接下来会如此往复，直到全部链表都被访问过。</p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RxRBLK"><img src="https://www.helloimg.com/images/2022/03/29/RxRBLK.png" alt="RxRBLK.png"></a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFSTraverse</span><span class="params">(GraphAdjList GL)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//定义一个一会遍历普通结点的变量</span></span><br><span class="line">    EdgeNode *p;</span><br><span class="line">    <span class="comment">//循环变量</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="comment">//队列</span></span><br><span class="line">    Queue  Q;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化被访问元素</span></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//初始化队列</span></span><br><span class="line">    <span class="built_in">InitQueue</span>(&amp;Q);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历整张图的每一个结点</span></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[i] )<span class="comment">//如果没有被访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//进来就设为已经问过了</span></span><br><span class="line">            visited[i] = TRUE;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,GL-&gt;adjList[i].data);<span class="comment">//输出对应元素</span></span><br><span class="line">            <span class="built_in">EnQueue</span>(&amp;Q,i);<span class="comment">//当前元素对应的下标入队</span></span><br><span class="line">            <span class="comment">//当队列不为空时</span></span><br><span class="line">            <span class="keyword">while</span> ( !<span class="built_in">QueueEmpty</span>(Q) )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//出队当前元素</span></span><br><span class="line">                <span class="built_in">DeQueue</span>(&amp;Q,&amp;i);</span><br><span class="line">                <span class="comment">//指针指向该头结点的首指针</span></span><br><span class="line">                p = GL-&gt;adjList[i].firstedge;<span class="comment">//p指向第一个元素</span></span><br><span class="line">                <span class="comment">//遍历整个链表</span></span><br><span class="line">                <span class="keyword">while</span> (p)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> ( !visited[p-&gt;adjvex] )<span class="comment">//p所指的此结点对应的下标违未被访问过</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        visited[p-&gt;adjvex] = TRUE;</span><br><span class="line">                        <span class="built_in">EnQueue</span>(&amp;Q,p-&gt;adjvex);<span class="comment">//当前p所指的此结点对应的下标</span></span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,GL-&gt;adjList[p-&gt;adjvex].data);<span class="comment">//当前p所指的此结点对应的下标输出对应元素</span></span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    p=p-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="DFS-深度优先遍历"><a href="#DFS-深度优先遍历" class="headerlink" title="DFS 深度优先遍历"></a>DFS 深度优先遍历</h2><h3 id="邻接矩阵的广度遍历算法-1"><a href="#邻接矩阵的广度遍历算法-1" class="headerlink" title="邻接矩阵的广度遍历算法"></a>邻接矩阵的广度遍历算法</h3><p>算法：通过矩阵的形式从左➡️到右进行遍历。当遇到 1 的，i  j  互换，互换的目的就是从搜索到的结点的哪一行开始继续探索。后面就是同理，遇到1则跳到对应的行上进行遍历。如图：</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RETcvu"><img src="https://www.helloimg.com/images/2022/03/30/RETcvu.jpg" alt="RETcvu.jpg"></a></p>
+<p>如果发现当前那一行都没有满足条件的就回溯到上一个你跳转过来的行往后继续进行。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(MGraph G, <span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> j;</span><br><span class="line">    visited[i] = TRUE;<span class="comment">//进来以后说明未访问过，标记为访问过</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,G.vexs[i]);<span class="comment">//先输出</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; G.numVertexes; ++j) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( G.arc[i][j]==<span class="number">1</span> &amp;&amp; !visited[j] )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(G,j);<span class="comment">/* 注意这里的细节：如果满足连通则，下一轮j就成为了i，也就是以i的基础上进行拓展，如果全部拓展完了一会要回到此地继续向后拓展。 */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 邻接矩阵的深度遍历操作 */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFSTraverse</span><span class="params">(MGraph G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">  <span class="comment">//对访问进行初始化</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遍历全部结点</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[i] )<span class="comment">//如果发现没有访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(G,i);<span class="comment">//调用DFS</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="邻接表的深度优先法"><a href="#邻接表的深度优先法" class="headerlink" title="邻接表的深度优先法"></a>邻接表的深度优先法</h3><p>类似于矩阵的形式，不过多赘述</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(GraphAdjList GL, <span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//结点</span></span><br><span class="line">    EdgeNode *p;</span><br><span class="line">    visited[i] = TRUE;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,GL-&gt;adjList[i].data);</span><br><span class="line">    p = GL-&gt;adjList[i].firstedge;<span class="comment">//p拿到头指针</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[p-&gt;adjvex] )<span class="comment">//如果p所指向的那个结点没有访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(GL,p-&gt;adjvex);<span class="comment">/* 这该结点的基础上递归调用--也就是从新的结点继续拓展。*/</span></span><br><span class="line">        &#125;</span><br><span class="line">        p=p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 邻接表的深度遍历操作 */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFSTraverse</span><span class="params">(GraphAdjList GL)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="comment">//进行初始化</span></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;<span class="comment">/* 初始所有顶点状态都是未访问过状态 */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[i] )<span class="comment">/* 对未访问过的顶点调用DFS,若是连通图,只会执行一次 */</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(GL,i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/图//" class="article-tag-list-link color2">图</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/03/29/%E5%9B%BE(1)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1867,128 +2005,6 @@
 
 
   
-    <article id="post-235-二叉搜索树的最近公共祖先(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/01/25/235-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88(1)/">235. 二叉搜索树的最近公共祖先</a>
-    </h1>
-  
-
-        
-        <a href="/2022/01/25/235-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88(1)/" class="archive-article-date">
-  	<time datetime="2022-01-25T14:58:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个&#x3D;&#x3D;二叉搜索树&#x3D;&#x3D;, 找到该树中两个指定节点的最近公共祖先。</p>
-<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
-<p>例如，给定如下二叉搜索树:  root &#x3D; [6,2,8,0,4,7,9,null,null,3,5] </p>
-<p>示例 1:</p>
-<p>输入: root &#x3D; [6,2,8,0,4,7,9,null,null,3,5], p &#x3D; 2, q &#x3D; 8<br>输出: 6<br>解释: 节点 2 和节点 8 的最近公共祖先是 6。<br>示例 2:</p>
-<p>输入: root &#x3D; [6,2,8,0,4,7,9,null,null,3,5], p &#x3D; 2, q &#x3D; 4<br>输出: 2<br>解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。</p>
-<p>说明:</p>
-<p>所有节点的值都是唯一的。<br>p、q 为不同节点且均存在于给定的二叉搜索树中。</p>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>😅一开始没有看到是二叉搜索树！走了很多弯路。。。。。这道题应该用到搜索树的性质来做。</p>
-<p>我们画张图容易理解！</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G6IuZ1"><img src="https://www.helloimg.com/images/2022/01/25/G6IuZ1.png" alt="G6IuZ1.png"></a></p>
-<ul>
-<li>如果判断两值都小于当前节点往左走</li>
-<li>再如果判断两值都大于当前节点往右走</li>
-<li>否则当前节点就是要找的节点。再break出去。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> TreeNode* <span class="title function_">lowestCommonAncestor</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="keyword">struct</span> TreeNode* p, </span></span><br><span class="line"><span class="params">	<span class="keyword">struct</span> TreeNode* q)</span> &#123;</span><br><span class="line">   	</span><br><span class="line">   	<span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">CopyNode</span> =</span> root; <span class="comment">//先把root叫出来，以防一会要更改</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>( <span class="literal">true</span> )&#123;   </span><br><span class="line"></span><br><span class="line">	   	<span class="keyword">if</span> ( p-&gt;val&lt; CopyNode-&gt;val &amp;&amp; q-&gt;val &lt; CopyNode-&gt;val ) <span class="comment">//说明在左边</span></span><br><span class="line">	   	&#123;</span><br><span class="line">	   		CopyNode= CopyNode-&gt;left;</span><br><span class="line">	   	&#125;<span class="keyword">else</span> <span class="keyword">if</span> ( p-&gt;val&gt; CopyNode-&gt;val &amp;&amp; q-&gt;val &gt; CopyNode-&gt;val )<span class="comment">//否则如果在右边</span></span><br><span class="line">	   	&#123;</span><br><span class="line">	   		CopyNode= CopyNode-&gt;right;</span><br><span class="line">	   	&#125;<span class="keyword">else</span></span><br><span class="line">	   	&#123;</span><br><span class="line">	   		<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">	   	&#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   	<span class="keyword">return</span> CopyNode;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树的简单题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/01/25/235-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -2138,6 +2154,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -2166,15 +2186,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">

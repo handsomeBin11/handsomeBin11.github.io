@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 187
+            总文章数 188
         </nav>
 
 
@@ -166,6 +166,128 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-235-二叉搜索树的最近公共祖先(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/01/25/235-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88(1)/">235. 二叉搜索树的最近公共祖先</a>
+    </h1>
+  
+
+        
+        <a href="/2022/01/25/235-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88(1)/" class="archive-article-date">
+  	<time datetime="2022-01-25T14:58:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个&#x3D;&#x3D;二叉搜索树&#x3D;&#x3D;, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p>例如，给定如下二叉搜索树:  root &#x3D; [6,2,8,0,4,7,9,null,null,3,5] </p>
+<p>示例 1:</p>
+<p>输入: root &#x3D; [6,2,8,0,4,7,9,null,null,3,5], p &#x3D; 2, q &#x3D; 8<br>输出: 6<br>解释: 节点 2 和节点 8 的最近公共祖先是 6。<br>示例 2:</p>
+<p>输入: root &#x3D; [6,2,8,0,4,7,9,null,null,3,5], p &#x3D; 2, q &#x3D; 4<br>输出: 2<br>解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。</p>
+<p>说明:</p>
+<p>所有节点的值都是唯一的。<br>p、q 为不同节点且均存在于给定的二叉搜索树中。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>😅一开始没有看到是二叉搜索树！走了很多弯路。。。。。这道题应该用到搜索树的性质来做。</p>
+<p>我们画张图容易理解！</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G6IuZ1"><img src="https://www.helloimg.com/images/2022/01/25/G6IuZ1.png" alt="G6IuZ1.png"></a></p>
+<ul>
+<li>如果判断两值都小于当前节点往左走</li>
+<li>再如果判断两值都大于当前节点往右走</li>
+<li>否则当前节点就是要找的节点。再break出去。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> TreeNode* <span class="title function_">lowestCommonAncestor</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="keyword">struct</span> TreeNode* p, </span></span><br><span class="line"><span class="params">	<span class="keyword">struct</span> TreeNode* q)</span> &#123;</span><br><span class="line">   	</span><br><span class="line">   	<span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">CopyNode</span> =</span> root; <span class="comment">//先把root叫出来，以防一会要更改</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>( <span class="literal">true</span> )&#123;   </span><br><span class="line"></span><br><span class="line">	   	<span class="keyword">if</span> ( p-&gt;val&lt; CopyNode-&gt;val &amp;&amp; q-&gt;val &lt; CopyNode-&gt;val ) <span class="comment">//说明在左边</span></span><br><span class="line">	   	&#123;</span><br><span class="line">	   		CopyNode= CopyNode-&gt;left;</span><br><span class="line">	   	&#125;<span class="keyword">else</span> <span class="keyword">if</span> ( p-&gt;val&gt; CopyNode-&gt;val &amp;&amp; q-&gt;val &gt; CopyNode-&gt;val )<span class="comment">//否则如果在右边</span></span><br><span class="line">	   	&#123;</span><br><span class="line">	   		CopyNode= CopyNode-&gt;right;</span><br><span class="line">	   	&#125;<span class="keyword">else</span></span><br><span class="line">	   	&#123;</span><br><span class="line">	   		<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">	   	&#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   	<span class="keyword">return</span> CopyNode;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树的简单题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/01/25/235-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88(1)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-235-二叉搜索树的最近公共祖先" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1217,126 +1339,6 @@
 
 
   
-    <article id="post-12-路径总和(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C(1)/">12. 路径总和</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C(1)/" class="archive-article-date">
-  	<time datetime="2021-12-10T13:35:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。</p>
-<p>叶子节点 是指没有子节点的节点。</p>
-<p>示例 1：</p>
-<p>输入：root &#x3D; [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum &#x3D; 22<br>输出：true<br>解释：等于目标和的根节点到叶节点路径如上图所示。<br>示例 2：</p>
-<p>输入：root &#x3D; [1,2,3], targetSum &#x3D; 5<br>输出：false<br>解释：树中存在两条根节点到叶子节点的路径：<br>(1 –&gt; 2): 和为 3<br>(1 –&gt; 3): 和为 4<br>不存在 sum &#x3D; 5 的根节点到叶子节点的路径。<br>示例 3：</p>
-<p>输入：root &#x3D; [], targetSum &#x3D; 0<br>输出：false<br>解释：由于树是空的，所以不存在根节点到叶子节点的路径。</p>
-<p>提示：</p>
-<p>树中节点的数目在范围 [0, 5000] 内<br>-1000 &lt;&#x3D; Node.val &lt;&#x3D; 1000<br>-1000 &lt;&#x3D; targetSum &lt;&#x3D; 1000</p>
-<p>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/path-sum">https://leetcode-cn.com/problems/path-sum</a></p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>题目的意思就说，给你一个路径sum，从根到叶子让你看看有没有那条路经上的结点加起来&#x3D;给的sum</p>
-<p>所以我的大体思路就是，前序遍历也就是DFS遍历深度遍历整课树，如果遇到一个结点就从sum 里面扣除当前结点的值。如果当发现走到叶子结点的时候当前的sum恰好为0的话就是说明符合题目所给的路径。</p>
-<ul>
-<li>检测当前root节点是不是空</li>
-<li>检测当前是不是叶子结点（所有子树为NULL），如果是的话，看看是否是0</li>
-<li>深度遍历左树并且-当前值 || 深度遍历右树-当前值</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">hasPathSum</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="type">int</span> targetSum)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( root == <span class="literal">NULL</span> )</span><br><span class="line">	&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root -&gt; right == <span class="literal">NULL</span> ) <span class="comment">//左右子树为空说明到叶子了</span></span><br><span class="line">	&#123;</span><br><span class="line">			<span class="keyword">return</span> (root-&gt;val-targetSum)==<span class="number">0</span>; <span class="comment">//看看是不是减没了</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> (hasPathSum( root -&gt; left , targetSum - root-&gt;val) || hasPathSum( root -&gt; right, targetSum - root-&gt;val ));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-12-路径总和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1457,7 +1459,7 @@
 
 
   
-    <article id="post-111-二叉树的最小深度(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-12-路径总和(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -1469,38 +1471,38 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/09/111-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6(1)/">111. 二叉树的最小深度</a>
+      <a class="article-title" href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C(1)/">12. 路径总和</a>
     </h1>
   
 
         
-        <a href="/2021/12/09/111-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6(1)/" class="archive-article-date">
-  	<time datetime="2021-12-09T02:32:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-09</time>
+        <a href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C(1)/" class="archive-article-date">
+  	<time datetime="2021-12-10T13:35:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给定一个二叉树，找出其最小深度。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/">https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/</a></p>
-<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
-<p><strong>说明：</strong>叶子节点是指没有子节点的节点。</p>
-<p> 示例 1：</p>
-<p>输入：root &#x3D; [3,9,20,null,null,15,7]<br>输出：2<br>示例 2：</p>
-<p>输入：root &#x3D; [2,null,3,null,4,null,5,null,6]<br>输出：5</p>
+        <p>给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。</p>
+<p>叶子节点 是指没有子节点的节点。</p>
+<p>示例 1：</p>
+<p>输入：root &#x3D; [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum &#x3D; 22<br>输出：true<br>解释：等于目标和的根节点到叶节点路径如上图所示。<br>示例 2：</p>
+<p>输入：root &#x3D; [1,2,3], targetSum &#x3D; 5<br>输出：false<br>解释：树中存在两条根节点到叶子节点的路径：<br>(1 –&gt; 2): 和为 3<br>(1 –&gt; 3): 和为 4<br>不存在 sum &#x3D; 5 的根节点到叶子节点的路径。<br>示例 3：</p>
+<p>输入：root &#x3D; [], targetSum &#x3D; 0<br>输出：false<br>解释：由于树是空的，所以不存在根节点到叶子节点的路径。</p>
 <p>提示：</p>
-<p>树中节点数的范围在 [0, 105] 内<br>-1000 &lt;&#x3D; Node.val &lt;&#x3D; 1000</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>根据题目中所给的，最小深度是从根节点到最近叶子节点的最短路径上的<strong>节点数量</strong>。</p>
-<p>这里注意加粗的<strong>结点数量</strong>，假设左树有一个分支且分就一个结点，你这里需要把结点数+1，因为有根结点</p>
+<p>树中节点的数目在范围 [0, 5000] 内<br>-1000 &lt;&#x3D; Node.val &lt;&#x3D; 1000<br>-1000 &lt;&#x3D; targetSum &lt;&#x3D; 1000</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/path-sum">https://leetcode-cn.com/problems/path-sum</a></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>题目的意思就说，给你一个路径sum，从根到叶子让你看看有没有那条路经上的结点加起来&#x3D;给的sum</p>
+<p>所以我的大体思路就是，前序遍历也就是DFS遍历深度遍历整课树，如果遇到一个结点就从sum 里面扣除当前结点的值。如果当发现走到叶子结点的时候当前的sum恰好为0的话就是说明符合题目所给的路径。</p>
 <ul>
-<li>先判断根的结点是不是空 —-&gt; 如果是的话就return 0</li>
-<li>再判断该根下的左右子树是否同时为空 —&gt; 同时空就返回 1代表最小深度为1 </li>
-<li>如果左树存在 则递归遍历左树 并且刷新最小值</li>
-<li>如果右树存在 则递归遍历右树 并且刷新最小值</li>
-<li>返回最小值+1</li>
+<li>检测当前root节点是不是空</li>
+<li>检测当前是不是叶子结点（所有子树为NULL），如果是的话，看看是否是0</li>
+<li>深度遍历左树并且-当前值 || 深度遍历右树-当前值</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	最小深度就是从根到最近的	叶子结点的 “结点个数”</span></span><br><span class="line"><span class="comment">	1. 先判断root是否为为空--&gt;re 0</span></span><br><span class="line"><span class="comment">	2. 判断左右是不是同时为空 --&gt; re 1</span></span><br><span class="line"><span class="comment">	3. 初始化一个 min_int</span></span><br><span class="line"><span class="comment">	4. 递归调用左右树 fmin 把最小值返回给min_int函数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">minDepth</span><span class="params">(<span class="keyword">struct</span> TreeNode* root)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( root == <span class="literal">NULL</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;	 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( root -&gt; left == <span class="literal">NULL</span>  &amp;&amp; root -&gt; right == <span class="literal">NULL</span> ) <span class="comment">// 如果左右子树同时为空则树的高度为1 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> min_high = INT_MAX; <span class="comment">//初始化</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( root -&gt; left != <span class="literal">NULL</span> ) <span class="comment">//如果左树不为空 深度遍历左树</span></span><br><span class="line">	&#123;</span><br><span class="line">		min_high = fmin( minDepth(root-&gt;left) , min_high); <span class="comment">//在已知的最小和左树的最小的选出一个最小的</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( root -&gt; right != <span class="literal">NULL</span> ) <span class="comment">//如果右树不为空，深度遍历右树</span></span><br><span class="line">	&#123;</span><br><span class="line">		min_high = fmin( minDepth(root-&gt;right) , min_high); <span class="comment">//在已知的最小和右树的最小的选出一个最小的</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> min_high+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">hasPathSum</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="type">int</span> targetSum)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( root == <span class="literal">NULL</span> )</span><br><span class="line">	&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root -&gt; right == <span class="literal">NULL</span> ) <span class="comment">//左右子树为空说明到叶子了</span></span><br><span class="line">	&#123;</span><br><span class="line">			<span class="keyword">return</span> (root-&gt;val-targetSum)==<span class="number">0</span>; <span class="comment">//看看是不是减没了</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> (hasPathSum( root -&gt; left , targetSum - root-&gt;val) || hasPathSum( root -&gt; right, targetSum - root-&gt;val ));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 
 
 
@@ -1546,7 +1548,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/09/111-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6(1)/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C(1)/">展开全文 >></a>
         </p>
       
 
@@ -1726,6 +1728,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
@@ -1754,15 +1760,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
