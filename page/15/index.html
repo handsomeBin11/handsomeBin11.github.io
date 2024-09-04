@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 188
+            总文章数 189
         </nav>
 
 
@@ -166,6 +166,113 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-栈的详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/12/%E6%A0%88%E7%9A%84%E8%AF%A6%E8%A7%A3/">栈的详解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/12/%E6%A0%88%E7%9A%84%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2021-03-12T01:37:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="它是什么样子的！"><a href="#它是什么样子的！" class="headerlink" title="它是什么样子的！"></a>它是什么样子的！</h3><p><a target="_blank" rel="noopener" href="https://imgtu.com/i/6NT4oT"><img src="https://s3.ax1x.com/2021/03/12/6NT4oT.jpg" alt="6NT4oT.jpg"></a></p>
+<p>按照 图中所示，栈低端就是数组的0号位置，top时刻指向栈顶端。</p>
+<h3 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">GetTop</span><span class="params">(SqStack S,SElemType *e)</span></span><br><span class="line">&#123;</span><br><span class="line">       <span class="comment">//要元素的时候只需要考虑是否为空的</span></span><br><span class="line">        <span class="keyword">if</span> ( S.top == <span class="number">-1</span> ) &#123;</span><br><span class="line">          <span class="keyword">return</span> ERROR;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        *e =   S.data[S.top];</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>判断是否为空</p>
+</li>
+<li><p>不为空否则的话就把栈顶的元素给我</p>
+</li>
+</ul>
+<h3 id="Push元素"><a href="#Push元素" class="headerlink" title="Push元素"></a>Push元素</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">Push</span><span class="params">(SqStack *S,SElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//既然是push我就要看看满了没有</span></span><br><span class="line">  <span class="keyword">if</span> ( S-&gt;top == MAXSIZE<span class="number">-1</span> ) &#123; <span class="comment">//⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️下图有说明</span></span><br><span class="line">    <span class="keyword">return</span> ERROR;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  S-&gt;top++;</span><br><span class="line"></span><br><span class="line">  S-&gt;data[S-&gt;top] = e;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>往里加元素要考虑是否<strong>满了</strong></li>
+<li>栈顶往上移出一个位置</li>
+<li>然后往位置上放值</li>
+</ul>
+<p>为什是 <strong>MAXSIZE-1</strong> ？ 看图</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/6N7NhF"><img src="https://s3.ax1x.com/2021/03/12/6N7NhF.jpg" alt="6N7NhF.jpg"></a></p>
+<p> 假设当前的MAXSIZE &#x3D;4 也就是当前数组的长度。因为数组是从0开始的，根据数组的定义，他的最大<strong>有效下标</strong>应该为 <strong>数组长度 -1</strong> </p>
+<p>而满栈top的值指向的位置恰好是最大<strong>有效下标</strong> 那个位置，所以判断条件即是 MAXSIZE-1 </p>
+<h3 id="Pop元素"><a href="#Pop元素" class="headerlink" title="Pop元素"></a>Pop元素</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">Pop</span><span class="params">(SqStack *S,SElemType *e)</span></span><br><span class="line">&#123; </span><br><span class="line">       <span class="comment">//弹栈考虑是否空</span></span><br><span class="line">     <span class="keyword">if</span> ( S-&gt;top == <span class="number">-1</span> ) &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">     &#125; </span><br><span class="line"></span><br><span class="line">    *e = S-&gt;data[S-&gt;top];</span><br><span class="line"></span><br><span class="line">    S-&gt;top--;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>往出拿元素要检查是否拿完了，也就是空</li>
+<li>把栈顶元素给我拿出来</li>
+<li>把栈顶指针往下移</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈，数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/12/%E6%A0%88%E7%9A%84%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-判断出现的次数利用数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1050,107 +1157,6 @@ int main(int argc, char const *argv[])
 
 
   
-    <article id="post-归并排序（递归）最稳定的算法！" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/21/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%EF%BC%88%E9%80%92%E5%BD%92%EF%BC%89%E6%9C%80%E7%A8%B3%E5%AE%9A%E7%9A%84%E7%AE%97%E6%B3%95%EF%BC%81/">归并排序（递归）最稳定的算法！</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/21/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%EF%BC%88%E9%80%92%E5%BD%92%EF%BC%89%E6%9C%80%E7%A8%B3%E5%AE%9A%E7%9A%84%E7%AE%97%E6%B3%95%EF%BC%81/" class="archive-article-date">
-  	<time datetime="2021-02-21T10:54:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="分为两个部分-合并-和-分治"><a href="#分为两个部分-合并-和-分治" class="headerlink" title="分为两个部分 合并 和 分治"></a>分为两个部分 合并 和 分治</h2><h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">merge</span><span class="params">( <span class="type">int</span> arr[],<span class="type">int</span> L,<span class="type">int</span> M,<span class="type">int</span> R)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> LEFT_SIZE = M-L;<span class="comment">//定义出一会右边数组的长度</span></span><br><span class="line">    <span class="type">int</span> RIGHT_SIZE = R-M+<span class="number">1</span>;<span class="comment">//定义出一会左边数组的长度</span></span><br><span class="line">  	<span class="comment">//	左边右边初始化新数组</span></span><br><span class="line">    <span class="type">int</span> left[LEFT_SIZE];</span><br><span class="line">    <span class="type">int</span> right[RIGHT_SIZE];</span><br><span class="line">    <span class="type">int</span> i,j,k;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//把左边的数组填入新的数组left</span></span><br><span class="line">    <span class="keyword">for</span> (i = L; i &lt; M; ++i)<span class="comment">//L是从最左边到中间值M</span></span><br><span class="line">    &#123;</span><br><span class="line">        left[i-L] = arr[i];<span class="comment">//i-L是为了保证下标和i的一致性</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//把右边的数组填入新的数组rigt</span></span><br><span class="line">    <span class="keyword">for</span> (i = M; i &lt;= R; ++i)<span class="comment">//从中间值到右边</span></span><br><span class="line">    &#123;</span><br><span class="line">        right[i-M] = arr[i];<span class="comment">//i-m也是为了保证下标从0开始 相当于m是一个基本数，随着i++ 剪掉m就是确保新的右边的数组也是从0开始</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="comment">//进入原始的数组</span></span><br><span class="line">    i=<span class="number">0</span>;<span class="comment">//在左边的数组中指向第一个元素的下标</span></span><br><span class="line">    j=<span class="number">0</span>;<span class="comment">//在右边的数组中指向第一个元素的下标</span></span><br><span class="line">    k = L;<span class="comment">//k指向L也就是原来数组的第一个（最左边的）</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ( i&lt; LEFT_SIZE &amp;&amp; j&lt;RIGHT_SIZE )<span class="comment">//当两个新数组 i 和 j 下标还小于长度的时候说明没有出界</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( left[i]&lt;right[j] )<span class="comment">//如果说新数组left的左边比新数组right小的时候</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//就填入那个左边的放入老数组中</span></span><br><span class="line">            arr[k] = left[i];</span><br><span class="line">            i++;<span class="comment">//同时左边指针往后移动</span></span><br><span class="line">            k++;<span class="comment">//同时k也要往后移动</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            arr[k] = right[j];</span><br><span class="line">            j++;</span><br><span class="line">            k++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果说当i还没走到头的时候，说明右边那边已经全放去进去了 直接把剩下的元素往里填</span></span><br><span class="line">        <span class="keyword">while</span> ( i&lt;LEFT_SIZE )</span><br><span class="line">        &#123;</span><br><span class="line">            arr[k] = left[i];</span><br><span class="line">            i++;</span><br><span class="line">            k++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> ( j&lt; RIGHT_SIZE ) &#123;</span><br><span class="line">            arr[k] = right[j];</span><br><span class="line">            j++;</span><br><span class="line">            k++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/yTk4bV"><img src="https://s3.ax1x.com/2021/02/21/yTk4bV.jpg" alt="yTk4bV.jpg"></a><br><a target="_blank" rel="noopener" href="https://imgchr.com/i/yTkhD0"><img src="https://s3.ax1x.com/2021/02/21/yTkhD0.jpg" alt="yTkhD0.jpg"></a></p>
-<h3 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//分治</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">mergeSort</span><span class="params">( <span class="type">int</span> arr[],<span class="type">int</span> L,<span class="type">int</span> R)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ( L == R ) &#123;<span class="comment">//如果L==R了代表每个数组只剩下一个元素了</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="type">int</span> M = (L+R)/<span class="number">2</span>;<span class="comment">//每次取最中间的位置</span></span><br><span class="line">        mergeSort(arr, L, M);<span class="comment">//左边</span></span><br><span class="line">        mergeSort(arr, M+<span class="number">1</span>, R);<span class="comment">//右边</span></span><br><span class="line">        merge(arr, L, M+<span class="number">1</span> , R);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> arr[] = &#123;<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>&#125;;</span><br><span class="line">    <span class="type">int</span> L = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> R = <span class="number">7</span>;</span><br><span class="line">    mergeSort(arr, L, R);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i&lt;R; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/排序算法//" class="article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/21/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%EF%BC%88%E9%80%92%E5%BD%92%EF%BC%89%E6%9C%80%E7%A8%B3%E5%AE%9A%E7%9A%84%E7%AE%97%E6%B3%95%EF%BC%81/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
@@ -1304,11 +1310,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1432,11 +1438,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">

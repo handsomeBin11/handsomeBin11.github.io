@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 188
+            总文章数 189
         </nav>
 
 
@@ -166,6 +166,120 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-静态链表详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/22/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8%E8%AF%A6%E8%A7%A3/">静态链表详解</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/22/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2020-12-22T14:15:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="静态链表思想"><a href="#静态链表思想" class="headerlink" title="静态链表思想"></a>静态链表思想</h3><p>在早期高级语言BASIC，Fortran ..中，由于没有指针，想和C语言一样实现链表之类的功能该怎么办，于是聪明的前辈们用数组实现了‘链表’。</p>
+<p>这种方式叫静态链表，也叫游标实现法。</p>
+<h4 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="type">int</span> cur;</span><br><span class="line">&#125;Component,StaticLinkList[MAXSIZE];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一个存储数据的东西和一个游标，当游标为0的时候没有指向</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rBwmjO"><img src="https://s3.ax1x.com/2020/12/21/rBwmjO.md.jpg" alt="rBwmjO.md.jpg"></a></p>
+<p>规则是这样的，你暂且可以把数组看成‘小房子’，里面存的值看成‘人’（其实是数据），0号小房子里面不放‘人’存的是第一个未被使用的节点下标（备用链表），而最后一个小房子也就是999哪，存放的是第一个<strong>有值的</strong>节点下标。</p>
+<p>接下来按照这个图来初始化一下数组吧</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">InitList</span><span class="params">( StaticLinkList space )</span><span class="comment">//初始化</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; MAXSIZE<span class="number">-1</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        space[i].cur = i+<span class="number">1</span>;<span class="comment">//第i个元素的房子知道第i+1号</span></span><br><span class="line">    &#125;</span><br><span class="line">    space[MAXSIZE<span class="number">-1</span>].cur = <span class="number">0</span>;<span class="comment">//最后一位为0也就是</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="进一步解释"><a href="#进一步解释" class="headerlink" title="进一步解释"></a>进一步解释</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rBBcBF"><img src="https://s3.ax1x.com/2020/12/21/rBBcBF.md.jpg" alt="rBBcBF.md.jpg"></a></p>
+<p>接上面的，游戏规则是每个房间里都有一个牌子（cur），比如当小明进入该房间的时候就会知道他的下一个房间是几号，显然这是3号，他就能找到浩浩。同理，浩浩能找到小张……但第0号房间不放人，它这个房间的作用是始终记录第一个空的房间号，例如这里是8号房空。而最后一个房间也存着第一个人进入房间的号牌。</p>
+<blockquote>
+<p>写类malloc函数</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Malloc_SLL</span><span class="params">( StaticLinkList space )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i=space[<span class="number">0</span>].cur;<span class="comment">//0号位置上永远知道待插入的第一个位置(空房间)8</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( space[<span class="number">0</span>].cur )</span><br><span class="line">    &#123;</span><br><span class="line">        space[<span class="number">0</span>].cur=space[i].cur;<span class="comment">//备用位置上的元素肯定知道它的下一个在哪,也就是下一个重新放回第0个位置上</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> i;<span class="comment">//值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>int i&#x3D;space[0].cur; 的意思是因为0号房间总是知道那个房间是空的，所以先把空的那个房间的房号告诉i，然后判断这个房间是否存在，如果存在则要把你要用的这个房间的房号告诉第0号房间，它会通过你要用的房间存储你这个房间放的下一个房间的房号。（因为每个房间都知道下一个房间在哪）。告诉0房后返回你要用的房号即可。你用就好啦！！！😊</p>
+<h4 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rBBcBF"><img src="https://s3.ax1x.com/2020/12/21/rBBcBF.md.jpg" alt="rBBcBF.md.jpg"></a></p>
+<p>如果要在张和王中间插入小赵，那就有意思了！</p>
+<p>我告诉小赵：你呀先回到8号房间里，我帮你搞定。接着我到小张那里告诉他你的下一个房间号牌不是4号吗，这点小钱，意思意思，你把号牌改成8号。收了钱的小张把号牌改了。接着我跑到小赵的8号房那里告诉他，你把号牌改成4号房。这样就在大家都不知情的情况下次序发生了改变。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rB2rex"><img src="https://s3.ax1x.com/2020/12/21/rB2rex.md.jpg" alt="rB2rex.md.jpg"></a></p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/22/%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-链表的详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1183,106 +1297,6 @@
 
 
   
-    <article id="post-快速排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/27/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/27/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-11-27T14:54:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="大概步骤梳理"><a href="#大概步骤梳理" class="headerlink" title="大概步骤梳理"></a>大概步骤梳理</h3><ol>
-<li>验证左右数列的合法性</li>
-<li>函数传入的值进行再次赋值给新的变量 防止之后改变原本的变量</li>
-<li>循环条件的设立 左右序列不相等时 循环继续</li>
-<li>右端哨兵先往左移动找比基数小的</li>
-<li>左端哨兵往右移动找比基数大的</li>
-<li>交换哨兵</li>
-<li>碰面时 交换基数</li>
-</ol>
-<h3 id="上代码！"><a href="#上代码！" class="headerlink" title="上代码！"></a>上代码！</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/排序算法//" class="article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/27/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/16/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/18/">Next &amp;raquo;</a>
@@ -1436,11 +1450,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1564,11 +1578,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">

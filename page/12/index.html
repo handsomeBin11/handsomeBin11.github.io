@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 188
+            总文章数 189
         </nav>
 
 
@@ -166,6 +166,109 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-求整数的位数及各位数字之和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/23/%E6%B1%82%E6%95%B4%E6%95%B0%E7%9A%84%E4%BD%8D%E6%95%B0%E5%8F%8A%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/">求整数的位数及各位数字之和</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/23/%E6%B1%82%E6%95%B4%E6%95%B0%E7%9A%84%E4%BD%8D%E6%95%B0%E5%8F%8A%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/" class="archive-article-date">
+  	<time datetime="2021-04-23T02:47:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于给定的正整数N，求它的位数及其各位数字之和。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出一个不超过109的正整数N。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出N的位数及其各位数字之和，中间用一个空格隔开。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">321</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 6</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//在一行中输出N的位数及其各位数字之和，中间用一个空格隔开。</span></span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> n,realN,cnt = <span class="number">0</span>,sum = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">  <span class="keyword">while</span>( n &gt; <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    realN  = n%<span class="number">10</span>;<span class="comment">//得到最后那一位</span></span><br><span class="line">    sum += realN;<span class="comment">//把那一位加到sum里去</span></span><br><span class="line">    n/=<span class="number">10</span>;<span class="comment">//划掉末尾哪一位</span></span><br><span class="line">    cnt++;<span class="comment">//计数器+1 最后能代表有几位</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,cnt,sum);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/23/%E6%B1%82%E6%95%B4%E6%95%B0%E7%9A%84%E4%BD%8D%E6%95%B0%E5%8F%8A%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-求最小值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1346,377 +1449,6 @@ struct point p1,p2;
 
 
   
-    <article id="post-字符串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/16/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/16/%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="archive-article-date">
-  	<time datetime="2021-04-16T01:51:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> [] = &#123;<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;!&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意这里<strong>不是C语言的字符串</strong>，以为不能用字符串的方式做计算。</p>
-</blockquote>
-<h3 id="真正的字符串"><a href="#真正的字符串" class="headerlink" title="真正的字符串"></a>真正的字符串</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> word[] = &#123;<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;!&#x27;</span>,<span class="string">&#x27;\0&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意⚠️ ：可以看出在最后的位置上有 ‘\0’     这才叫真正的字符串，因为只有这样，我们才能修改字符串里面的值。</p>
-</blockquote>
-<h4 id="字符串的特点是什么？"><a href="#字符串的特点是什么？" class="headerlink" title="字符串的特点是什么？"></a>字符串的特点是什么？</h4><ul>
-<li>以 整数0 或者 ‘\0’结尾，<strong>（注意这里是 ‘\0’)</strong>  ，<strong>不是</strong> **字符’0’**。</li>
-<li>那个 0 意味着是字符串的结束<strong>标志</strong>，它<strong>不属于字符串</strong>，不是字符串的一部分。<ul>
-<li>也就是计算字长度的时候不包括 0</li>
-</ul>
-</li>
-<li>字符串是<strong>以数组的形式存在</strong>，以<strong>数组</strong>或者<strong>指针</strong>的形式访问。<ul>
-<li>更多的是用指针代替</li>
-</ul>
-</li>
-<li>string.h 里有许多的字符串函数。</li>
-</ul>
-<h4 id="字符串变量"><a href="#字符串变量" class="headerlink" title="字符串变量"></a>字符串变量</h4><ul>
-<li>char *str &#x3D; “hello”;</li>
-<li>char word[] &#x3D; “hello”;</li>
-<li>char line[10]  &#x3D; “hello”; —&gt; 这里也就意味着我们申请了10个位置，但其实这个字符<strong>占据的是6个字节的位置</strong>，也就是还需要算上末尾’\0’。  也就是编译器会替你生成结尾的那个0的。</li>
-</ul>
-<h4 id="字符串常量"><a href="#字符串常量" class="headerlink" title="字符串常量"></a>字符串常量</h4><ul>
-<li><p>“Hello”</p>
-</li>
-<li><p>“hello”会被编译器变成一个字符数组放在某个地方，长度是6（能看见的字符的数 + 1），结尾还有个表示结束的0。</p>
-</li>
-<li><p>两个相邻的字符串会被<strong>自动的连接</strong>起来。如下代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;老师你好，我叫葛彬彬，&quot;</span>  <span class="comment">//⚠️ 这里自动连起来拉！</span></span><br><span class="line">           <span class="string">&quot;请\&quot;9 9\&quot;多指教！&quot;</span>   <span class="comment">//     \&quot;就代表着左边这个 “  \&quot; 就代表了右边这个 ”</span></span><br><span class="line">           );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>输出结果： <strong>老师你好，我叫葛彬彬，请”9 9”多指教！Program ended with exit code: 0</strong></p>
-</blockquote>
-</li>
-</ul>
-<h3 id="总结一下-究竟什么是字符串"><a href="#总结一下-究竟什么是字符串" class="headerlink" title="总结一下 究竟什么是字符串"></a>总结一下 究竟什么是字符串</h3><ul>
-<li><p>C 语言的字符串是以字符数组的形式存在的</p>
-<ul>
-<li><strong>不能</strong>用运算符对字符串做处理<strong>运算</strong>。（因为c是1970年代的语言，当时还不需要处理字符数据）</li>
-<li>通过数组的方式可以<strong>遍历</strong>字符串</li>
-</ul>
-</li>
-<li><p>唯一特殊的地方在于字符串的字面量可以用来初始化字符数组，这也是c语言‘最懂字符串’的地方了，因为它懂双引号是表示字符串。</p>
-</li>
-<li><p>一定是结尾有那个’&#x2F;0’ 它才叫字符串！</p>
-</li>
-</ul>
-<h3 id="字符串常量的进一步"><a href="#字符串常量的进一步" class="headerlink" title="字符串常量的进一步"></a>字符串常量的进一步</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="type">char</span> *s = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"></span><br><span class="line">s[<span class="number">0</span>] = <span class="string">&#x27;B&#x27;</span>;<span class="comment">//我的意思是说h的位置改成b</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Here!s[0] = %c\n&quot;</span>,s[<span class="number">0</span>]);<span class="comment">//完全没输出，程序崩溃！😭</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>意味着char *s 是一个不可修改的那么一个东西</p>
-</blockquote>
-<p>如果写两个 相同内容的字符串，但是变量名不同，会怎么样🤔</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *s = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"><span class="type">char</span> *s1 = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"></span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;s = %p\n&quot;</span>,s);  <span class="comment">//s  = 0x100000f7e</span></span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;s1 = %p\n&quot;</span>,s); <span class="comment">//s1 = 0x100000f7e</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>s   &#x3D; 0x100000f7e</p>
-<p>s1 &#x3D; 0x100000f7e</p>
-<p>可以发现，尽然指向了同一片的内存空间。</p>
-</blockquote>
-<p>如果在定义一个普通的变量看看</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *s = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">    <span class="type">char</span> *s1 = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">     </span><br><span class="line">    <span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;s = %p\n&quot;</span>,s);  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;s1 = %p\n&quot;</span>,s);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;i = %p\n&quot;</span>,i);</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Here!s[0] = %c\n&quot;</span>,s[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>s &#x3D; 0x100000f7e</strong></p>
-<p><strong>s1 &#x3D; 0x100000f7e</strong>   在很小的地方</p>
-<p><strong>&amp;i &#x3D; 0xa</strong>  在很大的地方</p>
-<p><strong>Here!s[0] &#x3D; h</strong></p>
-</blockquote>
-<p>可以发现，s1,s 在很大的内存编号上，而i 变量在很小的内存编号上。<strong>他们不再一个地方！，而且离得很远。</strong>如下图， </p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/ct5kJP"><img src="https://z3.ax1x.com/2021/04/09/ct5kJP.jpg" alt="ct5kJP.jpg"></a></p>
-<ul>
-<li><p>因为这个字符串是在编译之前就已经写好了的，所以说编译器会把它放在那个<strong>只能读不能写</strong>的地方。</p>
-</li>
-<li><p>然后用指针指向它。</p>
-</li>
-<li><p>而且如果有两处相同的东西，那些指针会指向同一个地方。也正是因为这个原因，s必须是只读的，如果s被修改了那s1怎么办？c是属于早期的语言，它还没那么聪明。</p>
-</li>
-</ul>
-<h3 id="char-和-char"><a href="#char-和-char" class="headerlink" title="char [] 和 char *"></a>char [] 和 char *</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *s = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">    <span class="type">char</span> s5[] = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">  </span><br><span class="line">    s5[<span class="number">0</span>] = <span class="string">&#x27;B&#x27;</span>;<span class="comment">//可以修改</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;s = %p\n&quot;</span>,s);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;s5 = %p\n&quot;</span>,s5);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Here!s5[0] = %c\n&quot;</span>,s5[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>s &#x3D; 0x100000f7c</strong></p>
-<p><strong>s5 &#x3D; 0x7ffeefbff59c</strong></p>
-<p><strong>Here!s5[0] &#x3D; B</strong></p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/ctofRP"><img src="https://z3.ax1x.com/2021/04/09/ctofRP.png" alt="ctofRP.png"></a></p>
-<p>可以发现，如果你写</p>
-<p>char s5[] &#x3D; “hello world”; 的时候， 它并没有存放到其他地方，’它就在这’,在本地变量哪里。它的地址编号也很大。</p>
-<h3 id="指针还是字符串数组？"><a href="#指针还是字符串数组？" class="headerlink" title="指针还是字符串数组？"></a>指针还是字符串数组？</h3><ul>
-<li>如果要构造一个字符串 —–&gt; 数组</li>
-<li>如果要处理一个字符串 —–&gt; 指针</li>
-</ul>
-<h3 id="字符串的赋值"><a href="#字符串的赋值" class="headerlink" title="字符串的赋值"></a>字符串的赋值</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *c = <span class="string">&quot;i am very handsome&quot;</span></span><br><span class="line">cahr *s;</span><br><span class="line"></span><br><span class="line">s = c;</span><br></pre></td></tr></table></figure>
-
-<p>其实并没有产生新的字符串，只是 s 指向了c指向的那个位置。也就是说，s  &amp; c 都指向了同一片内存空间。</p>
-<p>如果说要新生成一个字符串，看下面的字符串函数。</p>
-<h3 id="字符串的读入和输出"><a href="#字符串的读入和输出" class="headerlink" title="字符串的读入和输出"></a>字符串的读入和输出</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> word[<span class="number">8</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,word);</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s##\n&quot;</span>,word);<span class="comment">//## 意思是看看后面有没有空位</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>输入 ：hello world</p>
-<p>输出： <strong>hello##</strong></p>
-<p>可以看出，程序没有读到空格。</p>
-</blockquote>
-<p>定义两个变量分别度两次，效果怎么样？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> word[<span class="number">8</span>];</span><br><span class="line">    <span class="type">char</span> word1[<span class="number">8</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,word);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,word1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s##%s##\n&quot;</span>,word,word1);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>输入 ：hello world</p>
-<p>输出 ：<strong>hello##world##</strong></p>
-<p>输入 ：hello </p>
-<p>​      world</p>
-<p>输出 ：<strong>hello##world##</strong></p>
-<p>全被读到了，也就是空格&#x2F;回车&#x2F;tab不读。</p>
-</blockquote>
-<h4 id="scanf-“-s”-word"><a href="#scanf-“-s”-word" class="headerlink" title="scanf(“%s”,word);"></a>scanf(“%s”,word);</h4><ul>
-<li>scanf 读入一个单词（到空格，tab,或者 回车为止）</li>
-<li>scanf 不太安全，虽然定义了一个word[8]，但是你不知道最后读多少进来的！</li>
-<li>如果你超过数组大小，程序会崩溃。</li>
-</ul>
-<h4 id="怎么写安全？"><a href="#怎么写安全？" class="headerlink" title="怎么写安全？"></a>怎么写安全？</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%7s&quot;</span>,word);</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%7s&quot;</span>,word1);</span><br></pre></td></tr></table></figure>
-
-<p>这样就限制🚫了，最多你只能读进来7个。</p>
-<blockquote>
-<p>如果你输入 12345678 </p>
-<p><strong>1234567##8##</strong></p>
-</blockquote>
-<p>程序会在第7个的位置帮你🤚stop ，多出来的放在下一个数组里面去。</p>
-<h3 id="putchar-与-getchar-？"><a href="#putchar-与-getchar-？" class="headerlink" title="putchar 与 getchar ？"></a>putchar 与 getchar ？</h3><h4 id="putchar"><a href="#putchar" class="headerlink" title="putchar"></a>putchar</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">putchar</span><span class="params">( <span class="type">int</span> c )</span> <span class="comment">// 可以看的到其实它接收的是int 返回🔙的也是int </span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>向标准输出<strong>写一个</strong>字符</li>
-<li>返回的是写了几个字符，如果你的不能用了 返回EOF（-1）表示写失败。</li>
-</ul>
-<h4 id="getchar"><a href="#getchar" class="headerlink" title="getchar"></a>getchar</h4><ul>
-<li><pre><code class="c">int getchar( void ) //注意⚠️返回是int
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 从标准输入读入一个字符</span><br><span class="line"></span><br><span class="line">- 返回的那个 int  是为了返回 EOF（-1）</span><br><span class="line"></span><br><span class="line">我们写一个程序来看看</span><br><span class="line"></span><br><span class="line">~~~c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main(int argc, char const* argv[])</span><br><span class="line">&#123;</span><br><span class="line">   int ch;</span><br><span class="line">  //看看它什么时候给我们EOF</span><br><span class="line">   while ( (ch = getchar()) != EOF ) &#123;//判断它是不是EOF</span><br><span class="line">     putchar(ch); //输入until 碰见EOF的时候会停止循环</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   printf(&quot;EOF\n&quot;);//不是的话我就输出了</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-<blockquote>
-<p>我真帅<br>我真帅<br>你好<br>你好<br>hi<br>hi<br>sorry<br>sorry<br>-1<br>-1<br>EOF<br>EOF<br>我去<br>我去<br>EOF — 直到我按 crtl  + D 出现了EOF</p>
-</blockquote>
-<p>偶数个是计算机返回给我的，我们可以看出，无论输入啥，它都能返回，没有停止。按crtl  + D 时，他才推出并且返回EOF</p>
-<p>这究竟发生了什么？getchar 不是只读一个吗？怎么我按回车它才会给我回应？</p>
-<p><img src="https://ae04.alicdn.com/kf/U494a65ae53674a29bd276e70f2005b6cY.jpg" alt="iShot2021-04-10 20.45.15.png"></p>
-<ul>
-<li><p>你通过键盘⌨️输入 到程序的中间其实还有个程序在中间作加工员（也是一个程序），它叫shell。它会把你键盘输入进来的东西先放入一个叫缓冲区的地方。就如上图所示，123 回车 498 回车。当你调用getchar的时候，她会逐个从缓冲区的读入。当你scanf  %d的时候，他会把回车前面的视作一个整数。</p>
-</li>
-<li><p>当你按下 ctrl + D 的时候。他会把那个位置弄成 -1 ，然后才结束。</p>
-</li>
-</ul>
-<h3 id="字符串数组"><a href="#字符串数组" class="headerlink" title="字符串数组"></a>字符串数组</h3><h4 id="a-和-a-的区别"><a href="#a-和-a-的区别" class="headerlink" title="a[][] [ ] [ ]  和 *a[ ] 的区别"></a>a[][] [ ] [ ]  和 *a[ ] 的区别</h4><ul>
-<li><p>a[][] [ ] [ ]  代表二维数组，根据二维数组的规定。最后一个括号里<strong>不能没有值</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> a[][<span class="number">10</span>] = &#123;</span><br><span class="line">    <span class="string">&quot;hello &quot;</span>,</span><br><span class="line">  </span><br><span class="line">  <span class="string">&quot;world&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ueafgazs&quot;</span>,</span><br><span class="line">    <span class="string">&quot;askdjaldjasldjasdasl&quot;</span><span class="comment">//  ❌❌❌❌❌</span></span><br><span class="line">   &#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>上面的等价于  char[0] —-&gt; char[10] 也就是每一个char[0] 里面又包含了10个char。如下图：</p>
-</blockquote>
-</li>
-</ul>
-<p><img src="https://www.helloimg.com/images/2021/04/16/B6W3xC.png" alt="B6W3xC.png"></p>
-<ul>
-<li><p>*a[ ] 代表是一个窄格子，每一个格子指向其他地方的字符串如下图</p>
-<p><img src="https://www.helloimg.com/images/2021/04/16/B6WahS.png" alt="B6WahS.png"></p>
-</li>
-</ul>
-<h3 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h3><ul>
-<li><p>strlen 返回字符串长度–当然不包括结尾的\0</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> lian[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lu\n&quot;</span>,<span class="built_in">strlen</span>(lian));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lu\n&quot;</span>,<span class="keyword">sizeof</span>(lian));</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出结果 ：  5 6</span></span><br></pre></td></tr></table></figure>
-
-<p>纯手写一个strlen 函数</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">mylen</span><span class="params">( <span class="type">const</span> <span class="type">char</span> * s)</span><span class="comment">//反正数组传进来是指针，我干脆写成指针</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> cnt  = <span class="number">0</span> ;</span><br><span class="line">    <span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>( s[idx] != <span class="string">&#x27;\0&#x27;</span> )<span class="comment">//还没到字符串末尾的时候</span></span><br><span class="line">    &#123;</span><br><span class="line">        cnt++;<span class="comment">//数个数</span></span><br><span class="line">        idx++;<span class="comment">//下标往后移动一位</span></span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> lian[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,mylen(lian));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lu\n&quot;</span>,<span class="keyword">sizeof</span>(lian));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出结果 ：  5 6</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>strcmp  字符串比较函数</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> s1[] = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="type">char</span> s2[] = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">strcmp</span>(s1,s2)); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>相等结果为 0 </p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> s1[] = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="type">char</span> s2[] = <span class="string">&quot;bbc&quot;</span>;<span class="comment">//只有第一个位置的差距</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">strcmp</span>(s1,s2));<span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>结果为： -1 </p>
-<p>在As表中，a 🆚 b 要来的<strong>小</strong>，a在b的<strong>前面</strong>。所以说，相减是负的。</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> s1[] = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="type">char</span> s2[] = <span class="string">&quot;Abc&quot;</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">strcmp</span>(s1,s2));<span class="comment">//32</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="string">&#x27;a&#x27;</span>-<span class="string">&#x27;A&#x27;</span>);<span class="comment">//32</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>也就是说，差距就是 a - A 的差距。  a 为 97 ，b 为 65  —-&gt; 97 - 65 &#x3D; 32 </p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> s1[] = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="type">char</span> s2[] = <span class="string">&quot;abc &quot;</span>;<span class="comment">//这里有空格</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">strcmp</span>(s1,s2));<span class="comment">// -32</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>结果为： -32</p>
-<p>也就是说 ： 空格的那个值就是32</p>
-</blockquote>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li><p>也就是有两个字符数组，逐个字符进行比较，如果发现不相等就结束，并返回不相等位置的差值。</p>
-</li>
-<li><p>如果都走到最后的\0了，那就意味着两个字符串相等。</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/B6WAhg"><img src="https://www.helloimg.com/images/2021/04/16/B6WAhg.png" alt="B6WAhg.png"></a></p>
-</li>
-</ul>
-</li>
-</ul>
-<p>于是，我们根据这个特点，自己写一个函数来还愿这个方式。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">mycmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s1,<span class="type">const</span> <span class="type">char</span> *s2)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (s1[idx] != s2[idx] ) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>( s1[idx] == <span class="string">&#x27;\0&#x27;</span>)<span class="comment">//剩下这个条件就是相等，如果相等的情况下 s1还等于0 ,也就意味着s1结束，那也就意味着s2也结束</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        idx++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s1[idx] - s2[idx];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>判断如果s1[idx]和s2[idx] 不相等我们就跳出来</p>
-</li>
-<li><p>还如果，（此时s1[idx]和s2[idx]相等了）但是又是到了 ‘\0’的位置—&gt;跳出</p>
-</li>
-<li><p>返回差值</p>
-<p>代码不那么完美  改进！！！！··</p>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">mycmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s1,<span class="type">const</span> <span class="type">char</span> *s2)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>( s1[idx] == s2[idx] &amp;&amp; s1[idx] != <span class="string">&#x27;\0&#x27;</span>)<span class="comment">//如果说 两个idx 相等 并且。 s1 没到 \0，那继续循环。否则跳出就返回了。</span></span><br><span class="line">    &#123;</span><br><span class="line">        idx++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s1[idx] - s2[idx];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>如果说 两个idx 相等情况下 并且   s1 没到 \0，那继续循环了。</li>
-<li>如果不满足就跳出就返回了</li>
-</ul>
-<h3 id="strcopy"><a href="#strcopy" class="headerlink" title="strcopy"></a>strcopy</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> * <span class="title function_">strcpy</span><span class="params">( <span class="type">char</span> * restrist dst , <span class="type">const</span> <span class="type">char</span> * <span class="keyword">restrict</span> src)</span><span class="comment">//因为要把src拷贝到dst中，所以src 为 const 而 dst不能为const</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>把 src 的字符拷贝到dst中<ul>
-<li>restrict 表明 src 和 dst 不重叠</li>
-</ul>
-</li>
-<li>返回<strong>dst</strong><ul>
-<li>为了能链起代码来</li>
-</ul>
-</li>
-</ul>
-<h4 id="复制一个字符串"><a href="#复制一个字符串" class="headerlink" title="复制一个字符串"></a>复制一个字符串</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *dst = (<span class="type">char</span> *)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(src)+<span class="number">1</span>);</span><br><span class="line"><span class="built_in">strcpy</span>(dst,src);</span><br></pre></td></tr></table></figure>
-
-<h4 id="手写一个cop函数"><a href="#手写一个cop函数" class="headerlink" title="手写一个cop函数"></a>手写一个cop函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">char</span>* <span class="title function_">mycopy</span><span class="params">( <span class="type">char</span> * dst, <span class="type">const</span> <span class="type">char</span> * src)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>( src[idx] != <span class="string">&#x27;\0&#x27;</span>)<span class="comment">//如果源字符串没有被整完</span></span><br><span class="line">    &#123;<span class="comment">//注意，当到\0的时候程序跳出了，所以没有把\0写进去所以下面要补一句</span></span><br><span class="line">        dst[idx] = src[idx];</span><br><span class="line">        idx++;</span><br><span class="line">    &#125;</span><br><span class="line">    dst[idx] = <span class="string">&#x27;\0&#x27;</span>;<span class="comment">//添上结尾的\0</span></span><br><span class="line">    <span class="keyword">return</span> dst;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> s1[] = &#123;abc&#125;;</span><br><span class="line">  <span class="type">char</span> s2[] = &#123;abc&#125;;</span><br><span class="line">  <span class="built_in">strcpy</span>(s1,s2);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="字符串搜索函数"><a href="#字符串搜索函数" class="headerlink" title="字符串搜索函数"></a>字符串搜索函数</h3><h4 id="字符串中找字符"><a href="#字符串中找字符" class="headerlink" title="字符串中找字符"></a>字符串中找字符</h4><p>从左边找</p>
-<ul>
-<li><pre><code class="c">char * strchr( const char *s,int c)
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">从右边找</span><br><span class="line"></span><br><span class="line">- ~~~c</span><br><span class="line">  char * strrchr( const char *s,int c)</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-<p>返回 <strong>NULL</strong> 表示没找到！</p>
-<h4 id="怎么个用法？"><a href="#怎么个用法？" class="headerlink" title="怎么个用法？"></a>怎么个用法？</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> s[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="type">char</span> * p = <span class="built_in">strchr</span>(s,<span class="string">&#x27;l&#x27;</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,p);<span class="comment">//llo</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>也就是给你返回的是你要搜的那个字符（从那个字符开始到结尾的所有）</p>
-</blockquote>
-<h5 id="怎么才找到第二个？"><a href="#怎么才找到第二个？" class="headerlink" title="怎么才找到第二个？"></a>怎么才找到第二个？</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = <span class="built_in">strchr</span>(p+<span class="number">1</span>,<span class="string">&#x27;l&#x27;</span>);<span class="comment">// 第一个l加一</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,p);<span class="comment">// lo</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="实现把指定字符串后面的复制到新的字符串去"><a href="#实现把指定字符串后面的复制到新的字符串去" class="headerlink" title="实现把指定字符串后面的复制到新的字符串去"></a>实现把指定字符串后面的复制到新的字符串去</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> s[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="type">char</span> * p = <span class="built_in">strchr</span>(s,<span class="string">&#x27;l&#x27;</span>);<span class="comment">//llo</span></span><br><span class="line">  </span><br><span class="line"><span class="type">char</span> *t = (<span class="type">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(p));<span class="comment">//申请出来比llo多一个的空间位置给了t</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">strcpy</span>(t,p);<span class="comment">//把p复制到t里面去。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,t);<span class="comment">//llo</span></span><br><span class="line"><span class="built_in">free</span>(t);</span><br></pre></td></tr></table></figure>
-
-<h4 id="骚操作"><a href="#骚操作" class="headerlink" title="骚操作"></a>骚操作</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> s[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="type">char</span> * p = <span class="built_in">strchr</span>(s,<span class="string">&#x27;l&#x27;</span>);<span class="comment">//llo</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> c = *p; <span class="comment">//此时 c就是那个 &#x27;l&#x27;</span></span><br><span class="line">*p = <span class="string">&#x27;\0&#x27;</span>; <span class="comment">//把&#x27;l&#x27;那个位置换成 0</span></span><br><span class="line"><span class="type">char</span> *t = (<span class="type">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(s)+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">strcpy</span>(t,s);<span class="comment">//此时字符串就变成了从前到你换成0那个位置了</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,t);<span class="comment">// he</span></span><br><span class="line"><span class="built_in">free</span>(t);</span><br></pre></td></tr></table></figure>
-
-<p>看下图解释：</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/B6zATY"><img src="https://www.helloimg.com/images/2021/04/18/B6zATY.png" alt="B6zATY.png"></a></p>
-<blockquote>
-<ul>
-<li>p指向了第一个 第一个’L’的那个位置</li>
-<li>把位置那个位置上的l 先给了 c 以便一会在放回去。</li>
-<li>换完之后，原本的s字符串只剩下红色方块那部分了</li>
-<li>将s 拷贝到 新字符串 t</li>
-<li>输出t</li>
-<li>如果你想的话，可以把c 在放回 *p那个地方去， *p &#x3D; c; 这样就恢复原来的模样了</li>
-</ul>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/B6z4qE"><img src="https://www.helloimg.com/images/2021/04/18/B6z4qE.png" alt="B6z4qE.png"></a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言理论部分--字符串</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言理论部分//" class="article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/16/%E5%AD%97%E7%AC%A6%E4%B8%B2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
@@ -1870,11 +1602,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1998,11 +1730,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">

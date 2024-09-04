@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 188
+            总文章数 189
         </nav>
 
 
@@ -167,7 +167,7 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-图(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-穿越雷区" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -179,66 +179,42 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/29/%E5%9B%BE(1)/">图</a>
+      <a class="article-title" href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA/">穿越雷区</a>
     </h1>
   
 
         
-        <a href="/2022/03/29/%E5%9B%BE(1)/" class="archive-article-date">
-  	<time datetime="2022-03-29T13:12:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-29</time>
+        <a href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA/" class="archive-article-date">
+  	<time datetime="2022-04-01T14:16:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><h2 id="BFS-–-广度优先搜索🔍"><a href="#BFS-–-广度优先搜索🔍" class="headerlink" title="BFS – 广度优先搜索🔍"></a>BFS – 广度优先搜索🔍</h2><h3 id="邻接矩阵的广度遍历算法"><a href="#邻接矩阵的广度遍历算法" class="headerlink" title="邻接矩阵的广度遍历算法"></a>邻接矩阵的广度遍历算法</h3><p>思路：就是利用队列将访问的顶点入队，然后出队的时候把与该顶点相连的顶点都拉进队…. 如此往复。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFSTraverse</span><span class="params">(MGraph G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line">    Queue Q;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//先把顶点都默认为没访问</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">InitQueue</span>(&amp;Q);<span class="comment">//初始化一个队列</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//对每个顶点做循环</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visited[i])<span class="comment">//如果没有访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            visited[i] = TRUE;<span class="comment">//那么当前被访问了</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,G.vexs[i]);<span class="comment">//输出被访问的</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//把被访问的入队</span></span><br><span class="line">            <span class="built_in">EnQueue</span>(&amp;Q,i);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> ( !<span class="built_in">QueueEmpty</span>(Q) )<span class="comment">//如果队列不为空</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//我出去的时候就要把相连的顶点拉进来</span></span><br><span class="line">                <span class="built_in">DeQueue</span>(&amp;Q,&amp;i);</span><br><span class="line">                <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; G.numVertexes; ++j) &#123;<span class="comment">//寻找出去相连的点</span></span><br><span class="line">                    <span class="keyword">if</span> ( G.arc[i][j] == <span class="number">1</span> &amp;&amp; !visited[j] )<span class="comment">//当前顶点存在 并且 没被访问过</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="comment">//进来就是找到了</span></span><br><span class="line">                        <span class="comment">//先标记一下</span></span><br><span class="line">                        visited[j] = TRUE;</span><br><span class="line"></span><br><span class="line">                        <span class="comment">//打印出来</span></span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,G.vexs[j]);</span><br><span class="line"></span><br><span class="line">                        <span class="comment">//拉进队列里来</span></span><br><span class="line">                        <span class="built_in">EnQueue</span>(&amp;Q,j);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>X星的坦克战车很奇怪，它必须交替地穿越正能量辐射区和负能量辐射区才能保持正常运转，否则将报废。<br>某坦克需要从A区到B区去（A，B区本身是安全区，没有正能量或负能量特征），怎样走才能路径最短？</p>
+<p>已知的地图是一个方阵，上面用字母标出了A，B区，其它区都标了正号或负号分别表示正负能量辐射区。<br>例如：<br>A + - + -<br>- + - - +<br>- + + + -<br>+ - + - +<br>B + - + -</p>
+<p>坦克车只能水平或垂直方向上移动到相邻的区。</p>
+<p>输入</p>
+<p>输入第一行是一个整数n，表示方阵的大小， 4&lt;&#x3D;n&lt;100<br>接下来是n行，每行有n个数据，可能是A，B，+，-中的某一个，中间用空格分开。<br>A，B都只出现一次。</p>
+<p>输出</p>
+<p>要求输出一个整数，表示坦克从A区到B区的最少移动步数。<br>如果没有方案，则输出-1</p>
+<p>样例输入复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">A + - + -</span><br><span class="line">- + - - +</span><br><span class="line">- + + + -</span><br><span class="line">+ - + - +</span><br><span class="line">B + - + -</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="邻接表的广度优先法"><a href="#邻接表的广度优先法" class="headerlink" title="邻接表的广度优先法"></a>邻接表的广度优先法</h3><h4 id="有必要说的结构体"><a href="#有必要说的结构体" class="headerlink" title="有必要说的结构体"></a>有必要说的结构体</h4><p>我觉得还是有必要说一下结构体的定义，有些繁杂,有三段。</p>
-<p>1. </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 邻接表结构****************** */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">EdgeNode</span> <span class="comment">/* 构造普通的结点，有对应下标，有next指针 */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> adjvex;    <span class="comment">/* 邻接点域,存储该顶点对应的下标 */</span></span><br><span class="line">    <span class="type">int</span> weight;        <span class="comment">/* 用于存储权值,对于非网图可以不需要 */</span></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">EdgeNode</span> *next; <span class="comment">/* 链域,指向下一个邻接点 */</span></span><br><span class="line">&#125;EdgeNode;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>这个相当于构造普通的带指针的结点，那什么是普通呢？看下图，黄色框起来的。</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/ReXCjA"><img src="https://www.helloimg.com/images/2022/03/27/ReXCjA.jpg" alt="ReXCjA.jpg"></a></p>
-<p>2. </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">VertexNode</span> <span class="comment">/* 构造开头那个，开头比较特殊需要单独定义一下 */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> in;    <span class="comment">/* 顶点入度 */</span></span><br><span class="line">    <span class="type">char</span> data; <span class="comment">/* 顶点域,存储顶点信息 */</span></span><br><span class="line">    EdgeNode *firstedge;<span class="comment">/* 边表头指针 */</span></span><br><span class="line">&#125;VertexNode, AdjList[MAXVEX];</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>这里就容易理解了，开头的结点情况比较特殊，它要存储一些关于它这一溜的度呀、数据、以及头指针。</p>
-</blockquote>
-<p>3. </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span><span class="comment">//大局观，也就是放眼整张图 看看有多少顶点多少条边</span></span><br><span class="line">&#123;</span><br><span class="line">    AdjList adjList;</span><br><span class="line">    <span class="type">int</span> numVertexes,numEdges; <span class="comment">/* 图中当前顶点数和边数 */</span></span><br><span class="line">&#125;graphAdjList,*GraphAdjList;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>所谓的大局观，需要把刚刚定义的头指针串起来，组成整张表。这里存的就是总的顶点数，和边的数。</p>
-</blockquote>
-<p>最后总的来看一下哈</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/Reedeo"><img src="https://www.helloimg.com/images/2022/03/27/Reedeo.png" alt="Reedeo.png"></a></p>
-<h4 id="遍历算法"><a href="#遍历算法" class="headerlink" title="遍历算法"></a>遍历算法</h4><p>大体思路：当你建立好邻接链表的时候可以观察到，其实就是一个大数组把一个个小数组串起来。如下图：</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RxBOXt"><img src="https://www.helloimg.com/images/2022/03/29/RxBOXt.jpg" alt="RxBOXt.jpg"></a></p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>最优路径问题一般采用BFS or DFS 。如果体量大的话BFS会更有效。  </p>
+<p>这里用到的是BFS的思路。主要的判断方案是，如果发现当前的坐标和之前待访问的不同时，代表是正负能量场。</p>
+<p>主要谈到的是方向问题：如图</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RJtuu0"><img src="https://www.helloimg.com/images/2022/04/01/RJtuu0.jpg" alt="RJtuu0.jpg"></a></p>
 <ul>
-<li><p>当到了链表的第一个位置的时候会先出队，并且指针指向第一个的下一个结点。比如0号A，当A出队的时候指针会指向A的下一个元素，由此p会沿着该链表一直走下去看看是否有未被访问过的元素，如果有则先入队。</p>
-</li>
-<li><p>如果说该链表走完了，则从队列中出队列一个元素，例如，处理完A后，B会出列，那么指针会走到B的下一个位置遍历整个链表。接下来会如此往复，直到全部链表都被访问过。</p>
-</li>
+<li>x 的变化为 下，左，右，上。我们以（2，2）当作中点，往下走X的变化就是X+1 ，往左走就是X+0，往右走也是X+0，往上走时X-1。故定义数组为{1,0,0,-1}</li>
+<li>y 的变化同理</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RxRBLK"><img src="https://www.helloimg.com/images/2022/03/29/RxRBLK.png" alt="RxRBLK.png"></a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFSTraverse</span><span class="params">(GraphAdjList GL)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//定义一个一会遍历普通结点的变量</span></span><br><span class="line">    EdgeNode *p;</span><br><span class="line">    <span class="comment">//循环变量</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="comment">//队列</span></span><br><span class="line">    Queue  Q;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化被访问元素</span></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//初始化队列</span></span><br><span class="line">    <span class="built_in">InitQueue</span>(&amp;Q);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历整张图的每一个结点</span></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[i] )<span class="comment">//如果没有被访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//进来就设为已经问过了</span></span><br><span class="line">            visited[i] = TRUE;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,GL-&gt;adjList[i].data);<span class="comment">//输出对应元素</span></span><br><span class="line">            <span class="built_in">EnQueue</span>(&amp;Q,i);<span class="comment">//当前元素对应的下标入队</span></span><br><span class="line">            <span class="comment">//当队列不为空时</span></span><br><span class="line">            <span class="keyword">while</span> ( !<span class="built_in">QueueEmpty</span>(Q) )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//出队当前元素</span></span><br><span class="line">                <span class="built_in">DeQueue</span>(&amp;Q,&amp;i);</span><br><span class="line">                <span class="comment">//指针指向该头结点的首指针</span></span><br><span class="line">                p = GL-&gt;adjList[i].firstedge;<span class="comment">//p指向第一个元素</span></span><br><span class="line">                <span class="comment">//遍历整个链表</span></span><br><span class="line">                <span class="keyword">while</span> (p)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> ( !visited[p-&gt;adjvex] )<span class="comment">//p所指的此结点对应的下标违未被访问过</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        visited[p-&gt;adjvex] = TRUE;</span><br><span class="line">                        <span class="built_in">EnQueue</span>(&amp;Q,p-&gt;adjvex);<span class="comment">//当前p所指的此结点对应的下标</span></span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,GL-&gt;adjList[p-&gt;adjvex].data);<span class="comment">//当前p所指的此结点对应的下标输出对应元素</span></span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    p=p-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> controlX[<span class="number">4</span>] = &#123;<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> controlY[<span class="number">4</span>] = &#123; <span class="number">0</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">char</span> Map_all[<span class="number">105</span>][<span class="number">105</span>];<span class="comment">//存地图</span></span><br><span class="line"><span class="type">int</span> visited[<span class="number">105</span>][<span class="number">105</span>];<span class="comment">//标记数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//构建类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="type">int</span> y;</span><br><span class="line">    <span class="type">int</span> walk;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Point</span>(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> walk) : <span class="built_in">x</span>(x), <span class="built_in">y</span>(y), <span class="built_in">walk</span>(walk) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> Start_X,Start_Y;</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            cin&gt;&gt;Map_all[i][j];<span class="comment">//输入地图</span></span><br><span class="line">            <span class="keyword">if</span> ( Map_all[i][j] == <span class="string">&#x27;A&#x27;</span>)<span class="comment">//当为起点的时候，定位坐标系。</span></span><br><span class="line">            &#123;</span><br><span class="line">                Start_X=i;</span><br><span class="line">                Start_Y=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">BFS</span>(Start_X,Start_Y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    queue&lt;Point&gt; Qt;</span><br><span class="line"></span><br><span class="line">    Qt.<span class="built_in">push</span>(<span class="built_in">Point</span>(x,y,<span class="number">0</span>));<span class="comment">//先入队再说</span></span><br><span class="line">    visited[x][y] = <span class="number">1</span>;<span class="comment">//标记为访问过，作用就是一会判断是否访问过了</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ( !Qt.<span class="built_in">empty</span>() )<span class="comment">//队列不为空时候</span></span><br><span class="line">    &#123;</span><br><span class="line">        Point temp=Qt.<span class="built_in">front</span>();<span class="comment">//先拿到队头</span></span><br><span class="line">        Qt.<span class="built_in">pop</span>();<span class="comment">// 出队</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( Map_all[temp.x][temp.y] == <span class="string">&#x27;B&#x27;</span>)<span class="comment">//如果此时的x，y符合条件就出去</span></span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; temp.walk &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历四个方向</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            <span class="type">int</span> temp_X = temp.x+controlX[i];<span class="comment">//当前结点加上方向值</span></span><br><span class="line">            <span class="type">int</span> temp_Y = temp.y+controlY[i];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ( temp_X&gt;=<span class="number">1</span> &amp;&amp; temp_Y&gt;=<span class="number">1</span> &amp;&amp; temp_X&lt;=n &amp;&amp; temp_Y&lt;=n &amp;&amp; !visited[temp_X][temp_Y] &amp;&amp; Map_all[temp_X][temp_Y]!=Map_all[temp.x][temp.y])<span class="comment">//当上一次不相等的时候</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//标记访问过</span></span><br><span class="line">                visited[temp_X][temp_Y] = <span class="number">1</span>;<span class="comment">//探索到的变为1</span></span><br><span class="line">                Qt.<span class="built_in">push</span>(<span class="built_in">Point</span>(temp_X,temp_Y,temp.walk+<span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="number">-1</span> &lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-
-<h2 id="DFS-深度优先遍历"><a href="#DFS-深度优先遍历" class="headerlink" title="DFS 深度优先遍历"></a>DFS 深度优先遍历</h2><h3 id="邻接矩阵的广度遍历算法-1"><a href="#邻接矩阵的广度遍历算法-1" class="headerlink" title="邻接矩阵的广度遍历算法"></a>邻接矩阵的广度遍历算法</h3><p>算法：通过矩阵的形式从左➡️到右进行遍历。当遇到 1 的，i  j  互换，互换的目的就是从搜索到的结点的哪一行开始继续探索。后面就是同理，遇到1则跳到对应的行上进行遍历。如图：</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RETcvu"><img src="https://www.helloimg.com/images/2022/03/30/RETcvu.jpg" alt="RETcvu.jpg"></a></p>
-<p>如果发现当前那一行都没有满足条件的就回溯到上一个你跳转过来的行往后继续进行。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(MGraph G, <span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> j;</span><br><span class="line">    visited[i] = TRUE;<span class="comment">//进来以后说明未访问过，标记为访问过</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,G.vexs[i]);<span class="comment">//先输出</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; G.numVertexes; ++j) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( G.arc[i][j]==<span class="number">1</span> &amp;&amp; !visited[j] )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(G,j);<span class="comment">/* 注意这里的细节：如果满足连通则，下一轮j就成为了i，也就是以i的基础上进行拓展，如果全部拓展完了一会要回到此地继续向后拓展。 */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 邻接矩阵的深度遍历操作 */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFSTraverse</span><span class="params">(MGraph G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">  <span class="comment">//对访问进行初始化</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遍历全部结点</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[i] )<span class="comment">//如果发现没有访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(G,i);<span class="comment">//调用DFS</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="邻接表的深度优先法"><a href="#邻接表的深度优先法" class="headerlink" title="邻接表的深度优先法"></a>邻接表的深度优先法</h3><p>类似于矩阵的形式，不过多赘述</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(GraphAdjList GL, <span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//结点</span></span><br><span class="line">    EdgeNode *p;</span><br><span class="line">    visited[i] = TRUE;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,GL-&gt;adjList[i].data);</span><br><span class="line">    p = GL-&gt;adjList[i].firstedge;<span class="comment">//p拿到头指针</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[p-&gt;adjvex] )<span class="comment">//如果p所指向的那个结点没有访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(GL,p-&gt;adjvex);<span class="comment">/* 这该结点的基础上递归调用--也就是从新的结点继续拓展。*/</span></span><br><span class="line">        &#125;</span><br><span class="line">        p=p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 邻接表的深度遍历操作 */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFSTraverse</span><span class="params">(GraphAdjList GL)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="comment">//进行初始化</span></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;<span class="comment">/* 初始所有顶点状态都是未访问过状态 */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[i] )<span class="comment">/* 对未访问过的顶点调用DFS,若是连通图,只会执行一次 */</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(GL,i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
       
@@ -253,7 +229,19 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">蓝桥杯</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">图的遍历</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
         		</li>
       		
 		</ul>
@@ -265,7 +253,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/图//" class="article-tag-list-link color2">图</a>
+        			<a href="/categories/图的遍历-BFS-DFS-蓝桥杯//" class="article-tag-list-link color2">图的遍历,BFS,DFS,蓝桥杯</a>
         		</li>
       		
 		</ul>
@@ -274,7 +262,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/03/29/%E5%9B%BE(1)/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA/">展开全文 >></a>
         </p>
       
 
@@ -413,6 +401,144 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2022/03/29/%E5%9B%BE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-图(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/29/%E5%9B%BE(1)/">图</a>
+    </h1>
+  
+
+        
+        <a href="/2022/03/29/%E5%9B%BE(1)/" class="archive-article-date">
+  	<time datetime="2022-03-29T13:12:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><h2 id="BFS-–-广度优先搜索🔍"><a href="#BFS-–-广度优先搜索🔍" class="headerlink" title="BFS – 广度优先搜索🔍"></a>BFS – 广度优先搜索🔍</h2><h3 id="邻接矩阵的广度遍历算法"><a href="#邻接矩阵的广度遍历算法" class="headerlink" title="邻接矩阵的广度遍历算法"></a>邻接矩阵的广度遍历算法</h3><p>思路：就是利用队列将访问的顶点入队，然后出队的时候把与该顶点相连的顶点都拉进队…. 如此往复。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFSTraverse</span><span class="params">(MGraph G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line">    Queue Q;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//先把顶点都默认为没访问</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">InitQueue</span>(&amp;Q);<span class="comment">//初始化一个队列</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//对每个顶点做循环</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visited[i])<span class="comment">//如果没有访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            visited[i] = TRUE;<span class="comment">//那么当前被访问了</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,G.vexs[i]);<span class="comment">//输出被访问的</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//把被访问的入队</span></span><br><span class="line">            <span class="built_in">EnQueue</span>(&amp;Q,i);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> ( !<span class="built_in">QueueEmpty</span>(Q) )<span class="comment">//如果队列不为空</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//我出去的时候就要把相连的顶点拉进来</span></span><br><span class="line">                <span class="built_in">DeQueue</span>(&amp;Q,&amp;i);</span><br><span class="line">                <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; G.numVertexes; ++j) &#123;<span class="comment">//寻找出去相连的点</span></span><br><span class="line">                    <span class="keyword">if</span> ( G.arc[i][j] == <span class="number">1</span> &amp;&amp; !visited[j] )<span class="comment">//当前顶点存在 并且 没被访问过</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="comment">//进来就是找到了</span></span><br><span class="line">                        <span class="comment">//先标记一下</span></span><br><span class="line">                        visited[j] = TRUE;</span><br><span class="line"></span><br><span class="line">                        <span class="comment">//打印出来</span></span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,G.vexs[j]);</span><br><span class="line"></span><br><span class="line">                        <span class="comment">//拉进队列里来</span></span><br><span class="line">                        <span class="built_in">EnQueue</span>(&amp;Q,j);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="邻接表的广度优先法"><a href="#邻接表的广度优先法" class="headerlink" title="邻接表的广度优先法"></a>邻接表的广度优先法</h3><h4 id="有必要说的结构体"><a href="#有必要说的结构体" class="headerlink" title="有必要说的结构体"></a>有必要说的结构体</h4><p>我觉得还是有必要说一下结构体的定义，有些繁杂,有三段。</p>
+<p>1. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 邻接表结构****************** */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">EdgeNode</span> <span class="comment">/* 构造普通的结点，有对应下标，有next指针 */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> adjvex;    <span class="comment">/* 邻接点域,存储该顶点对应的下标 */</span></span><br><span class="line">    <span class="type">int</span> weight;        <span class="comment">/* 用于存储权值,对于非网图可以不需要 */</span></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">EdgeNode</span> *next; <span class="comment">/* 链域,指向下一个邻接点 */</span></span><br><span class="line">&#125;EdgeNode;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这个相当于构造普通的带指针的结点，那什么是普通呢？看下图，黄色框起来的。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/ReXCjA"><img src="https://www.helloimg.com/images/2022/03/27/ReXCjA.jpg" alt="ReXCjA.jpg"></a></p>
+<p>2. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">VertexNode</span> <span class="comment">/* 构造开头那个，开头比较特殊需要单独定义一下 */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> in;    <span class="comment">/* 顶点入度 */</span></span><br><span class="line">    <span class="type">char</span> data; <span class="comment">/* 顶点域,存储顶点信息 */</span></span><br><span class="line">    EdgeNode *firstedge;<span class="comment">/* 边表头指针 */</span></span><br><span class="line">&#125;VertexNode, AdjList[MAXVEX];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里就容易理解了，开头的结点情况比较特殊，它要存储一些关于它这一溜的度呀、数据、以及头指针。</p>
+</blockquote>
+<p>3. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span><span class="comment">//大局观，也就是放眼整张图 看看有多少顶点多少条边</span></span><br><span class="line">&#123;</span><br><span class="line">    AdjList adjList;</span><br><span class="line">    <span class="type">int</span> numVertexes,numEdges; <span class="comment">/* 图中当前顶点数和边数 */</span></span><br><span class="line">&#125;graphAdjList,*GraphAdjList;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>所谓的大局观，需要把刚刚定义的头指针串起来，组成整张表。这里存的就是总的顶点数，和边的数。</p>
+</blockquote>
+<p>最后总的来看一下哈</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/Reedeo"><img src="https://www.helloimg.com/images/2022/03/27/Reedeo.png" alt="Reedeo.png"></a></p>
+<h4 id="遍历算法"><a href="#遍历算法" class="headerlink" title="遍历算法"></a>遍历算法</h4><p>大体思路：当你建立好邻接链表的时候可以观察到，其实就是一个大数组把一个个小数组串起来。如下图：</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RxBOXt"><img src="https://www.helloimg.com/images/2022/03/29/RxBOXt.jpg" alt="RxBOXt.jpg"></a></p>
+<ul>
+<li><p>当到了链表的第一个位置的时候会先出队，并且指针指向第一个的下一个结点。比如0号A，当A出队的时候指针会指向A的下一个元素，由此p会沿着该链表一直走下去看看是否有未被访问过的元素，如果有则先入队。</p>
+</li>
+<li><p>如果说该链表走完了，则从队列中出队列一个元素，例如，处理完A后，B会出列，那么指针会走到B的下一个位置遍历整个链表。接下来会如此往复，直到全部链表都被访问过。</p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RxRBLK"><img src="https://www.helloimg.com/images/2022/03/29/RxRBLK.png" alt="RxRBLK.png"></a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFSTraverse</span><span class="params">(GraphAdjList GL)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//定义一个一会遍历普通结点的变量</span></span><br><span class="line">    EdgeNode *p;</span><br><span class="line">    <span class="comment">//循环变量</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="comment">//队列</span></span><br><span class="line">    Queue  Q;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化被访问元素</span></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//初始化队列</span></span><br><span class="line">    <span class="built_in">InitQueue</span>(&amp;Q);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历整张图的每一个结点</span></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[i] )<span class="comment">//如果没有被访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//进来就设为已经问过了</span></span><br><span class="line">            visited[i] = TRUE;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,GL-&gt;adjList[i].data);<span class="comment">//输出对应元素</span></span><br><span class="line">            <span class="built_in">EnQueue</span>(&amp;Q,i);<span class="comment">//当前元素对应的下标入队</span></span><br><span class="line">            <span class="comment">//当队列不为空时</span></span><br><span class="line">            <span class="keyword">while</span> ( !<span class="built_in">QueueEmpty</span>(Q) )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//出队当前元素</span></span><br><span class="line">                <span class="built_in">DeQueue</span>(&amp;Q,&amp;i);</span><br><span class="line">                <span class="comment">//指针指向该头结点的首指针</span></span><br><span class="line">                p = GL-&gt;adjList[i].firstedge;<span class="comment">//p指向第一个元素</span></span><br><span class="line">                <span class="comment">//遍历整个链表</span></span><br><span class="line">                <span class="keyword">while</span> (p)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> ( !visited[p-&gt;adjvex] )<span class="comment">//p所指的此结点对应的下标违未被访问过</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        visited[p-&gt;adjvex] = TRUE;</span><br><span class="line">                        <span class="built_in">EnQueue</span>(&amp;Q,p-&gt;adjvex);<span class="comment">//当前p所指的此结点对应的下标</span></span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,GL-&gt;adjList[p-&gt;adjvex].data);<span class="comment">//当前p所指的此结点对应的下标输出对应元素</span></span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    p=p-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="DFS-深度优先遍历"><a href="#DFS-深度优先遍历" class="headerlink" title="DFS 深度优先遍历"></a>DFS 深度优先遍历</h2><h3 id="邻接矩阵的广度遍历算法-1"><a href="#邻接矩阵的广度遍历算法-1" class="headerlink" title="邻接矩阵的广度遍历算法"></a>邻接矩阵的广度遍历算法</h3><p>算法：通过矩阵的形式从左➡️到右进行遍历。当遇到 1 的，i  j  互换，互换的目的就是从搜索到的结点的哪一行开始继续探索。后面就是同理，遇到1则跳到对应的行上进行遍历。如图：</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RETcvu"><img src="https://www.helloimg.com/images/2022/03/30/RETcvu.jpg" alt="RETcvu.jpg"></a></p>
+<p>如果发现当前那一行都没有满足条件的就回溯到上一个你跳转过来的行往后继续进行。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(MGraph G, <span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> j;</span><br><span class="line">    visited[i] = TRUE;<span class="comment">//进来以后说明未访问过，标记为访问过</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,G.vexs[i]);<span class="comment">//先输出</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; G.numVertexes; ++j) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( G.arc[i][j]==<span class="number">1</span> &amp;&amp; !visited[j] )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(G,j);<span class="comment">/* 注意这里的细节：如果满足连通则，下一轮j就成为了i，也就是以i的基础上进行拓展，如果全部拓展完了一会要回到此地继续向后拓展。 */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 邻接矩阵的深度遍历操作 */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFSTraverse</span><span class="params">(MGraph G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">  <span class="comment">//对访问进行初始化</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遍历全部结点</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[i] )<span class="comment">//如果发现没有访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(G,i);<span class="comment">//调用DFS</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="邻接表的深度优先法"><a href="#邻接表的深度优先法" class="headerlink" title="邻接表的深度优先法"></a>邻接表的深度优先法</h3><p>类似于矩阵的形式，不过多赘述</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(GraphAdjList GL, <span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//结点</span></span><br><span class="line">    EdgeNode *p;</span><br><span class="line">    visited[i] = TRUE;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c &quot;</span>,GL-&gt;adjList[i].data);</span><br><span class="line">    p = GL-&gt;adjList[i].firstedge;<span class="comment">//p拿到头指针</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[p-&gt;adjvex] )<span class="comment">//如果p所指向的那个结点没有访问过</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(GL,p-&gt;adjvex);<span class="comment">/* 这该结点的基础上递归调用--也就是从新的结点继续拓展。*/</span></span><br><span class="line">        &#125;</span><br><span class="line">        p=p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 邻接表的深度遍历操作 */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFSTraverse</span><span class="params">(GraphAdjList GL)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="comment">//进行初始化</span></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        visited[i] = FALSE;<span class="comment">/* 初始所有顶点状态都是未访问过状态 */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; GL-&gt;numVertexes; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !visited[i] )<span class="comment">/* 对未访问过的顶点调用DFS,若是连通图,只会执行一次 */</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">DFS</span>(GL,i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/图//" class="article-tag-list-link color2">图</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/03/29/%E5%9B%BE(1)/">展开全文 >></a>
         </p>
       
 
@@ -1851,160 +1977,6 @@
 
 
   
-    <article id="post-二叉树众的众数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/02/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BC%97%E7%9A%84%E4%BC%97%E6%95%B0/">二叉树众的众数</a>
-    </h1>
-  
-
-        
-        <a href="/2022/02/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BC%97%E7%9A%84%E4%BC%97%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2022-02-09T10:11:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="501-二叉搜索树中的众数"><a href="#501-二叉搜索树中的众数" class="headerlink" title="501. 二叉搜索树中的众数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/">501. 二叉搜索树中的众数</a></h4><p>难度简单410收藏分享切换为英文接收动态反馈</p>
-<p>给你一个含重复值的二叉搜索树（BST）的根节点 <code>root</code> ，找出并返回 BST 中的所有 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BC%97%E6%95%B0/44796">众数</a>（即，出现频率最高的元素）。</p>
-<p>如果树中有不止一个众数，可以按 <strong>任意顺序</strong> 返回。</p>
-<p>假定 BST 满足如下定义：</p>
-<ul>
-<li>结点左子树中所含节点的值 <strong>小于等于</strong> 当前节点的值</li>
-<li>结点右子树中所含节点的值 <strong>大于等于</strong> 当前节点的值</li>
-<li>左子树和右子树都是二叉搜索树</li>
-</ul>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2021/03/11/mode-tree.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,null,2,2]</span><br><span class="line">输出：[2]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [0]</span><br><span class="line">输出：[0]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>树中节点的数目在范围 <code>[1, 104]</code> 内</li>
-<li><code>-105 &lt;= Node.val &lt;= 105</code></li>
-</ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>首先读题 “给你一个含重复值的&#x3D;&#x3D;二叉搜索树&#x3D;&#x3D;（BST）”。</p>
-<p>根据这条，很快的就可以得想到一条性质，二叉搜索树的中序遍历结果&#x3D;&#x3D;是一个有序的序列&#x3D;&#x3D;</p>
-<p>我们就可以把问题转换为两个方面</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GURyaq"><img src="https://www.helloimg.com/images/2022/02/09/GURyaq.png" alt="GURyaq.png"></a></p>
-<p>我们就可以把整个过程分为中序的过程中，调用查找众数的函数</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> *answer;<span class="comment">//放结果的数组</span></span><br><span class="line"><span class="type">int</span> count;<span class="comment">//记录当前的个数</span></span><br><span class="line"><span class="type">int</span> maxcount; <span class="comment">//记录最大的个数</span></span><br><span class="line"><span class="type">int</span> currentNum;</span><br><span class="line"><span class="type">int</span> answerCount;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">( <span class="type">int</span> x )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (  x == currentNum  )</span><br><span class="line">	&#123;</span><br><span class="line">		count++; <span class="comment">//如果相等就把当前的计数器++</span></span><br><span class="line">	&#125;<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		count = <span class="number">1</span>; <span class="comment">//如果不等于 当前的个数归一</span></span><br><span class="line">		currentNum = x;<span class="comment">//更新新的数</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( count == maxcount )<span class="comment">//如果说当前的个数相等于上一个众数的个数，那么保留</span></span><br><span class="line">	&#123;</span><br><span class="line">		answer[answerCount++] = currentNum;		 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( count &gt; maxcount ) <span class="comment">//当前的个数比最大的个数还多 -- 我要颠覆整个数组</span></span><br><span class="line">	&#123;</span><br><span class="line">		</span><br><span class="line">		maxcount = count;<span class="comment">//更新最大值</span></span><br><span class="line">		answerCount = <span class="number">0</span>;<span class="comment">//新的众数出现之前数组整个清除掉</span></span><br><span class="line">		answer[answerCount++] = currentNum;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dbf</span><span class="params">( <span class="keyword">struct</span> TreeNode * t )</span> <span class="comment">//中序遍历</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( t == <span class="literal">NULL</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">dbf</span>( t-&gt;left );</span><br><span class="line">	<span class="built_in">update</span>( t-&gt;val );</span><br><span class="line">	<span class="built_in">dbf</span>( t-&gt;right );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span>* <span class="title">findMode</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="type">int</span>* returnSize)</span></span>&#123;</span><br><span class="line">		<span class="comment">//默认为0</span></span><br><span class="line">		maxcount = count = currentNum = answerCount = <span class="number">0</span>;</span><br><span class="line">		<span class="comment">//创建结果数组空间</span></span><br><span class="line">		answer = <span class="built_in">malloc</span>(<span class="built_in">sizeof</span>( <span class="type">int</span> * ) *<span class="number">4001</span> );</span><br><span class="line">		<span class="comment">//递归</span></span><br><span class="line">		<span class="built_in">dbf</span>( root );</span><br><span class="line">		<span class="comment">//最终结果集大小的复制</span></span><br><span class="line">		*returnSize = answerCount;</span><br><span class="line">		<span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树的简单题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/02/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BC%97%E7%9A%84%E4%BC%97%E6%95%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -2158,11 +2130,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2286,11 +2258,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">
