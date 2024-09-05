@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 189
+            总文章数 190
         </nav>
 
 
@@ -166,6 +166,115 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-素数问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/24/%E7%B4%A0%E6%95%B0%E9%97%AE%E9%A2%98/">素数问题</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/24/%E7%B4%A0%E6%95%B0%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2021-04-24T12:20:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="初级—判断一是不是素数"><a href="#初级—判断一是不是素数" class="headerlink" title="初级—判断一是不是素数"></a>初级—判断一是不是素数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n,isPrime;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; n; i++) </span><br><span class="line">    &#123;</span><br><span class="line">      isPrime = <span class="number">1</span>;<span class="comment">//先假设为真，我们验证假 </span></span><br><span class="line">        <span class="keyword">if</span>( n % i == <span class="number">0</span> ) &#123;<span class="comment">//说明不是</span></span><br><span class="line">          isPrime = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">break</span>;<span class="comment">//不是之后要break出去</span></span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> ( isPrime == <span class="number">1</span>) </span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;Yes!!\n&quot;</span>);  </span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>看看能否 从 2 ～  n  是否有数能被你输入的那个数整除<ul>
+<li>假设 条件为真</li>
+<li>如果说 - 能被整除—&gt;说明不是素数 然后 让 条件为假isPrime &#x3D; 0;</li>
+<li>⚠️记得break ！出去，已经发现就不用往后找了</li>
+</ul>
+</li>
+<li>判断条件为真还是假就可<ul>
+<li>如果是真 输出yes</li>
+<li>否则输出 NO</li>
+</ul>
+</li>
+</ul>
+<h3 id="中级编写一个函数-返回是不是素数"><a href="#中级编写一个函数-返回是不是素数" class="headerlink" title="中级编写一个函数 返回是不是素数"></a>中级编写一个函数 返回是不是素数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">prime</span><span class="params">( <span class="type">int</span> m )</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; m; i++) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( m % i == <span class="number">0</span> ) </span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//发现不是立刻返回0</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   &#125;   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//循环结束相当于没找到 ！！！ 返回1 即可</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="高级判断-一定范围内的素数和"><a href="#高级判断-一定范围内的素数和" class="headerlink" title="高级判断 一定范围内的素数和"></a>高级判断 一定范围内的素数和</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">prime</span><span class="params">( <span class="type">int</span> m )</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; m; i++) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( m % i == <span class="number">0</span> ) </span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> m=<span class="number">10</span>,n=<span class="number">1</span>;</span><br><span class="line">  <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = n; i &lt;= m; i++)</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">if</span> ( prime(i) ) <span class="comment">//如果为真返回的就是1 能近if</span></span><br><span class="line">      &#123;<span class="comment">//如果是prime</span></span><br><span class="line">        sum+=i;<span class="comment">//累加</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">	<span class="comment">//最后输出和</span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/24/%E7%B4%A0%E6%95%B0%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-求整数的位数及各位数字之和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1272,183 +1381,6 @@
 
 
   
-    <article id="post-结构体" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/18/%E7%BB%93%E6%9E%84%E4%BD%93/">结构体</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/18/%E7%BB%93%E6%9E%84%E4%BD%93/" class="archive-article-date">
-  	<time datetime="2021-04-18T13:05:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="为蛇么有结构体？"><a href="#为蛇么有结构体？" class="headerlink" title="为蛇么有结构体？"></a>为蛇么有结构体？</h2><p>如果你想连续存放一些数据，你可以用数组，但前提条件是数组必须每个元素的值都是相同类型的</p>
-<p>但如果你想存放一些不同类型的数据，把它们弄成一个整体—-出现了结构体。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">date</span> &#123;</span></span><br><span class="line">      <span class="type">int</span> month;</span><br><span class="line">      <span class="type">int</span> day;</span><br><span class="line">      <span class="type">int</span> year;</span><br><span class="line">    &#125;;<span class="comment">//⚠️这里有分号</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">date</span> <span class="title">today</span>;</span><span class="comment">//定义 struct date 类型的变量 today</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">    today.month = <span class="number">07</span>;</span><br><span class="line">    today.day=<span class="number">31</span>;</span><br><span class="line">    today.year=<span class="number">2014</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;today&#x27;s data is %i-%i-%i\n&quot;</span>,today.year,today.month,today.day);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="声明在函数外还是内？"><a href="#声明在函数外还是内？" class="headerlink" title="声明在函数外还是内？"></a>声明在函数外还是内？</h3><ul>
-<li><p>如果你想只在某个函数里使用，就定义在函数里，就像上面的main函数里一样。</p>
-</li>
-<li><p>如果你想在程序的每一处都能够使用，那么你就定义在外面如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="class"><span class="keyword">struct</span> <span class="title">date</span> &#123;</span></span><br><span class="line">      <span class="type">int</span> month;</span><br><span class="line">      <span class="type">int</span> day;</span><br><span class="line">      <span class="type">int</span> year;</span><br><span class="line">    &#125;;<span class="comment">//⚠️这里有分号</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="声明结构的形式–3种形式"><a href="#声明结构的形式–3种形式" class="headerlink" title="声明结构的形式–3种形式"></a>声明结构的形式–3种形式</h4><ul>
-<li><pre><code class="c">struct point&#123;
-  int x;
-  int y;
-&#125;;
-
-struct point p1,p2;
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ~~~c</span><br><span class="line">  struct&#123;//无名的</span><br><span class="line">    int x;</span><br><span class="line">    int y;</span><br><span class="line">  &#125;p1,p2;</span><br><span class="line">  //相当于说，我将来就用 p1 p2 两个变量就行，不需要定义其他变量了。</span><br><span class="line">  //也就是，以后除了 p1 和 p2 不能定义其他的变量了</span><br><span class="line">  //相当于一次性产品</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><pre><code class="c">struct point&#123;
-  int x;
-  int y;
-&#125;p1,p2;
-//相当于说，定义的时候顺便定义了 p1 p2
-//以后你想用该结构变量的时候，还是可以采用 struct point *** 的形式来定义的
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 结构变量的内存形式</span><br><span class="line"></span><br><span class="line">[![B6DmXE.png](https://www.helloimg.com/images/2021/04/18/B6DmXE.png)](https://www.helloimg.com/image/B6DmXE)</span><br><span class="line"></span><br><span class="line">#### 结构的初始化</span><br><span class="line"></span><br><span class="line">~~~c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">struct date &#123;</span><br><span class="line">      int month;</span><br><span class="line">      int day;</span><br><span class="line">      int year;</span><br><span class="line">&#125;;//⚠️这里有分号</span><br><span class="line">int main(int argc, char const* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    struct date today = &#123; 04,20,2021&#125;;</span><br><span class="line">   </span><br><span class="line">    today.month = 07;</span><br><span class="line">    today.day=31;</span><br><span class="line">    today.year=2014;</span><br><span class="line"></span><br><span class="line">    printf(&quot;today&#x27;s data is %i-%i-%i\n&quot;,today.year,today.month,today.day);</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/B6Dt89"><img src="https://www.helloimg.com/images/2021/04/18/B6Dt89.png" alt="B6Dt89.png"></a></p>
-<blockquote>
-<p>如图，当你花括号里这样定义的时候，编译器会自动帮你一一对应赋值结构中的变量。</p>
-</blockquote>
-<p>如果你想指定的几个赋值的话！采用    <strong>.神马</strong>   的方式来进行赋值</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">date</span> <span class="title">thismonth</span> =</span> &#123;.month = <span class="number">6</span>,.year = <span class="number">2014</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>当然，你没有赋值的变量会像数组那样，自动赋 0 值</p>
-</blockquote>
-<h4 id="访问结构中的成员"><a href="#访问结构中的成员" class="headerlink" title="访问结构中的成员"></a>访问结构中的成员</h4><p>结构和数组的情况有点像</p>
-<ul>
-<li><p>数组用下标的方式访问里面的成员</p>
-<ul>
-<li>arr[ 3 ] &#x3D; 10;</li>
-</ul>
-</li>
-<li><p>结构 用 . 运算符 和 名字来访问其成员</p>
-<ul>
-<li>today.day</li>
-<li>student.Name</li>
-<li>p1.x</li>
-<li>p1.y</li>
-</ul>
-</li>
-</ul>
-<h4 id="结构运算"><a href="#结构运算" class="headerlink" title="结构运算"></a>结构运算</h4><ul>
-<li><p>要访问整个结构，直接用结构变量的名字</p>
-</li>
-<li><p>结构可以做</p>
-<ul>
-<li><p>赋值</p>
-</li>
-<li><p>取地址</p>
-</li>
-<li><p>传递给函数的参数</p>
-</li>
-<li><pre><code class="c">p1 = (struct point)&#123;5,10&#125;;//强制转换
-//相当于 p1.x = 5 p1.y = 10
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ~~~c</span><br><span class="line">  p1 = p2; //可以相互赋值</span><br><span class="line">  //相当于</span><br><span class="line">  // p1.x = p2.x</span><br><span class="line">  // p1.y = p2.y</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">date</span> <span class="title">today</span> =</span> &#123; <span class="number">04</span>,<span class="number">20</span>,<span class="number">2021</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">date</span> <span class="title">day</span>;</span><span class="comment">//定义了一个day变量，但我没有赋值</span></span><br><span class="line"></span><br><span class="line">    day = today;<span class="comment">//直接赋值给day，这里是数组做不到的</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;today&#x27;s data is %i-%i-%i\n&quot;</span>,day.year,day.month,day.day);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;today&#x27;s data is %i-%i-%i\n&quot;</span>,today.year,today.month,today.day);</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">today&#x27;s data is 2021-4-20  相同</span></span><br><span class="line"><span class="comment">today&#x27;s data is 2021-4-20</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="结构指针"><a href="#结构指针" class="headerlink" title="结构指针"></a>结构指针</h4><p>注意⚠️，结构的名称不是变量的地址（这里和数组是不同的），所以说加要取地址运算符。</p>
-</li>
-</ul>
-<h3 id="结构与函数"><a href="#结构与函数" class="headerlink" title="结构与函数"></a>结构与函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">numberOfDays</span><span class="params">( <span class="keyword">struct</span> date d )</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>整个结构是可以作为参数传入函数的</li>
-<li>这时候，是在函数内新建了一个<strong>新的</strong>结构变量（克隆体），然后把调用者的值复制进去</li>
-<li>也可以<strong>返回一个结构</strong></li>
-<li>这与数组完全不同</li>
-</ul>
-<h4 id="指向结构的指针"><a href="#指向结构的指针" class="headerlink" title="指向结构的指针"></a>指向结构的指针</h4>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言理论部分//" class="article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/18/%E7%BB%93%E6%9E%84%E4%BD%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
@@ -1598,6 +1530,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
@@ -1606,7 +1542,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1642,10 +1586,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">历年真题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -1655,6 +1595,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">历年真题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1730,19 +1674,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
               </li>
              
               <li class="article-tag-list-item">

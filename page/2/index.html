@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 189
+            总文章数 190
         </nav>
 
 
@@ -166,6 +166,128 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-刷题统计(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/15/%E5%88%B7%E9%A2%98%E7%BB%9F%E8%AE%A1(1)/">刷题统计</a>
+    </h1>
+  
+
+        
+        <a href="/2022/04/15/%E5%88%B7%E9%A2%98%E7%BB%9F%E8%AE%A1(1)/" class="archive-article-date">
+  	<time datetime="2022-04-15T12:23:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##【问题描述】</p>
+<p>小明决定从下周一开始努力刷题准备蓝桥杯竞赛。他计划周一至周五每天</p>
+<p>做 <em>a</em> 道题目，周六和周日每天做 <em>b</em> 道题目。请你帮小明计算，按照计划他将在</p>
+<p>第几天实现做题数大于等于 <em>n</em> 题？</p>
+<p>【输入格式】</p>
+<p>输入一行包含三个整数 <em>a</em>, <em>b</em> 和 <em>n</em>.</p>
+<p>【输出格式】</p>
+<p>输出一个整数代表天数。</p>
+<p>【样例输入】</p>
+<p>10 20 99</p>
+<p>【样例输出】</p>
+<p>8</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<li><p>算出一周 到 周五  5 天做a道，周末做 b 道。 那么我们可以先算出<strong>每周能做多少道</strong>。</p>
+</li>
+<li><p>知道总共能做多少道，然后拿总的目标    <strong>n &#x2F; 每周能做多少道</strong>  可以算出最多能做几周 。然后 乘 7 代表最多能做多少个整周的天数。</p>
+</li>
+<li><p>然后   n % 每周能做多少道  &#x3D;&#x3D; 余下几个零散的天数，然后下一步进行分类。</p>
+</li>
+<li><p>用一个循环在 多少个整周的天数的基础上一天一天加</p>
+</li>
+<li><p>如果 等于 6 ，7 的时候就在余数里面扣出 b 天</p>
+</li>
+<li><p>如果 不是的话 就扣出 a天。</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> day,a,b,n;</span><br><span class="line"><span class="type">int</span> a_Week;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; a &gt;&gt; b &gt;&gt; n;</span><br><span class="line">    <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//计算出一周总共能完成多少</span></span><br><span class="line">    a_Week = a*<span class="number">5</span>+b*<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 总共 / 一周 == 共有几周  --&gt; 再乘7 就是最多多少周</span></span><br><span class="line">    result += <span class="number">7</span> * (n/a_Week);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//算余数</span></span><br><span class="line">    n = n % a_Week;<span class="comment">//算出余多少天，然后再根据情况分类给 工作日 还是 周末</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ( n &gt;= <span class="number">0</span> ) <span class="comment">//n 为余多少天</span></span><br><span class="line">    &#123;</span><br><span class="line">        ++result; <span class="comment">//不管是那天是 学 a 道题 还是b 道 题，先加上一天再说</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( day == <span class="number">5</span> ||  day == <span class="number">6</span> )<span class="comment">//  如果是周末的情况</span></span><br><span class="line">        &#123;</span><br><span class="line">            n -= b; <span class="comment">//从余数中扣除b道题</span></span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;<span class="comment">//否则就是周一到周五的情况，每天学a 道题</span></span><br><span class="line">            n -= a; <span class="comment">//从余数中扣除a道题</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        day = (day+<span class="number">1</span>) % <span class="number">7</span>;<span class="comment">//以一周为一个轮回</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">蓝桥杯</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">普通类型</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/蓝桥杯-普通类型//" class="article-tag-list-link color4">蓝桥杯,普通类型</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/04/15/%E5%88%B7%E9%A2%98%E7%BB%9F%E8%AE%A1(1)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-刷题统计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1167,132 +1289,6 @@
 
 
   
-    <article id="post-穿越雷区(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA(1)/">穿越雷区</a>
-    </h1>
-  
-
-        
-        <a href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA(1)/" class="archive-article-date">
-  	<time datetime="2022-04-01T14:16:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>X星的坦克战车很奇怪，它必须交替地穿越正能量辐射区和负能量辐射区才能保持正常运转，否则将报废。<br>某坦克需要从A区到B区去（A，B区本身是安全区，没有正能量或负能量特征），怎样走才能路径最短？</p>
-<p>已知的地图是一个方阵，上面用字母标出了A，B区，其它区都标了正号或负号分别表示正负能量辐射区。<br>例如：<br>A + - + -<br>- + - - +<br>- + + + -<br>+ - + - +<br>B + - + -</p>
-<p>坦克车只能水平或垂直方向上移动到相邻的区。</p>
-<p>输入</p>
-<p>输入第一行是一个整数n，表示方阵的大小， 4&lt;&#x3D;n&lt;100<br>接下来是n行，每行有n个数据，可能是A，B，+，-中的某一个，中间用空格分开。<br>A，B都只出现一次。</p>
-<p>输出</p>
-<p>要求输出一个整数，表示坦克从A区到B区的最少移动步数。<br>如果没有方案，则输出-1</p>
-<p>样例输入复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">A + - + -</span><br><span class="line">- + - - +</span><br><span class="line">- + + + -</span><br><span class="line">+ - + - +</span><br><span class="line">B + - + -</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>最优路径问题一般采用BFS or DFS 。如果体量大的话BFS会更有效。  </p>
-<p>这里用到的是BFS的思路。主要的判断方案是，如果发现当前的坐标和之前待访问的不同时，代表是正负能量场。</p>
-<p>主要谈到的是方向问题：如图</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RJtuu0"><img src="https://www.helloimg.com/images/2022/04/01/RJtuu0.jpg" alt="RJtuu0.jpg"></a></p>
-<ul>
-<li>x 的变化为 下，左，右，上。我们以（2，2）当作中点，往下走X的变化就是X+1 ，往左走就是X+0，往右走也是X+0，往上走时X-1。故定义数组为{1,0,0,-1}</li>
-<li>y 的变化同理</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> controlX[<span class="number">4</span>] = &#123;<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> controlY[<span class="number">4</span>] = &#123; <span class="number">0</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">char</span> Map_all[<span class="number">105</span>][<span class="number">105</span>];<span class="comment">//存地图</span></span><br><span class="line"><span class="type">int</span> visited[<span class="number">105</span>][<span class="number">105</span>];<span class="comment">//标记数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//构建类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="type">int</span> y;</span><br><span class="line">    <span class="type">int</span> walk;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Point</span>(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> walk) : <span class="built_in">x</span>(x), <span class="built_in">y</span>(y), <span class="built_in">walk</span>(walk) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> Start_X,Start_Y;</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            cin&gt;&gt;Map_all[i][j];<span class="comment">//输入地图</span></span><br><span class="line">            <span class="keyword">if</span> ( Map_all[i][j] == <span class="string">&#x27;A&#x27;</span>)<span class="comment">//当为起点的时候，定位坐标系。</span></span><br><span class="line">            &#123;</span><br><span class="line">                Start_X=i;</span><br><span class="line">                Start_Y=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">BFS</span>(Start_X,Start_Y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    queue&lt;Point&gt; Qt;</span><br><span class="line"></span><br><span class="line">    Qt.<span class="built_in">push</span>(<span class="built_in">Point</span>(x,y,<span class="number">0</span>));<span class="comment">//先入队再说</span></span><br><span class="line">    visited[x][y] = <span class="number">1</span>;<span class="comment">//标记为访问过，作用就是一会判断是否访问过了</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ( !Qt.<span class="built_in">empty</span>() )<span class="comment">//队列不为空时候</span></span><br><span class="line">    &#123;</span><br><span class="line">        Point temp=Qt.<span class="built_in">front</span>();<span class="comment">//先拿到队头</span></span><br><span class="line">        Qt.<span class="built_in">pop</span>();<span class="comment">// 出队</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( Map_all[temp.x][temp.y] == <span class="string">&#x27;B&#x27;</span>)<span class="comment">//如果此时的x，y符合条件就出去</span></span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; temp.walk &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历四个方向</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            <span class="type">int</span> temp_X = temp.x+controlX[i];<span class="comment">//当前结点加上方向值</span></span><br><span class="line">            <span class="type">int</span> temp_Y = temp.y+controlY[i];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ( temp_X&gt;=<span class="number">1</span> &amp;&amp; temp_Y&gt;=<span class="number">1</span> &amp;&amp; temp_X&lt;=n &amp;&amp; temp_Y&lt;=n &amp;&amp; !visited[temp_X][temp_Y] &amp;&amp; Map_all[temp_X][temp_Y]!=Map_all[temp.x][temp.y])<span class="comment">//当上一次不相等的时候</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//标记访问过</span></span><br><span class="line">                visited[temp_X][temp_Y] = <span class="number">1</span>;<span class="comment">//探索到的变为1</span></span><br><span class="line">                Qt.<span class="built_in">push</span>(<span class="built_in">Point</span>(temp_X,temp_Y,temp.walk+<span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="number">-1</span> &lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">蓝桥杯</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">图的遍历</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/图的遍历-BFS-DFS-蓝桥杯//" class="article-tag-list-link color2">图的遍历,BFS,DFS,蓝桥杯</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1442,6 +1438,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
@@ -1450,7 +1450,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1486,10 +1494,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">历年真题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -1499,6 +1503,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">历年真题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1574,19 +1582,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
               </li>
              
               <li class="article-tag-list-item">

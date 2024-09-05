@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 189
+            总文章数 190
         </nav>
 
 
@@ -166,6 +166,133 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-C语言大梳理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/19/C%E8%AF%AD%E8%A8%80%E5%A4%A7%E6%A2%B3%E7%90%86/">C语言大梳理</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/19/C%E8%AF%AD%E8%A8%80%E5%A4%A7%E6%A2%B3%E7%90%86/" class="archive-article-date">
+  	<time datetime="2021-03-19T05:14:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第二章-计算"><a href="#第二章-计算" class="headerlink" title="第二章 计算"></a>第二章 计算</h2><h4 id="变量的定义"><a href="#变量的定义" class="headerlink" title="变量的定义.     &lt;类型名&gt;&lt;变量的名称&gt;"></a>变量的定义.     &lt;类型名&gt;&lt;变量的名称&gt;</h4><h4 id="变量的名字（所谓的标识符）"><a href="#变量的名字（所谓的标识符）" class="headerlink" title="变量的名字（所谓的标识符）"></a>变量的名字（所谓的标识符）</h4><pre><code> 规则：只能是由字母、数字下划线组成，数字不能出现在第一个位置。
+</code></pre>
+<h4 id="变量的赋值-初始化"><a href="#变量的赋值-初始化" class="headerlink" title="变量的赋值&#x2F;初始化"></a>变量的赋值&#x2F;初始化</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> price = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;请输入金额(元):&quot;</span>);</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;price);</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> change = <span class="number">100</span>-price;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;找您%d元\n&quot;</span>,price);</span><br></pre></td></tr></table></figure>
+
+<p> 其中，int price &#x3D; 0  为初始化</p>
+<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> AMOUNT = <span class="number">100</span>;<span class="comment">//⚠️注意这里</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> price = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;请输入金额(元):&quot;</span>);</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;price);</span><br><span class="line"><span class="type">int</span> change = AMOUNT-price;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;找您%d元\n&quot;</span>,price);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用<strong>const这种修饰符</strong>的好处</p>
+<ul>
+<li>别人看比直接用100更容易理解从英文单词角度</li>
+<li>修改只需要找到该位置 修改一下就行，如果你用100，那么你就得在程序使用到100的地方都修改一次。</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> AMOUNT = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">  AMOUNT = <span class="number">14</span>; <span class="comment">//这里会爆错误❌！！！！！不能修改！！！！</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="使用变量的条件"><a href="#使用变量的条件" class="headerlink" title="使用变量的条件"></a>使用变量的条件</h4><p>如果以上程序那个amount要被用户读入数字而不是固定值，那我们要把它改成变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> amount = <span class="number">100</span>;</span><br><span class="line"><span class="type">int</span> price = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;请输入金额(元):&quot;</span>);</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;price);</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;请票面金额(元):&quot;</span>);</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;amount);</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> change = amount-price;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;找您%d元\n&quot;</span>,price);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>a+b &#x3D; c 的程序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a,b;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;请输入两个整数 &quot;</span>);</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;a,&amp;b);</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d + %d = %d\n&quot;</span>,a,b,a+b);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">( foot + inch /<span class="number">12</span> ) * <span class="number">0.3048</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>显然这里会有失精度！当整数和浮点数一起运算的时候，c语言会把那个<strong>整数转换为浮点数</strong>，然后<strong>进行浮点运算</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">( foot + inch /<span class="number">12.0</span> ) * <span class="number">0.3048</span> <span class="comment">//都变成浮点数，然后再进行计算这样就🉑️！</span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//或者把 foot 和 inch 换成 double</span></span><br><span class="line">  <span class="type">double</span> foot,inch;</span><br><span class="line">scnaf(<span class="string">&quot;%lf %lf&quot;</span>,foot,inch); <span class="comment">//注意这里， %lf⚠️</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="表达式部分"><a href="#表达式部分" class="headerlink" title="表达式部分"></a>表达式部分</h5><p>例子：计算时间差</p>
+<p>输入两个时间(同一天的两个时和分),计算其时间差,输出相差几小时几分钟？</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/yLQMGj"><img src="https://s3.ax1x.com/2021/02/23/yLQMGj.png" alt="yLQMGj.png"></a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> hour1,minute1;<span class="comment">//输入时候用的时间</span></span><br><span class="line"><span class="type">int</span> hour2,minute2;<span class="comment">//输入时候用的时间</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;hour1,&amp;minute1);</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;hour2,&amp;minute2);</span><br><span class="line"></span><br><span class="line"><span class="comment">//先都统一转换成分钟</span></span><br><span class="line"><span class="type">int</span> t1 =hour1*<span class="number">60</span>+minute1;</span><br><span class="line"><span class="type">int</span> t2 =hour2*<span class="number">60</span>+minute2;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> t3=t2 - t1;<span class="comment">//算出的分钟的差值</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d %d&quot;</span>,t3/<span class="number">60</span>,t3%<span class="number">60</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C语言理论部分--全集</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言理论部分//" class="article-tag-list-link color3">C语言理论部分</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/19/C%E8%AF%AD%E8%A8%80%E5%A4%A7%E6%A2%B3%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-栈的详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1065,98 +1192,6 @@ int main(int argc, char const *argv[])
 
 
   
-    <article id="post-堆排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/22/%E5%A0%86%E6%8E%92%E5%BA%8F/">堆排序</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/22/%E5%A0%86%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2021-02-22T12:15:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">( <span class="type">int</span> arr[],<span class="type">int</span> i,<span class="type">int</span> j)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> temp = arr[i];</span><br><span class="line">	arr[i] = arr[j];</span><br><span class="line">	arr[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这个函数只是一部分的交换</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">heaoify</span><span class="params">( <span class="type">int</span> tree[],<span class="type">int</span> n,<span class="type">int</span> i)</span><span class="comment">//i为当前的结点</span></span><br><span class="line">&#123;	</span><br><span class="line">	<span class="comment">//先算出c1和c2的位置</span></span><br><span class="line">	<span class="keyword">if</span> ( i &gt;= n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">			<span class="type">int</span> c1 = <span class="number">2</span>*i+<span class="number">1</span>;</span><br><span class="line">			<span class="type">int</span> c2 = <span class="number">2</span>*i+  <span class="number">2</span>;</span><br><span class="line">			<span class="type">int</span> max = i;<span class="comment">//假设i就是那个最大</span></span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (c1 &lt; n &amp;&amp; tree[c1] &gt; tree[max] )</span><br><span class="line">			&#123;</span><br><span class="line">				max = c1;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> ( c2 &lt; n &amp;&amp; tree[c2] &gt; tree[max] )</span><br><span class="line">			&#123;</span><br><span class="line">				max = c2;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> ( max != i )<span class="comment">//因为i是我们当作的最大值，结果现在i不是了，说明i需要被交换了</span></span><br><span class="line">			&#123;</span><br><span class="line">				swap( tree,max,i);<span class="comment">//max 和 i 进行交换</span></span><br><span class="line">				heaoify(tree,n,max);</span><br><span class="line">			&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这个函数是把那个一个个的部分给拼起来</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">build_heap</span><span class="params">( <span class="type">int</span> tree[] ,<span class="type">int</span> n )</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> last_node = n<span class="number">-1</span>;<span class="comment">//从最后一个节点开始</span></span><br><span class="line">	<span class="type">int</span> parent = (last_node<span class="number">-1</span>)/<span class="number">2</span>;<span class="comment">//计算出那个节点的父节点</span></span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (i = parent; i &gt;= <span class="number">0</span> ; --i)</span><br><span class="line">	&#123;</span><br><span class="line">		heaoify(tree,n,i);<span class="comment">//i随着i不断减少，也就意味着节点在不断的被砍断</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//形成标准的堆之后。不断的在和顶节点交换/砍断！起到排序的作用</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">heap_sort</span><span class="params">( <span class="type">int</span> tree[],<span class="type">int</span> n )</span></span><br><span class="line">&#123;</span><br><span class="line">	build_heap(tree,n);<span class="comment">//首先建立一个堆</span></span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = n<span class="number">-1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">	&#123;</span><br><span class="line">		  swap(tree,i,<span class="number">0</span>);</span><br><span class="line">		  heaoify(tree,i,<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> tree[] = &#123;<span class="number">10</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">4</span>&#125;;</span><br><span class="line">	<span class="type">int</span> n=<span class="number">6</span>;</span><br><span class="line">	</span><br><span class="line">	heap_sort(tree,n);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,tree[i]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/排序算法//" class="article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/22/%E5%A0%86%E6%8E%92%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
@@ -1306,6 +1341,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
@@ -1314,7 +1353,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1350,10 +1397,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">历年真题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -1363,6 +1406,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">历年真题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1438,19 +1485,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
               </li>
              
               <li class="article-tag-list-item">

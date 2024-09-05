@@ -65,7 +65,7 @@
 		</nav>
 
 		<nav>
-            总文章数 189
+            总文章数 190
         </nav>
 
 
@@ -166,6 +166,122 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-黑洞数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/03/%E9%BB%91%E6%B4%9E%E6%95%B0/">黑洞数</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/03/%E9%BB%91%E6%B4%9E%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2021-05-02T16:39:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>实验4-1-12 黑洞数 (20 分)</p>
+<p>黑洞数也称为陷阱数，又称“Kaprekar问题”，是一类具有奇特转换特性的数。</p>
+<p>任何一个各位数字不全相同的三位数，经有限次“重排求差”操作，总会得到495。最后所得的495即为三位黑洞数。所谓“重排求差”操作即组成该数的数字重排后的最大数减去重排后的最小数。（6174为四位黑洞数。）</p>
+<p>例如，对三位数207：</p>
+<ul>
+<li>第1次重排求差得：720 - 27 ＝ 693；</li>
+<li>第2次重排求差得：963 - 369 ＝ 594；</li>
+<li>第3次重排求差得：954 - 459 ＝ 495；</li>
+</ul>
+<p>以后会停留在495这一黑洞数。如果三位数的3个数字全相同，一次转换后即为0。</p>
+<p>任意输入一个三位数，编程给出重排求差的过程。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出一个三位数。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>按照以下格式输出重排求差的过程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">序号: 数字重排后的最大数 - 重排后的最小数 = 差值</span><br></pre></td></tr></table></figure>
+
+<p>序号从1开始，直到495出现在等号右边为止。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1: 321 - 123 = 198</span><br><span class="line">2: 981 - 189 = 792</span><br><span class="line">3: 972 - 279 = 693</span><br><span class="line">4: 963 - 369 = 594</span><br><span class="line">5: 954 - 459 = 495</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> num,cnt = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">  <span class="type">int</span> max,min,a,b,c;</span><br><span class="line">  <span class="comment">//拆分</span></span><br><span class="line">  <span class="keyword">while</span>( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//比大小</span></span><br><span class="line">    a = num/<span class="number">100</span>;</span><br><span class="line">    b = num/<span class="number">10</span>%<span class="number">10</span>;</span><br><span class="line">    c = num%<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">if</span> ( a &lt; b  ) &#123;</span><br><span class="line">       <span class="type">int</span> t = a;</span><br><span class="line">       a = b;</span><br><span class="line">       b = t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( a &lt; c ) &#123;</span><br><span class="line">      <span class="type">int</span> t = a;</span><br><span class="line">      a = c;</span><br><span class="line">      c = t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( b &lt; c ) &#123;</span><br><span class="line">      <span class="type">int</span> t = b;</span><br><span class="line">      b = c;</span><br><span class="line">      c = t;</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">    <span class="comment">// 此时 a最大， b中 ，C最小</span></span><br><span class="line">    max = a*<span class="number">100</span>+b*<span class="number">10</span>+c*<span class="number">1</span>;</span><br><span class="line">    min = c*<span class="number">100</span>+b*<span class="number">10</span>+a*<span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//算差值</span></span><br><span class="line">    num = max - min;</span><br><span class="line">    <span class="comment">//计数器++</span></span><br><span class="line">    cnt++;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d: %d - %d = %d\n&quot;</span>,cnt,max,min,num);</span><br><span class="line">    <span class="comment">//排除特殊情况</span></span><br><span class="line">    <span class="keyword">if</span> ( num == <span class="number">495</span> || num == <span class="number">1</span> ) &#123;<span class="comment">//最后把是 495 和 1 的情况break出去，因为属于特殊情况</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BgbG6R"><img src="https://www.helloimg.com/images/2021/05/03/BgbG6R.png" alt="BgbG6R.png"></a></p>
+<p>用分而治之的思想</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/03/%E9%BB%91%E6%B4%9E%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-球的反弹问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1214,115 +1330,6 @@
 
 
   
-    <article id="post-素数问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/24/%E7%B4%A0%E6%95%B0%E9%97%AE%E9%A2%98/">素数问题</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/24/%E7%B4%A0%E6%95%B0%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2021-04-24T12:20:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="初级—判断一是不是素数"><a href="#初级—判断一是不是素数" class="headerlink" title="初级—判断一是不是素数"></a>初级—判断一是不是素数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n,isPrime;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; n; i++) </span><br><span class="line">    &#123;</span><br><span class="line">      isPrime = <span class="number">1</span>;<span class="comment">//先假设为真，我们验证假 </span></span><br><span class="line">        <span class="keyword">if</span>( n % i == <span class="number">0</span> ) &#123;<span class="comment">//说明不是</span></span><br><span class="line">          isPrime = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">break</span>;<span class="comment">//不是之后要break出去</span></span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> ( isPrime == <span class="number">1</span>) </span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;Yes!!\n&quot;</span>);  </span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>看看能否 从 2 ～  n  是否有数能被你输入的那个数整除<ul>
-<li>假设 条件为真</li>
-<li>如果说 - 能被整除—&gt;说明不是素数 然后 让 条件为假isPrime &#x3D; 0;</li>
-<li>⚠️记得break ！出去，已经发现就不用往后找了</li>
-</ul>
-</li>
-<li>判断条件为真还是假就可<ul>
-<li>如果是真 输出yes</li>
-<li>否则输出 NO</li>
-</ul>
-</li>
-</ul>
-<h3 id="中级编写一个函数-返回是不是素数"><a href="#中级编写一个函数-返回是不是素数" class="headerlink" title="中级编写一个函数 返回是不是素数"></a>中级编写一个函数 返回是不是素数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">prime</span><span class="params">( <span class="type">int</span> m )</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; m; i++) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( m % i == <span class="number">0</span> ) </span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//发现不是立刻返回0</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   &#125;   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//循环结束相当于没找到 ！！！ 返回1 即可</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="高级判断-一定范围内的素数和"><a href="#高级判断-一定范围内的素数和" class="headerlink" title="高级判断 一定范围内的素数和"></a>高级判断 一定范围内的素数和</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">prime</span><span class="params">( <span class="type">int</span> m )</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; m; i++) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( m % i == <span class="number">0</span> ) </span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> m=<span class="number">10</span>,n=<span class="number">1</span>;</span><br><span class="line">  <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = n; i &lt;= m; i++)</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">if</span> ( prime(i) ) <span class="comment">//如果为真返回的就是1 能近if</span></span><br><span class="line">      &#123;<span class="comment">//如果是prime</span></span><br><span class="line">        sum+=i;<span class="comment">//累加</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">	<span class="comment">//最后输出和</span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/24/%E7%B4%A0%E6%95%B0%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
@@ -1472,6 +1479,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
@@ -1480,7 +1491,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1516,10 +1535,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">历年真题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -1529,6 +1544,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">历年真题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1604,19 +1623,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
               </li>
              
               <li class="article-tag-list-item">
