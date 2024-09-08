@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 190
+            总文章数 191
         </nav>
 
 
@@ -172,6 +172,132 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-累加类型的题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/24/%E7%B4%AF%E5%8A%A0%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A2%98/">累加类型的题</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/24/%E7%B4%AF%E5%8A%A0%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2021-03-24T10:15:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="分数类型累加-累乘题型"><a href="#分数类型累加-累乘题型" class="headerlink" title="分数类型累加&#x2F;累乘题型"></a>分数类型累加&#x2F;累乘题型</h2><p><a target="_blank" rel="noopener" href="https://imgtu.com/i/6bbGUf"><img src="https://z3.ax1x.com/2021/03/24/6bbGUf.jpg" alt="6bbGUf.jpg"></a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> Elem = <span class="number">1</span>,sum;</span><br><span class="line">    <span class="type">int</span> sign = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">100</span>;</span><br><span class="line">    <span class="comment">// scanf(&quot;%d&quot;,&amp;n);</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i+=<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Elem = (<span class="number">1.0</span>/i)*sign;</span><br><span class="line">        sum+=Elem;</span><br><span class="line">        sign = -sign;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.6lf\n&quot;</span>,sum*<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/6bj7gU"><img src="https://z3.ax1x.com/2021/03/24/6bj7gU.jpg" alt="6bj7gU.jpg"></a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> a,b;</span><br><span class="line">	<span class="type">int</span> m =<span class="number">1</span> ;</span><br><span class="line">	<span class="comment">// scanf(&quot;%d%d&quot;,&amp;a,&amp;b);</span></span><br><span class="line">	a = <span class="number">3</span>;</span><br><span class="line">	b = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//因为是b个a相乘 所以要循环要走b轮</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; b; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		m*=a;<span class="comment">//⚠️⚠️⚠️⚠️⚠️ 第一次一个a 第二次 a a .....</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,m);	</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>错误示范 m &#x3D; a*a ;   2 </p>
+<p>​                     &#x3D; a a a a  4</p>
+<p>​					 &#x3D; a a  a  a  a a  6   </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/6qPsXV"><img src="https://z3.ax1x.com/2021/03/24/6qPsXV.jpg" alt="6qPsXV.jpg"></a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="type">double</span> Sum = <span class="number">1</span>;</span><br><span class="line">	<span class="type">double</span> Fm;</span><br><span class="line">	<span class="type">int</span> n = <span class="number">6</span>;</span><br><span class="line">	<span class="comment">// scanf(&quot;%d&quot;,&amp;n);</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> Fm = <span class="number">1</span>;	<span class="comment">//每一轮都要从一开始到那个数字</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">2</span>*n<span class="number">-1</span>; ++j)<span class="comment">//每一轮都从1 到 外层的那个i</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//构造那个分母</span></span><br><span class="line">			Fm = Fm * j;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		Sum += <span class="number">1.0</span>/Fm;<span class="comment">//每一轮都把整个分数加到总和里面去。</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%lf\n&quot;</span>,Sum);	</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/24/%E7%B4%AF%E5%8A%A0%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-C语言大梳理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1106,101 +1232,9 @@ int main(int argc, char const *argv[])
 
 
   
-    <article id="post-大话-归并排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/22/%E5%A4%A7%E8%AF%9D-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">大话--归并排序</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/22/%E5%A4%A7%E8%AF%9D-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2021-02-22T12:19:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  main.c</span></span><br><span class="line"><span class="comment">//  归并大话</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Bing on 2021/2/22.</span></span><br><span class="line"><span class="comment">//  Copyright © 2021 Bing. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TRUE 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FALSE 0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_LENGTH_INSERT_SORT 7 <span class="comment">/* 用于快速排序时判断是否选用插入排序阙值 */</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Status;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSIZE 10000  <span class="comment">/* 用于要排序数组个数最大值，可根据需要修改 */</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> r[MAXSIZE+<span class="number">1</span>];    <span class="comment">/* 用于存储要排序数组，r[0]用作哨兵或临时变量 */</span></span><br><span class="line">    <span class="type">int</span> length;            <span class="comment">/* 用于记录顺序表的长度 */</span></span><br><span class="line">&#125;SqList;</span><br><span class="line"><span class="comment">/* 交换L中数组r的下标为i和j的值 */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(SqList *L,<span class="type">int</span> i,<span class="type">int</span> j)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> temp=L-&gt;r[i];</span><br><span class="line">    L-&gt;r[i]=L-&gt;r[j];</span><br><span class="line">    L-&gt;r[j]=temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(SqList L)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;L.length;i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d,&quot;</span>,L.r[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,L.r[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">                       </span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Merge</span><span class="params">( <span class="type">int</span> SR[],<span class="type">int</span> TR[],<span class="type">int</span> i,<span class="type">int</span> m,<span class="type">int</span> n)</span><span class="comment">//目的就是SR最终到TR中</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> j,k,l;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (j=m+<span class="number">1</span>,k=i; i &lt;= m &amp;&amp; j&lt;=n; ++k) <span class="comment">//最终要k++</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( SR[i] &lt; SR[j] )<span class="comment">//左边如果小于右边的数组</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//如果小就放到新的数组</span></span><br><span class="line">            TR[k] = SR[i++];<span class="comment">//赋值完了在++</span></span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            TR[k] = SR[j++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="comment">//如果那个数组已经跑完了，直接把剩下的数组复制进去就行</span></span><br><span class="line">        <span class="keyword">if</span> ( i&lt;=m )<span class="comment">//左边的那个还小于中间数</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (l = <span class="number">0</span>; l &lt;= m-i; ++l)<span class="comment">//0到剩下多长m（m-i）那么长（也就是剩下那么长）</span></span><br><span class="line">            &#123;</span><br><span class="line">                TR[k+l] = SR[i+l];<span class="comment">//因为L不是从0到m-i吗，然后i就是当前i所在在的位置，逐渐加从0-1-2.。。一直往上加</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( j&lt;=n )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (l = <span class="number">0</span>; l &lt;= n-j; ++l)</span><br><span class="line">            &#123;</span><br><span class="line">                TR[k+l]=SR[j+l];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">Msort</span><span class="params">( <span class="type">int</span> SR[],<span class="type">int</span> TR1[],<span class="type">int</span> L,<span class="type">int</span> R )</span><span class="comment">//最开始从1开始。L代表左边，R代表右边。</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> m;</span><br><span class="line">    <span class="type">int</span> TR2[MAXSIZE+<span class="number">1</span>];<span class="comment">//第一回这里是空的</span></span><br><span class="line">    <span class="keyword">if</span> ( L==R )<span class="comment">//说明只有一个了</span></span><br><span class="line">    &#123;</span><br><span class="line">        TR1[L] = SR[L];<span class="comment">//当左边只剩下一个的时候暂停</span></span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        m = (L + R)/<span class="number">2</span>;<span class="comment">//每次都取中间的那个值。</span></span><br><span class="line">        Msort( SR,TR2,L,m);<span class="comment">//先左边到中间</span></span><br><span class="line">        Msort( SR,TR2,m+<span class="number">1</span>,R);<span class="comment">//中间到右边</span></span><br><span class="line"></span><br><span class="line">        Merge(TR2,TR1,L,m,R);<span class="comment">//从TR2到TR1  汇总</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">MergeSort</span><span class="params">( SqList *L)</span></span><br><span class="line">&#123;</span><br><span class="line">    Msort(L-&gt;r,L-&gt;r,<span class="number">1</span>,L-&gt;length);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 9</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/* int d[N]=&#123;9,1,5,8,3,7,4,6,2&#125;; */</span></span><br><span class="line"><span class="comment">//   int d[N]=&#123;50,10,90,30,70,40,80,60,20&#125;;</span></span><br><span class="line">      <span class="type">int</span> d[N]=&#123;<span class="number">30</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">60</span>,<span class="number">70</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>&#125;;</span><br><span class="line">   <span class="comment">/* int d[N]=&#123;9,8,7,6,5,4,3,2,1&#125;; */</span></span><br><span class="line"></span><br><span class="line">   SqList l0,l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;N;i++)</span><br><span class="line">     l0.r[i+<span class="number">1</span>]=d[i];</span><br><span class="line">   l0.length=N;</span><br><span class="line">   l1=l2=l3=l4=l5=l6=l7=l8=l9=l10=l11=l0;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;排序前:\n&quot;</span>);</span><br><span class="line">   print(l7);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;归并排序（递归）:\n&quot;</span>);</span><br><span class="line">   MergeSort(&amp;l1);</span><br><span class="line">   print(l1);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/排序算法//" class="article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/22/%E5%A4%A7%E8%AF%9D-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1343,11 +1377,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1360,14 +1402,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1391,15 +1425,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1423,6 +1457,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
@@ -1431,11 +1469,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1448,10 +1486,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1491,11 +1525,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
+                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
               </li>
              
               <li class="article-tag-list-item">
