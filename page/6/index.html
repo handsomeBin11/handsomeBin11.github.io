@@ -288,105 +288,6 @@
 
 
   
-    <article id="post-kmp算法解析(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/28/kmp%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90(1)/">kmp算法解析</a>
-    </h1>
-  
-
-        
-        <a href="/2021/11/28/kmp%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90(1)/" class="archive-article-date">
-  	<time datetime="2021-11-28T02:38:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>上一篇已经解释了next数组如何求解以及原理，我们来看看如何进行主串和子串字符串的匹配。</p>
-<h3 id="图形解释"><a href="#图形解释" class="headerlink" title="图形解释"></a>图形解释</h3><p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GFQ6DX"><img src="https://www.helloimg.com/images/2021/11/28/GFQ6DX.jpg" alt="GFQ6DX.jpg"></a></p>
-<p>根据上图⬆️ next数组已经求出来（红色部分下标），当 i 和 j 所处的位置发现不匹配的时候，我们只需要根据<strong>next数组标记的3</strong> 把T串向右移动到<strong>数组下标为3</strong> 的位置上去。如下图⬇️这样</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GFQY9R"><img src="https://www.helloimg.com/images/2021/11/28/GFQY9R.jpg" alt="GFQY9R.jpg"></a></p>
-<p>然后根据i 、j 所指的位置继续向后比较。</p>
-<h3 id="思路🤔"><a href="#思路🤔" class="headerlink" title="思路🤔"></a>思路🤔</h3><p>那我们就可以写出大体的思路，如果i j 当前所指的元素相等，那就i++ j++ ，如果走到不配的位置上就将j的值根据next[j] 的位置进行回溯。也就是根据next[j] 映射到 T串的数组对应的下标去。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Index_KMP</span><span class="params">(String S, String T, <span class="type">int</span> pos)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = pos;<span class="comment">//从pos位置开始</span></span><br><span class="line">    j = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> next[<span class="number">255</span>];<span class="comment">//定义个next数组</span></span><br><span class="line">    get_next(T,next);<span class="comment">//把准备的T扔进去做next数组的分析</span></span><br><span class="line">    <span class="keyword">while</span>( j &lt;= T[<span class="number">0</span>]&amp;&amp; i &lt;= S[<span class="number">0</span>] )<span class="comment">//当i 和 j 没走到最大位置的时候，这里是从1开始算所以&lt;=</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( j==<span class="number">0</span> || T[j] == S[i] ) <span class="comment">// 如果是j回溯到0 和 i ，j 所指的元素相等</span></span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            j = next[j];<span class="comment">//回溯到下标为j的位置上</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//这里是要返回第几个位置相同</span></span><br><span class="line">    <span class="keyword">if</span> ( j &gt; T[<span class="number">0</span>] ) <span class="comment">//j超出了子串的长度</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> i-T[<span class="number">0</span>]; <span class="comment">// i-T[0] 恰好就是匹配的开始位置</span></span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GFDoEP"><img src="https://www.helloimg.com/images/2021/11/28/GFDoEP.jpg" alt="GFDoEP.jpg"></a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/28/kmp%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-kmp算法解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -456,6 +357,105 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/28/kmp%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kmp算法解析(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/28/kmp%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90(1)/">kmp算法解析</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/28/kmp%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90(1)/" class="archive-article-date">
+  	<time datetime="2021-11-28T02:38:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>上一篇已经解释了next数组如何求解以及原理，我们来看看如何进行主串和子串字符串的匹配。</p>
+<h3 id="图形解释"><a href="#图形解释" class="headerlink" title="图形解释"></a>图形解释</h3><p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GFQ6DX"><img src="https://www.helloimg.com/images/2021/11/28/GFQ6DX.jpg" alt="GFQ6DX.jpg"></a></p>
+<p>根据上图⬆️ next数组已经求出来（红色部分下标），当 i 和 j 所处的位置发现不匹配的时候，我们只需要根据<strong>next数组标记的3</strong> 把T串向右移动到<strong>数组下标为3</strong> 的位置上去。如下图⬇️这样</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GFQY9R"><img src="https://www.helloimg.com/images/2021/11/28/GFQY9R.jpg" alt="GFQY9R.jpg"></a></p>
+<p>然后根据i 、j 所指的位置继续向后比较。</p>
+<h3 id="思路🤔"><a href="#思路🤔" class="headerlink" title="思路🤔"></a>思路🤔</h3><p>那我们就可以写出大体的思路，如果i j 当前所指的元素相等，那就i++ j++ ，如果走到不配的位置上就将j的值根据next[j] 的位置进行回溯。也就是根据next[j] 映射到 T串的数组对应的下标去。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Index_KMP</span><span class="params">(String S, String T, <span class="type">int</span> pos)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = pos;<span class="comment">//从pos位置开始</span></span><br><span class="line">    j = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> next[<span class="number">255</span>];<span class="comment">//定义个next数组</span></span><br><span class="line">    get_next(T,next);<span class="comment">//把准备的T扔进去做next数组的分析</span></span><br><span class="line">    <span class="keyword">while</span>( j &lt;= T[<span class="number">0</span>]&amp;&amp; i &lt;= S[<span class="number">0</span>] )<span class="comment">//当i 和 j 没走到最大位置的时候，这里是从1开始算所以&lt;=</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( j==<span class="number">0</span> || T[j] == S[i] ) <span class="comment">// 如果是j回溯到0 和 i ，j 所指的元素相等</span></span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            j = next[j];<span class="comment">//回溯到下标为j的位置上</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//这里是要返回第几个位置相同</span></span><br><span class="line">    <span class="keyword">if</span> ( j &gt; T[<span class="number">0</span>] ) <span class="comment">//j超出了子串的长度</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> i-T[<span class="number">0</span>]; <span class="comment">// i-T[0] 恰好就是匹配的开始位置</span></span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GFDoEP"><img src="https://www.helloimg.com/images/2021/11/28/GFDoEP.jpg" alt="GFDoEP.jpg"></a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/28/kmp%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90(1)/">展开全文 >></a>
         </p>
       
 
@@ -1516,10 +1516,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
@@ -1529,6 +1525,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1584,15 +1584,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
