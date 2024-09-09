@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 191
+            总文章数 192
         </nav>
 
 
@@ -172,6 +172,184 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-路线规划微服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/09/09/%E8%B7%AF%E7%BA%BF%E8%A7%84%E5%88%92%E5%BE%AE%E6%9C%8D%E5%8A%A1/">路线规划微服务</a>
+    </h1>
+  
+
+        
+        <a href="/2024/09/09/%E8%B7%AF%E7%BA%BF%E8%A7%84%E5%88%92%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="archive-article-date">
+  	<time datetime="2024-09-09T02:10:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="如何让快递网点存到neo4j-里？"><a href="#如何让快递网点存到neo4j-里？" class="headerlink" title="如何让快递网点存到neo4j 里？"></a>如何让快递网点存到neo4j 里？</h1><p>根据权限管家用MQ同步存的。存入的代码实现思路如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 对于权限管家系统消息的处理</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AuthMQListener</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 监听权限管家中机构的变更消息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> msg</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RabbitListener(bindings = @QueueBinding(//设置绑定关系</span></span><br><span class="line"><span class="meta">            value = @Queue(name = Constants.MQ.Queues.AUTH_TRANSPORT),</span></span><br><span class="line"><span class="meta">            exchange = @Exchange(name = &quot;$&#123;rabbitmq.exchange&#125;&quot;, type = ExchangeTypes.TOPIC),</span></span><br><span class="line"><span class="meta">            key = &quot;#&quot;</span></span><br><span class="line"><span class="meta">    ))</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listenAgencyMsg</span><span class="params">(String msg)</span> &#123;</span><br><span class="line">        <span class="comment">//&#123;&quot;type&quot;:&quot;ORG&quot;,&quot;operation&quot;:&quot;ADD&quot;,</span></span><br><span class="line">        <span class="comment">// &quot;content&quot;:[&#123;&quot;id&quot;:&quot;977263044792942657&quot;,&quot;name&quot;:&quot;55&quot;,</span></span><br><span class="line">        <span class="comment">// &quot;parentId&quot;:&quot;0&quot;,&quot;managerId&quot;:null,&quot;status&quot;:true&#125;]&#125;</span></span><br><span class="line">        log.info(<span class="string">&quot;接收到消息 -&gt; &#123;&#125;&quot;</span>, msg);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1、字符串转为json对象</span></span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">jsonObject</span> <span class="operator">=</span> JSONUtil.parseObj(msg);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、获取type  看type 是否等于 ORG</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">type</span> <span class="operator">=</span> jsonObject.getStr(<span class="string">&quot;type&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!StrUtil.equalsIgnoreCase(type,<span class="string">&quot;ORG&quot;</span>))&#123;<span class="comment">//比较的时候忽略大小写</span></span><br><span class="line">            log.warn(<span class="string">&quot;接受到权限非机构的消息，无需处理: --&gt; &#123;&#125;&quot;</span>,msg);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果能到这，说明能往下走</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、获取operation的值</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">operation</span> <span class="operator">=</span> jsonObject.getStr(<span class="string">&quot;operation&quot;</span>);</span><br><span class="line">        <span class="comment">//4、获取content内容 ，， 拿到的是json 数组</span></span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">content</span> <span class="operator">=</span> (JSONObject)jsonObject.getJSONArray(<span class="string">&quot;content&quot;</span>).get(<span class="number">0</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> content.getStr(<span class="string">&quot;name&quot;</span>);<span class="comment">//得到机构名称</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">parentId</span> <span class="operator">=</span> content.getLong(<span class="string">&quot;parentId&quot;</span>);<span class="comment">//得到父ID的值</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//5、定义变量Iservice，BaseEntity</span></span><br><span class="line">        IService iService;</span><br><span class="line">        BaseEntity baseEntity;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//开始判断</span></span><br><span class="line">        <span class="keyword">if</span> (StrUtil.endWith(name,<span class="string">&quot;转运中心&quot;</span>))&#123;</span><br><span class="line">            <span class="comment">//如果是转运中心， iService就得是转运中心的实现</span></span><br><span class="line">            iService = OrganServiceFactory.getBean(OrganTypeEnum.OLT.getCode());</span><br><span class="line">            baseEntity = <span class="keyword">new</span> <span class="title class_">OLTEntity</span>();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (StrUtil.endWith(name,<span class="string">&quot;分拣中心&quot;</span>)) &#123;</span><br><span class="line">            iService = OrganServiceFactory.getBean(OrganTypeEnum.TLT.getCode());</span><br><span class="line">            baseEntity = <span class="keyword">new</span> <span class="title class_">TLTEntity</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (StrUtil.endWith(name,<span class="string">&quot;营业部&quot;</span>)) &#123;</span><br><span class="line">            iService = OrganServiceFactory.getBean(OrganTypeEnum.AGENCY.getCode());</span><br><span class="line">            baseEntity = <span class="keyword">new</span> <span class="title class_">AgencyEntity</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        baseEntity.setParentId(parentId);</span><br><span class="line">        baseEntity.setName(name);</span><br><span class="line">        baseEntity.setBid(content.getLong(<span class="string">&quot;id&quot;</span>));</span><br><span class="line">        baseEntity.setStatus(content.getBool(<span class="string">&quot;status&quot;</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//增删改方法</span></span><br><span class="line">        <span class="keyword">switch</span> (operation)&#123;</span><br><span class="line">            <span class="keyword">case</span>  <span class="string">&quot;ADD&quot;</span>:</span><br><span class="line">                iService.create(baseEntity);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;UPDATE&quot;</span>:</span><br><span class="line">                iService.update(baseEntity);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;DEL&quot;</span>:</span><br><span class="line">                iService.deleteByBid(baseEntity.getBid());</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>实现效果</p>
+</blockquote>
+<img src="https://pic.imgdb.cn/item/66da0157d9c307b7e9564afc.jpg" style="zoom:200%;" />
+
+
+
+<h2 id="机构管理"><a href="#机构管理" class="headerlink" title="机构管理"></a>机构管理</h2><h3 id="在后台系统中机构数据通过树形结构展示"><a href="#在后台系统中机构数据通过树形结构展示" class="headerlink" title="在后台系统中机构数据通过树形结构展示"></a>在后台系统中机构数据通过树形结构展示</h3><p><img src="https://pic.imgdb.cn/item/66da0240d9c307b7e9592ee8.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">findAllTree</span><span class="params">()</span> &#123;</span><br><span class="line"><span class="comment">//        //1、查询所有的机构信息</span></span><br><span class="line">        List&lt;OrganDTO&gt; organDTOList = <span class="built_in">this</span>.findAll(<span class="literal">null</span>);<span class="comment">//名称不用传</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、使用hutool TreeUtil 构建树节点  拿到树的集合</span></span><br><span class="line">        List&lt;Tree&lt;Long&gt;&gt; treeList = TreeUtil.build(organDTOList, <span class="number">0L</span>,</span><br><span class="line">                (organDTO, tree) -&gt; &#123;</span><br><span class="line">                    tree.setId(organDTO.getId());</span><br><span class="line">                    tree.setParentId(organDTO.getParentId());</span><br><span class="line">                    tree.putAll(BeanUtil.beanToMap(organDTO));</span><br><span class="line">                    tree.remove(<span class="string">&quot;bid&quot;</span>);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、将tree的数据 转为json 字符串</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.objectMapper.writeValueAsString(treeList);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (JsonProcessingException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(ExceptionEnum.ORGAN_TYPE_ERROR);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="路线管理"><a href="#路线管理" class="headerlink" title="路线管理"></a>路线管理</h2><img src="https://pic.imgdb.cn/item/66dab41fd9c307b7e91696f0.png" style="width: 9800px;" />
+
+
+
+<ul>
+<li><strong>干线</strong><ul>
+<li>一级转运中心到一级转运中心</li>
+</ul>
+</li>
+<li><strong>支线</strong><ul>
+<li>一级转运中心与二级转运中心之间线路</li>
+</ul>
+</li>
+<li><strong>接驳路线</strong><ul>
+<li>二级转运中心到网点</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>新增路线业务规则：</strong></p>
+<p>干线：起点终点无顺序，                如 ： 转运中心 –&gt; 转运中心</p>
+<p>支线：起点必须是二级转运中心， 如： 分拣中心 –&gt; 转运中心</p>
+<p>接驳路线：起点必须是网点             如： 营业网点 —&gt; 分拣中心</p>
+</blockquote>
+<h3 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h3><p><img src="https://pic.imgdb.cn/item/66dabb67d9c307b7e9241862.jpg"></p>
+<h4 id="新增路线业务规则：干线：起点终点无顺序，支线：起点必须是二级转运中心，接驳路线：起点必须是网点"><a href="#新增路线业务规则：干线：起点终点无顺序，支线：起点必须是二级转运中心，接驳路线：起点必须是网点" class="headerlink" title="新增路线业务规则：干线：起点终点无顺序，支线：起点必须是二级转运中心，接驳路线：起点必须是网点"></a><em>新增路线业务规则：干线：起点终点无顺序，支线：起点必须是二级转运中心，接驳路线：起点必须是网点</em></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Boolean <span class="title function_">createLine</span><span class="params">(TransportLine transportLine)</span> &#123;</span><br><span class="line">        <span class="comment">//传进来的类型先转成枚举类型</span></span><br><span class="line">        <span class="comment">//1、根据type 得到枚举类型,线路的类型</span></span><br><span class="line">        <span class="type">TransportLineEnum</span> <span class="variable">transportLineEnum</span> <span class="operator">=</span> TransportLineEnum.codeOf(transportLine.getType());</span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.isEmpty(transportLineEnum))&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(ExceptionEnum.TRANSPORT_LINE_TYPE_ERROR);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//起点和终点不能以一样</span></span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.equal(transportLine.getStartOrganId(),transportLine.getEndOrganId())) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(ExceptionEnum.START_END_ORGAN_NOT_FOUND);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、定义 起点和终点实体对象</span></span><br><span class="line">        BaseEntity firstNode;</span><br><span class="line">        BaseEntity secondNode;</span><br><span class="line">        <span class="keyword">switch</span> (transportLineEnum)&#123;</span><br><span class="line">            <span class="keyword">case</span> TRUNK_LINE:</span><br><span class="line">                firstNode = OLTEntity.builder().bid(transportLine.getStartOrganId()).build();</span><br><span class="line">                secondNode = OLTEntity.builder().bid(transportLine.getEndOrganId()).build();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> BRANCH_LINE:</span><br><span class="line">                firstNode = TLTEntity.builder().bid(transportLine.getStartOrganId()).build();</span><br><span class="line">                secondNode = OLTEntity.builder().bid(transportLine.getEndOrganId()).build();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CONNECT_LINE:</span><br><span class="line">                firstNode = AgencyEntity.builder().bid(transportLine.getStartOrganId()).build();</span><br><span class="line">                secondNode = TLTEntity.builder().bid(transportLine.getEndOrganId()).build();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(ExceptionEnum.TRANSPORT_LINE_NOT_FOUND);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过地图查询距离、时间，计算成本"><a href="#通过地图查询距离、时间，计算成本" class="headerlink" title="通过地图查询距离、时间，计算成本"></a><em>通过地图查询距离、时间，计算成本</em></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">infoFromMap</span><span class="params">(BaseEntity firstNode, BaseEntity secondNode, TransportLine transportLine)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据起点ID 查询起点网点OrganDTO</span></span><br><span class="line">        <span class="type">OrganDTO</span> <span class="variable">startOrgan</span> <span class="operator">=</span> <span class="built_in">this</span>.organService.findByBid(firstNode.getBid());</span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.hasEmpty(startOrgan,startOrgan.getLongitude(),startOrgan.getLatitude()))&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(<span class="string">&quot;请完善机构信息&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、 根据终点ID 查询终点网点OrganDTO</span></span><br><span class="line">        <span class="type">OrganDTO</span> <span class="variable">endOrgan</span> <span class="operator">=</span> <span class="built_in">this</span>.organService.findByBid(secondNode.getBid());</span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.hasEmpty(endOrgan,endOrgan.getLongitude(),endOrgan.getLatitude()))&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(<span class="string">&quot;请完善机构信息&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、 查询起点到终点的驾驶路线</span></span><br><span class="line">        <span class="type">Coordinate</span> <span class="variable">origin</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Coordinate</span>(startOrgan.getLongitude(), startOrgan.getLatitude());</span><br><span class="line">        <span class="type">Coordinate</span> <span class="variable">destination</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Coordinate</span>(endOrgan.getLongitude(), startOrgan.getLatitude());</span><br><span class="line">        Map&lt;String, Object&gt; param = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">driving</span> <span class="operator">=</span> <span class="built_in">this</span>.eagleMapTemplate.opsForDirection().driving(ProviderEnum.AMAP, origin, destination, param);</span><br><span class="line">        <span class="keyword">if</span> (StrUtil.isEmpty(driving)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">jsonObject</span> <span class="operator">=</span> JSONUtil.parseObj(driving);</span><br><span class="line">        <span class="comment">//时间，单位：秒</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">duration</span> <span class="operator">=</span> Convert.toLong(jsonObject.getByPath(<span class="string">&quot;route.paths[0].cost.duration&quot;</span>), -<span class="number">1L</span>);</span><br><span class="line">        transportLine.setTime(duration);</span><br><span class="line">        <span class="comment">//距离，单位：米</span></span><br><span class="line">        <span class="type">Double</span> <span class="variable">distance</span> <span class="operator">=</span> Convert.toDouble(jsonObject.getByPath(<span class="string">&quot;route.paths[0].distance&quot;</span>), -<span class="number">1d</span>);</span><br><span class="line">        transportLine.setDistance(distance);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//成本，这里按照高德地图的预计打车费用作为成本计算，同一标准在计算路线时是可行的，但是不能作为真实的成本进行利润计算</span></span><br><span class="line">        <span class="type">Double</span> <span class="variable">cost</span> <span class="operator">=</span> Convert.toDouble(jsonObject.getByPath(<span class="string">&quot;route.taxi_cost&quot;</span>), -<span class="number">1d</span>);</span><br><span class="line">        transportLine.setCost(cost);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">微服务</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JAVAWEB</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JAVAWEB-微服务//" class="article-tag-list-link color2">JAVAWEB,微服务</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/09/09/%E8%B7%AF%E7%BA%BF%E8%A7%84%E5%88%92%E5%BE%AE%E6%9C%8D%E5%8A%A1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="readbook-读-打开心智" class="article article-type-readbook  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1090,137 +1268,6 @@
 
 
   
-    <article id="post-编码，隐匿在计算机背后的语言详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3/">编码，隐匿在计算机背后的语言详解</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2023-07-07T04:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-一切都应该从电说起"><a href="#1-一切都应该从电说起" class="headerlink" title="1.一切都应该从电说起"></a>1.一切都应该从电说起</h1><p>  关于电仍然存在着许多未解之谜。如果我们把一个💡灯泡和电池🔋还有一根导线连成一个闭合回路，我们称为<strong>电路</strong> 。</p>
-<p>如果我们把世界上所有的物体无限缩小，可以看到其实是由原子（atom）构成的<em>ps: 当然还可以继续分下去这里我就不继续追溯下去了</em>   原子的结构包括为：质子，中子，电子。如下图所示，</p>
-<p><img src="https://i2.mjj.rip/2023/07/06/450dd402dd4c982ec42f583a410a05bf.jpeg" alt="450dd402dd4c982ec42f583a410a05bf.jpeg"></p>
-<p>质子<strong>带正电</strong> 中子<strong>不带电</strong>都是处在中心的区域<em>（像是银河系中的太阳一样）</em> ，而带电的是核外的<strong>电子</strong>。像是绕太阳运行的行星。</p>
-<p>尽管质子和电子通常用+，- 号表示，但不表示任何的数学含义，只表示某种特殊的关系。通常状况下它们表现为稳定状态。当你从地毯走过的时候，地毯偷偷从你的写上偷走电子，在你接触物体的那一瞬间产生静电火花🔥！在产生一瞬间之后，趋于平衡状态……。在这个过程中是一个<strong>回路</strong>，电子从你的地毯—&gt;身体—&gt; 鞋子。这种现象不仅仅存在于静电中，在风暴中，底层云积聚了大量的电子，而顶层的失去了大量的电子，然而一到闪电过后，一切趋于平衡….</p>
-<p>在电路中，当某个原子中的电子逃逸到下一个原子中，于此同时，该原子又从上一个原子中得到一个电子，而失去电子的原子又从上一个原子获取电子，如此循环，<strong>电流其实是电子不断从一个原子移动到另一个原子的过程</strong>。</p>
-<p>这一切肯定不是自发的，当你把一堆材料堆在一起一定不会产生电流。显然需要一个”驱动器”，那就是<strong>电池</strong>，电池会促进电路中电子的流动，从而产生电流。</p>
-<p><img src="https://i2.mjj.rip/2023/07/06/bcc90e4606dd1f566a11e3e07430ccbf.jpeg" alt="bcc90e4606dd1f566a11e3e07430ccbf.jpeg"></p>
-<p>如图，环形电路中，红色表示电流。两个电池，没个电池为1.5v。注意，电池的摆放必须是正负极对接。原因是负极的电子要流向正极产生电流。然而，两个1.5v 串联结果是3v。</p>
-<p>判断物体是否容易放电其实是看核外电子是否容易被<strong>失去</strong>，也就看是不是<strong>稳定</strong>。比如我们经常用的铜作为导线，是因为铜核外只有一个电子，容易失去电子，也即是容易逃逸！判断是否为导体就是看是否容易逃逸电子。 相反，导电相反是阻抗性，就是一些物质容易让电子通过，称为阻抗性。绝缘体就是这么来的。但是，大力出奇迹 : <em>其实只要电流足够大任何物体都可以导电</em> 。</p>
-<p>铜的阻抗性就比较低，但铜线越长阻抗性会越高。如果铜线越粗，阻抗性会越低，也就是可以流过的电子数量会越高。（类比水管） 电流就相当于水管中水的流速，水压相当于电压，水管的粗细程度代表电阻。</p>
-<p>电压： 比如一块1.5v的电池，说明电压是1.5v。<strong>电压表示了电流做功的势</strong>，也就是电势能的大小。就算不用这块电池，它的电势能依旧<strong>在那</strong>。势能好比是你拿一块砖在平地上，此时的势能几乎为0。但如果你把它拿到18层楼高的地方（但你别真的做！），此时的势能绝对挺大，<em>就算你什么也不做它的势能依旧在那里</em>。如果你想知道势能到底是多大，你得把它从18层释放下来…..</p>
-<p>​                    													<strong>欧姆定律：  I &#x3D; E&#x2F;R</strong></p>
-<p>在电学中，如果知道电势能和电阻，就可以算出电流的大小。</p>
-<p><strong><img src="https://i2.mjj.rip/2023/07/07/54795f082535408f014735fbbb27140b.jpeg" alt="54795f082535408f014735fbbb27140b.jpeg"></strong></p>
-<p>既然在天空中会打雷，那么空气也是一种导体。把电池放到空气中应该也会有从正负极有电流产生。但是！！根据公式可以看出：</p>
-<ul>
-<li>当放在空气中虽然知道电势是1.5v ，但空气中电阻是非常非常大的。故是  <strong>一个数&#x2F;∞ &#x3D; 0</strong>   ，最后算出电流是趋近于0。</li>
-<li>当单独连个导线，想必初中的时候讲过，会出现短路现象。原因是当电势能1.5的时候，正负极连着一根导线，单独的一根导线导致电阻值非常的小。所以是，一个数&#x2F;趋紧于0的数 &#x3D; ∞  电流无穷大！！ 意味着导线可能电流过大，导致整个导线变热甚至会烧红（<em>甚至融化</em>），会把电能转换为热能。</li>
-</ul>
-<p>大部分电路其实是介于这二者之间的，要么阻值大一点，要么小一点。当阻值小的时候，电路会发热，甚至燃烧。💡灯其实是利用了这个原理，只不过是在真空中然后，灯丝其实会发热然后燃烧。</p>
-<p>以上其实不是最主要的，开关才是最想说的。开关表示了电路的 通&#x2F;闭。其实对应了二进制的 0 &#x2F;1 。      </p>
-<h1 id="2-绕过拐角的通信"><a href="#2-绕过拐角的通信" class="headerlink" title="2.绕过拐角的通信"></a>2.绕过拐角的通信</h1><p>代入一个情景，你跟你的邻居好友在被妈妈没收手机后想在夜晚睡不着的时候进行交流。 但是，可是你们的窗户是错位的，也就是不能看到对方的窗户。所以不能用手电开关及其用摩斯码通过 <em>点和划</em> 来解读对方的话语。</p>
-<p>怎么办？</p>
-<p>已经通过之前的电路知识，给对方搭建一套“电报”系统。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/15f345afb516e32a194272bcddd7eab5.jpeg" alt="15f345afb516e32a194272bcddd7eab5.jpeg"></p>
-<p>但这个只是单向传递，你只能让对方看见，如果你想双向传递，你得再加一套通往你家的。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/68ff0ef0c3d41c1e1224193149348b29.jpeg" alt="68ff0ef0c3d41c1e1224193149348b29.jpeg"></p>
-<p>🤔如果再想想，其实可以省点线路“钱”，比如像这样，中间蓝色部分用<strong>公共线</strong>。如果你朋友那边闭合开关，通过图中的箭头的方向可以形成一个闭合回路会点亮你家里的灯泡💡。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/3d7bae25e5b0cf644a529544e6e13869.jpeg" alt="3d7bae25e5b0cf644a529544e6e13869.jpeg"></p>
-<p>如果你们俩都闭合开关那么灯泡其实是不亮的。原因是在公共线路中有两个方向相反的电流。两端都没有办法形成闭合回路。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/9516f93d848d18fe012801a8418e243d.jpeg" alt="9516f93d848d18fe012801a8418e243d.jpeg"></p>
-<hr>
-<p>如果我们铺设的线路足够长，对应的电阻也会无限大。这显然不符合经济性。</p>
-<p>其实还可以继续简化公用线！减少用线成本。我们知道一个理论，<strong>导体的截面越大，导电性就越好</strong>。我们这恰好有一个大球，直径大约7900英里，那就是地球呀🌍。地球是个很好的导体，如果你使用地球作为“<strong>导线</strong>”，那你的电压可不能只是两节干电池了，你需要大点的电压。然后插根铜柱子根地面有足够的接触面积。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/cd82cc25b2fe872ac42c02b6e6d03179.jpeg" alt="cd82cc25b2fe872ac42c02b6e6d03179.jpeg"></p>
-<p>由于不能使用干电池了，现在把电池那块抽象成一个符号方便后续的描述。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/e7a30c5be1924f7859c173bcb30c4af5.jpeg" alt="e7a30c5be1924f7859c173bcb30c4af5.jpeg"></p>
-<p>把V可以想象成一台能抽电子的吸尘器，整个地球🌍其实是一个<em>电子的海洋</em>，有无穷无尽的电子可以使用。</p>
-<p>那可以把上面的电报系统简化成现在这种样子。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/683164b5581c8d4fc977af0c6c1530ff.jpeg" alt="683164b5581c8d4fc977af0c6c1530ff.jpeg"></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">书籍</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/书籍//" class="article-tag-list-link color3">书籍</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-编码，隐匿在计算机背后的语言详解(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1352,7 +1399,7 @@
 
 
   
-    <article id="post-利用栈实现括号的匹配(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-编码，隐匿在计算机背后的语言详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -1364,19 +1411,60 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/04/%E5%88%A9%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E6%8B%AC%E5%8F%B7%E7%9A%84%E5%8C%B9%E9%85%8D(1)/">利用栈实现括号的匹配</a>
+      <a class="article-title" href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3/">编码，隐匿在计算机背后的语言详解</a>
     </h1>
   
 
         
-        <a href="/2022/10/04/%E5%88%A9%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E6%8B%AC%E5%8F%B7%E7%9A%84%E5%8C%B9%E9%85%8D(1)/" class="archive-article-date">
-  	<time datetime="2022-10-04T02:46:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-04</time>
+        <a href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2023-07-07T04:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
+        <h1 id="1-一切都应该从电说起"><a href="#1-一切都应该从电说起" class="headerlink" title="1.一切都应该从电说起"></a>1.一切都应该从电说起</h1><p>  关于电仍然存在着许多未解之谜。如果我们把一个💡灯泡和电池🔋还有一根导线连成一个闭合回路，我们称为<strong>电路</strong> 。</p>
+<p>如果我们把世界上所有的物体无限缩小，可以看到其实是由原子（atom）构成的<em>ps: 当然还可以继续分下去这里我就不继续追溯下去了</em>   原子的结构包括为：质子，中子，电子。如下图所示，</p>
+<p><img src="https://i2.mjj.rip/2023/07/06/450dd402dd4c982ec42f583a410a05bf.jpeg" alt="450dd402dd4c982ec42f583a410a05bf.jpeg"></p>
+<p>质子<strong>带正电</strong> 中子<strong>不带电</strong>都是处在中心的区域<em>（像是银河系中的太阳一样）</em> ，而带电的是核外的<strong>电子</strong>。像是绕太阳运行的行星。</p>
+<p>尽管质子和电子通常用+，- 号表示，但不表示任何的数学含义，只表示某种特殊的关系。通常状况下它们表现为稳定状态。当你从地毯走过的时候，地毯偷偷从你的写上偷走电子，在你接触物体的那一瞬间产生静电火花🔥！在产生一瞬间之后，趋于平衡状态……。在这个过程中是一个<strong>回路</strong>，电子从你的地毯—&gt;身体—&gt; 鞋子。这种现象不仅仅存在于静电中，在风暴中，底层云积聚了大量的电子，而顶层的失去了大量的电子，然而一到闪电过后，一切趋于平衡….</p>
+<p>在电路中，当某个原子中的电子逃逸到下一个原子中，于此同时，该原子又从上一个原子中得到一个电子，而失去电子的原子又从上一个原子获取电子，如此循环，<strong>电流其实是电子不断从一个原子移动到另一个原子的过程</strong>。</p>
+<p>这一切肯定不是自发的，当你把一堆材料堆在一起一定不会产生电流。显然需要一个”驱动器”，那就是<strong>电池</strong>，电池会促进电路中电子的流动，从而产生电流。</p>
+<p><img src="https://i2.mjj.rip/2023/07/06/bcc90e4606dd1f566a11e3e07430ccbf.jpeg" alt="bcc90e4606dd1f566a11e3e07430ccbf.jpeg"></p>
+<p>如图，环形电路中，红色表示电流。两个电池，没个电池为1.5v。注意，电池的摆放必须是正负极对接。原因是负极的电子要流向正极产生电流。然而，两个1.5v 串联结果是3v。</p>
+<p>判断物体是否容易放电其实是看核外电子是否容易被<strong>失去</strong>，也就看是不是<strong>稳定</strong>。比如我们经常用的铜作为导线，是因为铜核外只有一个电子，容易失去电子，也即是容易逃逸！判断是否为导体就是看是否容易逃逸电子。 相反，导电相反是阻抗性，就是一些物质容易让电子通过，称为阻抗性。绝缘体就是这么来的。但是，大力出奇迹 : <em>其实只要电流足够大任何物体都可以导电</em> 。</p>
+<p>铜的阻抗性就比较低，但铜线越长阻抗性会越高。如果铜线越粗，阻抗性会越低，也就是可以流过的电子数量会越高。（类比水管） 电流就相当于水管中水的流速，水压相当于电压，水管的粗细程度代表电阻。</p>
+<p>电压： 比如一块1.5v的电池，说明电压是1.5v。<strong>电压表示了电流做功的势</strong>，也就是电势能的大小。就算不用这块电池，它的电势能依旧<strong>在那</strong>。势能好比是你拿一块砖在平地上，此时的势能几乎为0。但如果你把它拿到18层楼高的地方（但你别真的做！），此时的势能绝对挺大，<em>就算你什么也不做它的势能依旧在那里</em>。如果你想知道势能到底是多大，你得把它从18层释放下来…..</p>
+<p>​                    													<strong>欧姆定律：  I &#x3D; E&#x2F;R</strong></p>
+<p>在电学中，如果知道电势能和电阻，就可以算出电流的大小。</p>
+<p><strong><img src="https://i2.mjj.rip/2023/07/07/54795f082535408f014735fbbb27140b.jpeg" alt="54795f082535408f014735fbbb27140b.jpeg"></strong></p>
+<p>既然在天空中会打雷，那么空气也是一种导体。把电池放到空气中应该也会有从正负极有电流产生。但是！！根据公式可以看出：</p>
+<ul>
+<li>当放在空气中虽然知道电势是1.5v ，但空气中电阻是非常非常大的。故是  <strong>一个数&#x2F;∞ &#x3D; 0</strong>   ，最后算出电流是趋近于0。</li>
+<li>当单独连个导线，想必初中的时候讲过，会出现短路现象。原因是当电势能1.5的时候，正负极连着一根导线，单独的一根导线导致电阻值非常的小。所以是，一个数&#x2F;趋紧于0的数 &#x3D; ∞  电流无穷大！！ 意味着导线可能电流过大，导致整个导线变热甚至会烧红（<em>甚至融化</em>），会把电能转换为热能。</li>
+</ul>
+<p>大部分电路其实是介于这二者之间的，要么阻值大一点，要么小一点。当阻值小的时候，电路会发热，甚至燃烧。💡灯其实是利用了这个原理，只不过是在真空中然后，灯丝其实会发热然后燃烧。</p>
+<p>以上其实不是最主要的，开关才是最想说的。开关表示了电路的 通&#x2F;闭。其实对应了二进制的 0 &#x2F;1 。      </p>
+<h1 id="2-绕过拐角的通信"><a href="#2-绕过拐角的通信" class="headerlink" title="2.绕过拐角的通信"></a>2.绕过拐角的通信</h1><p>代入一个情景，你跟你的邻居好友在被妈妈没收手机后想在夜晚睡不着的时候进行交流。 但是，可是你们的窗户是错位的，也就是不能看到对方的窗户。所以不能用手电开关及其用摩斯码通过 <em>点和划</em> 来解读对方的话语。</p>
+<p>怎么办？</p>
+<p>已经通过之前的电路知识，给对方搭建一套“电报”系统。</p>
+<p><img src="https://i2.mjj.rip/2023/07/07/15f345afb516e32a194272bcddd7eab5.jpeg" alt="15f345afb516e32a194272bcddd7eab5.jpeg"></p>
+<p>但这个只是单向传递，你只能让对方看见，如果你想双向传递，你得再加一套通往你家的。</p>
+<p><img src="https://i2.mjj.rip/2023/07/07/68ff0ef0c3d41c1e1224193149348b29.jpeg" alt="68ff0ef0c3d41c1e1224193149348b29.jpeg"></p>
+<p>🤔如果再想想，其实可以省点线路“钱”，比如像这样，中间蓝色部分用<strong>公共线</strong>。如果你朋友那边闭合开关，通过图中的箭头的方向可以形成一个闭合回路会点亮你家里的灯泡💡。</p>
+<p><img src="https://i2.mjj.rip/2023/07/07/3d7bae25e5b0cf644a529544e6e13869.jpeg" alt="3d7bae25e5b0cf644a529544e6e13869.jpeg"></p>
+<p>如果你们俩都闭合开关那么灯泡其实是不亮的。原因是在公共线路中有两个方向相反的电流。两端都没有办法形成闭合回路。</p>
+<p><img src="https://i2.mjj.rip/2023/07/07/9516f93d848d18fe012801a8418e243d.jpeg" alt="9516f93d848d18fe012801a8418e243d.jpeg"></p>
+<hr>
+<p>如果我们铺设的线路足够长，对应的电阻也会无限大。这显然不符合经济性。</p>
+<p>其实还可以继续简化公用线！减少用线成本。我们知道一个理论，<strong>导体的截面越大，导电性就越好</strong>。我们这恰好有一个大球，直径大约7900英里，那就是地球呀🌍。地球是个很好的导体，如果你使用地球作为“<strong>导线</strong>”，那你的电压可不能只是两节干电池了，你需要大点的电压。然后插根铜柱子根地面有足够的接触面积。</p>
+<p><img src="https://i2.mjj.rip/2023/07/07/cd82cc25b2fe872ac42c02b6e6d03179.jpeg" alt="cd82cc25b2fe872ac42c02b6e6d03179.jpeg"></p>
+<p>由于不能使用干电池了，现在把电池那块抽象成一个符号方便后续的描述。</p>
+<p><img src="https://i2.mjj.rip/2023/07/07/e7a30c5be1924f7859c173bcb30c4af5.jpeg" alt="e7a30c5be1924f7859c173bcb30c4af5.jpeg"></p>
+<p>把V可以想象成一台能抽电子的吸尘器，整个地球🌍其实是一个<em>电子的海洋</em>，有无穷无尽的电子可以使用。</p>
+<p>那可以把上面的电报系统简化成现在这种样子。</p>
+<p><img src="https://i2.mjj.rip/2023/07/07/683164b5581c8d4fc977af0c6c1530ff.jpeg" alt="683164b5581c8d4fc977af0c6c1530ff.jpeg"></p>
         
       
 
@@ -1390,11 +1478,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">王道</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">书籍</a>
         		</li>
       		
 		</ul>
@@ -1406,7 +1490,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/王道-栈//" class="article-tag-list-link color5">王道,栈</a>
+        			<a href="/categories/书籍//" class="article-tag-list-link color3">书籍</a>
         		</li>
       		
 		</ul>
@@ -1415,7 +1499,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/10/04/%E5%88%A9%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E6%8B%AC%E5%8F%B7%E7%9A%84%E5%8C%B9%E9%85%8D(1)/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
         </p>
       
 
@@ -1615,11 +1699,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">python数据分析</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">python数据分析</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1639,15 +1723,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1671,15 +1755,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">

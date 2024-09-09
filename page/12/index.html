@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 191
+            总文章数 192
         </nav>
 
 
@@ -172,6 +172,122 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-求分数序列前N项和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/25/%E6%B1%82%E5%88%86%E6%95%B0%E5%BA%8F%E5%88%97%E5%89%8DN%E9%A1%B9%E5%92%8C/">求分数序列前N项和</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/25/%E6%B1%82%E5%88%86%E6%95%B0%E5%BA%8F%E5%88%97%E5%89%8DN%E9%A1%B9%E5%92%8C/" class="archive-article-date">
+  	<time datetime="2021-04-25T09:09:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="实验4-1-6-求分数序列前N项和-15-分"><a href="#实验4-1-6-求分数序列前N项和-15-分" class="headerlink" title="实验4-1-6 求分数序列前N项和 (15 分)"></a>实验4-1-6 求分数序列前N项和 (15 分)</h3><p>本题要求编写程序，计算序列 2&#x2F;1+3&#x2F;2+5&#x2F;3+8&#x2F;5+… 的前N项之和。注意该序列从第2项起，每一项的分子是前一项分子与分母的和，分母是前一项的分子。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在一行中给出一个正整数N。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行中输出部分和的值，精确到小数点后两位。题目保证计算结果不超过双精度范围。</p>
+<h3 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">20</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32.66</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> N;</span><br><span class="line">  <span class="type">double</span> Fz = <span class="number">2.0</span>,Fm = <span class="number">1.0</span>,temp;</span><br><span class="line">  <span class="type">double</span> sum = <span class="number">0.0</span>;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">    sum+=(Fz/Fm);<span class="comment">//先加到sum里去</span></span><br><span class="line">    temp = Fz;<span class="comment">//把分子保存起来一会给下一个的分母</span></span><br><span class="line">    Fz = Fz+Fm;<span class="comment">//分子 + 分母 形成 下一个的分子</span></span><br><span class="line">    Fm = temp;<span class="comment">// 把之前分子交给分母</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,sum);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>碰到这种问题（知道首项的）首先，把首项定义出来。</li>
+<li>然后根据它们之间的关系推，基本不需要考虑用到循环变量，循环变量只负责弄次数即可。</li>
+<li>找出分子分母之间的联系</li>
+<li>⚠️碰到分数尽量都设置成<strong>浮点</strong>。一开始我习惯性设置成 int 会导致结果不正确。</li>
+</ul>
+<p>👇是我在草稿上的思考过程</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKuBlD"><img src="https://www.helloimg.com/images/2021/04/25/BKuBlD.png" alt="BKuBlD.png"></a></p>
+<h3 id="来一道类似的题目斐波那契数列"><a href="#来一道类似的题目斐波那契数列" class="headerlink" title="来一道类似的题目斐波那契数列"></a>来一道类似的题目斐波那契数列</h3><p>斐波那契数列是一组第一位和第二位为1，从第三位开始，后一位是前两位和的一组递增数列，</p>
+<p>像这样的：1、1、2、3、5、8、13、21、34、55……</p>
+<h4 id="输出前10个斐波那契"><a href="#输出前10个斐波那契" class="headerlink" title="输出前10个斐波那契"></a>输出前10个斐波那契</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//1、1、2、3、5、8、13、21、34、55......</span></span><br><span class="line">  <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">// scanf(&quot;%d&quot;, &amp;n);</span></span><br><span class="line">   <span class="type">int</span> n = <span class="number">10</span>;</span><br><span class="line">  <span class="type">int</span> first = <span class="number">1</span> ,second = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n/<span class="number">2</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,first);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,second);</span><br><span class="line"></span><br><span class="line">    first = first + second;</span><br><span class="line">    second = first + second;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️注意，因为涉及到每<strong>一</strong>轮都<strong>输出两个数</strong>，所以你那个循环到<strong>n</strong> <strong>要折半</strong>。否则就是输出2N个。</p>
+</blockquote>
+<h4 id="输出斐波前N项和"><a href="#输出斐波前N项和" class="headerlink" title="输出斐波前N项和"></a>输出斐波前N项和</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//1、1、2、3、5、8、13、21、34、55......</span></span><br><span class="line">  <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">// scanf(&quot;%d&quot;, &amp;n);</span></span><br><span class="line">   <span class="type">int</span> n = <span class="number">10</span>;</span><br><span class="line">  <span class="type">int</span> first = <span class="number">1</span> ,second = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n/<span class="number">2</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,first);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,second);</span><br><span class="line">    sum += (first+second);<span class="comment">//只需要在这里加到sum里面去就行</span></span><br><span class="line">    first = first + second;</span><br><span class="line">    second = first + second;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, sum);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/25/%E6%B1%82%E5%88%86%E6%95%B0%E5%BA%8F%E5%88%97%E5%89%8DN%E9%A1%B9%E5%92%8C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-韩信点兵" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1246,146 +1362,6 @@
 
 
   
-    <article id="post-高速公路超速处罚" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/19/%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF%E8%B6%85%E9%80%9F%E5%A4%84%E7%BD%9A/">高速公路超速处罚</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/19/%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF%E8%B6%85%E9%80%9F%E5%A4%84%E7%BD%9A/" class="archive-article-date">
-  	<time datetime="2021-04-19T11:06:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实验3-10 高速公路超速处罚 (15 分)</p>
-<p>按照规定，在高速公路上行使的机动车，达到或超出本车道限速的10%则处200元罚款；若达到或超出50%，就要吊销驾驶证。请编写程序根据车速和限速自动判别对该机动车的处理。</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在一行中给出2个正整数，分别对应车速和限速，其间以空格分隔。</p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行中输出处理意见：若属于正常行驶，则输出“OK”；若应处罚款，则输出“Exceed x%. Ticket 200”；若应吊销驾驶证，则输出“Exceed x%. License Revoked”。其中x是超速的百分比，精确到整数。 </p>
-<h3 id="输入样例1"><a href="#输入样例1" class="headerlink" title="输入样例1:"></a>输入样例1:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">65 60</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例1"><a href="#输出样例1" class="headerlink" title="输出样例1:"></a>输出样例1:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OK</span><br></pre></td></tr></table></figure>
-
-<h3 id="输入样例2"><a href="#输入样例2" class="headerlink" title="输入样例2:"></a>输入样例2:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">110 100</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例2"><a href="#输出样例2" class="headerlink" title="输出样例2:"></a>输出样例2:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exceed 10%. Ticket 200</span><br></pre></td></tr></table></figure>
-
-<h3 id="输入样例3"><a href="#输入样例3" class="headerlink" title="输入样例3:"></a>输入样例3:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">200 120</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例3"><a href="#输出样例3" class="headerlink" title="输出样例3:"></a>输出样例3:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exceed 67%. License Revoked</span><br></pre></td></tr></table></figure>
-
-
-
-<p>程序如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//在高速公路上行使的机动车，达到或超出本车道限速的10%则处200元罚款；若达到或超出50%，就要吊销驾驶证。</span></span><br><span class="line"></span><br><span class="line">  <span class="type">float</span> speed,LimtSped,Puls;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%f %f&quot;</span>, &amp;speed,&amp;LimtSped);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//先计算多百分之几？</span></span><br><span class="line"></span><br><span class="line">  Puls = (speed - LimtSped)/LimtSped * <span class="number">100</span> ;<span class="comment">//记得要乘100 转换成百分制，要不然是 0.几</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( Puls &gt;= <span class="number">50</span>  )</span><br><span class="line">  &#123; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Exceed %.0f%%. License Revoked&quot;</span>,Puls);<span class="comment">//% 用 %%来表示</span></span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(  Puls &gt;= <span class="number">10</span>)</span><br><span class="line">  &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;Exceed %.0f%%. Ticket 200\n&quot;</span>,Puls);<span class="comment">//% 用 %%来表示</span></span><br><span class="line"></span><br><span class="line">  &#125;<span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;OK\n&quot;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><p>写程序时，遇到几个基础的问题</p>
-<ol>
-<li><p>复习一下谁比谁多百分之几（🤦‍♂️小学问题哈）</p>
-<blockquote>
-<p>（大的谁-小的谁）&#x2F;比字 后面的谁。</p>
-</blockquote>
-<p>举例子本题中，问比限速超出了多少</p>
-<p>也就是说 （你的速度 - 限速）&#x2F;限速 （限速就是比字后面的）</p>
-</li>
-<li><p>在printf里要想表达 % ，得用 %%</p>
-</li>
-<li><p>%.0f 的意思是，小数点后保留0位小数，并且四舍五入</p>
-<p>  1.4的话就是  1 </p>
-<p>  1.7 就是   2</p>
-</li>
-</ol>
-</li>
-<li><p>还有个大问题</p>
-<p>起初我把条件写反了，这样</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( Puls &gt;= <span class="number">10</span> )</span><br><span class="line"> &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;Exceed %.0f%%. Ticket 200\n&quot;</span>,Puls);<span class="comment">//% 用 %%来表示</span></span><br><span class="line"> &#125;<span class="keyword">else</span> <span class="keyword">if</span>( Puls &gt;= <span class="number">50</span> )</span><br><span class="line"> &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;Exceed %.0f%%. License Revoked&quot;</span>,Puls);<span class="comment">//% 用 %%来表示</span></span><br><span class="line">  </span><br><span class="line"> &#125;<span class="keyword">else</span></span><br><span class="line"> &#123;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;OK\n&quot;</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样写有个严重的错误，如果你的车速超过了50%，我的程序先走那个 &gt;&#x3D;10 的，然后就结束了不会再进底下的 else if 里。故，导致程序的错误。</p>
-<p>改进就是，先判断小范围的，再判断大范围的。也就是先看看满不满足 &gt;&#x3D;50 的，如果不满足，再看看是&gt;&#x3D;10</p>
-<p>要是整反了，那就一直在大范围里。</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/19/%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF%E8%B6%85%E9%80%9F%E5%A4%84%E7%BD%9A/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
@@ -1555,11 +1531,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">python数据分析</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">python数据分析</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1579,15 +1555,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1611,15 +1587,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 191
+            总文章数 192
         </nav>
 
 
@@ -172,6 +172,100 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-斐波那契" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/28/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/">斐波那契</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/28/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/" class="archive-article-date">
+  	<time datetime="2021-03-27T22:23:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="斐波那契解法一"><a href="#斐波那契解法一" class="headerlink" title="斐波那契解法一"></a>斐波那契解法一</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*  </span></span><br><span class="line"><span class="comment">     *    1      1       2             3             5</span></span><br><span class="line"><span class="comment">     *    a      b       a=a+b       b = a+b       a = a+b  ... 输出a b 即可</span></span><br><span class="line"><span class="comment">     *  */</span></span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span> ,b = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d &quot;</span>,a,b);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">3</span>; i &lt;= <span class="number">30</span>; i++) &#123;</span><br><span class="line">        a = a+b;</span><br><span class="line">        b = a+b;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot; %d %d &quot;</span>,a,b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="斐波那契解法二"><a href="#斐波那契解法二" class="headerlink" title="斐波那契解法二"></a>斐波那契解法二</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> a =<span class="number">1</span> ,b= <span class="number">1</span>,c;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot; %d %d &quot;</span>,a,b);<span class="comment">//先输出前面两个最特殊的</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">3</span>; i &lt;= <span class="number">12</span> ; i++) &#123;</span><br><span class="line">            </span><br><span class="line">      c = a+b; <span class="comment">//每一轮都将前面两个值加</span></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,c);<span class="comment">//输出出去</span></span><br><span class="line">      a = b;   <span class="comment">//相对后面的那个给了前面成为第一个</span></span><br><span class="line">      b = c;  <span class="comment">// 成为了第二个</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/28/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-累加类型的题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1100,138 +1194,6 @@
 
 
   
-    <article id="post-第二周-然后是几点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/24/%E7%AC%AC%E4%BA%8C%E5%91%A8-%E7%84%B6%E5%90%8E%E6%98%AF%E5%87%A0%E7%82%B9/">第二周,然后是几点</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/24/%E7%AC%AC%E4%BA%8C%E5%91%A8-%E7%84%B6%E5%90%8E%E6%98%AF%E5%87%A0%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2021-02-24T12:41:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code>/*有时候人们用四位数字表示一个时间，比如1106表示11点零6分。
-现在，你的程序要根据起始时间和流逝的时间计算出终止时间。
-
-读入两个数字，第一个数字以这样的四位数字表示当前时间，第二个数字表示分钟数，
-计算当前时间经过那么多分钟后是几点，结果也表示为四位数字。当小时为个位数时，没有前导的零，
-即5点30分表示为530。注意，第二个数字表示的分钟数可能超过60，也可能是负数。
-
-输入格式：
-输入在一行中给出2个整数，分别是四位数字表示的起始时间、以及流逝的分钟数，其间以空格分隔。注意：在起始时间中，
-当小时为个位数时，没有前导的零，即5点30分表示为530；流逝的分钟数可能超过60，也可能是负数。
-
-输出格式：
-输出四位数字表示的终止时间，当小时为个位数时，没有前导的零。题目保证起始时间和终止时间在同一天内。
-
-输入样例：
-1120 110
- 
-输出样例：
-1310
-
-*/
-#include &lt;stdio.h&gt;
-int main(int argc, char const *argv[])
-&#123;
-    //思路: 1120-&gt;转换成分钟 然后加上110 等到总的分钟，总的分钟再查分成多少小时多少分钟，然后再转换成
-    int StartT1,roll,EndT2;
-    scanf(&quot;%d %d&quot;,&amp;StartT1,&amp;roll);
-
-    int hours= StartT1/100;//拿到小时部分
-    int minute = StartT1&amp;100;//拿到分钟部分
-
-    //小时转换成分钟
-    int minuteSum=hours * 60 + roll+minute;
-
-    //总分钟再转换成小时 和 分钟
-    int newHours = minuteSum/60;
-    int newMinute = minuteSum%60;
-
-    EndT2 = newHours*100+newMinute;//加一下成千
-    return 0;
-&#125;
-</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/24/%E7%AC%AC%E4%BA%8C%E5%91%A8-%E7%84%B6%E5%90%8E%E6%98%AF%E5%87%A0%E7%82%B9/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
@@ -1401,11 +1363,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">python数据分析</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">python数据分析</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1425,15 +1387,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1457,15 +1419,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">排序算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
