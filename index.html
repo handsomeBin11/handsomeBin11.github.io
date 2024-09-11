@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 192
+            总文章数 193
         </nav>
 
 
@@ -172,6 +172,212 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-调度任务模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/09/11/%E8%B0%83%E5%BA%A6%E4%BB%BB%E5%8A%A1%E6%A8%A1%E5%9D%97/">调度任务模块</a>
+    </h1>
+  
+
+        
+        <a href="/2024/09/11/%E8%B0%83%E5%BA%A6%E4%BB%BB%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="archive-article-date">
+  	<time datetime="2024-09-11T02:33:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="智能调度模块"><a href="#智能调度模块" class="headerlink" title="智能调度模块"></a>智能调度模块</h1><p><img src="https://pic.imgdb.cn/item/66de5aced9c307b7e94e0894.jpg"></p>
+<p>需完成快递员完成揽收之后要处理这个消息</p>
+<h2 id="把订单转成运单"><a href="#把订单转成运单" class="headerlink" title="把订单转成运单"></a>把订单转成运单</h2><p><img src="https://pic.imgdb.cn/item/66de5cd8d9c307b7e94ff1c3.jpg"></p>
+<h3 id="生成运单号"><a href="#生成运单号" class="headerlink" title="生成运单号"></a>生成运单号</h3><p>对于运单号的生成有特殊的要求，格式：SL+13位数字，例如：SL1000000000760，对于这个需求，如果采用MP提供的雪花id生成是19位，是不能满足需求的，所以我们需要自己生成id，并且要确<strong>保唯一不能重复</strong>。</p>
+<h3 id="美团Leaf"><a href="#美团Leaf" class="headerlink" title="美团Leaf"></a>美团Leaf</h3><p>之前的策略是每次都要向数据库获取一个ID，数据库压力大。Leaf做了改变： 每次申请一段segment的值，每一段代表一个<strong>step</strong>，用完这一个step的内容之后再向数据库申请。可以大大减少数据库的压力。</p>
+<p><img src="https://pic.imgdb.cn/item/66de8e5ed9c307b7e998a195.jpg"></p>
+<blockquote>
+<p>但是有个问题！当你达到最大的时候，数据库会进行修改max_id 的值。 </p>
+</blockquote>
+<h4 id="双buffer优化"><a href="#双buffer优化" class="headerlink" title="双buffer优化"></a>双buffer优化</h4><p><img src="https://pic.imgdb.cn/item/66de9150d9c307b7e9a10fac.jpg"></p>
+<p>Leaf 取号段的时机是在号段消耗完的时候进行的，也就意味着号段临界点的ID下发时间取决于下一次从DB取回号段的时间，并且在这期间进来的请求也会因为DB号段没有取回来，导致线程阻塞。</p>
+<p>解决方案: 当号段消费到某个点的时候，就异步的把下一个号加载到内存中，不要等的到了才更新号段。 </p>
+<h3 id="订单转运单的实现"><a href="#订单转运单的实现" class="headerlink" title="订单转运单的实现"></a>订单转运单的实现</h3><blockquote>
+<ul>
+<li>幂等性校验， 根据订单id查询关联运单是否存在 存在直接返回， 调用 findbyorderid</li>
+<li>判断是否为空</li>
+<li>根据订单id 远程调用订单服务查询订单数据</li>
+<li>根据订单id查询对应的货物信息</li>
+<li>判断货物信息不能为空</li>
+<li>根据订单id 远程调用订单服务查询订单的位置 信息</li>
+<li>根据前面获取的地址信息，获取 起始网点id 终点网点id </li>
+<li>声明变量，用于判断是否需要调度</li>
+<li>判断 的依据是，看看起始网点和终点网点是不是同一个网点</li>
+<li>​    是就改为false</li>
+<li>否则就是需要调度,此时需要把  路线规划微服务引入进行调用</li>
+<li>​    判断 路线不能为空，里面的路线的节点也不能为空</li>
+<li>以上结束之后就可以创建运单对象了</li>
+<li>接下去就是一顿set</li>
+<li>如果为null 说明已经是终点网点了 设置下站网点就是当前发送的网点id 状态： 到达终点网点</li>
+<li>如果不是null ，说明该运单需要转运</li>
+<li>保存到数据库中</li>
+<li>如果保存失败</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 订单 转 运单</span></span><br><span class="line"><span class="comment">    * 运单状态: &#123;<span class="doctag">@link</span> TransportOrderStatus&#125;</span></span><br><span class="line"><span class="comment">    * 运单调度状态: &#123;<span class="doctag">@link</span> TransportOrderSchedulingStatus&#125;</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> orderId 订单号</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Transactional(rollbackFor = Exception.class, timeout = 120000)</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> TransportOrderEntity <span class="title function_">orderToTransportOrder</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">       <span class="comment">//订单 转 运单</span></span><br><span class="line">       <span class="comment">// 幂等性校验， 根据订单id查询关联运单是否存在 存在直接返回， 调用 findbyorderid</span></span><br><span class="line">       <span class="type">TransportOrderEntity</span> <span class="variable">transportOrderEntity</span> <span class="operator">=</span> findByOrderId(orderId);<span class="comment">//运单的数据</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment">//判断是否为空</span></span><br><span class="line">       <span class="keyword">if</span> (ObjectUtil.isNotEmpty(transportOrderEntity))&#123;</span><br><span class="line">           <span class="comment">//如果不为空</span></span><br><span class="line">           <span class="keyword">return</span> transportOrderEntity;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//根据订单id 远程调用订单服务查询订单数据</span></span><br><span class="line">       <span class="type">OrderDTO</span> <span class="variable">orderDTO</span> <span class="operator">=</span> orderFeign.findById(orderId);</span><br><span class="line">       <span class="keyword">if</span> (ObjectUtil.isNull(orderDTO))&#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(WorkExceptionEnum.ORDER_NOT_FOUND);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//根据订单id查询对应的货物信息</span></span><br><span class="line">       <span class="type">OrderCargoDTO</span> <span class="variable">cargoDTO</span> <span class="operator">=</span> cargoFeign.findByOrderId(orderId);</span><br><span class="line">       <span class="comment">//判断货物信息不能为空</span></span><br><span class="line">       <span class="keyword">if</span> (ObjectUtil.isNull(cargoDTO)) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(WorkExceptionEnum.ORDER_CARGO_NOT_FOUND);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//根据订单id 远程调用订单服务查询订单的位置 信息</span></span><br><span class="line">       <span class="type">OrderLocationDTO</span> <span class="variable">orderLocationDTO</span> <span class="operator">=</span> orderFeign.findOrderLocationByOrderId(orderId);</span><br><span class="line">       <span class="keyword">if</span> (ObjectUtil.isNull(orderLocationDTO)) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(WorkExceptionEnum.ORDER_LOCATION_NOT_FOUND);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//根据前面获取的地址信息，获取 起始网点id 终点网点id</span></span><br><span class="line">       <span class="type">Long</span> <span class="variable">sendAgentId</span> <span class="operator">=</span> Convert.toLong(orderLocationDTO.getSendLocation());</span><br><span class="line">       <span class="type">Long</span> <span class="variable">receiveAgentId</span> <span class="operator">=</span> Convert.toLong(orderLocationDTO.getReceiveAgentId());</span><br><span class="line"></span><br><span class="line">       <span class="comment">//声明变量，用于判断是否需要调度</span></span><br><span class="line">       <span class="type">boolean</span> <span class="variable">isDispatch</span> <span class="operator">=</span> <span class="literal">true</span>;<span class="comment">//默认</span></span><br><span class="line"></span><br><span class="line">       <span class="comment">//声明变量transportLineNodeDTO 运输路线 默认为null 将来如果有路线就不为null</span></span><br><span class="line">       <span class="type">TransportLineNodeDTO</span> <span class="variable">transportLineNodeDTO</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//判断的依据是，看看起始网点和终点网点是不是同一个网点</span></span><br><span class="line">       <span class="keyword">if</span> (ObjectUtil.equal(sendAgentId,receiveAgentId)) &#123;</span><br><span class="line">           <span class="comment">//是就改为false</span></span><br><span class="line">           isDispatch = <span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="comment">//否则就是需要调度,此时需要把  路线规划微服务引入进行调用</span></span><br><span class="line">           transportLineNodeDTO = transportLineFeign.queryPathByDispatchMethod(sendAgentId, receiveAgentId);</span><br><span class="line">           <span class="comment">//路线不能为空，里面的路线的节点也不能为空</span></span><br><span class="line">           <span class="keyword">if</span> (ObjectUtil.isEmpty(transportLineNodeDTO) || CollUtil.isEmpty(transportLineNodeDTO.getNodeList())) &#123;</span><br><span class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(WorkExceptionEnum.TRANSPORT_LINE_NOT_FOUND);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//以上结束之后就可以创建运单对象了</span></span><br><span class="line">       transportOrderEntity =  <span class="keyword">new</span> <span class="title class_">TransportOrderEntity</span>();</span><br><span class="line">       <span class="comment">//接下去就是一顿set</span></span><br><span class="line">       transportOrderEntity.setId(idService.getId(IdEnum.TRANSPORT_ORDER));</span><br><span class="line">       transportOrderEntity.setOrderId(orderId);</span><br><span class="line">       transportOrderEntity.setStatus(TransportOrderStatus.CREATED);</span><br><span class="line">       transportOrderEntity.setSchedulingStatus(TransportOrderSchedulingStatus.TO_BE_SCHEDULED);</span><br><span class="line">       transportOrderEntity.setStartAgencyId(sendAgentId);</span><br><span class="line">       transportOrderEntity.setEndAgencyId(receiveAgentId);</span><br><span class="line">       transportOrderEntity.setCurrentAgencyId(sendAgentId);</span><br><span class="line">       transportOrderEntity.setTotalVolume(cargoDTO.getTotalVolume());<span class="comment">//设置重量</span></span><br><span class="line">       transportOrderEntity.setTotalWeight(cargoDTO.getTotalWeight());<span class="comment">//赋值体积</span></span><br><span class="line">       transportOrderEntity.setIsRejection(<span class="literal">false</span>);</span><br><span class="line">       transportOrderEntity.setCreated(LocalDateTime.now());</span><br><span class="line">       transportOrderEntity.setUpdated(LocalDateTime.now());</span><br><span class="line"></span><br><span class="line">       <span class="comment">//如果为null 说明已经是终点网点了 设置下站网点就是当前发送的网点id 状态： 到达终点网点</span></span><br><span class="line">       <span class="keyword">if</span> (ObjectUtil.isNull(transportLineNodeDTO))&#123;</span><br><span class="line">           transportOrderEntity.setNextAgencyId(sendAgentId);<span class="comment">//终点网点就是发送网点</span></span><br><span class="line">           transportOrderEntity.setStatus(TransportOrderStatus.ARRIVED_END);</span><br><span class="line">           transportOrderEntity.setSchedulingStatus(TransportOrderSchedulingStatus.SCHEDULED);</span><br><span class="line"></span><br><span class="line">       &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="comment">//如果不是null ，说明该运单需要转运</span></span><br><span class="line">           transportOrderEntity.setStatus(TransportOrderStatus.CREATED);</span><br><span class="line">           transportOrderEntity.setSchedulingStatus(TransportOrderSchedulingStatus.TO_BE_SCHEDULED);</span><br><span class="line">           transportOrderEntity.setNextAgencyId(transportLineNodeDTO.getNodeList().get(<span class="number">1</span>).getId());</span><br><span class="line">           transportOrderEntity.setTransportLine(JSONUtil.toJsonStr(transportLineNodeDTO));</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment">//保存到数据库中</span></span><br><span class="line">       <span class="type">boolean</span> <span class="variable">save</span> <span class="operator">=</span> <span class="built_in">this</span>.save(transportOrderEntity);</span><br><span class="line">       <span class="comment">//如果保存失败</span></span><br><span class="line">       <span class="keyword">if</span> (!save)&#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(WorkExceptionEnum.TRANSPORT_ORDER_SAVE_ERROR);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//发送运单创建完成的消息</span></span><br><span class="line">       <span class="built_in">this</span>.sendTransportOrderCreated(transportOrderEntity);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//如果需要调度</span></span><br><span class="line">       <span class="keyword">if</span> (isDispatch) &#123;<span class="comment">//如果为true 表示需要调度</span></span><br><span class="line">           <span class="comment">//把消息发送到调度中心</span></span><br><span class="line">           <span class="built_in">this</span>.sendTransportOrderMsgToDispatch(transportOrderEntity);</span><br><span class="line">       &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="comment">//不需要调度</span></span><br><span class="line">           <span class="comment">//说明运单变成一个以到达的状态</span></span><br><span class="line">           <span class="built_in">this</span>.sendUpdateStatusMsg(ListUtil.toList(transportOrderEntity.getId()),TransportOrderStatus.ARRIVED_END);</span><br><span class="line"></span><br><span class="line">           <span class="comment">//不需要调度，发送消息生成派件 任务</span></span><br><span class="line">           <span class="built_in">this</span>.sendDispatchTaskMsgToDispatch(transportOrderEntity);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> transportOrderEntity;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="运单管理"><a href="#运单管理" class="headerlink" title="运单管理"></a>运单管理</h3><h4 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h4><p><img src="https://pic.imgdb.cn/item/66dfbaded9c307b7e96b4a25.jpg"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 分页查询运单</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> transportOrderQueryDTO</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Page&lt;TransportOrderEntity&gt; <span class="title function_">findByPage</span><span class="params">(TransportOrderQueryDTO transportOrderQueryDTO)</span> &#123;</span><br><span class="line">        <span class="comment">// 封装分页查询参数</span></span><br><span class="line">        Page&lt;TransportOrderEntity&gt; page = <span class="keyword">new</span> <span class="title class_">Page</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">// 设置查询条件</span></span><br><span class="line">        <span class="comment">//  构建条件对象</span></span><br><span class="line">        LambdaQueryWrapper&lt;TransportOrderEntity&gt; lambdaQueryWrapper = Wrappers.lambdaQuery();</span><br><span class="line">        <span class="comment">//    如果运单id不为空，根据id模糊查询</span></span><br><span class="line">        <span class="comment">//         先判断为不为空</span></span><br><span class="line"></span><br><span class="line">        lambdaQueryWrapper.like(ObjectUtil.isNotEmpty(transportOrderQueryDTO.getId()),TransportOrderEntity::getId,transportOrderQueryDTO.getId());</span><br><span class="line">        <span class="comment">//    如果订单orderId不为空，根据orderId模糊查询</span></span><br><span class="line">        lambdaQueryWrapper.like(ObjectUtil.isNotEmpty(transportOrderQueryDTO.getOrderId()),TransportOrderEntity::getOrderId,transportOrderQueryDTO.getOrderId());</span><br><span class="line">        <span class="comment">//    如果运单状态不为空，根据运单状态等值查询</span></span><br><span class="line">        lambdaQueryWrapper.eq(ObjectUtil.isNotEmpty(transportOrderQueryDTO.getStatus()),TransportOrderEntity::getStatus,transportOrderQueryDTO.getStatus());</span><br><span class="line">        <span class="comment">//    如果运单调度状态不为空，根据运单调度状态等值查询</span></span><br><span class="line">        lambdaQueryWrapper.eq(ObjectUtil.isNotEmpty(transportOrderQueryDTO.getSchedulingStatus()),TransportOrderEntity::getSchedulingStatus,transportOrderQueryDTO.getSchedulingStatus());</span><br><span class="line">        <span class="comment">//    如果运单起点网点ID不为空，根据起点网点ID等值查询</span></span><br><span class="line">        lambdaQueryWrapper.eq(ObjectUtil.isNotEmpty(transportOrderQueryDTO.getStartAgencyId()),TransportOrderEntity::getStartAgencyId,transportOrderQueryDTO.getStartAgencyId());</span><br><span class="line">        <span class="comment">//    如果运单终点网点ID不为空，根据终点网点ID等值查询</span></span><br><span class="line">        lambdaQueryWrapper.eq(ObjectUtil.isNotEmpty(transportOrderQueryDTO.getEndAgencyId()),TransportOrderEntity::getEndAgencyId,transportOrderQueryDTO.getEndAgencyId());</span><br><span class="line">        <span class="comment">//    如果运单当前网点ID不为空，根据当前网点ID等值查询</span></span><br><span class="line">        lambdaQueryWrapper.eq(ObjectUtil.isNotEmpty(transportOrderQueryDTO.getCurrentAgencyId()),TransportOrderEntity::getCurrentAgencyId,transportOrderQueryDTO.getCurrentAgencyId());</span><br><span class="line">        <span class="comment">//    按照运单创建时间降序排序</span></span><br><span class="line">        lambdaQueryWrapper.orderByDesc(TransportOrderEntity::getCreated);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用分页查询 继承的分页方法</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.page(page, lambdaQueryWrapper);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="更新状态"><a href="#更新状态" class="headerlink" title="更新状态"></a>更新状态</h3><p>在更新运单状态时需要考虑三件事：</p>
+<ul>
+<li><p>如果更新运单为<strong>拒收状态</strong>，需要将快递退回去，也就是原路返回</p>
+<blockquote>
+<p>此处有细节，如果拒收，要加原来的路径，并且删除当前的营业点（D），因为会重复～</p>
+</blockquote>
+<p><img src="https://pic.imgdb.cn/item/66e06a06d9c307b7e992981d.jpg"></p>
+</li>
+<li><p>在更新状态时，需要同步更新物流信息，通过发送消息的方式完成</p>
+</li>
+<li><p>更新状态后需要通知其他系统（消息通知）</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 修改运单状态</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ids                  运单id列表</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> transportOrderStatus 修改的状态</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 是否成功</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">updateStatus</span><span class="params">(List&lt;String&gt; ids, TransportOrderStatus transportOrderStatus)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 修改运单状态</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> ids                  运单id列表</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> transportOrderStatus 修改的状态</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">updateStatus</span><span class="params">(List&lt;String&gt; ids, TransportOrderStatus transportOrderStatus)</span> &#123;</span><br><span class="line">       <span class="comment">// 1. 校验: ids不能为空  状态不能等于CREATED</span></span><br><span class="line">       <span class="keyword">if</span> (CollUtil.isEmpty(ids))&#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(WorkExceptionEnum.TRANSPORT_ORDER_NOT_FOUND);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 2. 声明运单集合变量: List&lt;TransportOrderEntity&gt;</span></span><br><span class="line">       List&lt;TransportOrderEntity&gt; transportOrderEntityList = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment">// 判断运单状态</span></span><br><span class="line">       <span class="keyword">if</span> (transportOrderStatus == transportOrderStatus.REJECTED)&#123;</span><br><span class="line">           <span class="comment">//代表拒收</span></span><br><span class="line">           <span class="comment">// 3 如果是拒收状态，如果是拒收需要重新查询路线，将包裹逆向回去</span></span><br><span class="line">           <span class="comment">// 3.1 根据ids查询运单列表</span></span><br><span class="line">           <span class="comment">// 根据mybatisplus 查询</span></span><br><span class="line">           transportOrderEntityList = <span class="built_in">super</span>.listByIds(ids);</span><br><span class="line">           <span class="comment">// 3.2 遍历运单列表</span></span><br><span class="line">           <span class="keyword">for</span> (TransportOrderEntity transportOrderEntity : transportOrderEntityList) &#123;</span><br><span class="line">               <span class="comment">// 3.2.1  设置拒收状态</span></span><br><span class="line">               transportOrderEntity.setStatus(transportOrderStatus.REJECTED);</span><br><span class="line">               <span class="comment">// 3.2.2  获取起始网点id 终点网点id (根据起始机构规划运输路线，这里要将起点和终点互换) 终点起点互换</span></span><br><span class="line">               <span class="type">Long</span> <span class="variable">startAgencyId</span> <span class="operator">=</span> transportOrderEntity.getEndAgencyId();</span><br><span class="line">               <span class="type">Long</span> <span class="variable">endAgencyId</span> <span class="operator">=</span> transportOrderEntity.getStartAgencyId();</span><br><span class="line">               <span class="comment">// 3.2.3  声明变量 isDispatch  默认参与调度</span></span><br><span class="line">               <span class="type">boolean</span> <span class="variable">isDispatch</span> <span class="operator">=</span> <span class="literal">true</span>;<span class="comment">//是否需要调度默认为需要</span></span><br><span class="line">               <span class="comment">// 判断起始网点id 终点网点id是否相等</span></span><br><span class="line">               <span class="keyword">if</span> (ObjectUtil.equal(startAgencyId,endAgencyId))&#123;</span><br><span class="line">                   isDispatch = <span class="literal">false</span>;<span class="comment">//如果在同一个网点，则不需要调度</span></span><br><span class="line">               &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                   <span class="comment">// 3.2.5  如果不等:</span></span><br><span class="line">                   <span class="comment">// 3.2.5.1 叫调度规划微服务来办这件事，给它起点和终点，结束之后它给我个路线</span></span><br><span class="line">                   <span class="type">TransportLineNodeDTO</span> <span class="variable">transportLineNodeDTO</span> <span class="operator">=</span> transportLineFeign.queryPathByDispatchMethod(startAgencyId, endAgencyId);</span><br><span class="line">                   <span class="comment">// 3.2.5.2  未查询到运输路线抛异常,路线不能为空或者路线节点不能为空</span></span><br><span class="line">                   <span class="keyword">if</span> (ObjectUtil.isEmpty(transportLineNodeDTO) || CollUtil.isEmpty(transportLineNodeDTO.getNodeList())) &#123;</span><br><span class="line">                       <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(WorkExceptionEnum.TRANSPORT_ORDER_NOT_FOUND);</span><br><span class="line">                   &#125;</span><br><span class="line"></span><br><span class="line">                   <span class="comment">// 3.2.5.3  删除掉第一个机构，逆向回去的第一个节点就是当前所在节点</span></span><br><span class="line">                   transportLineNodeDTO.getNodeList().remove(<span class="number">0</span>);</span><br><span class="line">                   <span class="comment">// 3.2.5.4  设置运单调度状态： 待调度</span></span><br><span class="line">                   transportOrderEntity.setSchedulingStatus(TransportOrderSchedulingStatus.TO_BE_SCHEDULED);</span><br><span class="line">                   <span class="comment">// 3.2.5.5  设置当前所在机构ID</span></span><br><span class="line">                   transportOrderEntity.setCurrentAgencyId(startAgencyId);</span><br><span class="line">                   <span class="comment">// 3.2.5.6  设置下一站网点机构ID</span></span><br><span class="line">                   transportOrderEntity.setNextAgencyId(transportLineNodeDTO.getNodeList().get(<span class="number">0</span>).getId());</span><br><span class="line">                   <span class="comment">// 3.2.5.7  现在的路线和原来的相加，单原来的路线是josn字符串，要转成原来的路线</span></span><br><span class="line">                   <span class="type">TransportLineNodeDTO</span> <span class="variable">oldTransportLineNode</span> <span class="operator">=</span> JSONUtil.toBean(transportOrderEntity.getTransportLine(), TransportLineNodeDTO.class);</span><br><span class="line">                   oldTransportLineNode.getNodeList().addAll(transportLineNodeDTO.getNodeList());</span><br><span class="line">                   <span class="comment">// 3.2.5.8  合并成本 并重新设置运单线路信息</span></span><br><span class="line">                   oldTransportLineNode.setCost(NumberUtil.add(oldTransportLineNode.getCost(),transportLineNodeDTO.getCost()));</span><br><span class="line">                   transportOrderEntity.setTransportLine(JSONUtil.toJsonStr(oldTransportLineNode));</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               <span class="comment">// 3.2.7 判断如果需要调度  发送消息参与调度 sendTransportOrderMsgToDispatch</span></span><br><span class="line">               <span class="keyword">if</span> (isDispatch)&#123;</span><br><span class="line">                   <span class="built_in">this</span>.sendDispatchTaskMsgToDispatch(transportOrderEntity);</span><br><span class="line">               &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                   <span class="comment">// 3.2.8 判断如果不需要调度  运单状态改为到达网点:  发送消息生成派件任务 sendDispatchTaskMsgToDispatch</span></span><br><span class="line">                   <span class="built_in">this</span>.sendDispatchTaskMsgToDispatch(transportOrderEntity);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="comment">//如果不是拒收</span></span><br><span class="line">           <span class="comment">// 4 如果不是拒收状态，遍历根据ids列表封装成运单对象列表</span></span><br><span class="line">           transportOrderEntityList = ids.stream().map(id -&gt; &#123;</span><br><span class="line">               <span class="type">TransportOrderEntity</span> <span class="variable">transportOrderEntity</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TransportOrderEntity</span>();</span><br><span class="line">               transportOrderEntity.setId(id);</span><br><span class="line">               transportOrderEntity.setStatus(transportOrderStatus);</span><br><span class="line">               <span class="built_in">this</span>.sendTransportOrderInfoMsg(id,<span class="string">&quot;快件已经发往【$organId】&quot;</span>);</span><br><span class="line">               <span class="keyword">return</span> transportOrderEntity;</span><br><span class="line">           &#125;).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment">// 5. 批量更新 运单状态数据</span></span><br><span class="line">       <span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> <span class="built_in">super</span>.updateBatchById(transportOrderEntityList);<span class="comment">//得到更新的结果</span></span><br><span class="line">       <span class="comment">// 6. 发消息通知其他系统运单状态的变化 sendUpdateStatusMsg</span></span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 运单状态枚举: &#123;<span class="doctag">@link</span> TransportOrderStatus&#125;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> List&lt;TransportOrderStatusCountDTO&gt; <span class="title function_">findStatusCount</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="comment">// 统计不同状态的 运单数量</span></span><br><span class="line">       <span class="comment">// 获取所有枚举状态，封装List&lt;TransportOrderStatusCountDTO&gt;集合，每个状态count值都是0</span></span><br><span class="line">       List&lt;TransportOrderStatusCountDTO&gt; transportOrderStatusCountDTOList = Arrays.stream(TransportOrderStatus.values()).map(transportOrderStatus -&gt; &#123;</span><br><span class="line">           <span class="comment">//传入进来是枚举的值们，需要转变为DTO对象</span></span><br><span class="line">           <span class="type">TransportOrderStatusCountDTO</span> <span class="variable">transportOrderStatusCountDTO</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TransportOrderStatusCountDTO</span>();</span><br><span class="line">           transportOrderStatusCountDTO.setStatus(transportOrderStatus);</span><br><span class="line">           transportOrderStatusCountDTO.setStatusCode(transportOrderStatus.getCode());</span><br><span class="line">           transportOrderStatusCountDTO.setCount(<span class="number">0L</span>);</span><br><span class="line">           <span class="keyword">return</span> transportOrderStatusCountDTO;</span><br><span class="line">       &#125;).collect(Collectors.toList());</span><br><span class="line">       <span class="comment">// [新建: 0,已装车: 0,运输中: 0,到达终端网点: 0,拒收: 0]</span></span><br><span class="line">       <span class="comment">// 执行sql: SELECT `status` AS statusCode,count(1) AS count FROM sl_transport_order GROUP BY `status`</span></span><br><span class="line">       List&lt;TransportOrderStatusCountDTO&gt; statusCountList = <span class="built_in">super</span>.baseMapper.findStatusCount();</span><br><span class="line">       <span class="comment">// [新建: 5, 运输中: 10,到达终端网点: 3]</span></span><br><span class="line">       <span class="comment">// 根据查询到的 状态数量结果，修改上面完整集合中的状态数量</span></span><br><span class="line">       <span class="comment">// 循环 上面的结果集</span></span><br><span class="line">       <span class="keyword">for</span> (TransportOrderStatusCountDTO transportOrderStatusCountDTO : transportOrderStatusCountDTOList) &#123;</span><br><span class="line">           <span class="comment">//判断当前的状态在结果集statusCountList中有没有</span></span><br><span class="line">           <span class="keyword">for</span> (TransportOrderStatusCountDTO orderStatusCountDTO : statusCountList) &#123;</span><br><span class="line">               <span class="keyword">if</span> (ObjectUtil.equal(transportOrderStatusCountDTO.getStatusCode(),orderStatusCountDTO.getStatus())) &#123;</span><br><span class="line">                   transportOrderStatusCountDTO.setCount(orderStatusCountDTO.getCount());</span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// [新建: 5,已装车: 10,运输中: 0,到达终端网点: 3,拒收: 0]</span></span><br><span class="line">       <span class="keyword">return</span> transportOrderStatusCountDTOList;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">微服务</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JAVAWEB</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JAVAWEB-微服务//" class="article-tag-list-link color2">JAVAWEB,微服务</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/09/11/%E8%B0%83%E5%BA%A6%E4%BB%BB%E5%8A%A1%E6%A8%A1%E5%9D%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-路线规划微服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1399,137 +1605,6 @@
 
 
   
-    <article id="post-编码，隐匿在计算机背后的语言详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3/">编码，隐匿在计算机背后的语言详解</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2023-07-07T04:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-一切都应该从电说起"><a href="#1-一切都应该从电说起" class="headerlink" title="1.一切都应该从电说起"></a>1.一切都应该从电说起</h1><p>  关于电仍然存在着许多未解之谜。如果我们把一个💡灯泡和电池🔋还有一根导线连成一个闭合回路，我们称为<strong>电路</strong> 。</p>
-<p>如果我们把世界上所有的物体无限缩小，可以看到其实是由原子（atom）构成的<em>ps: 当然还可以继续分下去这里我就不继续追溯下去了</em>   原子的结构包括为：质子，中子，电子。如下图所示，</p>
-<p><img src="https://i2.mjj.rip/2023/07/06/450dd402dd4c982ec42f583a410a05bf.jpeg" alt="450dd402dd4c982ec42f583a410a05bf.jpeg"></p>
-<p>质子<strong>带正电</strong> 中子<strong>不带电</strong>都是处在中心的区域<em>（像是银河系中的太阳一样）</em> ，而带电的是核外的<strong>电子</strong>。像是绕太阳运行的行星。</p>
-<p>尽管质子和电子通常用+，- 号表示，但不表示任何的数学含义，只表示某种特殊的关系。通常状况下它们表现为稳定状态。当你从地毯走过的时候，地毯偷偷从你的写上偷走电子，在你接触物体的那一瞬间产生静电火花🔥！在产生一瞬间之后，趋于平衡状态……。在这个过程中是一个<strong>回路</strong>，电子从你的地毯—&gt;身体—&gt; 鞋子。这种现象不仅仅存在于静电中，在风暴中，底层云积聚了大量的电子，而顶层的失去了大量的电子，然而一到闪电过后，一切趋于平衡….</p>
-<p>在电路中，当某个原子中的电子逃逸到下一个原子中，于此同时，该原子又从上一个原子中得到一个电子，而失去电子的原子又从上一个原子获取电子，如此循环，<strong>电流其实是电子不断从一个原子移动到另一个原子的过程</strong>。</p>
-<p>这一切肯定不是自发的，当你把一堆材料堆在一起一定不会产生电流。显然需要一个”驱动器”，那就是<strong>电池</strong>，电池会促进电路中电子的流动，从而产生电流。</p>
-<p><img src="https://i2.mjj.rip/2023/07/06/bcc90e4606dd1f566a11e3e07430ccbf.jpeg" alt="bcc90e4606dd1f566a11e3e07430ccbf.jpeg"></p>
-<p>如图，环形电路中，红色表示电流。两个电池，没个电池为1.5v。注意，电池的摆放必须是正负极对接。原因是负极的电子要流向正极产生电流。然而，两个1.5v 串联结果是3v。</p>
-<p>判断物体是否容易放电其实是看核外电子是否容易被<strong>失去</strong>，也就看是不是<strong>稳定</strong>。比如我们经常用的铜作为导线，是因为铜核外只有一个电子，容易失去电子，也即是容易逃逸！判断是否为导体就是看是否容易逃逸电子。 相反，导电相反是阻抗性，就是一些物质容易让电子通过，称为阻抗性。绝缘体就是这么来的。但是，大力出奇迹 : <em>其实只要电流足够大任何物体都可以导电</em> 。</p>
-<p>铜的阻抗性就比较低，但铜线越长阻抗性会越高。如果铜线越粗，阻抗性会越低，也就是可以流过的电子数量会越高。（类比水管） 电流就相当于水管中水的流速，水压相当于电压，水管的粗细程度代表电阻。</p>
-<p>电压： 比如一块1.5v的电池，说明电压是1.5v。<strong>电压表示了电流做功的势</strong>，也就是电势能的大小。就算不用这块电池，它的电势能依旧<strong>在那</strong>。势能好比是你拿一块砖在平地上，此时的势能几乎为0。但如果你把它拿到18层楼高的地方（但你别真的做！），此时的势能绝对挺大，<em>就算你什么也不做它的势能依旧在那里</em>。如果你想知道势能到底是多大，你得把它从18层释放下来…..</p>
-<p>​                    													<strong>欧姆定律：  I &#x3D; E&#x2F;R</strong></p>
-<p>在电学中，如果知道电势能和电阻，就可以算出电流的大小。</p>
-<p><strong><img src="https://i2.mjj.rip/2023/07/07/54795f082535408f014735fbbb27140b.jpeg" alt="54795f082535408f014735fbbb27140b.jpeg"></strong></p>
-<p>既然在天空中会打雷，那么空气也是一种导体。把电池放到空气中应该也会有从正负极有电流产生。但是！！根据公式可以看出：</p>
-<ul>
-<li>当放在空气中虽然知道电势是1.5v ，但空气中电阻是非常非常大的。故是  <strong>一个数&#x2F;∞ &#x3D; 0</strong>   ，最后算出电流是趋近于0。</li>
-<li>当单独连个导线，想必初中的时候讲过，会出现短路现象。原因是当电势能1.5的时候，正负极连着一根导线，单独的一根导线导致电阻值非常的小。所以是，一个数&#x2F;趋紧于0的数 &#x3D; ∞  电流无穷大！！ 意味着导线可能电流过大，导致整个导线变热甚至会烧红（<em>甚至融化</em>），会把电能转换为热能。</li>
-</ul>
-<p>大部分电路其实是介于这二者之间的，要么阻值大一点，要么小一点。当阻值小的时候，电路会发热，甚至燃烧。💡灯其实是利用了这个原理，只不过是在真空中然后，灯丝其实会发热然后燃烧。</p>
-<p>以上其实不是最主要的，开关才是最想说的。开关表示了电路的 通&#x2F;闭。其实对应了二进制的 0 &#x2F;1 。      </p>
-<h1 id="2-绕过拐角的通信"><a href="#2-绕过拐角的通信" class="headerlink" title="2.绕过拐角的通信"></a>2.绕过拐角的通信</h1><p>代入一个情景，你跟你的邻居好友在被妈妈没收手机后想在夜晚睡不着的时候进行交流。 但是，可是你们的窗户是错位的，也就是不能看到对方的窗户。所以不能用手电开关及其用摩斯码通过 <em>点和划</em> 来解读对方的话语。</p>
-<p>怎么办？</p>
-<p>已经通过之前的电路知识，给对方搭建一套“电报”系统。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/15f345afb516e32a194272bcddd7eab5.jpeg" alt="15f345afb516e32a194272bcddd7eab5.jpeg"></p>
-<p>但这个只是单向传递，你只能让对方看见，如果你想双向传递，你得再加一套通往你家的。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/68ff0ef0c3d41c1e1224193149348b29.jpeg" alt="68ff0ef0c3d41c1e1224193149348b29.jpeg"></p>
-<p>🤔如果再想想，其实可以省点线路“钱”，比如像这样，中间蓝色部分用<strong>公共线</strong>。如果你朋友那边闭合开关，通过图中的箭头的方向可以形成一个闭合回路会点亮你家里的灯泡💡。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/3d7bae25e5b0cf644a529544e6e13869.jpeg" alt="3d7bae25e5b0cf644a529544e6e13869.jpeg"></p>
-<p>如果你们俩都闭合开关那么灯泡其实是不亮的。原因是在公共线路中有两个方向相反的电流。两端都没有办法形成闭合回路。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/9516f93d848d18fe012801a8418e243d.jpeg" alt="9516f93d848d18fe012801a8418e243d.jpeg"></p>
-<hr>
-<p>如果我们铺设的线路足够长，对应的电阻也会无限大。这显然不符合经济性。</p>
-<p>其实还可以继续简化公用线！减少用线成本。我们知道一个理论，<strong>导体的截面越大，导电性就越好</strong>。我们这恰好有一个大球，直径大约7900英里，那就是地球呀🌍。地球是个很好的导体，如果你使用地球作为“<strong>导线</strong>”，那你的电压可不能只是两节干电池了，你需要大点的电压。然后插根铜柱子根地面有足够的接触面积。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/cd82cc25b2fe872ac42c02b6e6d03179.jpeg" alt="cd82cc25b2fe872ac42c02b6e6d03179.jpeg"></p>
-<p>由于不能使用干电池了，现在把电池那块抽象成一个符号方便后续的描述。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/e7a30c5be1924f7859c173bcb30c4af5.jpeg" alt="e7a30c5be1924f7859c173bcb30c4af5.jpeg"></p>
-<p>把V可以想象成一台能抽电子的吸尘器，整个地球🌍其实是一个<em>电子的海洋</em>，有无穷无尽的电子可以使用。</p>
-<p>那可以把上面的电报系统简化成现在这种样子。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/683164b5581c8d4fc977af0c6c1530ff.jpeg" alt="683164b5581c8d4fc977af0c6c1530ff.jpeg"></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">书籍</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/书籍//" class="article-tag-list-link color3">书籍</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1675,15 +1750,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1703,10 +1782,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1723,15 +1798,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1783,11 +1858,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">

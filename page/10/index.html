@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 192
+            总文章数 193
         </nav>
 
 
@@ -172,6 +172,108 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-字符串逆序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/20/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%86%E5%BA%8F/">字符串逆序</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/20/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%86%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2021-05-20T14:38:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>实验7-3-1 字符串逆序 (15 分)</p>
+<p>输入一个字符串，对该字符串进行逆序，输出逆序后的字符串。 </p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出一个不超过80个字符长度的、以回车结束的非空字符串。 </p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出逆序后的字符串。 </p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!dlroW olleH</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">char</span> c[<span class="number">80</span>];</span><br><span class="line">   <span class="type">char</span> ch;</span><br><span class="line">   <span class="type">int</span> i = <span class="number">0</span>;<span class="comment">//循环下标</span></span><br><span class="line">   ch = getchar();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">while</span> ( ch != <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">   &#123;</span><br><span class="line">      c[i] = ch;</span><br><span class="line">      i++;<span class="comment">//数组往后走一个</span></span><br><span class="line">      ch = getchar();<span class="comment">//再次读取一个char</span></span><br><span class="line">   &#125;</span><br><span class="line">	 <span class="comment">//此时那个i已经跑到最后一个下标的下一个了，所以要-1才是真正最后一个元素的下标</span></span><br><span class="line">   <span class="type">int</span> lastIntem = i;</span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> j = lastIntem<span class="number">-1</span>; j&gt;=<span class="number">0</span>; j--) &#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,c[j]);</span><br><span class="line">   &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/20/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%86%E5%BA%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-简单计算器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1152,103 +1254,6 @@
 
 
   
-    <article id="post-求e的近似值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/04/%E6%B1%82e%E7%9A%84%E8%BF%91%E4%BC%BC%E5%80%BC/">求e的近似值 </a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/04/%E6%B1%82e%E7%9A%84%E8%BF%91%E4%BC%BC%E5%80%BC/" class="archive-article-date">
-  	<time datetime="2021-05-04T12:49:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实验4-2-2 求e的近似值 (15 分)</p>
-<p>自然常数 <em>e</em> 可以用级数 1+1&#x2F;1!+1&#x2F;2!+⋯+1&#x2F;<em>n</em>!+⋯ 来近似计算。本题要求对给定的非负整数 <em>n</em>，求该级数的前 <em>n</em>+1 项和。</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入第一行中给出非负整数 <em>n</em>（≤1000）。</p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行中输出部分和的值，保留小数点后八位。</p>
-<h3 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.71828180</span><br></pre></td></tr></table></figure>
-
-
-
-<hr>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">double</span> <span class="title function_">reer</span><span class="params">( <span class="type">int</span> n )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//算阶乘</span></span><br><span class="line">    <span class="type">double</span> sum = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      sum*=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> N;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    <span class="type">double</span> suml= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> ( N &lt;= <span class="number">1000</span> ) &#123; </span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++) </span><br><span class="line">      &#123;</span><br><span class="line">        suml+=<span class="number">1.0</span>/reer(i);</span><br><span class="line">      &#125;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;%.8lf\n&quot;</span>,suml);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>分而治之的思想 </p>
-<ul>
-<li><p>先求出阶乘 —-&gt;非常经典且必须要记忆的代码。 用最基本的 <strong>连乘</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="title function_">reer</span><span class="params">( <span class="type">int</span> n )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//算阶乘</span></span><br><span class="line">    <span class="type">double</span> sum = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      sum*=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>利用累加循环把每一个分数累加进去。</p>
-</li>
-<li><p>最后按要求输出即可。</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>⚠️：阶乘到一定程度的时候会超过int的范围。所以我们函数里要定义 成double类型。我就在这犯的错❌</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="title function_">reer</span><span class="params">( <span class="type">int</span> n )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//算阶乘</span></span><br><span class="line">    <span class="type">double</span> sum = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      sum*=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/04/%E6%B1%82e%E7%9A%84%E8%BF%91%E4%BC%BC%E5%80%BC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
@@ -1394,15 +1399,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1422,10 +1431,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1442,15 +1447,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1502,11 +1507,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">

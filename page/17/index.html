@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 192
+            总文章数 193
         </nav>
 
 
@@ -172,6 +172,110 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-查找算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/10/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/">查找算法</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/10/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2021-02-10T14:21:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="顺序查找"><a href="#顺序查找" class="headerlink" title="顺序查找"></a>顺序查找</h3><h4 id="普通版"><a href="#普通版" class="headerlink" title="普通版"></a>普通版</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Search</span><span class="params">( <span class="type">int</span> *arr,<span class="type">int</span> key,<span class="type">int</span> n )</span><span class="comment">//key 是你要查询的那个东西 n是你传进来数组的长度</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> ( arr[i] == key )<span class="comment">//每次对比一下</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i);<span class="comment">//返回是那个位置标号</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="进阶版"><a href="#进阶版" class="headerlink" title="进阶版"></a>进阶版</h4><blockquote>
+<p>上一个是每次都要判断<strong>那个i</strong> 是否<strong>越界</strong>显然效率不太高（也就是i &lt; n 那一步）！所以说我们引入哨兵的概念。</p>
+<p>让哨兵等于该数组第一个元素</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Serach2</span><span class="params">(<span class="type">int</span> *arr,<span class="type">int</span> key,<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">	arr[<span class="number">0</span>] = key;<span class="comment">//设置第一个位置上为哨兵</span></span><br><span class="line">	<span class="comment">//从最后开始</span></span><br><span class="line">	<span class="type">int</span> i = n;</span><br><span class="line">	<span class="keyword">while</span>( arr[i]!=key )<span class="comment">//如果不是就继续找</span></span><br><span class="line">	&#123;</span><br><span class="line">		i--;<span class="comment">//从后往前整</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//出来循环说明你已经找到了</span></span><br><span class="line">	<span class="keyword">return</span> i;<span class="comment">//给我return出来！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>话不多说，都在程序里了！</p>
+<h3 id="折半查找（二分查找）"><a href="#折半查找（二分查找）" class="headerlink" title="折半查找（二分查找）"></a>折半查找（二分查找）</h3><blockquote>
+<p>说白了就是每次取中间的那个数，然后看看比左边大还是小，在决定在左边找还是右边找！说白了就是一颗树🌲。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Binary_Serach</span><span class="params">( <span class="type">int</span> *arr,<span class="type">int</span> key, <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> mid;</span><br><span class="line">	<span class="type">int</span> low =<span class="number">1</span>;<span class="comment">//从1号开始</span></span><br><span class="line">	<span class="type">int</span> high = n;<span class="comment">//数组末尾</span></span><br><span class="line">	<span class="keyword">while</span>( low&lt;high )<span class="comment">//当low和high没有相遇的时候代表没找到</span></span><br><span class="line">	&#123;</span><br><span class="line">	 	mid = (low+high)/<span class="number">2</span>;<span class="comment">//每一轮都要取中间，所以要放到循环里</span></span><br><span class="line">	 	<span class="keyword">if</span> ( key &lt; arr[mid] )</span><br><span class="line">	 	&#123;</span><br><span class="line">	 		<span class="comment">//说明在左边，也就是说要把后面那个移到mid-1的位置上</span></span><br><span class="line">	 		high = mid<span class="number">-1</span>;</span><br><span class="line">	 	&#125;<span class="keyword">else</span> <span class="keyword">if</span> ( key &gt; arr[mid])</span><br><span class="line">	 	&#123;</span><br><span class="line">	 		low  = mid+<span class="number">1</span>;</span><br><span class="line">	 	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	 		<span class="keyword">return</span> mid;<span class="comment">//否则那个mid就是那个要查的元素</span></span><br><span class="line">	 	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">查找算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/查找算法//" class="article-tag-list-link color5">查找算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/10/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-二叉查找树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1173,111 +1277,6 @@
 
 
   
-    <article id="post-链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/04/%E9%93%BE%E8%A1%A8/">链表</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/04/%E9%93%BE%E8%A1%A8/" class="archive-article-date">
-  	<time datetime="2020-12-04T14:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="先说一下思路"><a href="#先说一下思路" class="headerlink" title="先说一下思路"></a>先说一下思路</h3><ul>
-<li>必须要有个啥也不是的head也就是头指针，虽然看着没什么用，但是当我们后面要操作这个链表的时候用处就大了！</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = (<span class="keyword">struct</span> node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> node));<span class="comment">//赋值给一个临时变量</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>再次强调 p是<strong>临时变量</strong> ！！！！！</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p-&gt;data=a;</span><br><span class="line">p-&gt;next = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>因为p是一个指针，-&gt; 符号是指针操作结构体的运算符。</p>
-<p>因为新建的节点，所以我们默认他的后继节点为空</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( head == <span class="literal">NULL</span> )</span><br><span class="line">&#123;</span><br><span class="line">     head = p;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">     q-&gt;next = p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/04/%E9%93%BE%E8%A1%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/16/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/18/">Next &amp;raquo;</a>
@@ -1423,15 +1422,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1451,10 +1454,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1471,15 +1470,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1531,11 +1530,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">

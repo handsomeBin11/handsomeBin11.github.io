@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 192
+            总文章数 193
         </nav>
 
 
@@ -172,6 +172,108 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-计算个人所得税" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/09/%E8%AE%A1%E7%AE%97%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E/">计算个人所得税</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/09/%E8%AE%A1%E7%AE%97%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E/" class="archive-article-date">
+  	<time datetime="2021-04-08T16:33:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>假设个人所得税为：税率×(工资−1600)。请编写程序计算应缴的所得税，其中税率定义为：</p>
+<ul>
+<li>当工资不超过1600时，税率为0；</li>
+<li>当工资在区间(1600, 2500]时，税率为5%；</li>
+<li>当工资在区间(2500, 3500]时，税率为10%；</li>
+<li>当工资在区间(3500, 4500]时，税率为15%；</li>
+<li>当工资超过4500时，税率为20%。</li>
+</ul>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在一行中给出非负工资。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行输出个人所得税，精确到小数点后2位。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *    假设个人所得税为：税率×(工资−1600)。请编写程序计算应缴的所得税，其中税率定义为：</span></span><br><span class="line"><span class="comment">        当工资不超过1600时，税率为0；</span></span><br><span class="line"><span class="comment">        当工资在区间(1600, 2500]时，税率为5%；</span></span><br><span class="line"><span class="comment">        当工资在区间(2500, 3500]时，税率为10%；</span></span><br><span class="line"><span class="comment">        当工资在区间(3500, 4500]时，税率为15%；</span></span><br><span class="line"><span class="comment">        当工资超过4500时，税率为20%。</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line"></span><br><span class="line">     <span class="type">double</span> salr;</span><br><span class="line">     <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;salr);</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> ( salr &lt; <span class="number">1600</span> ) </span><br><span class="line">     &#123;</span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.</span>);</span><br><span class="line">     &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( salr &gt;= <span class="number">1600</span> &amp;&amp; salr &lt;= <span class="number">2500</span> )</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.05</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( salr &gt;= <span class="number">2500</span> &amp;&amp; salr &lt;= <span class="number">3500</span> )</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.1</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;<span class="keyword">else</span> <span class="keyword">if</span>( salr &gt;= <span class="number">3500</span> &amp;&amp; salr &lt;= <span class="number">4500</span> )</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.15</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.2</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/09/%E8%AE%A1%E7%AE%97%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-输出三角形的周长和面积" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1093,102 +1195,6 @@
 
 
   
-    <article id="post-总结最大公约数何最小公倍数的求法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/31/%E6%80%BB%E7%BB%93%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E4%BD%95%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E7%9A%84%E6%B1%82%E6%B3%95/">总结最大公约数何最小公倍数的求法</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/31/%E6%80%BB%E7%BB%93%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E4%BD%95%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E7%9A%84%E6%B1%82%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-03-31T14:12:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *    t = a%b;</span></span><br><span class="line"><span class="comment">   *    a = b;</span></span><br><span class="line"><span class="comment">   *    b = t</span></span><br><span class="line"><span class="comment">   *        </span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line">    <span class="type">int</span> a,b;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;a,&amp;b);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span> (b!=<span class="number">0</span> ) &#123;<span class="comment">// unit b == 0 stop</span></span><br><span class="line">      t = a%b;</span><br><span class="line">      a = b;</span><br><span class="line">      b = t;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,a);<span class="comment">//a就是那个最大公约数</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="最小公倍数"><a href="#最小公倍数" class="headerlink" title="最小公倍数"></a>最小公倍数</h2><h3 id="（最小公倍数法）"><a href="#（最小公倍数法）" class="headerlink" title="（最小公倍数法）"></a>（最小公倍数法）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  		核心算法： 最大公倍数 = 两数相乘 / 最大公约数</span></span><br><span class="line"><span class="comment">  </span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    <span class="type">int</span> a,b,t,n,m;</span><br><span class="line">      </span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;a,&amp;b);</span><br><span class="line">    m = a;<span class="comment">//防止串改a 和 b 的值</span></span><br><span class="line">    n = b;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  	<span class="comment">//-- 求最大公约数--</span></span><br><span class="line">    <span class="keyword">while</span> (b!=<span class="number">0</span> ) &#123;</span><br><span class="line">      t = a%b;</span><br><span class="line">      a = b;</span><br><span class="line">      b = t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//-------------</span></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,(m*n)/a);<span class="comment">//生成结果！</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="暴力枚举法"><a href="#暴力枚举法" class="headerlink" title="暴力枚举法"></a>暴力枚举法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     *     最小公倍数，故名思议： 至少要《大于等于》两个数字的《最大值》</span></span><br><span class="line"><span class="comment">     *    </span></span><br><span class="line"><span class="comment">     *    比如 12 36 的最小公倍数是 36 ，12*3 36*1</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *    所以思路是：</span></span><br><span class="line"><span class="comment">     *    读到输入的两个数，</span></span><br><span class="line"><span class="comment">     *    求出最大值，</span></span><br><span class="line"><span class="comment">     *    建立循环，</span></span><br><span class="line"><span class="comment">     *    从最大值开始往后找</span></span><br><span class="line"><span class="comment">     *    如果找到了就break</span></span><br><span class="line"><span class="comment">     *    当前的就是那个要求的</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> a,b,max;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;a,&amp;b);</span><br><span class="line"></span><br><span class="line">    max = a;</span><br><span class="line">    <span class="keyword">if</span> ( max &lt; b) &#123;</span><br><span class="line">        max = b;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">       max = a;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = max;; i++) &#123;</span><br><span class="line">          <span class="keyword">if</span> ( i % a == <span class="number">0</span> &amp;&amp; i % b == <span class="number">0</span> ) &#123;</span><br><span class="line">              <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/31/%E6%80%BB%E7%BB%93%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E4%BD%95%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E7%9A%84%E6%B1%82%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/13/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/15/">Next &amp;raquo;</a>
@@ -1334,15 +1340,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1362,10 +1372,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1382,15 +1388,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1442,11 +1448,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 192
+            总文章数 193
         </nav>
 
 
@@ -172,6 +172,127 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-计算油费" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/20/%E8%AE%A1%E7%AE%97%E6%B2%B9%E8%B4%B9/">计算油费</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/20/%E8%AE%A1%E7%AE%97%E6%B2%B9%E8%B4%B9/" class="archive-article-date">
+  	<time datetime="2021-04-20T11:25:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>实验3-11 计算油费 (15 分)</p>
+<p>现在90号汽油6.95元&#x2F;升、93号汽油7.44元&#x2F;升、97号汽油7.93元&#x2F;升。为吸引顾客，某自动加油站推出了“自助服务”和“协助服务”两个服务等级，分别可得到5%和3%的折扣。</p>
+<p>本题要求编写程序，根据输入顾客的加油量a，汽油品种b（90、93或97）和服务类型c（m - 自助，e - 协助），计算并输出应付款。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出两个整数和一个字符，分别表示顾客的加油量a，汽油品种b（90、93或97）和服务类型c（m - 自助，e - 协助）。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出应付款额，保留小数点后2位。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">40 97 m</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">301.34</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> total;<span class="comment">//返回给顾客的总价</span></span><br><span class="line">    <span class="type">double</span> Iptgas,numGas;<span class="comment">//输入油量 和 要加几号汽油</span></span><br><span class="line">    <span class="type">char</span> <span class="class"><span class="keyword">class</span>;</span><span class="comment">//什么类型</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lf %lf %c&quot;</span>,&amp;Iptgas,&amp;numGas,&amp;class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( class == <span class="string">&#x27;m&#x27;</span> )<span class="comment">//自助的情况如果是m - 自助 的情况</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( numGas == <span class="number">90</span> ) &#123; </span><br><span class="line">            total = Iptgas * <span class="number">6.95</span>*<span class="number">0.95</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>( numGas == <span class="number">93</span> )</span><br><span class="line">        &#123;</span><br><span class="line">             total = Iptgas * <span class="number">7.44</span>*<span class="number">0.95</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>( numGas == <span class="number">97</span> )</span><br><span class="line">        &#123;</span><br><span class="line">             total = Iptgas * <span class="number">7.93</span>*<span class="number">0.95</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( class == <span class="string">&#x27;e&#x27;</span> ) <span class="comment">//否则如果是要 e - 协助的情况</span></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> ( numGas == <span class="number">90</span> ) &#123;</span><br><span class="line">              total = Iptgas * <span class="number">6.95</span>*<span class="number">0.97</span>;</span><br><span class="line">          &#125;<span class="keyword">else</span> <span class="keyword">if</span>( numGas == <span class="number">93</span> )</span><br><span class="line">          &#123;</span><br><span class="line">                total = Iptgas * <span class="number">7.44</span>*<span class="number">0.97</span>;</span><br><span class="line">           &#125;<span class="keyword">else</span> <span class="keyword">if</span>( numGas == <span class="number">97</span> )</span><br><span class="line">           &#123;</span><br><span class="line">                total = Iptgas * <span class="number">7.93</span>*<span class="number">0.97</span>;</span><br><span class="line">           &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,total);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>代码逻辑很清楚：分两种情况，其中每一种情况分别对应 90 93 97 来分别讨论。</p>
+<p>但是遇⚠️注意题目中设了陷阱   </p>
+<ul>
+<li>得到5%和3%的折扣</li>
+</ul>
+<p><strong>要区分得到折扣和打多少折是不一样的</strong></p>
+<ul>
+<li><p>得到折扣相当于说： </p>
+</li>
+<li><p>原价 -（原价  ✖️ 得到多少折扣 ） 也可以是 </p>
+</li>
+<li><p>原价 * （1- 得多少折扣）——–&gt; 本题就是用的这种方法</p>
+</li>
+<li><p>打多少折是可以直接 ：   原价 * 打多少折</p>
+</li>
+</ul>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/20/%E8%AE%A1%E7%AE%97%E6%B2%B9%E8%B4%B9/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-高速公路超速处罚" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1525,108 +1646,6 @@ struct point p1,p2;
 
 
   
-    <article id="post-计算个人所得税" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/09/%E8%AE%A1%E7%AE%97%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E/">计算个人所得税</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/09/%E8%AE%A1%E7%AE%97%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E/" class="archive-article-date">
-  	<time datetime="2021-04-08T16:33:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>假设个人所得税为：税率×(工资−1600)。请编写程序计算应缴的所得税，其中税率定义为：</p>
-<ul>
-<li>当工资不超过1600时，税率为0；</li>
-<li>当工资在区间(1600, 2500]时，税率为5%；</li>
-<li>当工资在区间(2500, 3500]时，税率为10%；</li>
-<li>当工资在区间(3500, 4500]时，税率为15%；</li>
-<li>当工资超过4500时，税率为20%。</li>
-</ul>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在一行中给出非负工资。</p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行输出个人所得税，精确到小数点后2位。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *    假设个人所得税为：税率×(工资−1600)。请编写程序计算应缴的所得税，其中税率定义为：</span></span><br><span class="line"><span class="comment">        当工资不超过1600时，税率为0；</span></span><br><span class="line"><span class="comment">        当工资在区间(1600, 2500]时，税率为5%；</span></span><br><span class="line"><span class="comment">        当工资在区间(2500, 3500]时，税率为10%；</span></span><br><span class="line"><span class="comment">        当工资在区间(3500, 4500]时，税率为15%；</span></span><br><span class="line"><span class="comment">        当工资超过4500时，税率为20%。</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line"></span><br><span class="line">     <span class="type">double</span> salr;</span><br><span class="line">     <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;salr);</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> ( salr &lt; <span class="number">1600</span> ) </span><br><span class="line">     &#123;</span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.</span>);</span><br><span class="line">     &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( salr &gt;= <span class="number">1600</span> &amp;&amp; salr &lt;= <span class="number">2500</span> )</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.05</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( salr &gt;= <span class="number">2500</span> &amp;&amp; salr &lt;= <span class="number">3500</span> )</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.1</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;<span class="keyword">else</span> <span class="keyword">if</span>( salr &gt;= <span class="number">3500</span> &amp;&amp; salr &lt;= <span class="number">4500</span> )</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.15</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.2</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/09/%E8%AE%A1%E7%AE%97%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/12/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/14/">Next &amp;raquo;</a>
@@ -1772,15 +1791,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1800,10 +1823,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1820,15 +1839,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1880,11 +1899,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">

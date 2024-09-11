@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 192
+            总文章数 193
         </nav>
 
 
@@ -172,6 +172,111 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-环状序列-Circular-Sequence" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/23/%E7%8E%AF%E7%8A%B6%E5%BA%8F%E5%88%97-Circular-Sequence/">环状序列 Circular Sequence</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/23/%E7%8E%AF%E7%8A%B6%E5%BA%8F%E5%88%97-Circular-Sequence/" class="archive-article-date">
+  	<time datetime="2021-10-23T07:25:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>长度为n的环状串有n种表示法，分别为从某个位置开始顺时针得到。例如，图3-4的环状串有10种表示：CGAGTCAGCT，GAGTCAGCTC，AGTCAGCTCG等。在这些表示法中，字典序最小的称为”最小表示”。<br>输入一个长度为n（n≤100）的环状DNA串（只包含A、C、G、T这4种字符）的一种表示法，你的任务是输出该环状串的最小表示。例如，CTCC的最小表示是CCCT， CGAGTCAGCT的最小表示为AGCTCGAGTC。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CKHuTY"><img src="https://www.helloimg.com/images/2021/10/23/CKHuTY.png" alt="CKHuTY.png"></a></p>
+<h3 id="什么是字典最小表示"><a href="#什么是字典最小表示" class="headerlink" title="什么是字典最小表示"></a>什么是字典最小表示</h3><blockquote>
+<p>【分析】<br>本题出现了一个新概念:字典序。所谓字典序，就是字符串在字典中的顺序。一般地， 对于两个字符串，从第一个字符开始比较，当某一个位置的字符不同时，该位置字符较小的 串，字典序较小(例如，abc比bcd小);如果其中一个字符串已经没有更多字符，但另一个 字符串还没结束，则较短的字符串的字典序较小(例如，hi比history小)。字典序的概念可 以推广到任意序列，例如，序列1, 2, 4, 7比1, 2, 5小。</p>
+</blockquote>
+<hr>
+<p>自己的思路： 也就是我们要选取一个闭环从任意位置开始的字母的组合比大小。举个例子🌰：如果说我们需要排<strong>GCTAG</strong> ,那我们就可以用下图来表示</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CKbSWK"><img src="https://www.helloimg.com/images/2021/10/23/CKbSWK.jpg" alt="CKbSWK.jpg"></a></p>
+<p>显然有<strong>5</strong>种情况，我们要取里面字典序列最小的。由上面的分析的一句话“<strong>第一个字符开始比较，当某一个位置的字符不同时，该位置字符较小的串</strong>”可以得出，如果我们都从第一个字符开始比较，A开头的那一串为所有串种的最小。</p>
+<ul>
+<li><p>所以我能写出一个函数用来做一个比较。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">less</span><span class="params">( <span class="type">const</span> <span class="type">char</span> *s ,<span class="type">int</span> p , <span class="type">int</span> q )</span><span class="comment">//用来判别前后两个字符的关系</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="built_in">strlen</span>( s ); </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n ; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[(p+i)%n] != s[(q+i)%n] )<span class="comment">//当后一个和前一个字符不相等时候进入判断语句</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> s[(p+i)%n] &lt; s[(q+i)%n];<span class="comment">//当后一个比前一个字符来的小的话返回1否则返回0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//表示相等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="完整的程序"><a href="#完整的程序" class="headerlink" title="完整的程序"></a>完整的程序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 105</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">less</span><span class="params">( <span class="type">const</span> <span class="type">char</span> *s ,<span class="type">int</span> p , <span class="type">int</span> q)</span><span class="comment">//用来判别前后两个字符的关系</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="built_in">strlen</span>( s );</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n ; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[(p+i)%n] != s[(q+i)%n] )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> s[(p+i)%n] &lt; s[(q+i)%n];<span class="comment">//如果前一个小于后一个就返回1进行交换</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//表示相等</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    <span class="type">char</span> s[maxn];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>( T-- )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>( <span class="string">&quot;%s&quot;</span>,s );</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> n = <span class="built_in">strlen</span>(s);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ( less(s,i,ans) )<span class="comment">//如果后面的比前面的还小就进来</span></span><br><span class="line">            &#123;</span><br><span class="line">                 ans = i;   <span class="comment">//把小的那个作为新的ans（也就是小的），然后在ans的基础上往后看有没有比ans更小的</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//输出</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">putchar</span>(s[(i+ans)%n]);<span class="comment">//从ans开始往后逐个环形输出（环形输出）</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">竞赛</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/竞赛//" class="article-tag-list-link color3">竞赛</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/23/%E7%8E%AF%E7%8A%B6%E5%BA%8F%E5%88%97-Circular-Sequence/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-数字加密" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1106,113 +1211,6 @@
 
 
   
-    <article id="post-判断上三角矩阵" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/31/%E5%88%A4%E6%96%AD%E4%B8%8A%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5/">判断上三角矩阵</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/31/%E5%88%A4%E6%96%AD%E4%B8%8A%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5/" class="archive-article-date">
-  	<time datetime="2021-05-31T14:18:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实验7-2-5 判断上三角矩阵 (15 分)</p>
-<p>上三角矩阵指主对角线以下的元素都为0的矩阵；主对角线为从矩阵的左上角至右下角的连线。</p>
-<p>本题要求编写程序，判断一个给定的方阵是否上三角矩阵。</p>
-<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出一个正整数<em>T</em>，为待测矩阵的个数。接下来给出<em>T</em>个矩阵的信息：每个矩阵信息的第一行给出一个不超过10的正整数<em>n</em>。随后<em>n</em>行，每行给出<em>n</em>个整数，其间以空格分隔。</p>
-<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>每个矩阵的判断结果占一行。如果输入的矩阵是上三角矩阵，输出“YES”，否则输出“NO”。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">3</span><br><span class="line">1 2 3</span><br><span class="line">0 4 5</span><br><span class="line">0 0 6</span><br><span class="line">2</span><br><span class="line">1 0</span><br><span class="line">-8 2</span><br><span class="line">3</span><br><span class="line">1 2 3</span><br><span class="line">1 4 5</span><br><span class="line">0 -1 6</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">NO</span><br><span class="line">NO</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BuonWK"><img src="https://www.helloimg.com/images/2021/05/31/BuonWK.jpg" alt="BuonWK.jpg"></a></p>
-<ul>
-<li>观察发现： 下三角矩阵只需要保证      i(行标)  &gt; j (列标) 就是下三角的下标</li>
-<li>我的判断条件直接就是。 i &gt; j   &amp;&amp;  当前这个元素不为0  —&gt; 当前不是下三角</li>
-<li>同样 如果你要算下三角矩阵，也就是上边全是0 那就 <strong>i&lt;j</strong>  即可</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n,n1;<span class="comment">//</span></span><br><span class="line">    <span class="type">int</span> arr[<span class="number">10</span>][<span class="number">10</span>];</span><br><span class="line">    <span class="type">int</span> flagARR[<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="type">int</span> flag = <span class="number">1</span>;<span class="comment">//假设为是上三角</span></span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n1);<span class="comment">//输入当前矩阵的行</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n1; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n1; j++) &#123;</span><br><span class="line">          <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;arr[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">        </span><br><span class="line">      <span class="comment">//检查是否是三角</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n1; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n1; j++) &#123;</span><br><span class="line">          <span class="keyword">if</span> ( i &gt; j &amp;&amp; arr[i][j]!=<span class="number">0</span>)  &#123;</span><br><span class="line">              flag = <span class="number">0</span>;<span class="comment">//但凡有一个非零代表就不是了</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//循环完成之后代表记录当前的数组</span></span><br><span class="line">    flagARR[i] = flag;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">     <span class="keyword">if</span> (  flagARR[i] == <span class="number">1</span> )</span><br><span class="line">     &#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);</span><br><span class="line">     &#125;<span class="keyword">else</span></span><br><span class="line">     &#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/31/%E5%88%A4%E6%96%AD%E4%B8%8A%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/9/">Next &amp;raquo;</a>
@@ -1358,15 +1356,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1386,10 +1388,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1406,15 +1404,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1466,11 +1464,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">

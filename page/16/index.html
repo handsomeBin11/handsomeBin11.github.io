@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 192
+            总文章数 193
         </nav>
 
 
@@ -172,6 +172,87 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-第二周-逆序的三位数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/24/%E7%AC%AC%E4%BA%8C%E5%91%A8-%E9%80%86%E5%BA%8F%E7%9A%84%E4%B8%89%E4%BD%8D%E6%95%B0/">第二周,逆序的三位数</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/24/%E7%AC%AC%E4%BA%8C%E5%91%A8-%E9%80%86%E5%BA%8F%E7%9A%84%E4%B8%89%E4%BD%8D%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2021-02-24T12:41:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">程序每次读入一个正三位数，然后输出逆序的数字。注意，当输入的数字含有结尾的0时，输出不应带有前导的0。</span></span><br><span class="line"><span class="comment">比如输入700，输出应该是7。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入格式:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">每个测试是一个3位的正整数。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输出格式：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输出逆序的数。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入样例：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">123</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输出样例：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">321</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        123 / 100 = 1</span></span><br><span class="line"><span class="comment">        123 % 10 =3</span></span><br><span class="line"><span class="comment">        123 / 10 = 12 %10 = 2</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> a,b,c,num;</span><br><span class="line">    <span class="comment">// scanf(&quot;%d&quot;,&amp;num);</span></span><br><span class="line">    num=<span class="number">214</span>;</span><br><span class="line"></span><br><span class="line">    a=num/<span class="number">100</span>;<span class="comment">//百位</span></span><br><span class="line">    c = num%<span class="number">10</span>;<span class="comment">//个位</span></span><br><span class="line">    b = num/<span class="number">10</span>%<span class="number">10</span>;<span class="comment">//中间那个</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,c*<span class="number">100</span>+b*<span class="number">10</span>+a);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C语言知识点</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/24/%E7%AC%AC%E4%BA%8C%E5%91%A8-%E9%80%86%E5%BA%8F%E7%9A%84%E4%B8%89%E4%BD%8D%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-第二周-然后是几点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1096,110 +1177,6 @@ int main(int argc, char const *argv[])
 
 
   
-    <article id="post-查找算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/10/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/">查找算法</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/10/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-02-10T14:21:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="顺序查找"><a href="#顺序查找" class="headerlink" title="顺序查找"></a>顺序查找</h3><h4 id="普通版"><a href="#普通版" class="headerlink" title="普通版"></a>普通版</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Search</span><span class="params">( <span class="type">int</span> *arr,<span class="type">int</span> key,<span class="type">int</span> n )</span><span class="comment">//key 是你要查询的那个东西 n是你传进来数组的长度</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> ( arr[i] == key )<span class="comment">//每次对比一下</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i);<span class="comment">//返回是那个位置标号</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="进阶版"><a href="#进阶版" class="headerlink" title="进阶版"></a>进阶版</h4><blockquote>
-<p>上一个是每次都要判断<strong>那个i</strong> 是否<strong>越界</strong>显然效率不太高（也就是i &lt; n 那一步）！所以说我们引入哨兵的概念。</p>
-<p>让哨兵等于该数组第一个元素</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Serach2</span><span class="params">(<span class="type">int</span> *arr,<span class="type">int</span> key,<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">	arr[<span class="number">0</span>] = key;<span class="comment">//设置第一个位置上为哨兵</span></span><br><span class="line">	<span class="comment">//从最后开始</span></span><br><span class="line">	<span class="type">int</span> i = n;</span><br><span class="line">	<span class="keyword">while</span>( arr[i]!=key )<span class="comment">//如果不是就继续找</span></span><br><span class="line">	&#123;</span><br><span class="line">		i--;<span class="comment">//从后往前整</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//出来循环说明你已经找到了</span></span><br><span class="line">	<span class="keyword">return</span> i;<span class="comment">//给我return出来！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>话不多说，都在程序里了！</p>
-<h3 id="折半查找（二分查找）"><a href="#折半查找（二分查找）" class="headerlink" title="折半查找（二分查找）"></a>折半查找（二分查找）</h3><blockquote>
-<p>说白了就是每次取中间的那个数，然后看看比左边大还是小，在决定在左边找还是右边找！说白了就是一颗树🌲。</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Binary_Serach</span><span class="params">( <span class="type">int</span> *arr,<span class="type">int</span> key, <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> mid;</span><br><span class="line">	<span class="type">int</span> low =<span class="number">1</span>;<span class="comment">//从1号开始</span></span><br><span class="line">	<span class="type">int</span> high = n;<span class="comment">//数组末尾</span></span><br><span class="line">	<span class="keyword">while</span>( low&lt;high )<span class="comment">//当low和high没有相遇的时候代表没找到</span></span><br><span class="line">	&#123;</span><br><span class="line">	 	mid = (low+high)/<span class="number">2</span>;<span class="comment">//每一轮都要取中间，所以要放到循环里</span></span><br><span class="line">	 	<span class="keyword">if</span> ( key &lt; arr[mid] )</span><br><span class="line">	 	&#123;</span><br><span class="line">	 		<span class="comment">//说明在左边，也就是说要把后面那个移到mid-1的位置上</span></span><br><span class="line">	 		high = mid<span class="number">-1</span>;</span><br><span class="line">	 	&#125;<span class="keyword">else</span> <span class="keyword">if</span> ( key &gt; arr[mid])</span><br><span class="line">	 	&#123;</span><br><span class="line">	 		low  = mid+<span class="number">1</span>;</span><br><span class="line">	 	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	 		<span class="keyword">return</span> mid;<span class="comment">//否则那个mid就是那个要查的元素</span></span><br><span class="line">	 	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">查找算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/查找算法//" class="article-tag-list-link color5">查找算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/10/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/15/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/17/">Next &amp;raquo;</a>
@@ -1345,15 +1322,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1373,10 +1354,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1393,15 +1370,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1453,11 +1430,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
