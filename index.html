@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 193
+            总文章数 194
         </nav>
 
 
@@ -172,6 +172,204 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Java之-流的思想" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/09/20/Java%E4%B9%8B-%E6%B5%81%E7%9A%84%E6%80%9D%E6%83%B3/">Java之 流的思想</a>
+    </h1>
+  
+
+        
+        <a href="/2024/09/20/Java%E4%B9%8B-%E6%B5%81%E7%9A%84%E6%80%9D%E6%83%B3/" class="archive-article-date">
+  	<time datetime="2024-09-20T15:58:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Stream流"><a href="#Stream流" class="headerlink" title="Stream流"></a>Stream流</h1><h2 id="集合流的用法"><a href="#集合流的用法" class="headerlink" title="集合流的用法"></a>集合流的用法</h2><h3 id="单列集合"><a href="#单列集合" class="headerlink" title="单列集合"></a>单列集合</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//创建一个ArrayList集合</span></span><br><span class="line">ArrayList&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">list.stream().forEach(s -&gt; System.out.println(s));</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="双列集合"><a href="#双列集合" class="headerlink" title="双列集合"></a>双列集合</h3><blockquote>
+<p>无法直接使用方法，只能先转成单列再进行操作</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建双列集合</span></span><br><span class="line">       HashMap&lt;String,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 添加数据</span></span><br><span class="line">       map.put(<span class="string">&quot;aaa&quot;</span>,<span class="number">111</span>);</span><br><span class="line">       map.put(<span class="string">&quot;bbb&quot;</span>,<span class="number">222</span>);</span><br><span class="line">       map.put(<span class="string">&quot;ccc&quot;</span>,<span class="number">333</span>);</span><br><span class="line">       map.put(<span class="string">&quot;ddd&quot;</span>,<span class="number">444</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="第一种获取"><a href="#第一种获取" class="headerlink" title="第一种获取"></a>第一种获取</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取Stream流</span></span><br><span class="line">        <span class="comment">// 只能是键和值分别取  此时先取键</span></span><br><span class="line">map.keySet().stream().forEach(s -&gt; &#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line">aaa</span><br><span class="line">ccc</span><br><span class="line">bbb</span><br><span class="line">ddd</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="第二种获取"><a href="#第二种获取" class="headerlink" title="第二种获取"></a>第二种获取</h4><blockquote>
+<p>map.entrySet() 是获取到所有键值对儿对象的单列集合</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第二种</span></span><br><span class="line">map.entrySet().stream().forEach(s -&gt; &#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;);</span><br><span class="line"><span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line">aaa=<span class="number">111</span></span><br><span class="line">ccc=<span class="number">333</span></span><br><span class="line">bbb=<span class="number">222</span></span><br><span class="line">ddd=<span class="number">444</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> GE_BIN</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@data</span> 2024/9/20 10:47</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desciption</span>:</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StringDemo4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建数组</span></span><br><span class="line">        <span class="type">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>&#125;;</span><br><span class="line">				<span class="comment">//字符串</span></span><br><span class="line">        String[] arr2 = &#123;<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取stream 流</span></span><br><span class="line">        Arrays.stream(arr).forEach( s -&gt; &#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.stream(arr2).forEach( s -&gt; &#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line">  </span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="流的方法"><a href="#流的方法" class="headerlink" title="流的方法"></a>流的方法</h2><h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h3><h4 id="匿名内部类的方法"><a href="#匿名内部类的方法" class="headerlink" title="匿名内部类的方法"></a>匿名内部类的方法</h4><blockquote>
+<p>过滤不会改变原来值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StreamDemo4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;String&gt; list  = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Collections.addAll(list,<span class="string">&quot;李明&quot;</span>, <span class="string">&quot;王芳&quot;</span>, <span class="string">&quot;张伟&quot;</span>, <span class="string">&quot;刘洋&quot;</span>, <span class="string">&quot;陈静&quot;</span>, <span class="string">&quot;赵磊&quot;</span>, <span class="string">&quot;孙娜&quot;</span>, <span class="string">&quot;黄强&quot;</span>, <span class="string">&quot;周婷&quot;</span>, <span class="string">&quot;张杰&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 过滤   把姓张的留下，其余的不要</span></span><br><span class="line">        list.stream().filter(<span class="keyword">new</span> <span class="title class_">Predicate</span>&lt;String&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">test</span><span class="params">(String s)</span> &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> s.startsWith(<span class="string">&quot;张&quot;</span>);<span class="comment">// 是 true  不是 false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).forEach(s -&gt; System.out.println(s));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line">张伟</span><br><span class="line">张杰</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Lambda-表达式简化"><a href="#Lambda-表达式简化" class="headerlink" title="Lambda 表达式简化"></a>Lambda 表达式简化</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StreamDemo4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;String&gt; list  = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Collections.addAll(list,<span class="string">&quot;李明&quot;</span>, <span class="string">&quot;王芳&quot;</span>, <span class="string">&quot;张伟丽&quot;</span>, <span class="string">&quot;刘洋&quot;</span>, <span class="string">&quot;陈静&quot;</span>, <span class="string">&quot;赵磊&quot;</span>, <span class="string">&quot;孙娜&quot;</span>, <span class="string">&quot;黄强&quot;</span>, <span class="string">&quot;周婷&quot;</span>, <span class="string">&quot;张杰&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 过滤   把姓张的留下，其余的不要</span></span><br><span class="line">        list.stream().filter( s -&gt; s.startsWith(<span class="string">&quot;张&quot;</span>))</span><br><span class="line">                .forEach(s -&gt; System.out.println(s));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>继续过滤</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//先把返回的结果保存</span></span><br><span class="line">Stream&lt;String&gt; stream1 =  list.stream().filter(s -&gt; s.startsWith(<span class="string">&quot;张&quot;</span>));</span><br><span class="line"><span class="comment">//过滤剩下长度等于3的</span></span><br><span class="line">Stream&lt;String&gt; stream2 = stream1.filter(s -&gt; s.length() == <span class="number">3</span>);</span><br><span class="line">stream2.forEach(s -&gt; System.out.println(s));</span><br><span class="line"><span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line">张伟丽</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>但是 stream1 <strong>不能</strong>再继续使用了，故，若要继续使用就得用链式编程。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list.stream().filter(s -&gt; s.startsWith(<span class="string">&quot;张&quot;</span>))</span><br><span class="line">               .filter(s -&gt; s.length() == <span class="number">3</span>)</span><br><span class="line">               .forEach(s -&gt; System.out.println(s));</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="skip"><a href="#skip" class="headerlink" title="skip"></a>skip</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">list.stream().limit(<span class="number">4</span>)<span class="comment">// 第4个跳过</span></span><br><span class="line">                .forEach(s -&gt; System.out.println(s));</span><br><span class="line"><span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line">李明</span><br><span class="line">王芳</span><br><span class="line">张伟丽</span><br><span class="line">李明</span><br><span class="line">王芳</span><br><span class="line">张伟丽</span><br><span class="line">刘洋</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> ArrayList&lt;String&gt; list1  = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Collections.addAll(list1,<span class="string">&quot;谢永强&quot;</span>, <span class="string">&quot;谢永强&quot;</span>, <span class="string">&quot;谢永强&quot;</span>, <span class="string">&quot;王小蒙&quot;</span>, <span class="string">&quot;刘能&quot;</span>, <span class="string">&quot;赵四&quot;</span>, <span class="string">&quot;谢大脚&quot;</span>, <span class="string">&quot;宋晓峰&quot;</span>, <span class="string">&quot;王老七&quot;</span>, <span class="string">&quot;谢广坤&quot;</span>, <span class="string">&quot;小李秘书&quot;</span>);</span><br><span class="line">list1.stream().distinct().forEach(s -&gt; System.out.println(s));</span><br><span class="line"><span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line">谢永强</span><br><span class="line">王小蒙</span><br><span class="line">刘能</span><br><span class="line">赵四</span><br><span class="line">谢大脚</span><br><span class="line">宋晓峰</span><br><span class="line">王老七</span><br><span class="line">谢广坤</span><br><span class="line">小李秘书</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="concat-合并"><a href="#concat-合并" class="headerlink" title="concat 合并"></a><em>concat</em> 合并</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"> ArrayList&lt;String&gt; list1  = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Collections.addAll(list1,<span class="string">&quot;谢永强&quot;</span>, <span class="string">&quot;谢永强&quot;</span>, <span class="string">&quot;谢永强&quot;</span>, <span class="string">&quot;王小蒙&quot;</span>, <span class="string">&quot;刘能&quot;</span>, <span class="string">&quot;赵四&quot;</span>, <span class="string">&quot;谢大脚&quot;</span>, <span class="string">&quot;宋晓峰&quot;</span>, <span class="string">&quot;王老七&quot;</span>, <span class="string">&quot;谢广坤&quot;</span>, <span class="string">&quot;小李秘书&quot;</span>);</span><br><span class="line"></span><br><span class="line">        list1.stream().distinct().forEach(s -&gt; System.out.println(s));</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;String&gt; list2  = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Collections.addAll(list2,<span class="string">&quot;李明&quot;</span>, <span class="string">&quot;王芳&quot;</span>, <span class="string">&quot;张伟丽&quot;</span>, <span class="string">&quot;刘洋&quot;</span>, <span class="string">&quot;陈静&quot;</span>, <span class="string">&quot;赵磊&quot;</span>, <span class="string">&quot;孙娜&quot;</span>, <span class="string">&quot;黄强&quot;</span>, <span class="string">&quot;周婷&quot;</span>, <span class="string">&quot;张杰&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//合并流</span></span><br><span class="line">        Stream.concat(list2.stream(),list2.stream()).forEach(s -&gt; System.out.println(s));</span><br><span class="line"></span><br><span class="line"><span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line">谢永强</span><br><span class="line">王小蒙</span><br><span class="line">刘能</span><br><span class="line">赵四</span><br><span class="line">谢大脚</span><br><span class="line">宋晓峰</span><br><span class="line">王老七</span><br><span class="line">谢广坤</span><br><span class="line">小李秘书</span><br><span class="line">李明</span><br><span class="line">王芳</span><br><span class="line">张伟丽</span><br><span class="line">刘洋</span><br><span class="line">陈静</span><br><span class="line">赵磊</span><br><span class="line">孙娜</span><br><span class="line">黄强</span><br><span class="line">周婷</span><br><span class="line">张杰</span><br><span class="line">李明</span><br><span class="line">王芳</span><br><span class="line">张伟丽</span><br><span class="line">刘洋</span><br><span class="line">陈静</span><br><span class="line">赵磊</span><br><span class="line">孙娜</span><br><span class="line">黄强</span><br><span class="line">周婷</span><br><span class="line">张杰</span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Map-转换"><a href="#Map-转换" class="headerlink" title="Map 转换"></a>Map 转换</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StreamDemo5</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        ArrayList&lt;String&gt; list  = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Collections.addAll(list,<span class="string">&quot;谢永强-34&quot;</span>, <span class="string">&quot;王小蒙-29&quot;</span>, <span class="string">&quot;刘能-48&quot;</span>, <span class="string">&quot;赵四-52&quot;</span>, <span class="string">&quot;谢大脚-45&quot;</span>, <span class="string">&quot;宋晓峰-38&quot;</span>, <span class="string">&quot;王老七-60&quot;</span>, <span class="string">&quot;谢广坤-56&quot;</span>, <span class="string">&quot;小李秘书-31&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//要求： 只获取里面的年龄并打印</span></span><br><span class="line">        <span class="comment">// 也就是 String --&gt; int</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//第一个类型是原本的类型 第二个是你要转成的类型     &lt;String, Integer&gt;</span></span><br><span class="line">        list.stream().map(<span class="keyword">new</span> <span class="title class_">Function</span>&lt;String, Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Integer <span class="title function_">apply</span><span class="params">(String s)</span> &#123;<span class="comment">//这里的返回值也是转换后的类型</span></span><br><span class="line">                <span class="comment">//先把每一个字符串类型的 s 切割</span></span><br><span class="line">                String[] arr = s.split(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">                <span class="comment">// 每次数组只拿第二个字符串</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">ageString</span> <span class="operator">=</span> arr[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 字符串转为数字类型</span></span><br><span class="line">                <span class="type">int</span> <span class="variable">age</span> <span class="operator">=</span> Integer.parseInt(ageString);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> age;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).forEach(s -&gt; System.out.println(s));<span class="comment">//此时s就是数字类型的了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line"><span class="number">34</span></span><br><span class="line"><span class="number">29</span></span><br><span class="line"><span class="number">48</span></span><br><span class="line"><span class="number">52</span></span><br><span class="line"><span class="number">45</span></span><br><span class="line"><span class="number">38</span></span><br><span class="line"><span class="number">60</span></span><br><span class="line"><span class="number">56</span></span><br><span class="line"><span class="number">31</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Lambda-表达式简化-1"><a href="#Lambda-表达式简化-1" class="headerlink" title="Lambda 表达式简化"></a>Lambda 表达式简化</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 表达式改写</span></span><br><span class="line">       <span class="comment">//s.split(&quot;-&quot;)[1] ---- &gt; string</span></span><br><span class="line">       list.stream()</span><br><span class="line">               .map(s -&gt; Integer.parseInt(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]))</span><br><span class="line">               .forEach(s-&gt; System.out.println(s));</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="流的终结方法"><a href="#流的终结方法" class="headerlink" title="流的终结方法"></a>流的终结方法</h2><h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.stream().forEach(s -&gt; System.out.println(s));</span><br></pre></td></tr></table></figure>
+
+<h3 id="count"><a href="#count" class="headerlink" title="count"></a>count</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> ArrayList&lt;String&gt; list1  = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Collections.addAll(list1,<span class="string">&quot;谢永强&quot;</span>, <span class="string">&quot;谢永强&quot;</span>, <span class="string">&quot;谢永强&quot;</span>, <span class="string">&quot;王小蒙&quot;</span>, <span class="string">&quot;刘能&quot;</span>, <span class="string">&quot;赵四&quot;</span>, <span class="string">&quot;谢大脚&quot;</span>, <span class="string">&quot;宋晓峰&quot;</span>, <span class="string">&quot;王老七&quot;</span>, <span class="string">&quot;谢广坤&quot;</span>, <span class="string">&quot;小李秘书&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">long</span> <span class="variable">count</span> <span class="operator">=</span> list1.stream().count();</span><br><span class="line">        System.out.println(count);</span><br><span class="line"><span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line"><span class="number">11</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="终结方法"><a href="#终结方法" class="headerlink" title="终结方法"></a>终结方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object[] arr1 = list1.stream().toArray();</span><br><span class="line">System.out.println(Arrays.toString(arr1));</span><br><span class="line"><span class="comment">//[谢永强, 谢永强, 谢永强, 王小蒙, 刘能, 赵四, 谢大脚, 宋晓峰, 王老七, 谢广坤, 小李秘书]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>变成数组类型的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String[] arr = list1.stream().toArray(<span class="keyword">new</span> <span class="title class_">IntFunction</span>&lt;String[]&gt;() &#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> String[] apply(<span class="type">int</span> value) &#123; <span class="comment">//流中的数据的个数，要跟数组的长度保持一致</span></span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>[value];</span><br><span class="line">    &#125;</span><br><span class="line">     &#125;);</span><br><span class="line"> System.out.println(Arrays.toString(arr));</span><br><span class="line"></span><br><span class="line">[谢永强, 谢永强, 谢永强, 王小蒙, 刘能, 赵四, 谢大脚, 宋晓峰, 王老七, 谢广坤, 小李秘书]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Lambda</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Lambda</span></span><br><span class="line">        <span class="comment">//list1.stream().toArray( () -&gt; &#123;&#125; ) 如果是形参个数只有一个 数据类型可以省略括号可以省略</span></span><br><span class="line">String[] arr2 = list1.stream().toArray(value -&gt; <span class="keyword">new</span> <span class="title class_">String</span>[value]);</span><br><span class="line">System.out.println(Arrays.toString(arr2));</span><br><span class="line"></span><br><span class="line">[谢永强, 谢永强, 谢永强, 王小蒙, 刘能, 赵四, 谢大脚, 宋晓峰, 王老七, 谢广坤, 小李秘书]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="收集方法"><a href="#收集方法" class="headerlink" title="收集方法"></a>收集方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StreamDemo9</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;String&gt; list1  = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Collections.addAll(list1,<span class="string">&quot;谢永强-男-34&quot;</span>, <span class="string">&quot;王小蒙-女-29&quot;</span>, <span class="string">&quot;刘能-男-48&quot;</span>, <span class="string">&quot;赵四-男-52&quot;</span>,</span><br><span class="line">                <span class="string">&quot;谢大脚-女-45&quot;</span>, <span class="string">&quot;宋晓峰-男-38&quot;</span>, <span class="string">&quot;王老七-男-60&quot;</span>, <span class="string">&quot;谢广坤-男-56&quot;</span>, <span class="string">&quot;小李秘书-女-31&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//收集list当中</span></span><br><span class="line">        <span class="comment">// 把所有男性都收集起来</span></span><br><span class="line"></span><br><span class="line">        list1.stream()</span><br><span class="line">                .filter(s -&gt; <span class="string">&quot;男&quot;</span>.equals(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]))</span><br><span class="line">                .forEach(s -&gt; System.out.println(s));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">谢永强-男-<span class="number">34</span></span><br><span class="line">刘能-男-<span class="number">48</span></span><br><span class="line">赵四-男-<span class="number">52</span></span><br><span class="line">宋晓峰-男-<span class="number">38</span></span><br><span class="line">王老七-男-<span class="number">60</span></span><br><span class="line">谢广坤-男-<span class="number">56</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="收集到list方法当中"><a href="#收集到list方法当中" class="headerlink" title="收集到list方法当中"></a>收集到list方法当中</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; newList = list1.stream()</span><br><span class="line">                .filter(s -&gt; <span class="string">&quot;男&quot;</span>.equals(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]))</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line">        System.out.println(newList);</span><br><span class="line"></span><br><span class="line">[谢永强-男-<span class="number">34</span>, 刘能-男-<span class="number">48</span>, 赵四-男-<span class="number">52</span>, 宋晓峰-男-<span class="number">38</span>, 王老七-男-<span class="number">60</span>, 谢广坤-男-<span class="number">56</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="收集到set方法当中"><a href="#收集到set方法当中" class="headerlink" title="收集到set方法当中"></a>收集到set方法当中</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> Set&lt;String&gt; newList2 = list1.stream()</span><br><span class="line">                .filter(s -&gt; <span class="string">&quot;男&quot;</span>.equals(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]))</span><br><span class="line">                .collect(Collectors.toSet());</span><br><span class="line"></span><br><span class="line">        System.out.println(newList2);</span><br><span class="line"></span><br><span class="line">[谢永强-男-<span class="number">34</span>, 刘能-男-<span class="number">48</span>, 赵四-男-<span class="number">52</span>, 宋晓峰-男-<span class="number">38</span>, 王老七-男-<span class="number">60</span>, 谢广坤-男-<span class="number">56</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="收集到list-和-set-的区别"><a href="#收集到list-和-set-的区别" class="headerlink" title="收集到list 和 set 的区别"></a>收集到list 和 set 的区别</h4><blockquote>
+<p>注意 ： 集合中写了两个   <strong>刘能-男-48, 刘能-男-48</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; list1  = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Collections.addAll(list1,<span class="string">&quot;谢永强-男-34&quot;</span>, <span class="string">&quot;王小蒙-女-29&quot;</span>, <span class="string">&quot;刘能-男-48&quot;</span>, <span class="string">&quot;刘能-男-48&quot;</span>,<span class="string">&quot;赵四-男-52&quot;</span>,</span><br><span class="line">                <span class="string">&quot;谢大脚-女-45&quot;</span>, <span class="string">&quot;宋晓峰-男-38&quot;</span>, <span class="string">&quot;王老七-男-60&quot;</span>, <span class="string">&quot;谢广坤-男-56&quot;</span>, <span class="string">&quot;小李秘书-女-31&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//收集list当中</span></span><br><span class="line">        <span class="comment">// 把所有男性都收集起来</span></span><br><span class="line">        <span class="comment">//收集到list集合当中</span></span><br><span class="line">        List&lt;String&gt; newList = list1.stream()</span><br><span class="line">                .filter(s -&gt; <span class="string">&quot;男&quot;</span>.equals(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]))</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        System.out.println(newList);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//收集list当中</span></span><br><span class="line">        <span class="comment">// 把所有男性都收集起来</span></span><br><span class="line">        <span class="comment">//收集到Set集合当中</span></span><br><span class="line">        Set&lt;String&gt; newList2 = list1.stream()</span><br><span class="line">                .filter(s -&gt; <span class="string">&quot;男&quot;</span>.equals(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]))</span><br><span class="line">                .collect(Collectors.toSet());</span><br><span class="line"></span><br><span class="line">        System.out.println(newList2);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[谢永强-男-34, 刘能-男-48, 刘能-男-48, 赵四-男-52, 宋晓峰-男-38, 王老七-男-60, 谢广坤-男-56]<br>[赵四-男-52, 王老七-男-60, 谢广坤-男-56, 谢永强-男-34, 刘能-男-48, 宋晓峰-男-38]</p>
+<p>收集成为set集合 <strong>去除了重复</strong></p>
+</blockquote>
+<h4 id="收集到map方法当中"><a href="#收集到map方法当中" class="headerlink" title="收集到map方法当中"></a>收集到map方法当中</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">list1.stream()</span><br><span class="line">               .filter(s -&gt; <span class="string">&quot;男&quot;</span>.equals(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]))</span><br><span class="line">               .collect(Collectors.toMap(<span class="keyword">new</span> <span class="title class_">Function</span>&lt;String, String&gt;() &#123;<span class="comment">//第一个表示流的类型，第二个是你map的键的类型</span></span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="keyword">public</span> String <span class="title function_">apply</span><span class="params">(String s)</span> &#123;</span><br><span class="line">                       <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;, <span class="keyword">new</span> <span class="title class_">Function</span>&lt;String, String&gt;() &#123;</span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="keyword">public</span> String <span class="title function_">apply</span><span class="params">(String s)</span> &#123;</span><br><span class="line">                       <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.imgdb.cn/item/66ed4f1ff21886ccc00d5e31.jpg"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//收集Map集合当中</span></span><br><span class="line">        <span class="comment">//要知道 谁是键，谁是值</span></span><br><span class="line">        <span class="comment">//把所有的男性收集起来</span></span><br><span class="line">        <span class="comment">//键：姓名  值：年龄</span></span><br><span class="line">        <span class="comment">//.collect(Collectors.toMap(键的规则，值的规则))</span></span><br><span class="line">        Map&lt;String, Integer&gt; map = list1.stream()</span><br><span class="line">                .filter(s -&gt; <span class="string">&quot;男&quot;</span>.equals(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]))</span><br><span class="line">                .collect(Collectors.toMap(<span class="keyword">new</span> <span class="title class_">Function</span>&lt;String, String&gt;() &#123;<span class="comment">//第一个表示流的类型，第二个是你map的键的类型</span></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="keyword">public</span> String <span class="title function_">apply</span><span class="params">(String s)</span> &#123;</span><br><span class="line">                        <span class="comment">//每个 s = 例如 谢永强-男-34</span></span><br><span class="line">                        <span class="keyword">return</span> s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">0</span>]; <span class="comment">//谢永强</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, <span class="keyword">new</span> <span class="title class_">Function</span>&lt;String, Integer&gt;() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="keyword">public</span> Integer <span class="title function_">apply</span><span class="params">(String s)</span> &#123;</span><br><span class="line">                        <span class="comment">//每个 s = 例如 谢永强-男-34</span></span><br><span class="line">                        <span class="keyword">return</span> Integer.parseInt(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">2</span>]);<span class="comment">//34--注意:这里是int类型</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(map);</span><br><span class="line"></span><br><span class="line">&#123;赵四=<span class="number">52</span>, 大脑地=<span class="number">68</span>, 宋晓峰=<span class="number">38</span>, 王老七=<span class="number">60</span>, 谢广坤=<span class="number">56</span>, 谢永强=<span class="number">34</span>, 刘能=<span class="number">48</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Lambda 表达式简化</strong>    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; map2 = list1.stream()</span><br><span class="line">               .filter(s -&gt; <span class="string">&quot;男&quot;</span>.equals(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]))</span><br><span class="line">               .collect(Collectors.toMap(</span><br><span class="line">                       s -&gt; s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">0</span>],</span><br><span class="line">                       s -&gt; Integer.parseInt(s.split(<span class="string">&quot;-&quot;</span>)[<span class="number">2</span>])</span><br><span class="line">               ));</span><br><span class="line">System.out.println(map2);</span><br></pre></td></tr></table></figure>
+
+<p>练习</p>
+<blockquote>
+<p>保留年龄大于24岁的人，并将结果收集到Map集合中，姓为键，年龄为值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> GE_BIN</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@data</span> 2024/9/20 23:29</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desciption</span>:</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StreamDemo11</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        Collections.addAll(list,<span class="string">&quot;张三,23&quot;</span>,<span class="string">&quot;lisi,24&quot;</span>,<span class="string">&quot;wangwu,25&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//保留年龄大于24岁的人，并将结果收集到Map集合中，姓为键，年龄为值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//        System.out.println(list);</span></span><br><span class="line"></span><br><span class="line">        Map&lt;String, Integer&gt; stringIntegerMap = list.stream().filter(s -&gt; Integer.parseInt(s.split(<span class="string">&quot;,&quot;</span>)[<span class="number">1</span>]) &gt;= <span class="number">24</span>)</span><br><span class="line">                .collect(Collectors.toMap(<span class="keyword">new</span> <span class="title class_">Function</span>&lt;String, String&gt;() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="keyword">public</span> String <span class="title function_">apply</span><span class="params">(String s)</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> s.split(<span class="string">&quot;,&quot;</span>)[<span class="number">0</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, <span class="keyword">new</span> <span class="title class_">Function</span>&lt;String, Integer&gt;() &#123;</span><br><span class="line"></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="keyword">public</span> Integer <span class="title function_">apply</span><span class="params">(String s)</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> Integer.parseInt(s.split(<span class="string">&quot;,&quot;</span>)[<span class="number">1</span>]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//进行简化</span></span><br><span class="line">        Map&lt;String, Integer&gt; stringIntegerMap1 = list.stream().filter(s -&gt; Integer.parseInt(s.split(<span class="string">&quot;,&quot;</span>)[<span class="number">1</span>]) &gt;= <span class="number">24</span>)</span><br><span class="line">                .collect(Collectors.toMap(</span><br><span class="line">                        s -&gt; s.split(<span class="string">&quot;,&quot;</span>)[<span class="number">0</span>],</span><br><span class="line">                        s -&gt; Integer.parseInt(s.split(<span class="string">&quot;,&quot;</span>)[<span class="number">1</span>])</span><br><span class="line">                ));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(stringIntegerMap1);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVA基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JAVA基础//" class="article-tag-list-link color2">JAVA基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/09/20/Java%E4%B9%8B-%E6%B5%81%E7%9A%84%E6%80%9D%E6%83%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-调度任务模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1474,137 +1672,6 @@
 
 
   
-    <article id="post-编码，隐匿在计算机背后的语言详解(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3(1)/">编码，隐匿在计算机背后的语言详解</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3(1)/" class="archive-article-date">
-  	<time datetime="2023-07-07T04:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-一切都应该从电说起"><a href="#1-一切都应该从电说起" class="headerlink" title="1.一切都应该从电说起"></a>1.一切都应该从电说起</h1><p>  关于电仍然存在着许多未解之谜。如果我们把一个💡灯泡和电池🔋还有一根导线连成一个闭合回路，我们称为<strong>电路</strong> 。</p>
-<p>如果我们把世界上所有的物体无限缩小，可以看到其实是由原子（atom）构成的<em>ps: 当然还可以继续分下去这里我就不继续追溯下去了</em>   原子的结构包括为：质子，中子，电子。如下图所示，</p>
-<p><img src="https://i2.mjj.rip/2023/07/06/450dd402dd4c982ec42f583a410a05bf.jpeg" alt="450dd402dd4c982ec42f583a410a05bf.jpeg"></p>
-<p>质子<strong>带正电</strong> 中子<strong>不带电</strong>都是处在中心的区域<em>（像是银河系中的太阳一样）</em> ，而带电的是核外的<strong>电子</strong>。像是绕太阳运行的行星。</p>
-<p>尽管质子和电子通常用+，- 号表示，但不表示任何的数学含义，只表示某种特殊的关系。通常状况下它们表现为稳定状态。当你从地毯走过的时候，地毯偷偷从你的写上偷走电子，在你接触物体的那一瞬间产生静电火花🔥！在产生一瞬间之后，趋于平衡状态……。在这个过程中是一个<strong>回路</strong>，电子从你的地毯—&gt;身体—&gt; 鞋子。这种现象不仅仅存在于静电中，在风暴中，底层云积聚了大量的电子，而顶层的失去了大量的电子，然而一到闪电过后，一切趋于平衡….</p>
-<p>在电路中，当某个原子中的电子逃逸到下一个原子中，于此同时，该原子又从上一个原子中得到一个电子，而失去电子的原子又从上一个原子获取电子，如此循环，<strong>电流其实是电子不断从一个原子移动到另一个原子的过程</strong>。</p>
-<p>这一切肯定不是自发的，当你把一堆材料堆在一起一定不会产生电流。显然需要一个”驱动器”，那就是<strong>电池</strong>，电池会促进电路中电子的流动，从而产生电流。</p>
-<p><img src="https://i2.mjj.rip/2023/07/06/bcc90e4606dd1f566a11e3e07430ccbf.jpeg" alt="bcc90e4606dd1f566a11e3e07430ccbf.jpeg"></p>
-<p>如图，环形电路中，红色表示电流。两个电池，没个电池为1.5v。注意，电池的摆放必须是正负极对接。原因是负极的电子要流向正极产生电流。然而，两个1.5v 串联结果是3v。</p>
-<p>判断物体是否容易放电其实是看核外电子是否容易被<strong>失去</strong>，也就看是不是<strong>稳定</strong>。比如我们经常用的铜作为导线，是因为铜核外只有一个电子，容易失去电子，也即是容易逃逸！判断是否为导体就是看是否容易逃逸电子。 相反，导电相反是阻抗性，就是一些物质容易让电子通过，称为阻抗性。绝缘体就是这么来的。但是，大力出奇迹 : <em>其实只要电流足够大任何物体都可以导电</em> 。</p>
-<p>铜的阻抗性就比较低，但铜线越长阻抗性会越高。如果铜线越粗，阻抗性会越低，也就是可以流过的电子数量会越高。（类比水管） 电流就相当于水管中水的流速，水压相当于电压，水管的粗细程度代表电阻。</p>
-<p>电压： 比如一块1.5v的电池，说明电压是1.5v。<strong>电压表示了电流做功的势</strong>，也就是电势能的大小。就算不用这块电池，它的电势能依旧<strong>在那</strong>。势能好比是你拿一块砖在平地上，此时的势能几乎为0。但如果你把它拿到18层楼高的地方（但你别真的做！），此时的势能绝对挺大，<em>就算你什么也不做它的势能依旧在那里</em>。如果你想知道势能到底是多大，你得把它从18层释放下来…..</p>
-<p>​                    													<strong>欧姆定律：  I &#x3D; E&#x2F;R</strong></p>
-<p>在电学中，如果知道电势能和电阻，就可以算出电流的大小。</p>
-<p><strong><img src="https://i2.mjj.rip/2023/07/07/54795f082535408f014735fbbb27140b.jpeg" alt="54795f082535408f014735fbbb27140b.jpeg"></strong></p>
-<p>既然在天空中会打雷，那么空气也是一种导体。把电池放到空气中应该也会有从正负极有电流产生。但是！！根据公式可以看出：</p>
-<ul>
-<li>当放在空气中虽然知道电势是1.5v ，但空气中电阻是非常非常大的。故是  <strong>一个数&#x2F;∞ &#x3D; 0</strong>   ，最后算出电流是趋近于0。</li>
-<li>当单独连个导线，想必初中的时候讲过，会出现短路现象。原因是当电势能1.5的时候，正负极连着一根导线，单独的一根导线导致电阻值非常的小。所以是，一个数&#x2F;趋紧于0的数 &#x3D; ∞  电流无穷大！！ 意味着导线可能电流过大，导致整个导线变热甚至会烧红（<em>甚至融化</em>），会把电能转换为热能。</li>
-</ul>
-<p>大部分电路其实是介于这二者之间的，要么阻值大一点，要么小一点。当阻值小的时候，电路会发热，甚至燃烧。💡灯其实是利用了这个原理，只不过是在真空中然后，灯丝其实会发热然后燃烧。</p>
-<p>以上其实不是最主要的，开关才是最想说的。开关表示了电路的 通&#x2F;闭。其实对应了二进制的 0 &#x2F;1 。      </p>
-<h1 id="2-绕过拐角的通信"><a href="#2-绕过拐角的通信" class="headerlink" title="2.绕过拐角的通信"></a>2.绕过拐角的通信</h1><p>代入一个情景，你跟你的邻居好友在被妈妈没收手机后想在夜晚睡不着的时候进行交流。 但是，可是你们的窗户是错位的，也就是不能看到对方的窗户。所以不能用手电开关及其用摩斯码通过 <em>点和划</em> 来解读对方的话语。</p>
-<p>怎么办？</p>
-<p>已经通过之前的电路知识，给对方搭建一套“电报”系统。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/15f345afb516e32a194272bcddd7eab5.jpeg" alt="15f345afb516e32a194272bcddd7eab5.jpeg"></p>
-<p>但这个只是单向传递，你只能让对方看见，如果你想双向传递，你得再加一套通往你家的。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/68ff0ef0c3d41c1e1224193149348b29.jpeg" alt="68ff0ef0c3d41c1e1224193149348b29.jpeg"></p>
-<p>🤔如果再想想，其实可以省点线路“钱”，比如像这样，中间蓝色部分用<strong>公共线</strong>。如果你朋友那边闭合开关，通过图中的箭头的方向可以形成一个闭合回路会点亮你家里的灯泡💡。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/3d7bae25e5b0cf644a529544e6e13869.jpeg" alt="3d7bae25e5b0cf644a529544e6e13869.jpeg"></p>
-<p>如果你们俩都闭合开关那么灯泡其实是不亮的。原因是在公共线路中有两个方向相反的电流。两端都没有办法形成闭合回路。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/9516f93d848d18fe012801a8418e243d.jpeg" alt="9516f93d848d18fe012801a8418e243d.jpeg"></p>
-<hr>
-<p>如果我们铺设的线路足够长，对应的电阻也会无限大。这显然不符合经济性。</p>
-<p>其实还可以继续简化公用线！减少用线成本。我们知道一个理论，<strong>导体的截面越大，导电性就越好</strong>。我们这恰好有一个大球，直径大约7900英里，那就是地球呀🌍。地球是个很好的导体，如果你使用地球作为“<strong>导线</strong>”，那你的电压可不能只是两节干电池了，你需要大点的电压。然后插根铜柱子根地面有足够的接触面积。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/cd82cc25b2fe872ac42c02b6e6d03179.jpeg" alt="cd82cc25b2fe872ac42c02b6e6d03179.jpeg"></p>
-<p>由于不能使用干电池了，现在把电池那块抽象成一个符号方便后续的描述。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/e7a30c5be1924f7859c173bcb30c4af5.jpeg" alt="e7a30c5be1924f7859c173bcb30c4af5.jpeg"></p>
-<p>把V可以想象成一台能抽电子的吸尘器，整个地球🌍其实是一个<em>电子的海洋</em>，有无穷无尽的电子可以使用。</p>
-<p>那可以把上面的电报系统简化成现在这种样子。</p>
-<p><img src="https://i2.mjj.rip/2023/07/07/683164b5581c8d4fc977af0c6c1530ff.jpeg" alt="683164b5581c8d4fc977af0c6c1530ff.jpeg"></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">书籍</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/书籍//" class="article-tag-list-link color3">书籍</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1750,11 +1817,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1798,15 +1865,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1830,11 +1897,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1842,11 +1909,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1858,11 +1925,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">

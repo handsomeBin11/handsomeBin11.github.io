@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 193
+            总文章数 194
         </nav>
 
 
@@ -172,6 +172,116 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-近似求PI" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/20/%E8%BF%91%E4%BC%BC%E6%B1%82PI/">近似求PI</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/20/%E8%BF%91%E4%BC%BC%E6%B1%82PI/" class="archive-article-date">
+  	<time datetime="2021-05-20T14:39:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>实验6-1 近似求PI (15 分)</p>
+<p>本题要求编写程序，根据下式求<em>π</em>的近似值，直到最后一项小于给定精度eps。</p>
+<p>2<em>π</em>&#x3D;1+31!+3×52!+3×5×73!+⋯+3×5×⋯×(2×<em>i</em>+1)<em>i</em>!+⋯</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出精度eps，可以使用以下语句来读输入：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%le&quot;</span>, &amp;eps);</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行内，按照以下格式输出<em>π</em>的近似值（保留小数点后5位）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PI = 近似值</span><br></pre></td></tr></table></figure>
+
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1E-5</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PI = 3.14158</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">double</span> <span class="title function_">Jec</span><span class="params">( <span class="type">int</span> n )</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">double</span> total = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">double</span> i = <span class="number">1</span>; i &lt;= n ; i++) &#123;</span><br><span class="line">    total*=i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lf\n&quot;</span>, total);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> eps,sum=<span class="number">0</span>,deno=<span class="number">1</span>,item;</span><br><span class="line">    <span class="type">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%le&quot;</span>,&amp;eps);</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        deno=deno*(<span class="number">2</span>*i+<span class="number">1</span>);<span class="comment">//先累乘分母</span></span><br><span class="line">        item=Jec(i)/deno;<span class="comment">//再算整体（分子/分母）</span></span><br><span class="line">        sum+=item;<span class="comment">//把这个整体加到总和里面去</span></span><br><span class="line">        i++;<span class="comment">//计数器++</span></span><br><span class="line">    &#125;<span class="keyword">while</span>(item&gt;=eps);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;PI = %.5f\n&quot;</span>,<span class="number">2</span>*sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️⚠️⚠️⚠️最后一项小于给定精度eps。注意循环判断的条件是<strong>项</strong>，而不是sum。</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/20/%E8%BF%91%E4%BC%BC%E6%B1%82PI/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-字符串逆序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1154,106 +1264,6 @@
 
 
   
-    <article id="post-水仙花数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/12/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/">水仙花数</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/12/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2021-05-12T13:32:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实验4-2-5 水仙花数 (20 分)</p>
-<p>水仙花数是指一个<em>N</em>位正整数（<em>N</em>≥3），它的每个位上的数字的<em>N</em>次幂之和等于它本身。例如：153&#x3D;13+53+33。 本题要求编写程序,计算所有<em>N</em>位水仙花数。</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在一行中给出一个正整数<em>N</em>（3≤<em>N</em>≤7）。 </p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>按递增顺序输出所有<em>N</em>位水仙花数，每个数字占一行。</p>
-<h3 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">153</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">407</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> N;</span><br><span class="line">   <span class="comment">// scanf(&quot;%d&quot;, &amp;N);</span></span><br><span class="line">   N = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">//假如3位数</span></span><br><span class="line">   <span class="comment">//从100-999</span></span><br><span class="line">  <span class="comment">//4 位数</span></span><br><span class="line">  <span class="comment">//1000 - 9999</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">  <span class="comment">//i 如何能根据N 得到那个100？</span></span><br><span class="line">  <span class="type">int</span> first = <span class="number">1</span>;</span><br><span class="line">  <span class="comment">//这一步是要得到那个区间端点值 --- (比如 N = 3  ---&gt; 100 - 1000)</span></span><br><span class="line">  <span class="keyword">while</span> ( i &lt; N ) &#123;</span><br><span class="line">    first*=<span class="number">10</span>;</span><br><span class="line">    i++;</span><br><span class="line">  &#125;<span class="comment">//出来以后 first拿到了那个100 也就是区间的开始值</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="type">int</span> w= first;<span class="comment">//作循环变量要用 每一轮要变化 所以要找个替身</span></span><br><span class="line">   <span class="keyword">while</span> ( w &lt; first *<span class="number">10</span> ) &#123;</span><br><span class="line">     <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">     <span class="type">int</span> t = w;</span><br><span class="line">       <span class="comment">//拆当前的每一位数</span></span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">          <span class="type">int</span> d = t%<span class="number">10</span>;<span class="comment">//拿到个位</span></span><br><span class="line">          t/=<span class="number">10</span>;<span class="comment">//划去最后一位</span></span><br><span class="line">          <span class="type">int</span> k = <span class="number">1</span>;</span><br><span class="line">          <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">          <span class="comment">//怎么把最后一位乘相应的次数？当N = 3 的时候意味着要乘2次d本身 d  *d*d</span></span><br><span class="line">          <span class="keyword">while</span> ( j  &lt;  N )</span><br><span class="line">          &#123;</span><br><span class="line">              k *= d;</span><br><span class="line">              j++;</span><br><span class="line">          &#125;</span><br><span class="line">            </span><br><span class="line">          sum += k;<span class="comment">//当前的每一位的三次方加到summ里面去</span></span><br><span class="line">            </span><br><span class="line">         &#125;<span class="keyword">while</span>( t &gt; <span class="number">0</span> );</span><br><span class="line">        </span><br><span class="line">         <span class="keyword">if</span>( w == sum )<span class="comment">//如果满足条件就输出</span></span><br><span class="line">         &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,w);</span><br><span class="line">         &#125;</span><br><span class="line">           </span><br><span class="line">        w++;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/12/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
@@ -1399,11 +1409,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1447,15 +1457,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1479,11 +1489,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1491,11 +1501,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1507,11 +1517,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">

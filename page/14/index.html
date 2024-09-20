@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 193
+            总文章数 194
         </nav>
 
 
@@ -172,6 +172,112 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-统计学生成绩" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/09/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9/">统计学生成绩</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/09/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9/" class="archive-article-date">
+  	<time datetime="2021-04-08T16:35:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本题要求编写程序读入N个学生的百分制成绩，统计五分制成绩的分布。百分制成绩到五分制成绩的转换规则：</p>
+<ul>
+<li>大于等于90分为A；</li>
+<li>小于90且大于等于80为B；</li>
+<li>小于80且大于等于70为C；</li>
+<li>小于70且大于等于60为D；</li>
+<li>小于60为E。</li>
+</ul>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在第一行中给出一个正整数N（≤1000），即学生人数；第二行中给出N个学生的百分制成绩，其间以空格分隔。 </p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行中输出A、B、C、D、E对应的五分制成绩的人数分布，数字间以空格分隔，行末不得有多余空格。</p>
+<h3 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">77</span> <span class="number">54</span> <span class="number">92</span> <span class="number">73</span> <span class="number">60</span> <span class="number">65</span> <span class="number">69</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">0</span> <span class="number">2</span> <span class="number">3</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *    本题要求编写程序读入N个学生的百分制成绩，统计五分制成绩的分布。百分制成绩到五分制成绩的转换规则：</span></span><br><span class="line"><span class="comment">        大于等于90分为A；</span></span><br><span class="line"><span class="comment">        小于90且大于等于80为B；</span></span><br><span class="line"><span class="comment">        小于80且大于等于70为C；</span></span><br><span class="line"><span class="comment">        小于70且大于等于60为D；</span></span><br><span class="line"><span class="comment">        小于60为E。</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line">    <span class="type">int</span> N;<span class="comment">//记录学生人数</span></span><br><span class="line">    <span class="type">int</span> score;</span><br><span class="line">    <span class="type">int</span> aIndex = <span class="number">0</span>,bIndex=<span class="number">0</span>,cIndex=<span class="number">0</span>,dIndex=<span class="number">0</span>,eIndex=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> a[N];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i++) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;score);</span><br><span class="line">        a[i] = score;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> ( a[i]&gt;= <span class="number">90</span>  ) </span><br><span class="line">      &#123;</span><br><span class="line">          aIndex++;</span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span>( a[i] &gt;= <span class="number">80</span> &amp;&amp; a[i] &lt;= <span class="number">90</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        bIndex++;</span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span>( a[i] &gt;= <span class="number">70</span> &amp;&amp; a[i] &lt;= <span class="number">80</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        cIndex++;</span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span>( a[i] &gt;= <span class="number">60</span> &amp;&amp; a[i] &lt;= <span class="number">70</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        dIndex++;</span><br><span class="line">      &#125;<span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">        eIndex++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d %d\n&quot;</span>,aIndex,bIndex,cIndex,dIndex,eIndex);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/09/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-计算个人所得税" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1103,98 +1209,6 @@
 
 
   
-    <article id="post-打印图表的思想" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/01/%E6%89%93%E5%8D%B0%E5%9B%BE%E8%A1%A8%E7%9A%84%E6%80%9D%E6%83%B3/">打印图表的思想</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/01/%E6%89%93%E5%8D%B0%E5%9B%BE%E8%A1%A8%E7%9A%84%E6%80%9D%E6%83%B3/" class="archive-article-date">
-  	<time datetime="2021-04-01T02:37:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">nor</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  8    *               *</span></span><br><span class="line"><span class="comment">  7    *               **</span></span><br><span class="line"><span class="comment">  6    *               ***</span></span><br><span class="line"><span class="comment">  5    *               ****</span></span><br><span class="line"><span class="comment">  4    *               *****</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">6</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">contnor</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     *              *****</span></span><br><span class="line"><span class="comment">     *              ****</span></span><br><span class="line"><span class="comment">     *              ***</span></span><br><span class="line"><span class="comment">     *              **</span></span><br><span class="line"><span class="comment">     *              *</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;=<span class="number">6</span> ; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">6</span>; j &gt; i ; j--) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">contnor1</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*                               i           *           kg</span></span><br><span class="line"><span class="comment">     *                   *           1           1            4   5-i(1)</span></span><br><span class="line"><span class="comment">     *                  **           2           2            3   5-i(2)</span></span><br><span class="line"><span class="comment">     *                 ***           3           3            2   5-i(3)</span></span><br><span class="line"><span class="comment">     *                ****</span></span><br><span class="line"><span class="comment">     *               *****</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span> ; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">5</span>-i ; j++) &#123; <span class="comment">// 1 —— 4     注意下大轮回来 i还是从  1开始 --- 3      1 --- 2        1 -- 1</span></span><br><span class="line">               <span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= i; k++) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">nor1</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*                           i        *        kg</span></span><br><span class="line"><span class="comment">   *            *****          1        5        0  i-1</span></span><br><span class="line"><span class="comment">   *             ****          2        4        1  i-1</span></span><br><span class="line"><span class="comment">   *              ***          3        3        2  i-1</span></span><br><span class="line"><span class="comment">   *               **          4        2        3</span></span><br><span class="line"><span class="comment">   *                *          5        1        4</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;=<span class="number">6</span> ; i++) &#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt;= i<span class="number">-1</span> ; k++) &#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">6</span>; j &lt; i ; i++) &#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">  </span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">maXzT</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*                            i           *           kg</span></span><br><span class="line"><span class="comment">                    *             1           1            3</span></span><br><span class="line"><span class="comment">                   ***            2           3            2</span></span><br><span class="line"><span class="comment">                  *****           3           5            1</span></span><br><span class="line"><span class="comment">                 *******          4           7            0</span></span><br><span class="line"><span class="comment">                                             i*2-1        n-i</span></span><br><span class="line"><span class="comment">  </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">6</span>; i++)</span><br><span class="line">    &#123; </span><br><span class="line">          <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= <span class="number">6</span>-i; k++)</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i*<span class="number">2</span><span class="number">-1</span>; j++)</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        </span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">          </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">maXzTContr</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*                  i        *        k</span></span><br><span class="line"><span class="comment">          *******     1        7        0</span></span><br><span class="line"><span class="comment">           *****      2        5        1</span></span><br><span class="line"><span class="comment">            ***       3        3        2</span></span><br><span class="line"><span class="comment">             *        4        1        3</span></span><br><span class="line"><span class="comment">                            2n-2i+1    i-1</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">4</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i<span class="number">-1</span> ; j++ ) &#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//printf(&quot;%d&quot;,8-(2*i-1));</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= <span class="number">8</span>-(<span class="number">2</span>*i<span class="number">-1</span>); k++ ) &#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line"> </span><br><span class="line">    </span><br><span class="line">  <span class="comment">//nor();</span></span><br><span class="line">  <span class="comment">//contnor();</span></span><br><span class="line">  <span class="comment">// nor1();</span></span><br><span class="line">  <span class="comment">//contnor1();</span></span><br><span class="line">  maXzT();       </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/01/%E6%89%93%E5%8D%B0%E5%9B%BE%E8%A1%A8%E7%9A%84%E6%80%9D%E6%83%B3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/13/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/15/">Next &amp;raquo;</a>
@@ -1340,11 +1354,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1388,15 +1402,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1420,11 +1434,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1432,11 +1446,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1448,11 +1462,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 193
+            总文章数 194
         </nav>
 
 
@@ -172,6 +172,103 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-链表的添加" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/05/%E9%93%BE%E8%A1%A8%E7%9A%84%E6%B7%BB%E5%8A%A0/">链表的添加</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/05/%E9%93%BE%E8%A1%A8%E7%9A%84%E6%B7%BB%E5%8A%A0/" class="archive-article-date">
+  	<time datetime="2020-12-05T12:55:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="链表的增加"><a href="#链表的增加" class="headerlink" title="链表的增加"></a>链表的增加</h3><p>核心代码讲解</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(t!=<span class="literal">NULL</span>)<span class="comment">//如果说没有达到尾，就不停止循环</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//如果说t的下一个为空或者说t的下一个的data项大于当前这个的话就插入</span></span><br><span class="line">  	<span class="keyword">if</span>( t-&gt;next==<span class="literal">NULL</span> || t-&gt;next-&gt;data &gt; a)</span><br><span class="line">    &#123;</span><br><span class="line">      p = (<span class="keyword">struct</span> *node)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> node));<span class="comment">//动态生成一个获得给临时指针</span></span><br><span class="line">     	p-&gt;data = n;</span><br><span class="line">      p-&gt;next = t-&gt;next;</span><br><span class="line">      t-next = p;</span><br><span class="line">    &#125;</span><br><span class="line"> 	t =  t-&gt;next<span class="comment">//不断向后指</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对于p-&gt;next &#x3D; t-&gt;next; 两行的解释如下<br>      t-next &#x3D; p;</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/DOnmy6"><img src="https://s3.ax1x.com/2020/12/05/DOnmy6.md.png" alt="DOnmy6.md.png"></a></p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/05/%E9%93%BE%E8%A1%A8%E7%9A%84%E6%B7%BB%E5%8A%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1143,108 +1240,6 @@ C  0.0  0.0  0.0
 
 
   
-    <article id="post-有关Linux系统的命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/27/%E6%9C%89%E5%85%B3Linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%91%BD%E4%BB%A4/">有关Linux系统的命令</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/27/%E6%9C%89%E5%85%B3Linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2020-04-27T11:43:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="挂载命令"><a href="#挂载命令" class="headerlink" title="挂载命令"></a>挂载命令</h2><blockquote>
-<p>光盘有设备文件名和挂载点链接起来的过程</p>
-</blockquote>
-<h3 id="查询于自动挂载"><a href="#查询于自动挂载" class="headerlink" title="查询于自动挂载"></a>查询于自动挂载</h3><ul>
-<li>mount 查询已经挂载的设备</li>
-<li>mount -a</li>
-</ul>
-<h3 id="挂载光盘"><a href="#挂载光盘" class="headerlink" title="挂载光盘"></a>挂载光盘</h3><ol>
-<li>先创建一个挂载点 mkdir &#x2F;mnt&#x2F;cdrom</li>
-<li>mount &#x2F;dev&#x2F;cdrom   &#x2F;mnt&#x2F;cdrom  把&#x2F;dev&#x2F;cdrom 挂载到  &#x2F;mnt&#x2F;cdrom（挂载点） 访问的时候当然访问挂载点 也就是我门所说的盘符</li>
-</ol>
-<h3 id="弹出光盘"><a href="#弹出光盘" class="headerlink" title="弹出光盘"></a>弹出光盘</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/27/%E6%9C%89%E5%85%B3Linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%91%BD%E4%BB%A4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/17/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/19/">Next &amp;raquo;</a>
@@ -1390,11 +1385,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1438,15 +1433,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1470,11 +1465,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1482,11 +1477,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1498,11 +1493,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
