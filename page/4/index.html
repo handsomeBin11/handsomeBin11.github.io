@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     
-    <!-- <meta name="keywords" content="">
+    <!-- <meta name="keywords" content="say my name: ---  ">
     <meta name="description" content="say my name: ---  "> -->
   
   <meta name="description" content="say my name: ---">
@@ -21,7 +21,8 @@
 <meta property="og:site_name" content="字节漫步">
 <meta property="og:description" content="say my name: ---">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="gebin">
+<meta property="article:author" content="字节漫步">
+<meta property="article:tag" content="say my name: ---  ">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="字节漫步" type="application/atom+xml">
@@ -65,10 +66,10 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/img/head.jpg" class="js-avatar">
+			<img src="/img/touxiang.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-			<h1 class="header-author"><a href="/">gebin</a></h1>
+			<h1 class="header-author"><a href="/">字节漫步</a></h1>
 		</hgroup>
 		
 
@@ -146,11 +147,11 @@
 		<header id="header" class="inner">
 			<div class="profilepic">
 				<a href="/">
-					<img src="/img/head.jpg" class="js-avatar">
+					<img src="/img/touxiang.jpg" class="js-avatar">
 				</a>
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">gebin</h1>
+			  <h1 class="header-author js-header-author">字节漫步</h1>
 			</hgroup>
 			
 			
@@ -1379,166 +1380,6 @@
 
 
   
-    <article id="post-二叉树众的众数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BC%97%E7%9A%84%E4%BC%97%E6%95%B0/" target="_blank">二叉树众的众数</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BC%97%E7%9A%84%E4%BC%97%E6%95%B0/" class="archive-article-date">
-        <time datetime="2022-02-09T10:11:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-09</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h4 id="501-二叉搜索树中的众数"><a href="#501-二叉搜索树中的众数" class="headerlink" title="501. 二叉搜索树中的众数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/">501. 二叉搜索树中的众数</a></h4><p>难度简单410收藏分享切换为英文接收动态反馈</p>
-<p>给你一个含重复值的二叉搜索树（BST）的根节点 <code>root</code> ，找出并返回 BST 中的所有 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BC%97%E6%95%B0/44796">众数</a>（即，出现频率最高的元素）。</p>
-<p>如果树中有不止一个众数，可以按 <strong>任意顺序</strong> 返回。</p>
-<p>假定 BST 满足如下定义：</p>
-<ul>
-<li>结点左子树中所含节点的值 <strong>小于等于</strong> 当前节点的值</li>
-<li>结点右子树中所含节点的值 <strong>大于等于</strong> 当前节点的值</li>
-<li>左子树和右子树都是二叉搜索树</li>
-</ul>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2021/03/11/mode-tree.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,null,2,2]</span><br><span class="line">输出：[2]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [0]</span><br><span class="line">输出：[0]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>树中节点的数目在范围 <code>[1, 104]</code> 内</li>
-<li><code>-105 &lt;= Node.val &lt;= 105</code></li>
-</ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>首先读题 “给你一个含重复值的&#x3D;&#x3D;二叉搜索树&#x3D;&#x3D;（BST）”。</p>
-<p>根据这条，很快的就可以得想到一条性质，二叉搜索树的中序遍历结果&#x3D;&#x3D;是一个有序的序列&#x3D;&#x3D;</p>
-<p>我们就可以把问题转换为两个方面</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GURyaq"><img src="https://www.helloimg.com/images/2022/02/09/GURyaq.png" alt="GURyaq.png"></a></p>
-<p>我们就可以把整个过程分为中序的过程中，调用查找众数的函数</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> *answer;<span class="comment">//放结果的数组</span></span><br><span class="line"><span class="type">int</span> count;<span class="comment">//记录当前的个数</span></span><br><span class="line"><span class="type">int</span> maxcount; <span class="comment">//记录最大的个数</span></span><br><span class="line"><span class="type">int</span> currentNum;</span><br><span class="line"><span class="type">int</span> answerCount;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">( <span class="type">int</span> x )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (  x == currentNum  )</span><br><span class="line">	&#123;</span><br><span class="line">		count++; <span class="comment">//如果相等就把当前的计数器++</span></span><br><span class="line">	&#125;<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		count = <span class="number">1</span>; <span class="comment">//如果不等于 当前的个数归一</span></span><br><span class="line">		currentNum = x;<span class="comment">//更新新的数</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( count == maxcount )<span class="comment">//如果说当前的个数相等于上一个众数的个数，那么保留</span></span><br><span class="line">	&#123;</span><br><span class="line">		answer[answerCount++] = currentNum;		 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( count &gt; maxcount ) <span class="comment">//当前的个数比最大的个数还多 -- 我要颠覆整个数组</span></span><br><span class="line">	&#123;</span><br><span class="line">		</span><br><span class="line">		maxcount = count;<span class="comment">//更新最大值</span></span><br><span class="line">		answerCount = <span class="number">0</span>;<span class="comment">//新的众数出现之前数组整个清除掉</span></span><br><span class="line">		answer[answerCount++] = currentNum;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dbf</span><span class="params">( <span class="keyword">struct</span> TreeNode * t )</span> <span class="comment">//中序遍历</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( t == <span class="literal">NULL</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">dbf</span>( t-&gt;left );</span><br><span class="line">	<span class="built_in">update</span>( t-&gt;val );</span><br><span class="line">	<span class="built_in">dbf</span>( t-&gt;right );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span>* <span class="title">findMode</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="type">int</span>* returnSize)</span></span>&#123;</span><br><span class="line">		<span class="comment">//默认为0</span></span><br><span class="line">		maxcount = count = currentNum = answerCount = <span class="number">0</span>;</span><br><span class="line">		<span class="comment">//创建结果数组空间</span></span><br><span class="line">		answer = <span class="built_in">malloc</span>(<span class="built_in">sizeof</span>( <span class="type">int</span> * ) *<span class="number">4001</span> );</span><br><span class="line">		<span class="comment">//递归</span></span><br><span class="line">		<span class="built_in">dbf</span>( root );</span><br><span class="line">		<span class="comment">//最终结果集大小的复制</span></span><br><span class="line">		*returnSize = answerCount;</span><br><span class="line">		<span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树的简单题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BC%97%E7%9A%84%E4%BC%97%E6%95%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-二叉树众的众数(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1670,6 +1511,166 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/02/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BC%97%E7%9A%84%E4%BC%97%E6%95%B0(1)/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-二叉树众的众数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/02/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BC%97%E7%9A%84%E4%BC%97%E6%95%B0/" target="_blank">二叉树众的众数</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/02/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BC%97%E7%9A%84%E4%BC%97%E6%95%B0/" class="archive-article-date">
+        <time datetime="2022-02-09T10:11:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h4 id="501-二叉搜索树中的众数"><a href="#501-二叉搜索树中的众数" class="headerlink" title="501. 二叉搜索树中的众数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/">501. 二叉搜索树中的众数</a></h4><p>难度简单410收藏分享切换为英文接收动态反馈</p>
+<p>给你一个含重复值的二叉搜索树（BST）的根节点 <code>root</code> ，找出并返回 BST 中的所有 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BC%97%E6%95%B0/44796">众数</a>（即，出现频率最高的元素）。</p>
+<p>如果树中有不止一个众数，可以按 <strong>任意顺序</strong> 返回。</p>
+<p>假定 BST 满足如下定义：</p>
+<ul>
+<li>结点左子树中所含节点的值 <strong>小于等于</strong> 当前节点的值</li>
+<li>结点右子树中所含节点的值 <strong>大于等于</strong> 当前节点的值</li>
+<li>左子树和右子树都是二叉搜索树</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/11/mode-tree.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,null,2,2]</span><br><span class="line">输出：[2]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [0]</span><br><span class="line">输出：[0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>树中节点的数目在范围 <code>[1, 104]</code> 内</li>
+<li><code>-105 &lt;= Node.val &lt;= 105</code></li>
+</ul>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>首先读题 “给你一个含重复值的&#x3D;&#x3D;二叉搜索树&#x3D;&#x3D;（BST）”。</p>
+<p>根据这条，很快的就可以得想到一条性质，二叉搜索树的中序遍历结果&#x3D;&#x3D;是一个有序的序列&#x3D;&#x3D;</p>
+<p>我们就可以把问题转换为两个方面</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GURyaq"><img src="https://www.helloimg.com/images/2022/02/09/GURyaq.png" alt="GURyaq.png"></a></p>
+<p>我们就可以把整个过程分为中序的过程中，调用查找众数的函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> *answer;<span class="comment">//放结果的数组</span></span><br><span class="line"><span class="type">int</span> count;<span class="comment">//记录当前的个数</span></span><br><span class="line"><span class="type">int</span> maxcount; <span class="comment">//记录最大的个数</span></span><br><span class="line"><span class="type">int</span> currentNum;</span><br><span class="line"><span class="type">int</span> answerCount;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">( <span class="type">int</span> x )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (  x == currentNum  )</span><br><span class="line">	&#123;</span><br><span class="line">		count++; <span class="comment">//如果相等就把当前的计数器++</span></span><br><span class="line">	&#125;<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		count = <span class="number">1</span>; <span class="comment">//如果不等于 当前的个数归一</span></span><br><span class="line">		currentNum = x;<span class="comment">//更新新的数</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( count == maxcount )<span class="comment">//如果说当前的个数相等于上一个众数的个数，那么保留</span></span><br><span class="line">	&#123;</span><br><span class="line">		answer[answerCount++] = currentNum;		 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( count &gt; maxcount ) <span class="comment">//当前的个数比最大的个数还多 -- 我要颠覆整个数组</span></span><br><span class="line">	&#123;</span><br><span class="line">		</span><br><span class="line">		maxcount = count;<span class="comment">//更新最大值</span></span><br><span class="line">		answerCount = <span class="number">0</span>;<span class="comment">//新的众数出现之前数组整个清除掉</span></span><br><span class="line">		answer[answerCount++] = currentNum;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dbf</span><span class="params">( <span class="keyword">struct</span> TreeNode * t )</span> <span class="comment">//中序遍历</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( t == <span class="literal">NULL</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">dbf</span>( t-&gt;left );</span><br><span class="line">	<span class="built_in">update</span>( t-&gt;val );</span><br><span class="line">	<span class="built_in">dbf</span>( t-&gt;right );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span>* <span class="title">findMode</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="type">int</span>* returnSize)</span></span>&#123;</span><br><span class="line">		<span class="comment">//默认为0</span></span><br><span class="line">		maxcount = count = currentNum = answerCount = <span class="number">0</span>;</span><br><span class="line">		<span class="comment">//创建结果数组空间</span></span><br><span class="line">		answer = <span class="built_in">malloc</span>(<span class="built_in">sizeof</span>( <span class="type">int</span> * ) *<span class="number">4001</span> );</span><br><span class="line">		<span class="comment">//递归</span></span><br><span class="line">		<span class="built_in">dbf</span>( root );</span><br><span class="line">		<span class="comment">//最终结果集大小的复制</span></span><br><span class="line">		*returnSize = answerCount;</span><br><span class="line">		<span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树的简单题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/02/09/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BC%97%E7%9A%84%E4%BC%97%E6%95%B0/">展开全文 >></a>
     </p>
     
 
@@ -1955,7 +1956,7 @@
 
 
   
-    <article id="post-用C-编写通讯录管理系统(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-用C-编写通讯录管理系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -1963,7 +1964,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F(1)/" target="_blank">用C++编写通讯录管理系统</a>
+	  <a class="article-title" href="/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" target="_blank">用C++编写通讯录管理系统</a>
   
     </h1>
   
@@ -1971,7 +1972,7 @@
 
   
   
-<a href="/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F(1)/" class="archive-article-date">
+<a href="/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="archive-article-date">
         <time datetime="2022-01-22T16:02:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-23</time>
 </a>
 
@@ -2016,7 +2017,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F(1)/">展开全文 >></a>
+      <a class="article-more-a" href="/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">展开全文 >></a>
     </p>
     
 
@@ -2060,7 +2061,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018-2024 <a href="http://example.com/" target="_blank">gebin</a>
+    		&copy; 2018-2024 <a href="http://example.com/" target="_blank">字节漫步</a>
     	</div>
       	<div class="footer-right">
 			
@@ -2295,11 +2296,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2383,15 +2384,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">线性结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目总结</a>
               </li>
             
             <div class="clearfix"></div>
