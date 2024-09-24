@@ -924,109 +924,6 @@
 
 
   
-    <article id="post-怒干KMP算法的next数组问题(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98(1)/">怒干KMP算法的next数组问题</a>
-    </h1>
-  
-
-        
-        <a href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98(1)/" class="archive-article-date">
-  	<time datetime="2021-11-25T07:11:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>想必很多同学跟我一样被KMP算法当中的最关键的next数组所困扰。我在理解的时候可是伤了很多脑细胞，而我在翻阅资料的时候很多教材和博客中这块一笔带过，next这里恰恰才是KMP的精髓，所以我将从底层挖掘它的基本原理。当我真正get到的时候，瞬间豁然开朗，头脑中冒出一堆 妙啊～～在此，膜拜🙏三位大神 D.E.Knuth,J.H.Morris和V.R.Pratt 。这种思想打破了传动暴力匹配时候的时间消耗，能快速把字串回溯到准确的位置上，省掉了很多无用功。</p>
-<h3 id="我们来先看代码"><a href="#我们来先看代码" class="headerlink" title="我们来先看代码"></a>我们来先看代码</h3><blockquote>
-<p>这里我采用三位大神的论文中阐述的 next 数组下标从0开始。</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">get_next</span><span class="params">(String T, <span class="type">int</span> *next)</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i,k;</span><br><span class="line">	i = <span class="number">1</span>,k = <span class="number">0</span>;</span><br><span class="line"> 	next[<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//初始化为1</span></span><br><span class="line"> 	<span class="keyword">while</span>( i &lt; T[<span class="number">0</span>] )<span class="comment">//T[0]存储的是长度，也即是i还没走到头的时候</span></span><br><span class="line"> 	&#123;</span><br><span class="line"> 		<span class="keyword">if</span> ( k = <span class="number">0</span> || T[i] == T[j])<span class="comment">//如果相等或者k回溯到0时候进来</span></span><br><span class="line"> 		&#123;</span><br><span class="line"> 			k++;</span><br><span class="line"> 			j++</span><br><span class="line"> 			next[i] = k;</span><br><span class="line"> 		&#125;<span class="keyword">else</span></span><br><span class="line"> 		&#123;</span><br><span class="line"> 			k = next[k];</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>当时这里k &#x3D; next[k]; 我就感到很困惑。。。不过看了我下面的解释你很快就会理解。</p>
-</blockquote>
-<p>如果你想要理解的更快的话，我建议你像我一样跟着代码自己手算一遍。</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GZjjHC"><img src="https://www.helloimg.com/images/2021/11/25/GZjjHC.jpg" alt="GZjjHC.jpg"></a></p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GZjhPS"><img src="https://www.helloimg.com/images/2021/11/25/GZjhPS.jpg" alt="GZjhPS.jpg"></a></p>
-<p>⚠️：从图中的规律可以观察到，i 是会不断向前走，k在不匹配i的时候会回溯。那么上图中的k 从 4 回溯到了 2 这是什么原理呢？</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-怒干KMP算法的next数组问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1100,6 +997,109 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-怒干KMP算法的next数组问题(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98(1)/">怒干KMP算法的next数组问题</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98(1)/" class="archive-article-date">
+  	<time datetime="2021-11-25T07:11:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>想必很多同学跟我一样被KMP算法当中的最关键的next数组所困扰。我在理解的时候可是伤了很多脑细胞，而我在翻阅资料的时候很多教材和博客中这块一笔带过，next这里恰恰才是KMP的精髓，所以我将从底层挖掘它的基本原理。当我真正get到的时候，瞬间豁然开朗，头脑中冒出一堆 妙啊～～在此，膜拜🙏三位大神 D.E.Knuth,J.H.Morris和V.R.Pratt 。这种思想打破了传动暴力匹配时候的时间消耗，能快速把字串回溯到准确的位置上，省掉了很多无用功。</p>
+<h3 id="我们来先看代码"><a href="#我们来先看代码" class="headerlink" title="我们来先看代码"></a>我们来先看代码</h3><blockquote>
+<p>这里我采用三位大神的论文中阐述的 next 数组下标从0开始。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">get_next</span><span class="params">(String T, <span class="type">int</span> *next)</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i,k;</span><br><span class="line">	i = <span class="number">1</span>,k = <span class="number">0</span>;</span><br><span class="line"> 	next[<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//初始化为1</span></span><br><span class="line"> 	<span class="keyword">while</span>( i &lt; T[<span class="number">0</span>] )<span class="comment">//T[0]存储的是长度，也即是i还没走到头的时候</span></span><br><span class="line"> 	&#123;</span><br><span class="line"> 		<span class="keyword">if</span> ( k = <span class="number">0</span> || T[i] == T[j])<span class="comment">//如果相等或者k回溯到0时候进来</span></span><br><span class="line"> 		&#123;</span><br><span class="line"> 			k++;</span><br><span class="line"> 			j++</span><br><span class="line"> 			next[i] = k;</span><br><span class="line"> 		&#125;<span class="keyword">else</span></span><br><span class="line"> 		&#123;</span><br><span class="line"> 			k = next[k];</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当时这里k &#x3D; next[k]; 我就感到很困惑。。。不过看了我下面的解释你很快就会理解。</p>
+</blockquote>
+<p>如果你想要理解的更快的话，我建议你像我一样跟着代码自己手算一遍。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GZjjHC"><img src="https://www.helloimg.com/images/2021/11/25/GZjjHC.jpg" alt="GZjjHC.jpg"></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GZjhPS"><img src="https://www.helloimg.com/images/2021/11/25/GZjhPS.jpg" alt="GZjhPS.jpg"></a></p>
+<p>⚠️：从图中的规律可以观察到，i 是会不断向前走，k在不匹配i的时候会回溯。那么上图中的k 从 4 回溯到了 2 这是什么原理呢？</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98(1)/">展开全文 >></a>
         </p>
       
 
@@ -1284,7 +1284,8 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<!--页面点击小红心-->
+<script type="text/javascript" src="/love.js"></script>
     </div>
     <script>
 	var yiliaConfig = {
@@ -1400,11 +1401,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1448,15 +1449,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
