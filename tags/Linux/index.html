@@ -72,11 +72,11 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/" target="_blank">主页</a></li>
+				<li><a href="/" >主页</a></li>
 			
-				<li><a href="/tags" target="_blank">标签</a></li>
+				<li><a href="/tags" >标签</a></li>
 			
-				<li><a href="/categories" target="_blank">分类</a></li>
+				<li><a href="/categories" >分类</a></li>
 			
 			</ul>
 		</nav>
@@ -100,22 +100,22 @@
 				
 					
 						<a class="github" href="#" 
-												title="GitHub" target="_blank"><i class="icon-github"></i></a>
+												title="GitHub" ><i class="icon-github"></i></a>
 					
 				
 					
 						<a class="github" href="#" 
-												title="GitHub" target="_blank"><i class="icon-github"></i></a>
+												title="GitHub" ><i class="icon-github"></i></a>
 					
 				
 					
 						<a class="gitee" href="#" 
-												title="码云" target="_blank"><i class="icon-gitee"></i></a>
+												title="码云" ><i class="icon-gitee"></i></a>
 					
 				
 					
 						<a class="jianshu" href="#" 
-												title="简书" target="_blank"><i class="icon-jianshu"></i></a>
+												title="简书" ><i class="icon-jianshu"></i></a>
 					
 				
 			</div>
@@ -237,8 +237,8 @@
   
     <h1 itemprop="name">
 	
-	  <a class="archive-article-title" href="/2020/04/27/%E6%9C%89%E5%85%B3Linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%91%BD%E4%BB%A4/" target="_blank">有关Linux系统的命令</a>
-  
+	  <a class="archive-article-title" href="/2020/04/27/%E6%9C%89%E5%85%B3Linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%91%BD%E4%BB%A4/">有关Linux系统的命令</a>
+	
     </h1>
   
 
@@ -291,8 +291,8 @@
   
     <h1 itemprop="name">
 	
-	  <a class="archive-article-title" href="/2020/04/06/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" target="_blank">Linux常用命令总结</a>
-  
+	  <a class="archive-article-title" href="/2020/04/06/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Linux常用命令总结</a>
+	
     </h1>
   
 
@@ -345,8 +345,8 @@
   
     <h1 itemprop="name">
 	
-	  <a class="archive-article-title" href="/2020/03/19/VM-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" target="_blank">VM 常用命令</a>
-  
+	  <a class="archive-article-title" href="/2020/03/19/VM-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">VM 常用命令</a>
+	
     </h1>
   
 
@@ -432,7 +432,7 @@
 		isArchive: false,
 		isTag: true,
 		isCategory: false,
-		open_in_new: true,
+		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -596,11 +596,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C语言错题</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言编程题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言编程题</a>
+                <a href="javascript:void(0)" class="js-tag color1">C语言错题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -926,6 +926,16 @@
   <!-- <script async type="text/javascript" size="90" alpha="0.2" zIndex="0" src="/plugins/ribbon.js/ribbon.min.js"></script> -->
   
   
+  
+  <script type="text/javascript" src="/lib/snow.js"></script>
+  <script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
+  <script>
+    snow.down();
+    $(window).resize(function() {
+      $("canvas").css("z-index","500").remove();
+      snow.down();
+    });
+  </script>
   
 </body>
 

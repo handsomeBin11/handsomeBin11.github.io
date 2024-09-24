@@ -74,11 +74,11 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/" target="_blank">主页</a></li>
+				<li><a href="/" >主页</a></li>
 			
-				<li><a href="/tags" target="_blank">标签</a></li>
+				<li><a href="/tags" >标签</a></li>
 			
-				<li><a href="/categories" target="_blank">分类</a></li>
+				<li><a href="/categories" >分类</a></li>
 			
 			</ul>
 		</nav>
@@ -102,22 +102,22 @@
 				
 					
 						<a class="github" href="#" 
-												title="GitHub" target="_blank"><i class="icon-github"></i></a>
+												title="GitHub" ><i class="icon-github"></i></a>
 					
 				
 					
 						<a class="github" href="#" 
-												title="GitHub" target="_blank"><i class="icon-github"></i></a>
+												title="GitHub" ><i class="icon-github"></i></a>
 					
 				
 					
 						<a class="gitee" href="#" 
-												title="码云" target="_blank"><i class="icon-gitee"></i></a>
+												title="码云" ><i class="icon-gitee"></i></a>
 					
 				
 					
 						<a class="jianshu" href="#" 
-												title="简书" target="_blank"><i class="icon-jianshu"></i></a>
+												title="简书" ><i class="icon-jianshu"></i></a>
 					
 				
 			</div>
@@ -477,6 +477,19 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Numpy%E6%95%B0%E7%BB%84%E8%BF%90%E7%AE%97"><span class="toc-number">1.</span> <span class="toc-text">Numpy数组运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84"><span class="toc-number">1.0.1.</span> <span class="toc-text">如何生成一个数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E6%8D%A2%E6%95%B0%E7%BB%84%E7%9A%84%E5%BD%A2%E6%80%81"><span class="toc-number">1.0.2.</span> <span class="toc-text">变换数组的形态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">1.0.3.</span> <span class="toc-text">数组的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E7%BB%84%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">1.0.4.</span> <span class="toc-text">数组和数组之间的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.0.5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E5%B0%8F%E4%BA%8E%E6%9F%90%E6%95%B0"><span class="toc-number">1.0.6.</span> <span class="toc-text">矩阵中的小于某数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nan"><span class="toc-number">1.0.7.</span> <span class="toc-text">nan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.0.8.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%92%8C"><span class="toc-number">1.0.9.</span> <span class="toc-text">计算和</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
@@ -535,7 +548,7 @@
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: true,
+		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -699,11 +712,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C语言错题</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言编程题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言编程题</a>
+                <a href="javascript:void(0)" class="js-tag color1">C语言错题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1029,6 +1042,16 @@
   <!-- <script async type="text/javascript" size="90" alpha="0.2" zIndex="0" src="/plugins/ribbon.js/ribbon.min.js"></script> -->
   
   
+  
+  <script type="text/javascript" src="/lib/snow.js"></script>
+  <script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
+  <script>
+    snow.down();
+    $(window).resize(function() {
+      $("canvas").css("z-index","500").remove();
+      snow.down();
+    });
+  </script>
   
 </body>
 
