@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 194
+            总文章数 195
         </nav>
 
 
@@ -172,6 +172,151 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-运费微服务的设计思路" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/09/24/%E8%BF%90%E8%B4%B9%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/">运费微服务的设计思路</a>
+    </h1>
+  
+
+        
+        <a href="/2024/09/24/%E8%BF%90%E8%B4%B9%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/" class="archive-article-date">
+  	<time datetime="2024-09-24T09:00:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="运费微服务"><a href="#运费微服务" class="headerlink" title="运费微服务"></a>运费微服务</h2><p>代码设计的相关说明：项目的依赖关系如下</p>
+<p><img src="https://pic.imgdb.cn/item/66f109f1f21886ccc07d292b.jpg"></p>
+<p>做到每个微服务都依赖<strong>父工程</strong>，由父工程来进行版本控制。</p>
+<h2 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h2><h4 id="DTO"><a href="#DTO" class="headerlink" title="DTO"></a>DTO</h4><ul>
+<li>与数据库<strong>表</strong>交互的类结尾都用<strong>entity</strong></li>
+<li><strong>接受前端页面</strong>的数据结尾都用<strong>DTO</strong>结尾</li>
+<li>微服务与<strong>微服务之间</strong>的调用传参都是以<strong>DTO</strong>结尾</li>
+</ul>
+<blockquote>
+<p>DTO 与  entity 还需要相互转换，因为从前端拿到数据后需转换为entity进行数据库操作</p>
+</blockquote>
+<h3 id="查询模版列表的实现"><a href="#查询模版列表的实现" class="headerlink" title="查询模版列表的实现"></a>查询模版列表的实现</h3><p><img src="https://pic.imgdb.cn/item/66f11418f21886ccc088c1b4.jpg"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;CarriageDTO&gt; <span class="title function_">findAll</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="comment">//用对应数据库的entity来构造一个查询条件</span></span><br><span class="line">        LambdaQueryWrapper&lt;CarriageEntity&gt; queryWrapper = Wrappers.lambdaQuery();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//数据库中的字段进行按创建时间倒叙</span></span><br><span class="line">        queryWrapper.orderByDesc(CarriageEntity::getCreated);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用父类的方法查询数据库拿到list</span></span><br><span class="line">        List&lt;CarriageEntity&gt; list = <span class="built_in">super</span>.list(queryWrapper);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//返回 --- 将结果转为DTO对象， 使用carriageutils工具类</span></span><br><span class="line">        <span class="keyword">return</span> list.stream().map(CarriageUtils::toDTO).collect(Collectors.toList());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="新增或更新的实现"><a href="#新增或更新的实现" class="headerlink" title="新增或更新的实现"></a>新增或更新的实现</h3><p><img src="https://pic.imgdb.cn/item/66f11de9f21886ccc091e7e7.jpg"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 保存或修改 运费模板</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> carriageDto 新增/修改运费对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> CarriageDTO <span class="title function_">saveOrUpdate</span><span class="params">(CarriageDTO carriageDto)</span> &#123;</span><br><span class="line">        <span class="comment">//校验运费模版是否存在</span></span><br><span class="line">        <span class="comment">//构造查询条件</span></span><br><span class="line">        LambdaQueryWrapper&lt;CarriageEntity&gt; queryWrapper = Wrappers.lambdaQuery();</span><br><span class="line">        <span class="comment">//模版类型</span></span><br><span class="line">        queryWrapper.eq(CarriageEntity::getTemplateType,carriageDto.getTemplateType());</span><br><span class="line">        <span class="comment">//运输类型</span></span><br><span class="line">        queryWrapper.eq(CarriageEntity::getTransportType,carriageDto.getTransportType());</span><br><span class="line">        <span class="comment">//排除，如果是修改操作，需要查询出其他模版数据，用于是否重复判定</span></span><br><span class="line">        queryWrapper.ne(ObjectUtil.isNotEmpty(carriageDto.getId()),CarriageEntity::getId,carriageDto.getId());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据父类的条件查询 得到数据库中的模版集合</span></span><br><span class="line">        List&lt;CarriageEntity&gt; carriageEntityList = <span class="built_in">super</span>.list(queryWrapper);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//不重复的保存起来</span></span><br><span class="line">        <span class="comment">//如果模版集合为空转到下面直接添加</span></span><br><span class="line">        <span class="keyword">if</span> (CollUtil.isEmpty(carriageEntityList))&#123;</span><br><span class="line">            <span class="comment">//直接保存，但是传进来是dtp 需要转 entity</span></span><br><span class="line">            <span class="keyword">return</span> getCarriageDTO(carriageDto);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果没有重复模版，需要判断此次插入是否为经济区，不是经济区不可以重复</span></span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.notEqual(carriageDto.getTemplateType(),CarriageConstant.ECONOMIC_ZONE))&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(CarriageExceptionEnum.NOT_ECONOMIC_ZONE_REPEAT);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果是经济区互寄，须臾奥进一步判断关联城市是否重复，通过集合取交集判断是否重复</span></span><br><span class="line">        <span class="comment">//将集合放到流水线上</span></span><br><span class="line">        carriageEntityList.stream().map(CarriageEntity::getAssociatedCity)<span class="comment">//先把城市给拿出来</span></span><br><span class="line">                                   .map(associatedCity -&gt; StrUtil.split(associatedCity,<span class="string">&quot;,&quot;</span>))<span class="comment">// 拿出流中每一个associatedCity按照逗号进行分割</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.imgdb.cn/item/66f13786f21886ccc0aaaf86.jpg"></p>
+<blockquote>
+<p>上面是flatmap的用法图解</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">.flatMap(Arrays::stream)</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line">        <span class="comment">//判断和已有的是否有交集   已有的和前端传过来的dto有交集 --- &gt; 得到一个集合</span></span><br><span class="line">        Collection&lt;String&gt; intersection = CollUtil.intersection(associateCityList, carriageDto.getAssociatedCityList());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//为空可以添加，不为空抛异常</span></span><br><span class="line">        <span class="keyword">if</span> (CollUtil.isNotEmpty(intersection))&#123;<span class="comment">//不为空---&gt;代表有交集---&gt;代表有重复---&gt;不为空</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(CarriageExceptionEnum.NOT_ECONOMIC_ZONE_REPEAT);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> saveOrUpdateCarriage(carriageDto);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">private</span> CarriageDTO <span class="title function_">saveOrUpdateCarriage</span><span class="params">(CarriageDTO carriageDto)</span> &#123;</span><br><span class="line">        <span class="type">CarriageEntity</span> <span class="variable">carriageEntity</span> <span class="operator">=</span> CarriageUtils.toEntity(carriageDto);</span><br><span class="line">        <span class="built_in">super</span>.saveOrUpdate(carriageEntity);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//因为数据需要返回给页面所以需要再转回DTO</span></span><br><span class="line">        <span class="keyword">return</span> CarriageUtils.toDTO(carriageEntity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>抽取出的方法单独成一个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NotNull</span></span><br><span class="line">   <span class="keyword">private</span> CarriageDTO <span class="title function_">saveOrUpdateCarriage</span><span class="params">(CarriageDTO carriageDto)</span> &#123;</span><br><span class="line">       <span class="type">CarriageEntity</span> <span class="variable">carriageEntity</span> <span class="operator">=</span> CarriageUtils.toEntity(carriageDto);</span><br><span class="line">       <span class="built_in">super</span>.saveOrUpdate(carriageEntity);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//因为数据需要返回给页面所以需要再转回DTO</span></span><br><span class="line">       <span class="keyword">return</span> CarriageUtils.toDTO(carriageEntity);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="运费计算"><a href="#运费计算" class="headerlink" title="运费计算"></a>运费计算</h3><h4 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h4><p><img src="https://pic.imgdb.cn/item/66f188c5f21886ccc0fe6f02.jpg"></p>
+<h4 id="根据参数查找运费模板"><a href="#根据参数查找运费模板" class="headerlink" title="根据参数查找运费模板"></a><em>根据参数查找运费模板</em></h4> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> CarriageEntity <span class="title function_">findCarriage</span><span class="params">(WaybillDTO waybillDTO)</span> &#123;</span><br><span class="line">        <span class="comment">//先根据传过来的查询发件的城市id</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">senderCityId</span> <span class="operator">=</span> waybillDTO.getSenderCityId();<span class="comment">//发件城市</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">receiverCityId</span> <span class="operator">=</span> waybillDTO.getReceiverCityId();<span class="comment">//收件城市id</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//查询这两个城市id是不是一样</span></span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.equal(receiverCityId,senderCityId))&#123;</span><br><span class="line">            <span class="comment">// 如果相同 调用自己在下面写的findByTemplateType方法查询 查询同城模版</span></span><br><span class="line">            <span class="type">CarriageEntity</span> <span class="variable">carriageEntity</span> <span class="operator">=</span> findByTemplateType(CarriageConstant.SAME_CITY);</span><br><span class="line">            <span class="comment">//    如果不是空就代表是，返回enti</span></span><br><span class="line">            <span class="keyword">if</span> (ObjectUtil.isNotEmpty(carriageEntity))&#123;</span><br><span class="line">                <span class="keyword">return</span> carriageEntity;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果上面没查到或者不是同城的就往上找同省的</span></span><br><span class="line">        <span class="comment">//先拿到省的</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">senderProvinceId</span> <span class="operator">=</span> areaFeign.get(senderCityId).getParentId();<span class="comment">//省的</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">receiverProvinceId</span> <span class="operator">=</span> areaFeign.get(receiverCityId).getParentId();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.equal(senderProvinceId,receiverProvinceId)) &#123;</span><br><span class="line">            <span class="type">CarriageEntity</span> <span class="variable">carriageEntity</span> <span class="operator">=</span> findByTemplateType(CarriageConstant.SAME_PROVINCE);</span><br><span class="line">            <span class="keyword">if</span> (ObjectUtil.isNotEmpty(carriageEntity))&#123;</span><br><span class="line">                <span class="keyword">return</span> carriageEntity;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果没有查到或不是同省，则查询是否为经济区互相寄，调用自己写的findEconomicCarriage()</span></span><br><span class="line">        <span class="type">CarriageEntity</span> <span class="variable">carriageEntity</span> <span class="operator">=</span> findEconomicCarriage(senderProvinceId, receiverProvinceId);<span class="comment">//返回运费模版的对象</span></span><br><span class="line">        <span class="comment">//不为空直接返回</span></span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.isNotEmpty(carriageEntity))&#123;</span><br><span class="line">            <span class="keyword">return</span> carriageEntity;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果没查到或者不是经济区互寄送，查询跨省的模版</span></span><br><span class="line">        carriageEntity = findByTemplateType(CarriageConstant.TRANS_PROVINCE);</span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.isNotEmpty(carriageEntity))&#123;</span><br><span class="line">            <span class="keyword">return</span> carriageEntity;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(CarriageExceptionEnum.NOT_FOUND);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> receiverProvinceId 收件省份id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> senderProvinceId 发件省份id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> CarriageEntity <span class="title function_">findEconomicCarriage</span><span class="params">(Long receiverProvinceId, Long senderProvinceId)</span> &#123;</span><br><span class="line">        <span class="comment">//通过工具类EnumUtil 获取经济区城市配置枚举 需要传入枚举类 得到枚举对象</span></span><br><span class="line">        LinkedHashMap&lt;String, EconomicRegionEnum&gt; enumMap = EnumUtil.getEnumMap(EconomicRegionEnum.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//定一个变量 暂时设置为null下面要用</span></span><br><span class="line">        <span class="type">EconomicRegionEnum</span> <span class="variable">economicRegionEnum</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="comment">//遍历所有的经济区枚举</span></span><br><span class="line">        <span class="keyword">for</span> (EconomicRegionEnum regionEnum : enumMap.values()) &#123;</span><br><span class="line">            <span class="comment">//通过ArrayUtil工具类 判断发件网点 和 收件网点是否在同一经济区</span></span><br><span class="line">            <span class="type">boolean</span> <span class="variable">containsAll</span> <span class="operator">=</span> ArrayUtil.containsAll(regionEnum.getValue(), receiverProvinceId, senderProvinceId);</span><br><span class="line">            <span class="comment">//如果为true就是属于这个经济区 赋值 然后break出去</span></span><br><span class="line">            <span class="keyword">if</span> (containsAll)&#123;</span><br><span class="line">                economicRegionEnum = regionEnum;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//若遍历没有发现，说明为null</span></span><br><span class="line">        <span class="comment">//判断如果为null 直接返回null</span></span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.isNull(economicRegionEnum)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果有经济区 根据 模板类型=经济区, 运输类型=普快  关联城市=枚举的code值 查询</span></span><br><span class="line">        LambdaQueryWrapper&lt;CarriageEntity&gt; queryWrapper = Wrappers.lambdaQuery();</span><br><span class="line">        queryWrapper.eq(CarriageEntity::getTemplateType,CarriageConstant.ECONOMIC_ZONE);</span><br><span class="line">        queryWrapper.eq(CarriageEntity::getTransportType,CarriageConstant.REGULAR_FAST);</span><br><span class="line">        queryWrapper.like(CarriageEntity::getAssociatedCity,economicRegionEnum.getCode());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.getOne(queryWrapper);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="计算运费的重量"><a href="#计算运费的重量" class="headerlink" title="计算运费的重量"></a>计算运费的重量</h4><blockquote>
+<p>以0.5 为计量单位的算法如下</p>
+</blockquote>
+<p><img src="https://pic.imgdb.cn/item/66f235a2f21886ccc073fe28.jpg"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 根据体积参数与实际重量计算计费重量</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> waybillDTO 运费计算对象</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> carriage   运费模板</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 计费重量</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">private</span> <span class="type">double</span> <span class="title function_">getComputeWeight</span><span class="params">(WaybillDTO waybillDTO, CarriageEntity carriage)</span> &#123;</span><br><span class="line">       <span class="comment">//计算体积，如果传入体积则不需要计算</span></span><br><span class="line">       <span class="type">Integer</span> <span class="variable">volume</span> <span class="operator">=</span> waybillDTO.getVolume();</span><br><span class="line">       <span class="comment">//如果体积为空</span></span><br><span class="line">       <span class="keyword">if</span> (ObjectUtil.isEmpty(volume))&#123;</span><br><span class="line">           <span class="comment">// 则利用长宽高计算出体积</span></span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               volume = waybillDTO.getMeasureHigh() * waybillDTO.getMeasureLong() * waybillDTO.getMeasureWidth();</span><br><span class="line">           &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">               volume = <span class="number">0</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//计算体积重量 体积 / 轻抛系数  tips: 使用NumberUtil工具类计算 保留一位小数</span></span><br><span class="line">       <span class="type">BigDecimal</span> <span class="variable">volumeWeight</span> <span class="operator">=</span> NumberUtil.div(volume, carriage.getLightThrowingCoefficient());</span><br><span class="line"></span><br><span class="line">       <span class="comment">//重量取大值 = 体积重量 和 实际重量 tips: 使用NumberUtil工具类计算   保留一位小数</span></span><br><span class="line">       <span class="type">double</span> <span class="variable">computeWeight</span> <span class="operator">=</span> NumberUtil.max(volumeWeight, NumberUtil.round(waybillDTO.getWeight(), <span class="number">1</span>)).doubleValue();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment">// 计算续重，规则：不满1kg，按1kg计费；</span></span><br><span class="line">       <span class="keyword">if</span> (computeWeight &gt; <span class="number">1</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 10kg以下续重以0.1kg计量保留1位小数；</span></span><br><span class="line">       <span class="keyword">if</span> (computeWeight &lt;= <span class="number">10</span>)&#123;</span><br><span class="line">           <span class="comment">//本身就是保留 故 返回自己</span></span><br><span class="line">           <span class="keyword">return</span> computeWeight;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 100kg以上四舍五入取整  举例：108.4kg按照108kg收费 108.5kg按照109kg收费</span></span><br><span class="line">       <span class="keyword">if</span> (computeWeight &gt;= <span class="number">100</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span> NumberUtil.round(computeWeight, <span class="number">0</span>).doubleValue();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 10-100kg续重以0.5kg计量保留1位小数；</span></span><br><span class="line">       <span class="type">int</span> <span class="variable">integer</span> <span class="operator">=</span> NumberUtil.round(computeWeight, <span class="number">0</span>, RoundingMode.DOWN).intValue();</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 0.5为一个计算单位，举例：18.8kg按照19收费， 18.4kg按照18.5kg收费 18.1kg按照18.5kg收费</span></span><br><span class="line">       <span class="comment">// 用原来的 - integer</span></span><br><span class="line">       <span class="type">double</span> <span class="variable">sub</span> <span class="operator">=</span> NumberUtil.sub(computeWeight, integer);</span><br><span class="line">       <span class="comment">//判断 sub 与 0。5的关系</span></span><br><span class="line">       <span class="keyword">if</span> (sub == <span class="number">0.5</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span> integer;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//如果sub&lt;0.5 就加上0.5</span></span><br><span class="line">       <span class="keyword">if</span> (sub &lt; <span class="number">0.5</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> NumberUtil.add(integer,<span class="number">0.5</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> NumberUtil.add(integer,<span class="number">0.5</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> CarriageDTO <span class="title function_">compute</span><span class="params">(WaybillDTO waybillDTO)</span> &#123;</span><br><span class="line">       <span class="comment">//方法找模版对象</span></span><br><span class="line">       <span class="type">CarriageEntity</span> <span class="variable">carriage</span> <span class="operator">=</span> findCarriage(waybillDTO);</span><br><span class="line">       <span class="comment">//把前端传过来的参数传进去还有模版 -- 得到重量</span></span><br><span class="line">       <span class="type">double</span> <span class="variable">computeWeight</span> <span class="operator">=</span> getComputeWeight(waybillDTO, carriage);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//计算运费  运费 = 首重价格 + （实际重量-1） * 续重价格</span></span><br><span class="line">       <span class="type">double</span> <span class="variable">price</span> <span class="operator">=</span> carriage.getFirstWeight() + (computeWeight - <span class="number">1</span>) * carriage.getContinuousWeight();</span><br><span class="line"></span><br><span class="line">       <span class="comment">//结果保留一位小数</span></span><br><span class="line">       <span class="type">BigDecimal</span> <span class="variable">expense</span> <span class="operator">=</span> NumberUtil.round(price, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//将价格和重量封装到DTO重 返回给前端</span></span><br><span class="line">       <span class="type">CarriageDTO</span> <span class="variable">carriageDTO</span> <span class="operator">=</span> CarriageUtils.toDTO(carriage);</span><br><span class="line">       carriageDTO.setExpense(expense.doubleValue());</span><br><span class="line">       carriageDTO.setComputeWeight(computeWeight);</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> carriageDTO;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">微服务</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JAVAWEB</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">项目总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JAVAWEB-项目总结-微服务//" class="article-tag-list-link color2">JAVAWEB,项目总结,微服务</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/09/24/%E8%BF%90%E8%B4%B9%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-Java之-流的思想" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1612,66 +1757,6 @@
 
 
   
-    <article id="post- 查找书籍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实验9-5 查找书籍 (20 分)</p>
-<p>给定n本书的名称和定价，本题要求编写程序，查找并输出其中定价最高和最低的书的名称和定价。</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入第一行给出正整数n（&lt;10），随后给出n本书的信息。每本书在一行中给出书名，即长度不超过30的字符串，随后一行中给出正实数价格。题目保证没有同样价格的书。</p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行中按照“价格, 书名”的格式先后输出价格最高和最低的书。价格保留2位小数。</p>
-<h3 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">Programming in C</span><br><span class="line">21.5</span><br><span class="line">Programming in VB</span><br><span class="line">18.5</span><br><span class="line">Programming in Delphi</span><br><span class="line">25.0</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">25.00, Programming in Delphi</span><br><span class="line">18.50, Programming in VB</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">book</span> &#123;</span></span><br><span class="line">  <span class="type">char</span> name[<span class="number">31</span>];</span><br><span class="line">  <span class="type">double</span> value;</span><br><span class="line">&#125;MyBook[<span class="number">11</span>];</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//求最高定价 和 最底定价</span></span><br><span class="line">    <span class="type">int</span> n,i;</span><br><span class="line">    <span class="type">double</span> max=<span class="number">-1</span>,min=<span class="number">1000000</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//输入</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">      gets(MyBook[i].name);<span class="comment">//读入字符串⚠️⚠️⚠️⚠️用gets（放入你要读入的元素）</span></span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>,&amp;MyBook[i].value);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="type">int</span> maxIndex;</span><br><span class="line">    <span class="type">int</span> minIndex;</span><br><span class="line">  <span class="comment">//遍历查最大最小</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">       <span class="keyword">if</span> ( MyBook[i].value &gt; max) &#123;</span><br><span class="line">           max=MyBook[i].value;</span><br><span class="line">           maxIndex = i;<span class="comment">//⚠️这里记得要保存那个下标，一会出去循环结构体需要用下标来找值</span></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> ( MyBook[i].value &lt; min) &#123;</span><br><span class="line">          min=MyBook[i].value;</span><br><span class="line">           minIndex = i;<span class="comment">//⚠️这里记得要保存那个下标，一会出去循环结构体需要用下标来找值</span></span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf, %s\n&quot;</span>,MyBook[maxIndex].value,MyBook[maxIndex].name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf, %s\n&quot;</span>,MyBook[minIndex].value,MyBook[minIndex].name);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/24/%20%E6%9F%A5%E6%89%BE%E4%B9%A6%E7%B1%8D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1817,11 +1902,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1897,11 +1982,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1909,11 +1994,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1978,6 +2063,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目总结</a>
               </li>
              
               <li class="article-tag-list-item">

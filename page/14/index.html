@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 194
+            总文章数 195
         </nav>
 
 
@@ -172,6 +172,137 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-统计字符" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/10/%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6/">统计字符</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/10/%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6/" class="archive-article-date">
+  	<time datetime="2021-04-10T12:54:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本题要求编写程序，输入10个字符，统计其中英文字母、空格或回车、数字字符和其他字符的个数。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入为10个字符。最后一个回车表示输入结束，不算在内。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *  本题要求编写程序，输入10个字符，统计其中英文字母、空格或回车、数字字符和其他字符的个数。</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line">  <span class="type">char</span> c;</span><br><span class="line">  <span class="type">int</span> l = <span class="number">0</span>,b= <span class="number">0</span>,d=<span class="number">0</span>,o=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) </span><br><span class="line">  &#123;</span><br><span class="line">    c = getchar();<span class="comment">//拿到一个字符</span></span><br><span class="line">    <span class="keyword">if</span> ( c == <span class="string">&#x27; &#x27;</span> || c == <span class="string">&#x27;\n&#x27;</span> ) <span class="comment">//如果等于回车或者 空格</span></span><br><span class="line">    &#123; </span><br><span class="line">       b++;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>( c &lt;= <span class="string">&#x27;9&#x27;</span> &amp;&amp; c &gt;= <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">       d++;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>( (c &lt;=<span class="string">&#x27;z&#x27;</span> &amp;&amp; c &gt;= <span class="string">&#x27;a&#x27;</span>) ||(c &lt;=<span class="string">&#x27;Z&#x27;</span> &amp;&amp; c &gt;= <span class="string">&#x27;A&#x27;</span>))</span><br><span class="line">    &#123;</span><br><span class="line">      l++;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      o++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;letter = %d, blank = %d, digit = %d, other = %d\n&quot;</span>,l,b,d,o);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>初始化 计数器为 0，一会要累加。（这是一个好习惯。）</li>
+<li>因为涉及到要输入10个字符所以要循环10次，也就是 for 0-9</li>
+<li>利用getchar函数，拿到一个字符。</li>
+<li>利用多重判读条件<ul>
+<li>如果是 ‘空格 或者 回车 则相应的计数器++</li>
+<li>否则如果是 字符0  - 字符9   则相应的计数器++</li>
+<li>再否则如果 再 小写字母 a-z  <strong>或者</strong>  大写字母 A - Z 之间的 则相应的计数器++</li>
+<li>其他情况就是  则相应的计数器++</li>
+</ul>
+</li>
+</ul>
+<p>最后打印输出</p>
+<h3 id="putchar-与-getchar-？"><a href="#putchar-与-getchar-？" class="headerlink" title="putchar 与 getchar ？"></a>putchar 与 getchar ？</h3><h4 id="putchar"><a href="#putchar" class="headerlink" title="putchar"></a>putchar</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">putchar</span><span class="params">( <span class="type">int</span> c )</span> <span class="comment">// 可以看的到其实它接收的是int 返回🔙的也是int </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>向标准输出<strong>写一个</strong>字符</li>
+<li>返回的是写了几个字符，如果你的不能用了 返回EOF（-1）表示写失败。</li>
+</ul>
+<h4 id="getchar"><a href="#getchar" class="headerlink" title="getchar"></a>getchar</h4><ul>
+<li><pre><code class="c">int getchar( void ) //注意⚠️返回是int
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 从标准输入读入一个字符</span><br><span class="line"></span><br><span class="line">- 返回的那个 int  是为了返回 EOF（-1）</span><br><span class="line"></span><br><span class="line">我们写一个程序来看看</span><br><span class="line"></span><br><span class="line">~~~c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main(int argc, char const* argv[])</span><br><span class="line">&#123;</span><br><span class="line">   int ch;</span><br><span class="line">  //看看它什么时候给我们EOF</span><br><span class="line">   while ( (ch = getchar()) != EOF ) &#123;//判断它是不是EOF</span><br><span class="line">     putchar(ch); //输入until 碰见EOF的时候会停止循环</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   printf(&quot;EOF\n&quot;);//不是的话我就输出了</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>我真帅<br>我真帅<br>你好<br>你好<br>hi<br>hi<br>sorry<br>sorry<br>-1<br>-1<br>EOF<br>EOF<br>我去<br>我去<br>EOF — 直到我按 crtl  + D 出现了EOF</p>
+</blockquote>
+<p>偶数个是计算机返回给我的，我们可以看出，无论输入啥，它都能返回，没有停止。按crtl  + D 时，他才推出并且返回EOF</p>
+<p>这究竟发生了什么？getchar 不是只读一个吗？怎么我按回车它才会给我回应？</p>
+<p><img src="https://ae04.alicdn.com/kf/U494a65ae53674a29bd276e70f2005b6cY.jpg" alt="iShot2021-04-10 20.45.15.png"></p>
+<ul>
+<li><p>你通过键盘⌨️输入 到程序的中间其实还有个程序在中间作加工员（也是一个程序），它叫shell。它会把你键盘输入进来的东西先放入一个叫缓冲区的地方。就如上图所示，123 回车 498 回车。当你调用getchar的时候，她会逐个从缓冲区的读入。当你scanf  %d的时候，他会把回车前面的视作一个整数。</p>
+</li>
+<li><p>当你按下 ctrl + D 的时候。他会把那个位置弄成 -1 ，然后才结束。</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/10/%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-统计学生成绩" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1117,98 +1248,6 @@
 
 
   
-    <article id="post-交替的前n项目和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/02/%E4%BA%A4%E6%9B%BF%E7%9A%84%E5%89%8Dn%E9%A1%B9%E7%9B%AE%E5%92%8C/">交替的前n项目和</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/02/%E4%BA%A4%E6%9B%BF%E7%9A%84%E5%89%8Dn%E9%A1%B9%E7%9B%AE%E5%92%8C/" class="archive-article-date">
-  	<time datetime="2021-04-02T15:14:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *            1-2/3+3/5-4/7+5/9-6/11+... 的前N项之和。</span></span><br><span class="line"><span class="comment">   *             输入在一行中给出一个正整数N。</span></span><br><span class="line"><span class="comment">                在一行中输出部分和的值，结果保留三位小数。</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="type">double</span> sel,sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> ( i%<span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        sum += (<span class="number">-1.0</span>*i/(<span class="number">2</span>*i<span class="number">-1</span>));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">         sum += (<span class="number">1.0</span>*i/(<span class="number">2</span>*i<span class="number">-1</span>));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.3lf\n&quot;</span>,sum);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/02/%E4%BA%A4%E6%9B%BF%E7%9A%84%E5%89%8Dn%E9%A1%B9%E7%9B%AE%E5%92%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/13/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/15/">Next &amp;raquo;</a>
@@ -1354,11 +1393,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1434,11 +1473,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1446,11 +1485,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1515,6 +1554,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目总结</a>
               </li>
              
               <li class="article-tag-list-item">

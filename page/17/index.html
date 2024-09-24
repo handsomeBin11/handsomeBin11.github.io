@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 194
+            总文章数 195
         </nav>
 
 
@@ -172,6 +172,109 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-详解冒泡排序并优化算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/18/%E8%AF%A6%E8%A7%A3%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%B9%B6%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/">详解冒泡排序并优化算法</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/18/%E8%AF%A6%E8%A7%A3%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%B9%B6%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2021-02-18T12:56:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="普通版"><a href="#普通版" class="headerlink" title="普通版"></a>普通版</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">BubbleSort</span><span class="params">( Sqlist *L )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> j,i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; L-&gt;length; ++i)<span class="comment">//记住 n个数字排 只需要n-1轮即可 d所以这里是8轮</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = L-&gt;length<span class="number">-1</span>;  j&gt;=i ; --j)<span class="comment">//排完一个就会比之前少一个m，所以跟外轮i比较 因为i是不断++，所以会导致每次j会比之前少一轮</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ( L-&gt;r[j] &gt; L-&gt;r[j+<span class="number">1</span>])<span class="comment">//后面的小于前面的时候</span></span><br><span class="line">            &#123;</span><br><span class="line">                swap(L,j,j+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>外层 — 记住 n个数字排 外层 只需要n-1轮即可 d所以这里是8轮</li>
+<li>内层循环随着外层i的不断增大 内层循环也会逐渐缩短（因为每一大轮会排好一个数，所以会缩小）</li>
+</ul>
+</blockquote>
+<h3 id="加强版"><a href="#加强版" class="headerlink" title="加强版"></a>加强版</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">BubbleSort1</span><span class="params">( Sqlist *L )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> j,i;</span><br><span class="line">    Status flag = TRUE;<span class="comment">//做标记</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; L-&gt;length &amp;&amp; flag ; ++i)<span class="comment">//当flag和i&lt;length同时成立的时候继续循环</span></span><br><span class="line">    &#123;</span><br><span class="line">        flag = FALSE;<span class="comment">//每一轮初始值为false</span></span><br><span class="line">        <span class="keyword">for</span> (j = L-&gt;length<span class="number">-1</span>;  j&gt;=i; --j)<span class="comment">//排完一个就会比之前少一个m，所以跟外轮i比较 因为i是不断++，所以会导致每次j会比之前少一轮</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ( L-&gt;r[j] &gt; L-&gt;r[j+<span class="number">1</span>])<span class="comment">//后面的小于前面的时候</span></span><br><span class="line">            &#123;</span><br><span class="line">                swap(L,j,j+<span class="number">1</span>);</span><br><span class="line">                flag = TRUE; <span class="comment">//如果发生了交换 那么把false改成true方能继续外层循环</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>设立flag的目的在于，在发现内层循环没有发生交换的时候就说明其他数字已经排好了，没必要继续下去了。</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/排序算法//" class="article-tag-list-link color5">排序算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/18/%E8%AF%A6%E8%A7%A3%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%B9%B6%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-哈希（散列）查找" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1185,117 +1288,6 @@
 
 
   
-    <article id="post-复杂度分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/12/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">复杂度分析</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/12/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2020-12-12T12:58:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h2><h3 id="推导大O阶的方法"><a href="#推导大O阶的方法" class="headerlink" title="推导大O阶的方法"></a>推导大O阶的方法</h3><ol>
-<li>用常数1取代运行时间中的所加法常数。</li>
-<li>在修改后的运行次函数中，只保留最高项。</li>
-<li>如果最高项存在且不是1，则去掉这个相乘的常数。</li>
-</ol>
-<blockquote>
-<p>实际上分析算法的时间复杂度可没那么简单，我们还需要多看例子。</p>
-</blockquote>
-<h3 id="常数阶"><a href="#常数阶" class="headerlink" title="常数阶"></a>常数阶</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> sum = <span class="number">0</span>;n=<span class="number">100</span>;<span class="comment">// 执行一次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行一次</span></span><br><span class="line">prinft(<span class="string">&quot;%d&quot;</span>,sum);<span class="comment">// 执行一次</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>执行了3次对不对？根据我们刚才的理论，第一步就是用常数1取代加法常数。</p>
-<p>所以结论应该是 <strong>O(1)</strong> 而不是 <strong>O(3)</strong>  更不是不是<strong>O(100)</strong></p>
-</blockquote>
-<p>另外如果是这种情况</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> sum = <span class="number">0</span>;n=<span class="number">100</span>;<span class="comment">// 执行一次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行1次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行2次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行3次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行4次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行5次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行6次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行7次</span></span><br><span class="line">sum = (<span class="number">1</span>+n)*<span class="number">100</span>/<span class="number">2</span>;<span class="comment">// 执行8次</span></span><br><span class="line">prinft(<span class="string">&quot;%d&quot;</span>,sum);<span class="comment">// 执行一次</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>以上也就是3次和8次的差距，这种问题无关大小(n的大小),执行恒定时间的，所以就叫做常数阶。</p>
-</blockquote>
-<h3 id="线性阶"><a href="#线性阶" class="headerlink" title="线性阶"></a>线性阶</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/12/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/16/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/18/">Next &amp;raquo;</a>
@@ -1441,11 +1433,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1521,11 +1513,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1533,11 +1525,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1602,6 +1594,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目总结</a>
               </li>
              
               <li class="article-tag-list-item">

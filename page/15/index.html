@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 194
+            总文章数 195
         </nav>
 
 
@@ -172,6 +172,98 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-交替的前n项目和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/02/%E4%BA%A4%E6%9B%BF%E7%9A%84%E5%89%8Dn%E9%A1%B9%E7%9B%AE%E5%92%8C/">交替的前n项目和</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/02/%E4%BA%A4%E6%9B%BF%E7%9A%84%E5%89%8Dn%E9%A1%B9%E7%9B%AE%E5%92%8C/" class="archive-article-date">
+  	<time datetime="2021-04-02T15:14:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *            1-2/3+3/5-4/7+5/9-6/11+... 的前N项之和。</span></span><br><span class="line"><span class="comment">   *             输入在一行中给出一个正整数N。</span></span><br><span class="line"><span class="comment">                在一行中输出部分和的值，结果保留三位小数。</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="type">double</span> sel,sum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> ( i%<span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        sum += (<span class="number">-1.0</span>*i/(<span class="number">2</span>*i<span class="number">-1</span>));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">         sum += (<span class="number">1.0</span>*i/(<span class="number">2</span>*i<span class="number">-1</span>));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.3lf\n&quot;</span>,sum);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/02/%E4%BA%A4%E6%9B%BF%E7%9A%84%E5%89%8Dn%E9%A1%B9%E7%9B%AE%E5%92%8C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-打印图表的思想" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1116,102 +1208,6 @@
 
 
   
-    <article id="post-链表易混淆点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/07/%E9%93%BE%E8%A1%A8%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9/">链表易混淆点</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/07/%E9%93%BE%E8%A1%A8%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2021-03-07T09:14:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">ListInsert</span><span class="params">(LinkList *L,<span class="type">int</span> i,ElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> j;</span><br><span class="line">  LinkList p,s;</span><br><span class="line">  p =*L;</span><br><span class="line">  j = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( p &amp;&amp; j &lt; i ) <span class="comment">//仔细观察这里 ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ </span></span><br><span class="line">  &#123;</span><br><span class="line">    p = p-&gt;next;</span><br><span class="line">    j++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>( !p || j &gt; i ) <span class="comment">//仔细观察这里 ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ </span></span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">return</span> ERROR;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  s = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line"></span><br><span class="line">  s-&gt;data = e;</span><br><span class="line">  s-&gt;next = p-&gt;next;</span><br><span class="line">  p-&gt;next = s;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">ListDelete</span><span class="params">(LinkList *L,<span class="type">int</span> i,ElemType *e)</span> </span><br><span class="line">&#123; </span><br><span class="line">  <span class="type">int</span> j;</span><br><span class="line">  LinkList p,q;</span><br><span class="line">  j = <span class="number">1</span>;</span><br><span class="line">  p = *L;</span><br><span class="line">  <span class="keyword">while</span> ( p-&gt;next &amp;&amp; j &lt; i ) &#123;<span class="comment">//仔细观察这里 ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ </span></span><br><span class="line">     p = p-&gt;next;</span><br><span class="line">     j++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( !(p-&gt;next) || j &gt; i ) &#123;<span class="comment">//仔细观察这里 ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️ </span></span><br><span class="line">    <span class="keyword">return</span> ERROR;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  q = p-&gt;next;</span><br><span class="line">  *e = q-&gt;data;</span><br><span class="line">  p-&gt;next = q-&gt;next;</span><br><span class="line">  <span class="built_in">free</span>(q);</span><br><span class="line">  <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="为什么插入和删除的判断条件有区别？一个是-p-另一个是-p-next-🤔🤔🤔🤔🤔🤔🤔🤔"><a href="#为什么插入和删除的判断条件有区别？一个是-p-另一个是-p-next-🤔🤔🤔🤔🤔🤔🤔🤔" class="headerlink" title="为什么插入和删除的判断条件有区别？一个是  p    另一个是 p-&gt;next.  ??????  🤔🤔🤔🤔🤔🤔🤔🤔"></a>为什么插入和删除的判断条件有区别？一个是  <strong>p</strong>    另一个是 <strong>p-&gt;next</strong>.  ??????  🤔🤔🤔🤔🤔🤔🤔🤔</h4><p>画一张图就容易理解了！</p>
-<ul>
-<li><p>这是插入的</p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/6MPfrq"><img src="https://s3.ax1x.com/2021/03/07/6MPfrq.jpg" alt="6MPfrq.jpg"></a></p>
-</li>
-<li><p>这里是删除的</p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/6MPWMn"><img src="https://s3.ax1x.com/2021/03/07/6MPWMn.jpg" alt="6MPWMn.jpg"></a></p>
-</li>
-</ul>
-<p>我们可以看出，当我们要插入元素的时候，实际上是<strong>不需要</strong>考虑“<strong>下一个是否存在</strong>” 的，如果当前这个p还存在直接在后面插就可以。</p>
-<p>相反，当删除元素的时候则肯定需要考虑下一个是否是存在的！因为当下一个不存在就没必要往下走了，直接可以得出结论ERROR！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/07/%E9%93%BE%E8%A1%A8%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
@@ -1357,11 +1353,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1437,11 +1433,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1449,11 +1445,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1518,6 +1514,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目总结</a>
               </li>
              
               <li class="article-tag-list-item">

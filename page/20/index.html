@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 194
+            总文章数 195
         </nav>
 
 
@@ -172,6 +172,101 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-JavaScript全选与全不选" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/24/JavaScript%E5%85%A8%E9%80%89%E4%B8%8E%E5%85%A8%E4%B8%8D%E9%80%89/">JavaScript全选与全不选</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/24/JavaScript%E5%85%A8%E9%80%89%E4%B8%8E%E5%85%A8%E4%B8%8D%E9%80%89/" class="archive-article-date">
+  	<time datetime="2019-12-24T03:15:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">			你的爱好运动是？<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;checkedAllBox&quot;</span> /&gt;</span>全选/全不选<span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;items&quot;</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;足球&quot;</span> /&gt;</span>足球</span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;items&quot;</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;篮球&quot;</span> /&gt;</span>篮球</span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;items&quot;</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;羽毛球&quot;</span> /&gt;</span>羽毛球</span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;items&quot;</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;乒乓求&quot;</span> /&gt;</span>乒乓球</span><br><span class="line">			<span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">id</span>=<span class="string">&quot;checkAllBtn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;全 选&quot;</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">id</span>=<span class="string">&quot;checkNoBtn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;全不选&quot;</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">id</span>=<span class="string">&quot;checkedRevBtn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;反 选&quot;</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">id</span>=<span class="string">&quot;sendBtn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提 交&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">		</span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">var</span> items = <span class="variable language_">document</span>.<span class="title function_">getElementsByName</span>(<span class="string">&#x27;items&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">		<span class="comment">//全选 </span></span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">var</span> checkAllBtn=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;checkAllBtn&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">		checkAllBtn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="comment">//获取每一个items</span></span></span><br><span class="line"><span class="language-javascript">			<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; items.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">				items[i].<span class="property">checked</span> = <span class="literal">true</span>;</span></span><br><span class="line"><span class="language-javascript">			&#125;</span></span><br><span class="line"><span class="language-javascript">		&#125;;</span></span><br><span class="line"><span class="language-javascript">		</span></span><br><span class="line"><span class="language-javascript">		</span></span><br><span class="line"><span class="language-javascript">		<span class="comment">//为checkNoBtn绑定一个鼠标单击事件</span></span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">var</span> checkNoBtn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;checkNoBtn&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">		checkNoBtn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; items.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">				items[i].<span class="property">checked</span> = <span class="literal">false</span>;</span></span><br><span class="line"><span class="language-javascript">			&#125;</span></span><br><span class="line"><span class="language-javascript">		&#125;;</span></span><br><span class="line"><span class="language-javascript">		</span></span><br><span class="line"><span class="language-javascript">		</span></span><br><span class="line"><span class="language-javascript">	<span class="comment">//添加反选checkedRevBtn</span></span></span><br><span class="line"><span class="language-javascript">	</span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">var</span> checkedRevBtn=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;checkedRevBtn&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">			checkedRevBtn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">		</span></span><br><span class="line"><span class="language-javascript">			<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; items.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">					<span class="comment">//先判断是否是选中状态</span></span></span><br><span class="line"><span class="language-javascript">				<span class="keyword">if</span>(items[i].<span class="property">checked</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">					<span class="comment">//证明多选框已选中，则设置为未选中状态</span></span></span><br><span class="line"><span class="language-javascript">					items[i].<span class="property">checked</span> = <span class="literal">false</span>;</span></span><br><span class="line"><span class="language-javascript">				&#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="language-javascript">					items[i].<span class="property">checked</span> = <span class="literal">true</span>;</span></span><br><span class="line"><span class="language-javascript">				&#125;</span></span><br><span class="line"><span class="language-javascript">				<span class="comment">//快捷方法直接取反</span></span></span><br><span class="line"><span class="language-javascript">				<span class="comment">// items[i].checked =!items[i].checked</span></span></span><br><span class="line"><span class="language-javascript">			&#125;</span></span><br><span class="line"><span class="language-javascript">			</span></span><br><span class="line"><span class="language-javascript">		&#125;</span></span><br><span class="line"><span class="language-javascript">		</span></span><br><span class="line"><span class="language-javascript">		<span class="comment">//提交按钮 弹出多选款的value值</span></span></span><br><span class="line"><span class="language-javascript">		<span class="comment">//sendBtn</span></span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">var</span> sendBtn=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;sendBtn&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">		sendBtn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; items.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="comment">//判断多选是否选中</span></span></span><br><span class="line"><span class="language-javascript">				<span class="keyword">if</span> ( items[i].<span class="property">checked</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">					<span class="title function_">alert</span>(items[i].<span class="property">value</span>);</span></span><br><span class="line"><span class="language-javascript">				&#125;</span></span><br><span class="line"><span class="language-javascript">				</span></span><br><span class="line"><span class="language-javascript">			&#125;</span></span><br><span class="line"><span class="language-javascript">		&#125;;</span></span><br><span class="line"><span class="language-javascript">		</span></span><br><span class="line"><span class="language-javascript">		<span class="comment">//实现全选/全部选</span></span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">var</span> checkedAllBox=<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;checkedAllBox&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">		checkedAllBox.<span class="property">onclick</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; items.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">					items[i].<span class="property">checked</span> = checkedAllBox.<span class="property">checked</span>;<span class="comment">//默认是true</span></span></span><br><span class="line"><span class="language-javascript">			&#125;</span></span><br><span class="line"><span class="language-javascript">		&#125;;</span></span><br><span class="line"><span class="language-javascript">	</span></span><br><span class="line"><span class="language-javascript">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>总结：其实就一句话，先‘找对象’，在‘搞对象’。</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Javascript//" class="article-tag-list-link color1">Javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/24/JavaScript%E5%85%A8%E9%80%89%E4%B8%8E%E5%85%A8%E4%B8%8D%E9%80%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-利用indexOf（）函数统计数组arr（-a-b-d-d-c-d-d-）中元素d出现的次数，并同时返回其对应的所有下标" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -686,11 +781,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -766,11 +861,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -778,11 +873,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -847,6 +942,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目总结</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -67,7 +67,7 @@
 		</nav>
 
 		<nav>
-            总文章数 194
+            总文章数 195
         </nav>
 
 
@@ -172,6 +172,113 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-求给定精度的简单" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        <!-- 添加代码 访问统计 -->
+         
+
+
+
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/27/%E6%B1%82%E7%BB%99%E5%AE%9A%E7%B2%BE%E5%BA%A6%E7%9A%84%E7%AE%80%E5%8D%95/">求给定精度的简单</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/27/%E6%B1%82%E7%BB%99%E5%AE%9A%E7%B2%BE%E5%BA%A6%E7%9A%84%E7%AE%80%E5%8D%95/" class="archive-article-date">
+  	<time datetime="2021-04-27T12:56:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本题要求编写程序，计算序列部分和 1 - 1&#x2F;4 + 1&#x2F;7 - 1&#x2F;10 + … 直到最后一项的绝对值不大于给定精度eps。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//1 - 1/4 + 1/7 - 1/10 + ...</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> denominator = <span class="number">1</span>,flag;</span><br><span class="line">    <span class="type">double</span> sum = <span class="number">0.</span>,item = <span class="number">0.</span>,esp;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;esp);</span><br><span class="line">    flag = <span class="number">1</span>;<span class="comment">//先是正的</span></span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">       item = flag * <span class="number">1.0</span>/ denominator;<span class="comment">//一个分子分母的结果保存在item中</span></span><br><span class="line">       </span><br><span class="line">       sum += item; <span class="comment">//把那一项加到总和sum里面去</span></span><br><span class="line">  </span><br><span class="line">       flag = - flag; <span class="comment">//变号</span></span><br><span class="line">       </span><br><span class="line">       denominator+=<span class="number">3</span>;<span class="comment">//分母加3</span></span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">    &#125;<span class="keyword">while</span>( <span class="built_in">fabs</span>(item)&gt;esp );</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sum = %.6f\n&quot;</span>,sum);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BUbPB9"><img src="https://www.helloimg.com/images/2021/04/27/BUbPB9.png" alt="BUbPB9.png"></a></p>
+<ul>
+<li>很明确，题目说，直到最后一项的绝对值不大于给定精度eps。</li>
+<li>那我就得定义每一项  也就是那个item</li>
+<li>观察其中的每一项，分子都是1 ，分母公差为3<ol>
+<li>item &#x3D; flag * 1.0 &#x2F; den ——&gt; 其中 flag是正负号， 注意分式要用下1.0浮点数。</li>
+<li>把当前的这一项加到 sum里面去。</li>
+<li>flag &#x3D; -flag  —–&gt; 正负号交替。</li>
+<li>分母要每一轮 + 3</li>
+</ol>
+</li>
+</ul>
+<p>遇到分式，分子为1 的情况。考虑先把一个分式求出来，只考虑分母即可。分母的初值由题中给出。</p>
+<p>只需要在题给出的值赋初始值即可。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/27/%E6%B1%82%E7%BB%99%E5%AE%9A%E7%B2%BE%E5%BA%A6%E7%9A%84%E7%AE%80%E5%8D%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-特殊a串数列求和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1184,195 +1291,6 @@
 
 
   
-    <article id="post-指针和多维数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        <!-- 添加代码 访问统计 -->
-         
-
-
-
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/22/%E6%8C%87%E9%92%88%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/">指针和多维数组</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/22/%E6%8C%87%E9%92%88%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" class="archive-article-date">
-  	<time datetime="2021-04-22T15:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>先看一段代码👇</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> zippo[<span class="number">4</span>][<span class="number">2</span>] = &#123; &#123;<span class="number">2</span>,<span class="number">4</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">6</span>,<span class="number">8</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">1</span>,<span class="number">3</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">5</span>,<span class="number">7</span>&#125;,</span><br><span class="line">                       &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; zippo = %p\n&quot;</span>,zippo);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;zippo[0] = %p\n&quot;</span>,&amp;zippo[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;zippo[0][0] = %p\n&quot;</span>,&amp;zippo[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>zippo &#x3D; 0x7ffee5fc3b50<br>&amp;zippo[0] &#x3D; 0x7ffee5fc3b50<br>&amp;zippo[0][0] &#x3D; 0x7ffee5fc3b50</p>
-<p>惊奇的发现地址一样！</p>
-</blockquote>
-<ul>
-<li>根据数组的知识，Zippo 数组名就是该数组的首地址。</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKB606"><img src="https://www.helloimg.com/images/2021/04/22/BKB606.png" alt="BKB606.png"></a></p>
-<ul>
-<li>根据上图可见，&amp;zippo[0] （蓝色）其实是一个<strong>含有两个元素的小数组</strong>。那么根据我们的理论，既然是数组，它的表示方法就是<strong>首个元素的地址</strong>，它的地址是那个（黄色）那个位置元素的地址。</li>
-<li>zippo 是整个二维数组的名，它的地址又恰好与那个小的一维数组zippo[0] 地址重合</li>
-<li>自然，那个黄色框框里的(也就是存放2那个元素)位置的地址为&amp;zippo[0][0]</li>
-</ul>
-<p>👌，那我们最终🉑️推出，zippo &#x3D; &amp;zippo[0] &#x3D; &amp;zippo[0][0] &#x3D; 0x7ffee83eab50</p>
-<p>—-&gt; 进一步推理</p>
-<ul>
-<li>对于整个二维数组zippo来讲，他含有4个 1维的数组，每个一维的数组里面又含有2个元素。所以对于zippo的第一个元素就表示<strong>占用了</strong>两个大小的 int  对象<strong>的地址</strong>。</li>
-<li>而对于zippo[0] 来讲，他只是一个<strong>占有</strong>一个元素的<strong>的地址。</strong></li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; zippo = %p , zippo + 1  = %p\n&quot;</span>,zippo,zippo+<span class="number">1</span>);                    </span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; zippo[0] = %p , zippo[0] + 1  = %p\n&quot;</span>,zippo[<span class="number">0</span>],zippo[<span class="number">0</span>]+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>​     zippo &#x3D; 0x7ffee83eab50 ,     zippo + 1  &#x3D; 0x7ffee83eab58<br> zippo[0] &#x3D; 0x7ffee83eab50 , zippo[0] + 1  &#x3D; 0x7ffee83eab54</p>
-</blockquote>
-<p>从👆那个输出结果可以看出，当我们+1 之后，zippo 和 zippo[0]的结果是截然不同的,但是开始位置是相同的。</p>
-<ul>
-<li>zippo + 1 一下跳了<strong>两个</strong>int —-&gt; 8. 说明 zippo 是占有<strong>两个int</strong>对象的地址 </li>
-<li>zippo[0] +1 一下跳了<strong>一个</strong>int —-&gt; 4 说明 zippo[0] 是占有<strong>一个int</strong>对象的地址。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; *zippo = %p , &amp;zippo[0][0]= %p\n&quot;</span>,*zippo,&amp;zippo[<span class="number">0</span>][<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>*zippo       &#x3D;  0x7ffee9c4fb50 ,  </p>
-<p>&amp;zippo[0][0]&#x3D; 0x7ffee9c4fb50</p>
-</blockquote>
-<p>​			因为*zippo 代表取了一层地址，相当于是里面小数组的第一个地址也就是 zippo[0][0]（首地址）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; *(zippo[0])= %d , &amp;zippo[0][0]= %d\n&quot;</span>,*(zippo[<span class="number">0</span>]),zippo[<span class="number">0</span>][<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>*(zippo[0])&#x3D; 2 , &amp;zippo[0][0]&#x3D; 2</p>
-</blockquote>
-<ul>
-<li>因为zippo[0]代表着是小数组里面的首个元素的地址，* 它 就是取它地址上的值，那当然是 2啦。</li>
-</ul>
-<p>————-&gt;所以说，如果我们想通过指针取得地址上的值我们需要👇</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; *(zippo[0])= %d , zippo[0][0]= %d, **zippo = %d\n&quot;</span>,*(zippo[<span class="number">0</span>]),zippo[<span class="number">0</span>][<span class="number">0</span>],**zippo);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>*(zippo[0])&#x3D; 2 , zippo[0][0]&#x3D; 2, **zippo &#x3D; 2</p>
-</blockquote>
-<ul>
-<li>需要取两层 * ,<ul>
-<li>第一层 *代表小数组的第一个元素的地址</li>
-<li>再取一层 *  代表小数组里面的第一个位置上存放的值。</li>
-</ul>
-</li>
-</ul>
-<h4 id="烧脑时刻！"><a href="#烧脑时刻！" class="headerlink" title="烧脑时刻！"></a>烧脑时刻！</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> zippo[<span class="number">4</span>][<span class="number">2</span>] = &#123; &#123;<span class="number">2</span>,<span class="number">4</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">6</span>,<span class="number">8</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">1</span>,<span class="number">3</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">5</span>,<span class="number">7</span>&#125;,</span><br><span class="line">                       &#125;;</span><br><span class="line"></span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;zippo[2][1]= %d\n&quot;</span>,zippo[<span class="number">2</span>][<span class="number">1</span>]);</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;*(*(zippo+2)+1) = %d\n&quot;</span>,*(*(zippo+<span class="number">2</span>)+<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>zippo[2][1]        &#x3D; 3<br>*(*(zippo+2)+1) &#x3D; 3</p>
-<p>*(*(zippo+2)+1) 同样也能得到那个3!!!!!! ⚠️</p>
-</blockquote>
-<p>要想了解里面的原理我们需要逐个拆开，看看它的真面目！</p>
-<ol>
-<li>zippo</li>
-</ol>
-<p>​       <a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKCo1b"><img src="https://www.helloimg.com/images/2021/04/22/BKCo1b.md.png" alt="BKCo1b.md.png"> </a></p>
-<ol start="2">
-<li><p>zippo+2</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKCFlo"><img src="https://www.helloimg.com/images/2021/04/22/BKCFlo.md.png" alt="BKCFlo.md.png"></a></p>
-</li>
-<li><p>*(zippo+2)+1</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKC3LC"><img src="https://www.helloimg.com/images/2021/04/22/BKC3LC.md.png" alt="BKC3LC.md.png"></a></p>
-</li>
-<li><p>*(*(zippo+2)+1)</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKC1RS"><img src="https://www.helloimg.com/images/2021/04/22/BKC1RS.md.png" alt="BKC1RS.md.png"></a></p>
-</li>
-</ol>
-<h3 id="指向对维数组的指针"><a href="#指向对维数组的指针" class="headerlink" title="指向对维数组的指针"></a>指向对维数组的指针</h3><p>如何声明一个指针变量，用来指向一个二维数组？</p>
-<ul>
-<li>如果单纯只用 int ，那么如上 的zippo。int 只能与 zippo[0]匹配，而说明该类型指向一个 int类型的值。但是zippo是首元素的地址，它里面内含 两个int类型值的一维数组。</li>
-<li>因此我们定义一个指针变量，它得用来指向<strong>两个int类型的数组</strong>而不是指向一个int类型值。</li>
-</ul>
-<p>因此我们用如下手段：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> ( *pz )[<span class="number">2</span>];<span class="comment">// []它的优先级高，所以前面得加括号！</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>表示用来指向<strong>两个 int类型值</strong>的<strong>数组</strong>的指针。</p>
-</blockquote>
-<p>根据这个，能写出下面这个程序</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> zippo[<span class="number">4</span>][<span class="number">2</span>] = &#123; &#123;<span class="number">2</span>,<span class="number">4</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">6</span>,<span class="number">8</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">1</span>,<span class="number">3</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">5</span>,<span class="number">7</span>&#125;,</span><br><span class="line">                       &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> (*pz)[<span class="number">2</span>];<span class="comment">//声明一个指向两个int 类型值的数组的指针变量</span></span><br><span class="line"></span><br><span class="line">    pz = zippo;<span class="comment">//pz指向了那个zippo，因此我们能直接操作那个zippo</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; pz = %p\n&quot;</span>,pz);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;pz[0] = %p\n&quot;</span>,&amp;pz[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;pz[0][0] = %p\n&quot;</span>,&amp;pz[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*(*(pz+2)) = %d\n&quot;</span>,*(*(pz+<span class="number">2</span>)));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>pz &#x3D; 0x7ffee1a31b50<br>&amp;pz[0] &#x3D; 0x7ffee1a31b50<br>&amp;pz[0][0] &#x3D; 0x7ffee1a31b50<br>*(*(pz+2))&#x3D; 1</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言理论部分//" class="article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/22/%E6%8C%87%E9%92%88%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
@@ -1518,11 +1436,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1598,11 +1516,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1610,11 +1528,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">单循环链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分--字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1679,6 +1597,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目总结</a>
               </li>
              
               <li class="article-tag-list-item">
