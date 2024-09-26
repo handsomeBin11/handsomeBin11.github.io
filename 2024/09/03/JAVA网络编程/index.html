@@ -18,7 +18,7 @@
 <meta property="og:description" content="网络编程UDP单发连接客户端 12345678910111213141516public class Client &amp;#123;    public static void main(String[] args) throws IOException &amp;#123;        &#x2F;&#x2F;目标是： 客户端实现        &#x2F;&#x2F;1 . 创建一个发送端对象 --人        DatagramSocke">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-03T15:04:16.000Z">
-<meta property="article:modified_time" content="2024-09-03T15:11:09.032Z">
+<meta property="article:modified_time" content="2024-09-26T17:11:15.563Z">
 <meta property="article:author" content="字节漫步">
 <meta property="article:tag" content="JAVA基础">
 <meta name="twitter:card" content="summary">
@@ -273,7 +273,8 @@
 
 
 
-<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="单发"><a href="#单发" class="headerlink" title="单发"></a>单发</h3><p><strong>客户端</strong></p>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><span id="more"></span>
+<h3 id="单发"><a href="#单发" class="headerlink" title="单发"></a>单发</h3><p><strong>客户端</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//创建socket对象，请求服务端的socket管道连接</span></span><br><span class="line">        Socket socket= <span class="keyword">new</span> <span class="title class_">Socket</span>(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="number">6666</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//从socket 通信管道中得到一个字节输出流</span></span><br><span class="line">        <span class="type">OutputStream</span> <span class="variable">os</span> <span class="operator">=</span> socket.getOutputStream();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把低级字节输出流包装成特殊的数据输出流</span></span><br><span class="line">        <span class="type">DataOutputStream</span> <span class="variable">dos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataOutputStream</span>(os);</span><br><span class="line"></span><br><span class="line">        dos.writeUTF(<span class="string">&quot;这里是客户端，我是tcp通讯发来的～！！！！&quot;</span>);</span><br><span class="line">        dos.flush();<span class="comment">//刷新</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>服务端</strong></p>
@@ -737,15 +738,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">

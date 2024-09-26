@@ -10,12 +10,12 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="运费微服务代码设计的相关说明：项目的依赖关系如下  做到每个微服务都依赖父工程，由父工程来进行版本控制。 代码规范DTO 与数据库表交互的类结尾都用entity 接受前端页面的数据结尾都用DTO结尾 微服务与微服务之间的调用传参都是以DTO结尾   DTO 与  entity 还需要相互转换，因为从前端拿到数据后需转换为entity进行数据库操作  查询模版列表的实现 12345678910111">
+  <meta name="description" content="运费微服务代码设计的相关说明：项目的依赖关系如下  做到每个微服务都依赖父工程，由父工程来进行版本控制。 代码规范DTO 与数据库表交互的类结尾都用entity 接受前端页面的数据结尾都用DTO结尾 微服务与微服务之间的调用传参都是以DTO结尾   DTO 与  entity 还需要相互转换，因为从前端拿到数据后需转换为entity进行数据库操作  查询模版列表的实现">
 <meta property="og:type" content="article">
 <meta property="og:title" content="运费微服务的设计思路">
 <meta property="og:url" content="http://example.com/2024/09/24/%E8%BF%90%E8%B4%B9%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/index.html">
 <meta property="og:site_name" content="字节漫步">
-<meta property="og:description" content="运费微服务代码设计的相关说明：项目的依赖关系如下  做到每个微服务都依赖父工程，由父工程来进行版本控制。 代码规范DTO 与数据库表交互的类结尾都用entity 接受前端页面的数据结尾都用DTO结尾 微服务与微服务之间的调用传参都是以DTO结尾   DTO 与  entity 还需要相互转换，因为从前端拿到数据后需转换为entity进行数据库操作  查询模版列表的实现 12345678910111">
+<meta property="og:description" content="运费微服务代码设计的相关说明：项目的依赖关系如下  做到每个微服务都依赖父工程，由父工程来进行版本控制。 代码规范DTO 与数据库表交互的类结尾都用entity 接受前端页面的数据结尾都用DTO结尾 微服务与微服务之间的调用传参都是以DTO结尾   DTO 与  entity 还需要相互转换，因为从前端拿到数据后需转换为entity进行数据库操作  查询模版列表的实现">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic.imgdb.cn/item/66f109f1f21886ccc07d292b.jpg">
 <meta property="og:image" content="https://pic.imgdb.cn/item/66f11418f21886ccc088c1b4.jpg">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://pic.imgdb.cn/item/66f188c5f21886ccc0fe6f02.jpg">
 <meta property="og:image" content="https://pic.imgdb.cn/item/66f235a2f21886ccc073fe28.jpg">
 <meta property="article:published_time" content="2024-09-24T09:00:07.000Z">
-<meta property="article:modified_time" content="2024-09-26T17:00:18.612Z">
+<meta property="article:modified_time" content="2024-09-26T17:10:15.041Z">
 <meta property="article:author" content="字节漫步">
 <meta property="article:tag" content="微服务">
 <meta property="article:tag" content="JAVAWEB">
@@ -277,10 +277,11 @@
 <blockquote>
 <p>DTO 与  entity 还需要相互转换，因为从前端拿到数据后需转换为entity进行数据库操作</p>
 </blockquote>
-<h3 id="查询模版列表的实现"><a href="#查询模版列表的实现" class="headerlink" title="查询模版列表的实现"></a>查询模版列表的实现</h3><p><img src="https://pic.imgdb.cn/item/66f11418f21886ccc088c1b4.jpg"></p>
+<h3 id="查询模版列表的实现"><a href="#查询模版列表的实现" class="headerlink" title="查询模版列表的实现"></a>查询模版列表的实现</h3><span id="more"></span>
+<p><img src="https://pic.imgdb.cn/item/66f11418f21886ccc088c1b4.jpg"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;CarriageDTO&gt; <span class="title function_">findAll</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="comment">//用对应数据库的entity来构造一个查询条件</span></span><br><span class="line">        LambdaQueryWrapper&lt;CarriageEntity&gt; queryWrapper = Wrappers.lambdaQuery();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//数据库中的字段进行按创建时间倒叙</span></span><br><span class="line">        queryWrapper.orderByDesc(CarriageEntity::getCreated);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用父类的方法查询数据库拿到list</span></span><br><span class="line">        List&lt;CarriageEntity&gt; list = <span class="built_in">super</span>.list(queryWrapper);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//返回 --- 将结果转为DTO对象， 使用carriageutils工具类</span></span><br><span class="line">        <span class="keyword">return</span> list.stream().map(CarriageUtils::toDTO).collect(Collectors.toList());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<span id="more"></span>
+<!--more-->
 
 <h3 id="新增或更新的实现"><a href="#新增或更新的实现" class="headerlink" title="新增或更新的实现"></a>新增或更新的实现</h3><p><img src="https://pic.imgdb.cn/item/66f11de9f21886ccc091e7e7.jpg"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 保存或修改 运费模板</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> carriageDto 新增/修改运费对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> CarriageDTO <span class="title function_">saveOrUpdate</span><span class="params">(CarriageDTO carriageDto)</span> &#123;</span><br><span class="line">        <span class="comment">//校验运费模版是否存在</span></span><br><span class="line">        <span class="comment">//构造查询条件</span></span><br><span class="line">        LambdaQueryWrapper&lt;CarriageEntity&gt; queryWrapper = Wrappers.lambdaQuery();</span><br><span class="line">        <span class="comment">//模版类型</span></span><br><span class="line">        queryWrapper.eq(CarriageEntity::getTemplateType,carriageDto.getTemplateType());</span><br><span class="line">        <span class="comment">//运输类型</span></span><br><span class="line">        queryWrapper.eq(CarriageEntity::getTransportType,carriageDto.getTransportType());</span><br><span class="line">        <span class="comment">//排除，如果是修改操作，需要查询出其他模版数据，用于是否重复判定</span></span><br><span class="line">        queryWrapper.ne(ObjectUtil.isNotEmpty(carriageDto.getId()),CarriageEntity::getId,carriageDto.getId());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据父类的条件查询 得到数据库中的模版集合</span></span><br><span class="line">        List&lt;CarriageEntity&gt; carriageEntityList = <span class="built_in">super</span>.list(queryWrapper);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//不重复的保存起来</span></span><br><span class="line">        <span class="comment">//如果模版集合为空转到下面直接添加</span></span><br><span class="line">        <span class="keyword">if</span> (CollUtil.isEmpty(carriageEntityList))&#123;</span><br><span class="line">            <span class="comment">//直接保存，但是传进来是dtp 需要转 entity</span></span><br><span class="line">            <span class="keyword">return</span> getCarriageDTO(carriageDto);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果没有重复模版，需要判断此次插入是否为经济区，不是经济区不可以重复</span></span><br><span class="line">        <span class="keyword">if</span> (ObjectUtil.notEqual(carriageDto.getTemplateType(),CarriageConstant.ECONOMIC_ZONE))&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(CarriageExceptionEnum.NOT_ECONOMIC_ZONE_REPEAT);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果是经济区互寄，须臾奥进一步判断关联城市是否重复，通过集合取交集判断是否重复</span></span><br><span class="line">        <span class="comment">//将集合放到流水线上</span></span><br><span class="line">        carriageEntityList.stream().map(CarriageEntity::getAssociatedCity)<span class="comment">//先把城市给拿出来</span></span><br><span class="line">                                   .map(associatedCity -&gt; StrUtil.split(associatedCity,<span class="string">&quot;,&quot;</span>))<span class="comment">// 拿出流中每一个associatedCity按照逗号进行分割</span></span><br></pre></td></tr></table></figure>
@@ -749,15 +750,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">
