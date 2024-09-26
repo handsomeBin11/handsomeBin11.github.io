@@ -80,8 +80,6 @@
 			
 				<li><a href="/" >主页</a></li>
 			
-				<li><a href="/categories/index.html" >分类</a></li>
-			
 				<li><a href="/archives/index.html" >归档</a></li>
 			
 			</ul>
@@ -164,8 +162,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -195,14 +191,12 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/categories/index.html">分类</a></li>
-		        
-					<li style="width: 33.333333333333336%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 50%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -219,6 +213,125 @@
           </div>
           <div id="js-content" class="content-ll">
             
+
+  
+    <article id="post-多级指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/04/22/%E5%A4%9A%E7%BA%A7%E6%8C%87%E9%92%88/">多级指针</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/04/22/%E5%A4%9A%E7%BA%A7%E6%8C%87%E9%92%88/" class="archive-article-date">
+        <time datetime="2021-04-22T15:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="什么是多维指针？"><a href="#什么是多维指针？" class="headerlink" title="什么是多维指针？"></a>什么是多维指针？</h3><h4 id="如何得到那个地址？"><a href="#如何得到那个地址？" class="headerlink" title="如何得到那个地址？"></a>如何得到那个地址？</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">10</span>;<span class="comment">//i首先是个整形的变量 </span></span><br><span class="line">  </span><br><span class="line">	<span class="type">int</span> *p = &amp;i;<span class="comment">//int类型的指针变量p 取得了i的地址</span></span><br><span class="line">	<span class="type">int</span> **q = &amp;p;<span class="comment">//int类型的指针变量q 取得了p的地址</span></span><br><span class="line">	<span class="type">int</span> ***r = &amp;q;<span class="comment">//int类型的指针变量r 取得了p的地址</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们画个图来看看究竟发生了什么？👇</p>
+<p><img src="https://www.helloimg.com/images/2021/04/21/B805fK.png" alt="B805fK.png"></p>
+<ol>
+<li>i 是int类型的</li>
+<li>p 存放的是 i 的地址，p就应该是 int *类型的。即p能存放 int 类型<strong>变量</strong>的地址。</li>
+<li>q 存放了 p的地址， p又是 int * 类型的。故，q 能存放是 int 类型指针变量的地址。所以是 (int * )  *</li>
+<li>r 存放了 q的地址， q又是 能存放  int ** 类型的，故，r能存放 int 类型变量(p)的指针变量（q）的指针变量的地址。</li>
+</ol>
+<p>题问：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//r 是否能存 i的地址？</span></span><br><span class="line"><span class="comment">// no ！！！！！</span></span><br><span class="line">r 只能存法 <span class="type">int</span> ** 类型的变量的地址。</span><br><span class="line"><span class="comment">//q能存放 i的地址吗？</span></span><br><span class="line">  <span class="comment">//no!!@!!</span></span><br><span class="line">  </span><br><span class="line"> q 只能 存放 <span class="type">int</span> * 类型的变量的地址。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="如何拿到多级指针里面的值？"><a href="#如何拿到多级指针里面的值？" class="headerlink" title="如何拿到多级指针里面的值？"></a>如何拿到多级指针里面的值？</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;***r = %d\n&quot;</span>,***r);<span class="comment">//***r = 10 </span></span><br></pre></td></tr></table></figure>
+
+<p>由下图可知：</p>
+<p><img src="https://www.helloimg.com/images/2021/04/21/B8wyw1.png" alt="B8wyw1.png"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">		* r 就相当于那个q变量存放的内容 ，q里存放的2000H</span></span><br><span class="line"><span class="comment">		    - 原理就是根据r里存放的3000H找到该位置上的变量q，接着拿到q里存放的2000H这个内容。</span></span><br><span class="line"><span class="comment">		** r就相当于那个p变量存放的内容 ，p里面存放的是1000H</span></span><br><span class="line"><span class="comment">				- 原理就是根据q里存放的2000H找到该位置上的变量p，接着拿到p里存放的2000H这个内容。</span></span><br><span class="line"><span class="comment">		*** r就当于那个i变量存放的内容 ， i里面存放的是10。</span></span><br><span class="line"><span class="comment">				- 原理就是根据p里存放的1000H找到该位置上的变量i，接着拿到i里存放的10这个内容。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">f</span><span class="params">( <span class="type">int</span> **q )</span><span class="comment">//这里就应该用 *（*p）来接收。</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//*q 就是 p</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">g</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line">  <span class="type">int</span> * p = &amp;i;</span><br><span class="line">  f( &amp;p );<span class="comment">//p是int * 类型的变量。 &amp;p 就是  int **</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言理论部分</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言理论部分//" class="article-tag-list-link color3">C语言理论部分</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/04/22/%E5%A4%9A%E7%BA%A7%E6%8C%87%E9%92%88/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
 
   
     <article id="post-指针和多维数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
@@ -1711,120 +1824,6 @@ struct point p1,p2;
 
 
   
-    <article id="post-判断闰年" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/11/%E5%88%A4%E6%96%AD%E9%97%B0%E5%B9%B4/">判断闰年</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/11/%E5%88%A4%E6%96%AD%E9%97%B0%E5%B9%B4/" class="archive-article-date">
-        <time datetime="2021-04-11T09:11:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>遇到这么一个题哈，问不能判断闰年的是那个程序？其中的一个程序是这样的</p>
-<p>判断是不是闰年的方法</p>
-<ol>
-<li>能被400整除</li>
-<li>能被4 整除 <strong>且</strong> 不能被100整除<ul>
-<li>以上两个满足条件之一就🉑️</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> year;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;year);</span><br><span class="line">    <span class="keyword">if</span> ( year %<span class="number">400</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;是&quot;</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( year %<span class="number">100</span> != <span class="number">0</span> )<span class="comment">//⚠️注意这里不能被整出，如果2000进来就直接跳出去</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (year %<span class="number">4</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;是&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;不是&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>看这个题，发现当 整数年的时候 ，如果我们输入2000 3000 1000 的话程序应该输出‘不是’</p>
-<p>但这个程序在 else if 哪里 进不去。结果就是程序直接啥也没有输出！！！！！所以这个程序就是错的。</p>
-</blockquote>
-<p>顺便来看下正常人写的闰年程序！</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> year;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;year);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( year == <span class="number">400</span> || (year %<span class="number">4</span> == <span class="number">0</span> &amp;&amp; year%<span class="number">100</span>!=<span class="number">0</span>)  ) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;是！\n&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;不是！\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C语言错题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言错题//" class="article-tag-list-link color1">C语言错题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/11/%E5%88%A4%E6%96%AD%E9%97%B0%E5%B9%B4/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/12/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/14/">Next &amp;raquo;</a>
@@ -1998,11 +1997,11 @@ struct point p1,p2;
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2034,6 +2033,10 @@ struct point p1,p2;
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
               </li>
              
@@ -2046,15 +2049,15 @@ struct point p1,p2;
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2074,11 +2077,11 @@ struct point p1,p2;
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2146,19 +2149,15 @@ struct point p1,p2;
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
+                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2360,7 +2359,7 @@ struct point p1,p2;
 <script type="text/javascript" src="/plugins/activate-power-mode/activate-power-mode.js"></script>
 <script>
   POWERMODE.colorful = true; // make power mode colorful
-  POWERMODE.shake = false; // turn off shake
+  POWERMODE.shake = true; // turn off shake
   document.body.addEventListener('input', POWERMODE);
 </script>
 

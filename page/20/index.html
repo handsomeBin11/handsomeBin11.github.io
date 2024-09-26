@@ -80,8 +80,6 @@
 			
 				<li><a href="/" >主页</a></li>
 			
-				<li><a href="/categories/index.html" >分类</a></li>
-			
 				<li><a href="/archives/index.html" >归档</a></li>
 			
 			</ul>
@@ -164,8 +162,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -195,14 +191,12 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/categories/index.html">分类</a></li>
-		        
-					<li style="width: 33.333333333333336%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 50%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -219,6 +213,109 @@
           </div>
           <div id="js-content" class="content-ll">
             
+
+  
+    <article id="post-用C解决正逆序输出任意数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/01/06/%E7%94%A8C%E8%A7%A3%E5%86%B3%E6%AD%A3%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E4%BB%BB%E6%84%8F%E6%95%B0%E5%AD%97/">用C解决正逆序输出任意数字</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/01/06/%E7%94%A8C%E8%A7%A3%E5%86%B3%E6%AD%A3%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E4%BB%BB%E6%84%8F%E6%95%B0%E5%AD%97/" class="archive-article-date">
+        <time datetime="2020-01-06T12:40:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-06</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="最近复习了C的相关知识，想分享关于拆分数字的一些思想。"><a href="#最近复习了C的相关知识，想分享关于拆分数字的一些思想。" class="headerlink" title="最近复习了C的相关知识，想分享关于拆分数字的一些思想。"></a>最近复习了C的相关知识，想分享关于拆分数字的一些思想。</h2><p>比如我们要用计算机拆分一个12345 这个1万那么大的数字，要求倒序输出每一位， 如 6  5  4  3  2  1.</p>
+<p>可以看出每一轮可以拆出最后一位</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">		123456%10 --&gt; 6 </span></span><br><span class="line"><span class="comment">		123456/10 --&gt; 12345</span></span><br><span class="line"><span class="comment">		</span></span><br><span class="line"><span class="comment">		12345%10 --&gt;  5</span></span><br><span class="line"><span class="comment">		12345/10 --&gt; 1234</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">		.....</span></span><br><span class="line"><span class="comment">		.....</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>由上面的式子可以写出以下程序</p>
+    
+    <a class="article-more-a" href="/2020/01/06/%E7%94%A8C%E8%A7%A3%E5%86%B3%E6%AD%A3%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E4%BB%BB%E6%84%8F%E6%95%B0%E5%AD%97/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/01/06/%E7%94%A8C%E8%A7%A3%E5%86%B3%E6%AD%A3%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E4%BB%BB%E6%84%8F%E6%95%B0%E5%AD%97/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
 
   
     <article id="post-JavaScript全选与全不选" class="article article-type-post  article-index" itemscope itemprop="blogPost">
@@ -893,11 +990,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -929,6 +1026,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
               </li>
              
@@ -941,15 +1042,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -969,11 +1070,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1041,19 +1142,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
+                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1255,7 +1352,7 @@
 <script type="text/javascript" src="/plugins/activate-power-mode/activate-power-mode.js"></script>
 <script>
   POWERMODE.colorful = true; // make power mode colorful
-  POWERMODE.shake = false; // turn off shake
+  POWERMODE.shake = true; // turn off shake
   document.body.addEventListener('input', POWERMODE);
 </script>
 

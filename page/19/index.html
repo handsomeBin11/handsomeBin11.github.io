@@ -80,8 +80,6 @@
 			
 				<li><a href="/" >主页</a></li>
 			
-				<li><a href="/categories/index.html" >分类</a></li>
-			
 				<li><a href="/archives/index.html" >归档</a></li>
 			
 			</ul>
@@ -164,8 +162,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -195,14 +191,12 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/categories/index.html">分类</a></li>
-		        
-					<li style="width: 33.333333333333336%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 50%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -219,6 +213,137 @@
           </div>
           <div id="js-content" class="content-ll">
             
+
+  
+    <article id="post-数据合并和分组聚合" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/11/%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6%E5%92%8C%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88/">数据合并和分组聚合</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/11/%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6%E5%92%8C%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88/" class="archive-article-date">
+        <time datetime="2020-05-11T06:41:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-11</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <ul>
+<li><pre><code class="python">In [32]: df1
+Out[32]:
+     a    b    c    d
+A  1.0  1.0  1.0  1.0
+B  1.0  1.0  1.0  1.0
+
+
+
+In [36]: df2
+Out[36]:
+     x    y    z
+A  0.0  0.0  0.0
+B  0.0  0.0  0.0
+C  0.0  0.0  0.0
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**Join**. 方法 : 以 df1作为主体，拼接------多余的不要！ 空余的位置补NaN</span><br><span class="line"></span><br><span class="line">~~~python</span><br><span class="line">In [38]: df1.join(df2)</span><br><span class="line">Out[38]:</span><br><span class="line">     a    b    c    d    x    y    z</span><br><span class="line">A  1.0  1.0  1.0  1.0  0.0  0.0  0.0</span><br><span class="line">B  1.0  1.0  1.0  1.0  0.0  0.0  0.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 如果反过来  </span><br><span class="line">In [39]: df2.join(df1)</span><br><span class="line">Out[39]:</span><br><span class="line">     x    y    z    a    b    c    d</span><br><span class="line">A  0.0  0.0  0.0  1.0  1.0  1.0  1.0</span><br><span class="line">B  0.0  0.0  0.0  1.0  1.0  1.0  1.0</span><br><span class="line">C  0.0  0.0  0.0  NaN  NaN  NaN  NaN</span><br></pre></td></tr></table></figure>
+
+**merge** 方法
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">     a    b    c    d        df1</span><br><span class="line">A  <span class="number">1.0</span>  <span class="number">1.0</span>  <span class="number">1.0</span>  <span class="number">1.0</span></span><br><span class="line">B  <span class="number">1.0</span>  <span class="number">1.0</span>  <span class="number">1.0</span>  <span class="number">1.0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     f    a    x</span><br><span class="line"><span class="number">0</span>  <span class="number">0.0</span>  <span class="number">0.0</span>  <span class="number">0.0</span>            df3</span><br><span class="line"><span class="number">1</span>  <span class="number">0.0</span>  <span class="number">1.0</span>  <span class="number">0.0</span></span><br><span class="line"><span class="number">2</span>  <span class="number">0.0</span>  <span class="number">0.0</span>  <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line">df1.merge(df3,on=<span class="string">&quot;a&quot;</span>)   <span class="comment"># 默认为inner链接</span></span><br><span class="line"></span><br><span class="line">Out[<span class="number">49</span>]:</span><br><span class="line">     a    b    c    d    f    x</span><br><span class="line"><span class="number">0</span>  <span class="number">1.0</span>  <span class="number">1.0</span>  <span class="number">1.0</span>  <span class="number">1.0</span>  <span class="number">0.0</span>  <span class="number">0.0</span></span><br><span class="line"><span class="number">1</span>  <span class="number">1.0</span>  <span class="number">1.0</span>  <span class="number">1.0</span>  <span class="number">1.0</span>  <span class="number">0.0</span>  <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line">t1.merge(df3,on=<span class="string">&quot;a&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+### 分组聚合 GroupBy ------------得到的是一个对象
+&lt;!-- more --&gt;
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 是辛巴克每个国家的信息</span></span><br><span class="line"></span><br><span class="line">Brand  Store Number     Store Name Ownership <span class="type">Type</span>     Street Address              City State/Province Country Postcode Phone Number                 Timezone  Longitude  Latitude</span><br><span class="line"><span class="number">0</span>  Starbucks  <span class="number">47370</span>-<span class="number">257954</span>  Meritxell, <span class="number">96</span>       Licensed  Av. Meritxell, <span class="number">96</span>  Andorra la Vella              <span class="number">7</span>      AD    AD500    <span class="number">376818720</span>  GMT+<span class="number">1</span>:<span class="number">00</span> Europe/Andorra       <span class="number">1.53</span>     <span class="number">42.51</span></span><br><span class="line"><span class="comment">## 读入数据  </span></span><br><span class="line">file_path = <span class="string">&quot;./starbucks_store_worldwide.csv&quot;</span></span><br><span class="line">df = pd.read_csv(file_path)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 分组  生成的grouped是一个对象类型的数据元祖，里边有两个值，国家和对应的Dateframe。</span></span><br><span class="line">grouped=df.groupby(by=<span class="string">&quot;Country&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 可以对元祖的两个数据进行遍历</span></span><br><span class="line"><span class="keyword">for</span> i,j <span class="keyword">in</span> grouped:</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;-&quot;</span>*<span class="number">100</span>)</span><br><span class="line">    <span class="built_in">print</span>(j)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>*<span class="number">100</span>)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">country_count = grouped[<span class="string">&quot;Brand&quot;</span>].count()<span class="comment">#统计数量 按照Brand进行分组</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(country_count[<span class="string">&quot;US&quot;</span>]) <span class="comment">#统计国家的数量</span></span><br><span class="line"><span class="built_in">print</span>(country_count[<span class="string">&quot;CN&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+- .mean()  计算平均
+- .count()  计算数量
+
+### 索引
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">a = pd.DataFrame(&#123;<span class="string">&#x27;a&#x27;</span>: <span class="built_in">range</span>(<span class="number">7</span>),<span class="string">&#x27;b&#x27;</span>: <span class="built_in">range</span>(<span class="number">7</span>, <span class="number">0</span>, -<span class="number">1</span>),<span class="string">&#x27;c&#x27;</span>: [<span class="string">&#x27;one&#x27;</span>,<span class="string">&#x27;one,: &#x27;</span>one<span class="string">&#x27;,&#x27;</span>two<span class="string">&#x27;,&#x27;</span>two<span class="string">&#x27;,&#x27;</span>two<span class="string">&#x27;, &#x27;</span>two<span class="string">&#x27;],&#x27;</span>d<span class="string">&#x27;: list(&quot;hjklmno&quot;)&#125;) </span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string">In [71]: df1</span></span><br><span class="line"><span class="string">Out[71]:</span></span><br><span class="line"><span class="string">       a    b    c    d</span></span><br><span class="line"><span class="string">A  100.0  1.0  1.0  1.0</span></span><br><span class="line"><span class="string">B    1.0  1.0  1.0  1.0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># index  展示索引                                                           </span></span><br><span class="line"><span class="string">In [72]: df1.index </span></span><br><span class="line"><span class="string">Out[72]: Index([&#x27;</span>A<span class="string">&#x27;, &#x27;</span><span class="string">B&#x27;], dtype=&#x27;</span><span class="built_in">object</span><span class="string">&#x27;)                                                           </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># reindex 从新定义索引</span></span><br><span class="line"><span class="string">       a    b    c    d</span></span><br><span class="line"><span class="string">A  100.0  1.0  1.0  1.0</span></span><br><span class="line"><span class="string">B    1.0  1.0  1.0  1.0                                                           </span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string">In [75]: df1.reindex([&quot;a&quot;,&quot;f&quot;])</span></span><br><span class="line"><span class="string">Out[75]:</span></span><br><span class="line"><span class="string">       a    b    c    d</span></span><br><span class="line"><span class="string">a  100.0  1.0  1.0  1.0</span></span><br><span class="line"><span class="string">f    NaN  NaN  NaN  NaN                                                           </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> # 将某列作为索引</span></span><br><span class="line"><span class="string">      a    b    c    d</span></span><br><span class="line"><span class="string">A  100.0  1.0  1.0  1.0</span></span><br><span class="line"><span class="string">B    1.0  1.0  1.0  1.0    </span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string">In [76]: df1.set_index(&quot;a&quot;)</span></span><br><span class="line"><span class="string">Out[76]:</span></span><br><span class="line"><span class="string">         b    c    d</span></span><br><span class="line"><span class="string">a</span></span><br><span class="line"><span class="string">100.0  1.0  1.0  1.0</span></span><br><span class="line"><span class="string">1.0    1.0  1.0  1.0                                                           </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#查看一下当前索引</span></span><br><span class="line"><span class="string">df1.set_index(&quot;a&quot;,drop=False)                                                           </span></span><br><span class="line"><span class="string"> Out[77]: Float64Index([100.0, 1.0], dtype=&#x27;</span>float64<span class="string">&#x27;, name=&#x27;</span>a<span class="string">&#x27;) </span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string"> # 把某列设为索引但是不改变本来的结构 drop</span></span><br><span class="line"><span class="string">In [78]: df1.set_index(&quot;a&quot;,drop=False)</span></span><br><span class="line"><span class="string">Out[78]:</span></span><br><span class="line"><span class="string">           a    b    c    d</span></span><br><span class="line"><span class="string">a</span></span><br><span class="line"><span class="string">100.0  100.0  1.0  1.0  1.0</span></span><br><span class="line"><span class="string">1.0      1.0  1.0  1.0  1.0                                                           </span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string">## 从复合索引中取值</span></span><br><span class="line"><span class="string">In [82]: barr= a.set_index([&quot;c&quot;,&quot;d&quot;])</span></span><br><span class="line"><span class="string">In [83]: barr</span></span><br><span class="line"><span class="string">Out[83]:</span></span><br><span class="line"><span class="string">       a  b</span></span><br><span class="line"><span class="string">c   d</span></span><br><span class="line"><span class="string">one h  0  7</span></span><br><span class="line"><span class="string">    j  1  6</span></span><br><span class="line"><span class="string">    k  2  5</span></span><br><span class="line"><span class="string">two l  3  4</span></span><br><span class="line"><span class="string">    m  4  3</span></span><br><span class="line"><span class="string">    n  5  2</span></span><br><span class="line"><span class="string">    o  6  1                        </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string">barr[&quot;a&quot;] </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">           </span></span><br><span class="line"><span class="string">c    d</span></span><br><span class="line"><span class="string">one  h    0</span></span><br><span class="line"><span class="string">     j    1</span></span><br><span class="line"><span class="string">     k    2</span></span><br><span class="line"><span class="string">two  l    3</span></span><br><span class="line"><span class="string">     m    4</span></span><br><span class="line"><span class="string">     n    5</span></span><br><span class="line"><span class="string">     o    6</span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string">In [86]: c[&quot;one&quot;][&quot;j&quot;]            </span></span><br><span class="line"><span class="string">Out[86]:  1  </span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string">In [87]: c[&quot;one&quot;]</span></span><br><span class="line"><span class="string">Out[87]:</span></span><br><span class="line"><span class="string">d</span></span><br><span class="line"><span class="string">h    0</span></span><br><span class="line"><span class="string">j    1</span></span><br><span class="line"><span class="string">k    2 </span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string">                                                           </span></span><br><span class="line"><span class="string"># 转换索引列 swaplevel</span></span><br><span class="line"><span class="string">In [90]: d = a.set_index([&quot;d&quot;,&quot;c&quot;])[&quot;a&quot;]</span></span><br><span class="line"><span class="string">In [91]: d</span></span><br><span class="line"><span class="string">Out[91]:</span></span><br><span class="line"><span class="string">d  c</span></span><br><span class="line"><span class="string">h  one    0</span></span><br><span class="line"><span class="string">j  one    1</span></span><br><span class="line"><span class="string">k  one    2</span></span><br><span class="line"><span class="string">l  two    3</span></span><br><span class="line"><span class="string">m  two    4</span></span><br><span class="line"><span class="string">n  two    5                                                           </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">d.swaplevel()</span></span><br><span class="line"><span class="string">Out[94]:</span></span><br><span class="line"><span class="string">c    d</span></span><br><span class="line"><span class="string">one  h    0</span></span><br><span class="line"><span class="string">     j    1</span></span><br><span class="line"><span class="string">     k    2</span></span><br><span class="line"><span class="string">two  l    3</span></span><br><span class="line"><span class="string">     m    4</span></span><br><span class="line"><span class="string">     n    5</span></span><br><span class="line"><span class="string">     o    6                                                           </span></span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">python数据分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据分析//" class="article-tag-list-link color5">数据分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/11/%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6%E5%92%8C%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
 
   
     <article id="post-Pandas" class="article article-type-post  article-index" itemscope itemprop="blogPost">
@@ -1206,109 +1331,6 @@
 
 
   
-    <article id="post-用C解决正逆序输出任意数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/01/06/%E7%94%A8C%E8%A7%A3%E5%86%B3%E6%AD%A3%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E4%BB%BB%E6%84%8F%E6%95%B0%E5%AD%97/">用C解决正逆序输出任意数字</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/01/06/%E7%94%A8C%E8%A7%A3%E5%86%B3%E6%AD%A3%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E4%BB%BB%E6%84%8F%E6%95%B0%E5%AD%97/" class="archive-article-date">
-        <time datetime="2020-01-06T12:40:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="最近复习了C的相关知识，想分享关于拆分数字的一些思想。"><a href="#最近复习了C的相关知识，想分享关于拆分数字的一些思想。" class="headerlink" title="最近复习了C的相关知识，想分享关于拆分数字的一些思想。"></a>最近复习了C的相关知识，想分享关于拆分数字的一些思想。</h2><p>比如我们要用计算机拆分一个12345 这个1万那么大的数字，要求倒序输出每一位， 如 6  5  4  3  2  1.</p>
-<p>可以看出每一轮可以拆出最后一位</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">		123456%10 --&gt; 6 </span></span><br><span class="line"><span class="comment">		123456/10 --&gt; 12345</span></span><br><span class="line"><span class="comment">		</span></span><br><span class="line"><span class="comment">		12345%10 --&gt;  5</span></span><br><span class="line"><span class="comment">		12345/10 --&gt; 1234</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">		.....</span></span><br><span class="line"><span class="comment">		.....</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>由上面的式子可以写出以下程序</p>
-    
-    <a class="article-more-a" href="/2020/01/06/%E7%94%A8C%E8%A7%A3%E5%86%B3%E6%AD%A3%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E4%BB%BB%E6%84%8F%E6%95%B0%E5%AD%97/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/01/06/%E7%94%A8C%E8%A7%A3%E5%86%B3%E6%AD%A3%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E4%BB%BB%E6%84%8F%E6%95%B0%E5%AD%97/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/18/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/20/">Next &amp;raquo;</a>
@@ -1482,11 +1504,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1518,6 +1540,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
               </li>
              
@@ -1530,15 +1556,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1558,11 +1584,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1630,19 +1656,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
+                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1844,7 +1866,7 @@
 <script type="text/javascript" src="/plugins/activate-power-mode/activate-power-mode.js"></script>
 <script>
   POWERMODE.colorful = true; // make power mode colorful
-  POWERMODE.shake = false; // turn off shake
+  POWERMODE.shake = true; // turn off shake
   document.body.addEventListener('input', POWERMODE);
 </script>
 

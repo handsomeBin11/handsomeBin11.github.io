@@ -80,8 +80,6 @@
 			
 				<li><a href="/" >主页</a></li>
 			
-				<li><a href="/categories/index.html" >分类</a></li>
-			
 				<li><a href="/archives/index.html" >归档</a></li>
 			
 			</ul>
@@ -164,8 +162,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -195,14 +191,12 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/categories/index.html">分类</a></li>
-		        
-					<li style="width: 33.333333333333336%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 50%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -219,6 +213,143 @@
           </div>
           <div id="js-content" class="content-ll">
             
+
+  
+    <article id="post-宏" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/04/28/%E5%AE%8F/">宏</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/04/28/%E5%AE%8F/" class="archive-article-date">
+        <time datetime="2021-04-28T01:45:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-28</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="像函数的宏"><a href="#像函数的宏" class="headerlink" title="像函数的宏"></a>像函数的宏</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> cube(x) ((x)*(x)*(x))</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>宏可以带参数</li>
+</ul>
+<p>比如 以下程序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> cube(x) ( (x)*(x)*(x) )</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, cube(<span class="number">5</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>125</p>
+</blockquote>
+<p>那么它实际的含义是 ：👇</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;       </span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ((<span class="number">5</span>)*(<span class="number">5</span>)*(<span class="number">5</span>)));<span class="comment">//也就是那个括号里的全部都替代这里</span></span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>明显，那个cube（5）的位置呢被替换成了( (x)*(x)*(x) )</li>
+</ul>
+<p>cube() 里面也可以是变量哦！</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> cube(x) ((x)*(x)*(x))</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, cube(i));<span class="comment">//⚠️注意这里把里面替换成了i</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 👆它等价于👇</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="type">int</span> i;</span><br><span class="line"> <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ((i)*(i)*(i)));<span class="comment">//全都替换成了 i </span></span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="如果是一个表达式"><a href="#如果是一个表达式" class="headerlink" title="如果是一个表达式"></a>如果是一个表达式</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RADTODEG1(x) ( x * 57.29578 )</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RADTODEG2(x) (x) * 57.29578 </span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, RADTODEG1(<span class="number">5</span>+<span class="number">2</span>));<span class="comment">//目的是 7 * 57.29578 = 400多</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, <span class="number">180</span>/RADTODEG2(<span class="number">1</span>));<span class="comment">//目的是 180 / 57.29578 = 3.多</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>实际运行结果：</p>
+<p>119.591560<br>10313.240400		</p>
+</blockquote>
+<p>为什么结果有出入？我们来看看它里是什么状况</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, ( <span class="number">5</span>+<span class="number">2</span> * <span class="number">57.29578</span> ));<span class="comment">//实际上是 2先乘然后才加的5</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, <span class="number">180</span>/(<span class="number">1</span>) * <span class="number">57.29578</span>);<span class="comment">// 180 先除1 然后才乘的57 </span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>正确的写法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> RADTODEG2(x) ((x) * 57.29578 )</span></span><br></pre></td></tr></table></figure>
+
+<p>外面有括号，里面也得有括号。</p>
+<p>反正就记住，所有的<strong>参数</strong>的地方<strong>都加括号</strong></p>
+<p>在宏定义的时候，千万不要加分号</p>
+<p>如果你加了分号，那个结尾的分号会被一起带入你调用宏的地方，于是你的程序就会出现两个分号！结果就错了。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言理论部分</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言理论部分//" class="article-tag-list-link color3">C语言理论部分</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/04/28/%E5%AE%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
 
   
     <article id="post-求给定精度的简单" class="article article-type-post  article-index" itemscope itemprop="blogPost">
@@ -1280,125 +1411,6 @@
 
 
   
-    <article id="post-多级指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/22/%E5%A4%9A%E7%BA%A7%E6%8C%87%E9%92%88/">多级指针</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/22/%E5%A4%9A%E7%BA%A7%E6%8C%87%E9%92%88/" class="archive-article-date">
-        <time datetime="2021-04-22T15:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="什么是多维指针？"><a href="#什么是多维指针？" class="headerlink" title="什么是多维指针？"></a>什么是多维指针？</h3><h4 id="如何得到那个地址？"><a href="#如何得到那个地址？" class="headerlink" title="如何得到那个地址？"></a>如何得到那个地址？</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">10</span>;<span class="comment">//i首先是个整形的变量 </span></span><br><span class="line">  </span><br><span class="line">	<span class="type">int</span> *p = &amp;i;<span class="comment">//int类型的指针变量p 取得了i的地址</span></span><br><span class="line">	<span class="type">int</span> **q = &amp;p;<span class="comment">//int类型的指针变量q 取得了p的地址</span></span><br><span class="line">	<span class="type">int</span> ***r = &amp;q;<span class="comment">//int类型的指针变量r 取得了p的地址</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们画个图来看看究竟发生了什么？👇</p>
-<p><img src="https://www.helloimg.com/images/2021/04/21/B805fK.png" alt="B805fK.png"></p>
-<ol>
-<li>i 是int类型的</li>
-<li>p 存放的是 i 的地址，p就应该是 int *类型的。即p能存放 int 类型<strong>变量</strong>的地址。</li>
-<li>q 存放了 p的地址， p又是 int * 类型的。故，q 能存放是 int 类型指针变量的地址。所以是 (int * )  *</li>
-<li>r 存放了 q的地址， q又是 能存放  int ** 类型的，故，r能存放 int 类型变量(p)的指针变量（q）的指针变量的地址。</li>
-</ol>
-<p>题问：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//r 是否能存 i的地址？</span></span><br><span class="line"><span class="comment">// no ！！！！！</span></span><br><span class="line">r 只能存法 <span class="type">int</span> ** 类型的变量的地址。</span><br><span class="line"><span class="comment">//q能存放 i的地址吗？</span></span><br><span class="line">  <span class="comment">//no!!@!!</span></span><br><span class="line">  </span><br><span class="line"> q 只能 存放 <span class="type">int</span> * 类型的变量的地址。</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="如何拿到多级指针里面的值？"><a href="#如何拿到多级指针里面的值？" class="headerlink" title="如何拿到多级指针里面的值？"></a>如何拿到多级指针里面的值？</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;***r = %d\n&quot;</span>,***r);<span class="comment">//***r = 10 </span></span><br></pre></td></tr></table></figure>
-
-<p>由下图可知：</p>
-<p><img src="https://www.helloimg.com/images/2021/04/21/B8wyw1.png" alt="B8wyw1.png"></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">		* r 就相当于那个q变量存放的内容 ，q里存放的2000H</span></span><br><span class="line"><span class="comment">		    - 原理就是根据r里存放的3000H找到该位置上的变量q，接着拿到q里存放的2000H这个内容。</span></span><br><span class="line"><span class="comment">		** r就相当于那个p变量存放的内容 ，p里面存放的是1000H</span></span><br><span class="line"><span class="comment">				- 原理就是根据q里存放的2000H找到该位置上的变量p，接着拿到p里存放的2000H这个内容。</span></span><br><span class="line"><span class="comment">		*** r就当于那个i变量存放的内容 ， i里面存放的是10。</span></span><br><span class="line"><span class="comment">				- 原理就是根据p里存放的1000H找到该位置上的变量i，接着拿到i里存放的10这个内容。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">f</span><span class="params">( <span class="type">int</span> **q )</span><span class="comment">//这里就应该用 *（*p）来接收。</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//*q 就是 p</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">g</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line">  <span class="type">int</span> * p = &amp;i;</span><br><span class="line">  f( &amp;p );<span class="comment">//p是int * 类型的变量。 &amp;p 就是  int **</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言理论部分//" class="article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/22/%E5%A4%9A%E7%BA%A7%E6%8C%87%E9%92%88/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
@@ -1572,11 +1584,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1608,6 +1620,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
               </li>
              
@@ -1620,15 +1636,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1648,11 +1664,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1720,19 +1736,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
+                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1934,7 +1946,7 @@
 <script type="text/javascript" src="/plugins/activate-power-mode/activate-power-mode.js"></script>
 <script>
   POWERMODE.colorful = true; // make power mode colorful
-  POWERMODE.shake = false; // turn off shake
+  POWERMODE.shake = true; // turn off shake
   document.body.addEventListener('input', POWERMODE);
 </script>
 

@@ -6,22 +6,34 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>字节漫步</title>
+  <title>交易系统的设计 | 字节漫步</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="实验9-5 查找书籍 (20 分) 给定n本书的名称和定价，本题要求编写程序，查找并输出其中定价最高和最低的书的名称和定价。 输入格式:输入第一行给出正整数n（&lt;10），随后给出n本书的信息。每本书在一行中给出书名，即长度不超过30的字符串，随后一行中给出正实数价格。题目保证没有同样价格的书。 输出格式:在一行中按照“价格, 书名”的格式先后输出价格最高和最低的书。价格保留2位小数。 输入样">
+  <meta name="description" content="交易微服务交易流程的设计  ✍️关于二维码的生成最开始我是在后台利用hutool工具类直接生成的二维码图片，然后把base64返回给前端，但是并发量高了发支付服务有些卡。🤦‍♂️原因是所有的二维码都在后台生成，而且传输的内容还多 解决方法：后端不再生成二维码，直接把路径返回给前端，前端有内置的工具类。 关于安全首先配置支付宝的给的公钥 应用的私钥 ， 由于支付宝是第三方，系统在调用支付宝的时候要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="字节漫步">
-<meta property="og:url" content="http://example.com/2024/01/24/%20%E6%9F%A5%E6%89%BE%E4%B9%A6%E7%B1%8D/index.html">
+<meta property="og:title" content="交易系统的设计">
+<meta property="og:url" content="http://example.com/2024/09/24/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="字节漫步">
-<meta property="og:description" content="实验9-5 查找书籍 (20 分) 给定n本书的名称和定价，本题要求编写程序，查找并输出其中定价最高和最低的书的名称和定价。 输入格式:输入第一行给出正整数n（&lt;10），随后给出n本书的信息。每本书在一行中给出书名，即长度不超过30的字符串，随后一行中给出正实数价格。题目保证没有同样价格的书。 输出格式:在一行中按照“价格, 书名”的格式先后输出价格最高和最低的书。价格保留2位小数。 输入样">
+<meta property="og:description" content="交易微服务交易流程的设计  ✍️关于二维码的生成最开始我是在后台利用hutool工具类直接生成的二维码图片，然后把base64返回给前端，但是并发量高了发支付服务有些卡。🤦‍♂️原因是所有的二维码都在后台生成，而且传输的内容还多 解决方法：后端不再生成二维码，直接把路径返回给前端，前端有内置的工具类。 关于安全首先配置支付宝的给的公钥 应用的私钥 ， 由于支付宝是第三方，系统在调用支付宝的时候要">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-23T16:30:05.864Z">
-<meta property="article:modified_time" content="2024-01-23T16:30:06.076Z">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66f36aeff21886ccc0744e88.jpg">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66f36f1ff21886ccc077e084.jpg">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66f3c497f21886ccc0bece27.jpg">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66f3d97ff21886ccc0d2bf6f.jpg">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66f3da86f21886ccc0d3d920.jpg">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66f3dad1f21886ccc0d42274.jpg">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66f4d6e2f21886ccc0996655.jpg">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66f518e5f21886ccc0d1a66e.jpg">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66f4f986f21886ccc0b5f023.jpg">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66f507f3f21886ccc0c2dfc9.jpg">
+<meta property="article:published_time" content="2024-09-24T09:00:07.000Z">
+<meta property="article:modified_time" content="2024-09-26T16:49:50.250Z">
 <meta property="article:author" content="字节漫步">
-<meta property="article:tag" content="say my name: ---  ">
+<meta property="article:tag" content="微服务">
+<meta property="article:tag" content="JAVAWEB">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/66f36aeff21886ccc0744e88.jpg">
   
     <link rel="alternative" href="/atom.xml" title="字节漫步" type="application/atom+xml">
   
@@ -210,23 +222,173 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post- 查找书籍" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-交易系统的设计" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+  
+  
+    <h1 class="article-title" itemprop="name">
+      交易系统的设计
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2024/09/24/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1/" class="archive-article-date">
+        <time datetime="2024-09-24T09:00:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-24</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">2.1k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">8分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
   <div class="article-entry" itemprop="articleBody">
     
-    <p>实验9-5 查找书籍 (20 分)</p>
-<p>给定n本书的名称和定价，本题要求编写程序，查找并输出其中定价最高和最低的书的名称和定价。</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入第一行给出正整数n（&lt;10），随后给出n本书的信息。每本书在一行中给出书名，即长度不超过30的字符串，随后一行中给出正实数价格。题目保证没有同样价格的书。</p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行中按照“价格, 书名”的格式先后输出价格最高和最低的书。价格保留2位小数。</p>
-<h3 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">Programming in C</span><br><span class="line">21.5</span><br><span class="line">Programming in VB</span><br><span class="line">18.5</span><br><span class="line">Programming in Delphi</span><br><span class="line">25.0</span><br></pre></td></tr></table></figure>
+    <h1 id="交易微服务"><a href="#交易微服务" class="headerlink" title="交易微服务"></a>交易微服务</h1><h2 id="交易流程的设计"><a href="#交易流程的设计" class="headerlink" title="交易流程的设计"></a>交易流程的设计</h2><p><img src="https://pic.imgdb.cn/item/66f36aeff21886ccc0744e88.jpg"></p>
+<p><img src="https://pic.imgdb.cn/item/66f36f1ff21886ccc077e084.jpg"></p>
+<h2 id="✍️关于二维码的生成"><a href="#✍️关于二维码的生成" class="headerlink" title="✍️关于二维码的生成"></a>✍️关于二维码的生成</h2><p>最开始我是在后台利用hutool工具类直接生成的二维码图片，然后把base64返回给前端，但是<strong>并发量</strong>高了发支付服务有些卡。🤦‍♂️原因是所有的二维码都在<strong>后台生成</strong>，而且传输的内容<strong>还多</strong></p>
+<p><strong>解决方法：后端不再生成二维码，直接把路径返回给前端，前端有内置的工具类。</strong></p>
+<h3 id="关于安全"><a href="#关于安全" class="headerlink" title="关于安全"></a>关于安全</h3><p>首先配置支付宝的给的<strong>公钥</strong> 应用的<strong>私钥</strong> ， 由于支付宝是第三方，系统在调用支付宝的时候要保证传递时数据的安全。</p>
+<p>数据传递时，会根据传递数据的参数进行        <strong>签名（加密） &#x3D;&#x3D;&#x3D;&#x3D;&gt;  验签（支付宝）</strong></p>
+<p> <img src="https://pic.imgdb.cn/item/66f3c497f21886ccc0bece27.jpg"></p>
+<h3 id="主要的代码结构"><a href="#主要的代码结构" class="headerlink" title="主要的代码结构"></a>主要的代码结构</h3><p><img src="https://pic.imgdb.cn/item/66f3d97ff21886ccc0d2bf6f.jpg"></p>
+<p>问题： 支付宝要对接公钥私钥，存在哪里？</p>
+<blockquote>
+<p>存到渠道这张报表</p>
+</blockquote>
+<p><img src="https://pic.imgdb.cn/item/66f3da86f21886ccc0d3d920.jpg"></p>
+<p><img src="https://pic.imgdb.cn/item/66f3dad1f21886ccc0d42274.jpg"></p>
+<h3 id="涉及表（3张）"><a href="#涉及表（3张）" class="headerlink" title="涉及表（3张）"></a>涉及表（3张）</h3><ol>
+<li>交易单表</li>
+<li>渠道表</li>
+<li>退款记录表</li>
+</ol>
+<p><strong>将来的支付的支付方式怎么扩展？支付配置存到哪里？有这么多支付方式如何维护？</strong></p>
+<blockquote>
+<p>就在渠道表中</p>
+</blockquote>
+<p>前端传回来的实体封装成了这个表</p>
+<p><img src="https://pic.imgdb.cn/item/66f4d6e2f21886ccc0996655.jpg"></p>
+<h2 id="核心代码涉及流程"><a href="#核心代码涉及流程" class="headerlink" title="核心代码涉及流程"></a>核心代码涉及流程</h2><p><img src="https://pic.imgdb.cn/item/66f518e5f21886ccc0d1a66e.jpg"></p>
+<blockquote>
+<p>快递员直接把请求发送到<strong>NativePayController</strong>中进行一个下单的请求，请求参数会携带（订单号，金额，支付渠道，商户号，描述）这些以<strong>DTO的形式</strong>传到后台，根据这些转成trade交易单对象entity。</p>
+<p>拿到entity之后：</p>
+<ul>
+<li>校验参数，把必须填的参数都校验完</li>
+<li>加锁： 用redisson加锁，加的是<strong>公平锁</strong>，加锁的时候用的是<strong>tryLock</strong>让有个等待的时间，不是一直阻塞。</li>
+<li>幂等性： 根据传进来的<strong>订单号查询交易单数据</strong>，</li>
+<li>如果查不到交易单是正常的，说明是第一次提交，直接补全信息即可。</li>
+<li>如果要是<strong>查到了</strong>！就判断它的状态，如果状态是<strong>已结算</strong>代表<strong>支付过了</strong>。</li>
+<li>如果是付款中，就看看是不是换渠道（也就是换微信支付或支付宝支付），那就把原来的交易单号换一下，重新发起支付。</li>
+<li>其他情况也类似，都是重新发起一个。</li>
+<li>支付实现： <strong>工厂 + IOC + 反射</strong> ，创建了一个工厂类，只需要传给工厂 <strong>渠道名称</strong>，和<strong>Handler</strong>，所有的支付都实现了这个接口。在工厂里，利用IOC把所有的对象，利用反射找对象与之进行对比。</li>
+<li>支付配置： 支付配置是动态获取的。从支付渠道中动态获取。每次从数据库中获取影响性能，把支付配置存到<strong>redis</strong>中做缓存。</li>
+<li>对接支付宝：EasySDK</li>
+<li>对接微信： V3</li>
+</ul>
+</blockquote>
+<p>前端传过来的信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NativePayDTO</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;商户号&quot;, required = true)</span></span><br><span class="line">    <span class="keyword">private</span> Long enterpriseId;</span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;业务系统订单号&quot;, required = true)</span></span><br><span class="line">    <span class="keyword">private</span> Long productOrderNo;</span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;支付渠道&quot;, required = true)</span></span><br><span class="line">    <span class="keyword">private</span> PayChannelEnum tradingChannel;</span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;交易金额，单位：元&quot;, required = true)</span></span><br><span class="line">    <span class="keyword">private</span> BigDecimal tradingAmount;</span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;备注，如：运费&quot;, required = true)</span></span><br><span class="line">    <span class="keyword">private</span> String memo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">25.00, Programming in Delphi</span><br><span class="line">18.50, Programming in VB</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>Controller</strong>来接受处理前端信息</p>
+<p>Service来处理逻辑</p>
+<h4 id="交易单校验"><a href="#交易单校验" class="headerlink" title="交易单校验"></a>交易单校验</h4><h5 id="参数校验"><a href="#参数校验" class="headerlink" title="参数校验"></a>参数校验</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">checkCreateTrading</span><span class="params">(TradingEntity tradingEntity)</span> &#123;</span><br><span class="line">        <span class="comment">//校验不为为空，订单备注、订单号、企业号、交易金额、支付渠道</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> ObjectUtil.isAllNotEmpty(tradingEntity,</span><br><span class="line">                tradingEntity.getMemo(),</span><br><span class="line">                tradingEntity.getProductOrderNo(),</span><br><span class="line">                tradingEntity.getEnterpriseId(),</span><br><span class="line">                tradingEntity.getTradingAmount(),</span><br><span class="line">                tradingEntity.getTradingChannel());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (NumberUtil.isLessOrEqual(tradingEntity.getTradingAmount(), BigDecimal.valueOf(<span class="number">0</span>))) &#123;</span><br><span class="line">            <span class="comment">//金额不能小于等于0</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="加锁"><a href="#加锁" class="headerlink" title="加锁"></a>加锁</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> TradingEntity <span class="title function_">createDownLineTrading</span><span class="params">(TradingEntity tradingEntity)</span> &#123;</span><br><span class="line">        <span class="comment">//交易前置处理：检测交易单参数</span></span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">flag</span> <span class="operator">=</span> beforePayHandler.checkCreateTrading(tradingEntity);</span><br><span class="line">        <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(TradingEnum.CONFIG_ERROR);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        tradingEntity.setTradingType(TradingConstant.TRADING_TYPE_FK);</span><br><span class="line">        tradingEntity.setEnableFlag(Constants.YES);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//对交易订单加锁</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">productOrderNo</span> <span class="operator">=</span> tradingEntity.getProductOrderNo();</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> TradingCacheConstant.CREATE_PAY + productOrderNo;</span><br><span class="line">        <span class="type">RLock</span> <span class="variable">lock</span> <span class="operator">=</span> redissonClient.getFairLock(key);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//获取锁</span></span><br><span class="line">            <span class="keyword">if</span> (lock.tryLock(TradingCacheConstant.REDIS_WAIT_TIME, TimeUnit.SECONDS)) &#123;</span><br><span class="line">                <span class="comment">//交易前置处理：幂等性处理</span></span><br><span class="line">                <span class="built_in">this</span>.beforePayHandler.idempotentCreateTrading(tradingEntity);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//调用不同的支付渠道进行处理</span></span><br><span class="line">                <span class="type">PayChannelEnum</span> <span class="variable">payChannel</span> <span class="operator">=</span> PayChannelEnum.valueOf(tradingEntity.getTradingChannel());</span><br><span class="line">                <span class="type">NativePayHandler</span> <span class="variable">nativePayHandler</span> <span class="operator">=</span> HandlerFactory.get(payChannel, NativePayHandler.class);</span><br><span class="line">                nativePayHandler.createDownLineTrading(tradingEntity);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//生成统一收款二维码</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">placeOrderMsg</span> <span class="operator">=</span> tradingEntity.getPlaceOrderMsg();</span><br><span class="line">                <span class="type">String</span> <span class="variable">qrCode</span> <span class="operator">=</span> <span class="built_in">this</span>.qrCodeService.generate(placeOrderMsg, payChannel);</span><br><span class="line">                tradingEntity.setQrCode(qrCode);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//新增或更新交易数据</span></span><br><span class="line">                flag = <span class="built_in">this</span>.tradingService.saveOrUpdate(tradingEntity);</span><br><span class="line">                <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(TradingEnum.SAVE_OR_UPDATE_FAIL);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> tradingEntity;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(TradingEnum.NATIVE_PAY_FAIL);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SLException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;统一收单线下交易预创建异常:&#123;&#125;&quot;</span>, ExceptionUtil.stacktraceToString(e));</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(TradingEnum.NATIVE_PAY_FAIL);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>加锁的逻辑</strong></p>
+<p><img src="https://pic.imgdb.cn/item/66f4f986f21886ccc0b5f023.jpg"></p>
+<h5 id="渠道"><a href="#渠道" class="headerlink" title="渠道"></a>渠道</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//调用不同的支付渠道进行处理</span></span><br><span class="line"><span class="type">PayChannelEnum</span> <span class="variable">payChannel</span> <span class="operator">=</span> PayChannelEnum.valueOf(tradingEntity.getTradingChannel());</span><br><span class="line"><span class="comment">//把实现对象放到IOC容器中</span></span><br><span class="line"><span class="type">NativePayHandler</span> <span class="variable">nativePayHandler</span> <span class="operator">=</span> HandlerFactory.get(payChannel, NativePayHandler.class);</span><br><span class="line">nativePayHandler.createDownLineTrading(tradingEntity);</span><br></pre></td></tr></table></figure>
+
+<p>动态的获取支付实现</p>
+<p><img src="https://pic.imgdb.cn/item/66f507f3f21886ccc0c2dfc9.jpg"></p>
+<p>所有的支付方式都实现了<strong>NativePayHandler</strong>接口</p>
+<h2 id="支付结果的获取"><a href="#支付结果的获取" class="headerlink" title="支付结果的获取"></a>支付结果的获取</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 支付宝支付成功回调</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> enterpriseId 商户id</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 正常响应200，否则响应500</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@PostMapping(&quot;alipay/&#123;enterpriseId&#125;&quot;)</span></span><br><span class="line">   <span class="keyword">public</span> ResponseEntity&lt;Void&gt; <span class="title function_">aliPayNotify</span><span class="params">(HttpServletRequest request,</span></span><br><span class="line"><span class="params">                                            <span class="meta">@PathVariable(&quot;enterpriseId&quot;)</span> Long enterpriseId)</span> &#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           <span class="comment">//支付宝通知的业务处理</span></span><br><span class="line">           <span class="built_in">this</span>.notifyService.aliPayNotify(request, enterpriseId);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (SLException e) &#123;</span><br><span class="line">           <span class="comment">//响应500</span></span><br><span class="line">           <span class="keyword">return</span> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> ResponseEntity.ok(<span class="literal">null</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>aliPayNotify</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">aliPayNotify</span><span class="params">(HttpServletRequest request, Long enterpriseId)</span> <span class="keyword">throws</span> SLException &#123;</span><br><span class="line">        <span class="comment">//获取参数</span></span><br><span class="line">        Map&lt;String, String[]&gt; parameterMap = request.getParameterMap();</span><br><span class="line">        Map&lt;String, String&gt; param = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, String[]&gt; entry : parameterMap.entrySet()) &#123;</span><br><span class="line">            param.put(entry.getKey(), StrUtil.join(<span class="string">&quot;,&quot;</span>, entry.getValue()));</span><br><span class="line">        &#125;</span><br><span class="line">				</span><br><span class="line">      	<span class="comment">//这是支付宝发的交易状态</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">tradeStatus</span> <span class="operator">=</span> param.get(<span class="string">&quot;trade_status&quot;</span>);</span><br><span class="line">      	<span class="comment">//判断是否交易等于成功</span></span><br><span class="line">        <span class="keyword">if</span> (!StrUtil.equals(tradeStatus, TradingConstant.ALI_TRADE_SUCCESS)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//查询配置</span></span><br><span class="line">        <span class="type">Config</span> <span class="variable">config</span> <span class="operator">=</span> AlipayConfig.getConfig(enterpriseId);</span><br><span class="line">        Factory.setOptions(config);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Boolean</span> <span class="variable">result</span> <span class="operator">=</span> Factory</span><br><span class="line">                    .Payment</span><br><span class="line">                    .Common().verifyNotify(param);</span><br><span class="line">            <span class="keyword">if</span> (!result) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(<span class="string">&quot;验签失败&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(<span class="string">&quot;验签失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取交易单号</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">tradingOrderNo</span> <span class="operator">=</span> Convert.toLong(param.get(<span class="string">&quot;out_trade_no&quot;</span>));</span><br><span class="line">        <span class="comment">//更新交易单</span></span><br><span class="line">        <span class="built_in">this</span>.updateTrading(tradingOrderNo, <span class="string">&quot;支付成功&quot;</span>, JSONUtil.toJsonStr(param));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>updateTrading</strong> 更新交易单</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">updateTrading</span><span class="params">(Long tradingOrderNo, String resultMsg, String resultJson)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> TradingCacheConstant.CREATE_PAY + tradingOrderNo;</span><br><span class="line">  			<span class="comment">//遇到重要的要加锁</span></span><br><span class="line">        <span class="type">RLock</span> <span class="variable">lock</span> <span class="operator">=</span> redissonClient.getFairLock(key);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//获取锁</span></span><br><span class="line">            <span class="keyword">if</span> (lock.tryLock(TradingCacheConstant.REDIS_WAIT_TIME, TimeUnit.SECONDS)) &#123;</span><br><span class="line">              <span class="comment">//查询出来交易单的数据</span></span><br><span class="line">                <span class="type">TradingEntity</span> <span class="variable">trading</span> <span class="operator">=</span> <span class="built_in">this</span>.tradingService.findTradByTradingOrderNo(tradingOrderNo);</span><br><span class="line">              <span class="comment">//如果交易单 == 已结算</span></span><br><span class="line">                <span class="keyword">if</span> (trading.getTradingState() == TradingStateEnum.YJS) &#123;</span><br><span class="line">                    <span class="comment">// 已付款</span></span><br><span class="line">                    <span class="keyword">return</span>;<span class="comment">//不用处理</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//设置成付款成功</span></span><br><span class="line">                trading.setTradingState(TradingStateEnum.YJS);</span><br><span class="line">                <span class="comment">//清空二维码数据</span></span><br><span class="line">                trading.setQrCode(<span class="string">&quot;&quot;</span>);</span><br><span class="line">                trading.setResultMsg(resultMsg);</span><br><span class="line">                trading.setResultJson(resultJson);</span><br><span class="line">                <span class="built_in">this</span>.tradingService.saveOrUpdate(trading);<span class="comment">//保存</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// 发消息通知其他系统支付成功</span></span><br><span class="line">                <span class="type">TradeStatusMsg</span> <span class="variable">tradeStatusMsg</span> <span class="operator">=</span> TradeStatusMsg.builder()</span><br><span class="line">                        .tradingOrderNo(trading.getTradingOrderNo())</span><br><span class="line">                        .productOrderNo(trading.getProductOrderNo())</span><br><span class="line">                        .statusCode(TradingStateEnum.YJS.getCode())</span><br><span class="line">                        .statusName(TradingStateEnum.YJS.name())</span><br><span class="line">                        .build();</span><br><span class="line"></span><br><span class="line">                <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> JSONUtil.toJsonStr(Collections.singletonList(tradeStatusMsg));</span><br><span class="line">                <span class="built_in">this</span>.mqFeign.sendMsg(Constants.MQ.Exchanges.TRADE, Constants.MQ.RoutingKeys.TRADE_UPDATE_STATUS, msg);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(<span class="string">&quot;处理业务失败&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SLException</span>(<span class="string">&quot;处理业务失败&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">book</span> &#123;</span></span><br><span class="line">  <span class="type">char</span> name[<span class="number">31</span>];</span><br><span class="line">  <span class="type">double</span> value;</span><br><span class="line">&#125;MyBook[<span class="number">11</span>];</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//求最高定价 和 最底定价</span></span><br><span class="line">    <span class="type">int</span> n,i;</span><br><span class="line">    <span class="type">double</span> max=<span class="number">-1</span>,min=<span class="number">1000000</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//输入</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">      gets(MyBook[i].name);<span class="comment">//读入字符串⚠️⚠️⚠️⚠️用gets（放入你要读入的元素）</span></span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>,&amp;MyBook[i].value);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="type">int</span> maxIndex;</span><br><span class="line">    <span class="type">int</span> minIndex;</span><br><span class="line">  <span class="comment">//遍历查最大最小</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">       <span class="keyword">if</span> ( MyBook[i].value &gt; max) &#123;</span><br><span class="line">           max=MyBook[i].value;</span><br><span class="line">           maxIndex = i;<span class="comment">//⚠️这里记得要保存那个下标，一会出去循环结构体需要用下标来找值</span></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> ( MyBook[i].value &lt; min) &#123;</span><br><span class="line">          min=MyBook[i].value;</span><br><span class="line">           minIndex = i;<span class="comment">//⚠️这里记得要保存那个下标，一会出去循环结构体需要用下标来找值</span></span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf, %s\n&quot;</span>,MyBook[maxIndex].value,MyBook[maxIndex].name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf, %s\n&quot;</span>,MyBook[minIndex].value,MyBook[minIndex].name);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<ul>
+<li><p>抽取支付通用服务的作用？</p>
+<blockquote>
+<p>把支付的功能抽取出来，这是一个中台思想，所有的其他服务，不仅仅是当前项目都可以调取支付服务。</p>
+</blockquote>
+</li>
+<li><p><strong>交易服务设计 -&gt; 交易单表的作用?</strong></p>
+<blockquote>
+<p>对于其他服务<strong>不关注</strong>，交易服务只关注你要多少钱，关联的业务id，商户号，备注信息。不管什么服务，只要调当前的都给转成交易单。</p>
+</blockquote>
+</li>
+<li><p>怎么对接的支付宝和微信？</p>
+<blockquote>
+<ul>
+<li>支付宝：先开通支付宝，在项目中引入支付宝的SDK，做支付宝的相关配置。配置的时候需要用，应用的私钥，支付宝的公钥，加密的方式。操作支付宝用的，easySDK。</li>
+<li>微信：方式比较繁琐，v2老版本，v3新版本，微信官方没有提供SDK，用的开源的SDK</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>支付功能为什么要加分布式锁?</strong></p>
+<blockquote>
+<ul>
+<li>防止安全并发，比如：这边支付订单的时候刚想把它改为已经结算，那边又有个并发的请求把它改成<strong>取消交易了</strong>。那么有可能会变成，<strong>该订单已经取消了交易然后还被改成已结算的状态</strong>…..会有数据改错的情况。</li>
+<li>加锁是基于Redisson实现的分布式锁。</li>
+</ul>
+</blockquote>
+</li>
+<li><p>订单有哪些状态?</p>
+<blockquote>
+<ul>
+<li>创建号订单是 <strong>代付款状态</strong></li>
+<li>发起支付（当面付） 是 <strong>付款中</strong></li>
+<li>付款成功 会改成 <strong>已结算</strong></li>
+<li>用户取消 <strong>取消订单</strong></li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>如何得知支付的结果？项目中是如何处理的？</strong></p>
+<blockquote>
+<p>两种情况，<strong>异步通知</strong>和<strong>主动轮寻</strong>，主要用的是异步通知，但异步通知又是依赖互联网调用的，有一个兜底的策略就是靠<strong>主动轮询</strong></p>
+</blockquote>
+</li>
+</ul>
 
     
 
@@ -241,7 +403,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://example.com/2024/01/24/ 查找书籍/" title="" target="_blank">http://example.com/2024/01/24/ 查找书籍/</a>
+          <a href="http://example.com/2024/09/24/交易系统的设计/" title="交易系统的设计" target="_blank">http://example.com/2024/09/24/交易系统的设计/</a>
         </li>
         
         <li>
@@ -258,7 +420,33 @@
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">微服务</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JAVAWEB</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JAVAWEB-微服务//" class="article-tag-list-link color2">JAVAWEB,微服务</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
     
 
@@ -308,7 +496,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/01/24/%20%E6%9F%A5%E6%89%BE%E4%B9%A6%E7%B1%8D/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/09/24/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -323,18 +511,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2024/01/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Mysql 数据库
-        
-      </div>
-    </a>
   
-  
-    <a href="/2023/07/07/%E7%BC%96%E7%A0%81%EF%BC%8C%E9%9A%90%E5%8C%BF%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E8%AF%AD%E8%A8%80%E8%AF%A6%E8%A7%A3(1)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">编码，隐匿在计算机背后的语言详解</div>
+    <a href="/2024/09/24/%E8%BF%90%E8%B4%B9%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">运费微服务的设计思路</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -361,7 +540,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">输入格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">输出格式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">输入样例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B"><span class="toc-number">4.</span> <span class="toc-text">输出样例:</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%A4%E6%98%93%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">交易微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.1.</span> <span class="toc-text">交易流程的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%8D%EF%B8%8F%E5%85%B3%E4%BA%8E%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9A%84%E7%94%9F%E6%88%90"><span class="toc-number">1.2.</span> <span class="toc-text">✍️关于二维码的生成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%AE%89%E5%85%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">关于安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%9A%84%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.2.</span> <span class="toc-text">主要的代码结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%89%E5%8F%8A%E8%A1%A8%EF%BC%883%E5%BC%A0%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">涉及表（3张）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E6%B6%89%E5%8F%8A%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">核心代码涉及流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E6%98%93%E5%8D%95%E6%A0%A1%E9%AA%8C"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">交易单校验</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C"><span class="toc-number">1.3.0.1.1.</span> <span class="toc-text">参数校验</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A0%E9%94%81"><span class="toc-number">1.3.0.1.2.</span> <span class="toc-text">加锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B8%A0%E9%81%93"><span class="toc-number">1.3.0.1.3.</span> <span class="toc-text">渠道</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%AF%E4%BB%98%E7%BB%93%E6%9E%9C%E7%9A%84%E8%8E%B7%E5%8F%96"><span class="toc-number">1.4.</span> <span class="toc-text">支付结果的获取</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

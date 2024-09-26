@@ -80,8 +80,6 @@
 			
 				<li><a href="/" >主页</a></li>
 			
-				<li><a href="/categories/index.html" >分类</a></li>
-			
 				<li><a href="/archives/index.html" >归档</a></li>
 			
 			</ul>
@@ -164,8 +162,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -195,14 +191,12 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/categories/index.html">分类</a></li>
-		        
-					<li style="width: 33.333333333333336%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 50%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -219,6 +213,149 @@
           </div>
           <div id="js-content" class="content-ll">
             
+
+  
+    <article id="post-输出整数各位数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/05/19/%E8%BE%93%E5%87%BA%E6%95%B4%E6%95%B0%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97/">输出整数各位数字</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/05/19/%E8%BE%93%E5%87%BA%E6%95%B4%E6%95%B0%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97/" class="archive-article-date">
+        <time datetime="2021-05-18T16:52:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-19</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>实验4-2-8 输出整数各位数字 (15 分)</p>
+<p>本题要求编写程序，对输入的一个整数，从高位开始逐位分割并输出它的各位数字。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出一个长整型范围内的非负整数。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>从高位开始逐位输出该整数的各位数字，每个数字后面有一个空格。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123456</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 2 3 4 5 6 </span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>第一次 想办法先规定数位输出</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> t,j,i,x;</span><br><span class="line">    <span class="comment">// scanf(&quot;%d&quot;, &amp;x);</span></span><br><span class="line">    x = <span class="number">700</span>;</span><br><span class="line">    <span class="comment">//12345</span></span><br><span class="line">    <span class="comment">// 123/100 --&gt; 1</span></span><br><span class="line">    <span class="comment">// 123%100 --&gt;23</span></span><br><span class="line">    <span class="comment">// 23/10   --&gt;2</span></span><br><span class="line">    <span class="comment">// 23%10   --&gt;3</span></span><br><span class="line">    <span class="comment">// 2/10    --&gt;0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//先计算输入的是几位</span></span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span> ;</span><br><span class="line">  </span><br><span class="line">    <span class="type">int</span> mask = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">      </span><br><span class="line">      <span class="type">int</span> d = x/mask;        <span class="comment">//得到高位</span></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,d);      <span class="comment">//输出那个高位</span></span><br><span class="line"></span><br><span class="line">      x %= mask;           <span class="comment">//拿到除了高位剩下的</span></span><br><span class="line"></span><br><span class="line">      mask /=<span class="number">10</span>;           <span class="comment">//改变大小下一轮 除要用</span></span><br><span class="line">      </span><br><span class="line">    &#125;<span class="keyword">while</span>( x &gt; <span class="number">0</span> );</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输出  7 2 3 </p>
+<p>虽然我们只固定了百位才可以实现，但是出现一个问题。</p>
+<p>当 700 的时候， 却只输出了 7  ，我们希望输出 007 该怎么解决？</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">do</span>&#123;</span><br><span class="line">      </span><br><span class="line">      <span class="type">int</span> d = x/mask;        <span class="comment">//得到高位</span></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,d);      <span class="comment">//输出那个高位</span></span><br><span class="line"></span><br><span class="line">      x %= mask;           <span class="comment">//拿到除了高位剩下的</span></span><br><span class="line"></span><br><span class="line">      mask /=<span class="number">10</span>;           <span class="comment">//改变大小下一轮 除要用</span></span><br><span class="line">      </span><br><span class="line">    &#125;<span class="keyword">while</span>( x &gt; <span class="number">0</span> );  <span class="comment">//⚠️⚠️⚠️⚠️⚠️⚠️显然这里出了问题</span></span><br><span class="line"><span class="comment">// 比如 700  </span></span><br><span class="line"><span class="comment">// 700 / 100  ---&gt; 7</span></span><br><span class="line"><span class="comment">// 700 % 100  ---&gt; 0. x这里出了问题</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>改进方案：    我们观察到 mask其实还没有为0 。试试mask用来判断</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> t,j,i,x;</span><br><span class="line">    <span class="comment">// scanf(&quot;%d&quot;, &amp;x);</span></span><br><span class="line">    x = <span class="number">700</span>;</span><br><span class="line">    <span class="comment">//12345</span></span><br><span class="line">    <span class="comment">// 123/100 --&gt; 1</span></span><br><span class="line">    <span class="comment">// 123%100 --&gt;23</span></span><br><span class="line">    <span class="comment">// 23/10   --&gt;2</span></span><br><span class="line">    <span class="comment">// 23%10   --&gt;3</span></span><br><span class="line">    <span class="comment">// 2/10    --&gt;0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//先计算输入的是几位</span></span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span> ;</span><br><span class="line">  </span><br><span class="line">    <span class="type">int</span> mask = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">      </span><br><span class="line">      <span class="type">int</span> d = x/mask;        <span class="comment">//得到高位</span></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,d);      <span class="comment">//输出那个高位</span></span><br><span class="line"></span><br><span class="line">      x %= mask;           <span class="comment">//拿到除了高位剩下的</span></span><br><span class="line"></span><br><span class="line">      mask /=<span class="number">10</span>;           <span class="comment">//改变大小下一轮 除要用</span></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;mask = %d\n&quot;</span>,mask);</span><br><span class="line">    &#125;<span class="keyword">while</span>( mask &gt; <span class="number">0</span> );</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>7 mask &#x3D; 10<br>0 mask &#x3D; 1<br>0 mask &#x3D; 0</p>
+<p>这样就ok 正好三轮</p>
+<p>由此我们解决了007 的问题。</p>
+<p>还有一个问题是，现在我们只能处理固定的数（百位的）。怎么改变？</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以同计数器看看有多少位</span></span><br><span class="line"><span class="keyword">while</span>( x &gt; <span class="number">0</span> )</span><br><span class="line">&#123;</span><br><span class="line">  x/=<span class="number">10</span>;</span><br><span class="line">  cnt ++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这样，显然 cnt 是对的</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>但是我们知道 多少位有神么用？</p>
+<p>最终需要 的是对应的位数。比如我输入12345  —- &gt;要对应成 10000   来除12345。</p>
+<p>不用cnt 了，改用mask</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>( x &gt; <span class="number">0</span> )</span><br><span class="line">&#123;</span><br><span class="line">  	x/=<span class="number">10</span>;<span class="comment">//划去最后一位</span></span><br><span class="line">    <span class="comment">//同时让mask乘上去</span></span><br><span class="line">    mask*=<span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//此时结果比预想的要大一位，所以要改进一下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>( x &gt; <span class="number">9</span> )<span class="comment">//🦶🦶🦶🦶</span></span><br><span class="line">&#123;</span><br><span class="line">  	x/=<span class="number">10</span>;<span class="comment">//划去最后一位</span></span><br><span class="line">    <span class="comment">//同时让mask乘上去</span></span><br><span class="line">    mask*=<span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时 mask的值就是正确的，12345 –&gt;  10000</p>
+</blockquote>
+<h3 id="最终代码"><a href="#最终代码" class="headerlink" title="最终代码"></a>最终代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> t,j,i,x;</span><br><span class="line">    <span class="comment">// scanf(&quot;%d&quot;, &amp;x);</span></span><br><span class="line">    x = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">//12345</span></span><br><span class="line">    <span class="comment">// 123/100 --&gt; 1</span></span><br><span class="line">    <span class="comment">// 123%100 --&gt;23</span></span><br><span class="line">    <span class="comment">// 23/10   --&gt;2</span></span><br><span class="line">    <span class="comment">// 23%10   --&gt;3</span></span><br><span class="line">    <span class="comment">// 2/10    --&gt;0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//先计算输入的是几位</span></span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span> ;</span><br><span class="line">    <span class="type">int</span> mask = <span class="number">1</span>;</span><br><span class="line">    t = x;</span><br><span class="line">    <span class="keyword">while</span>( t &gt; <span class="number">9</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      t/=<span class="number">10</span>;<span class="comment">//划掉最后一位</span></span><br><span class="line">      mask*=<span class="number">10</span>;<span class="comment">//mask乘上去</span></span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">      </span><br><span class="line">      <span class="type">int</span> d = x/mask;        <span class="comment">//得到高位</span></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,d);      <span class="comment">//输出那个高位</span></span><br><span class="line"></span><br><span class="line">      x %= mask;           <span class="comment">//拿到除了高位剩下的</span></span><br><span class="line"></span><br><span class="line">      mask /=<span class="number">10</span>;           <span class="comment">//改变大小下一轮 除要用</span></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;mask = %d\n&quot;</span>,mask);</span><br><span class="line">    &#125;<span class="keyword">while</span>( mask &gt; <span class="number">0</span> );</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/05/19/%E8%BE%93%E5%87%BA%E6%95%B4%E6%95%B0%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
 
   
     <article id="post-历年真题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
@@ -1179,143 +1316,6 @@
 
 
   
-    <article id="post-宏" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/28/%E5%AE%8F/">宏</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/28/%E5%AE%8F/" class="archive-article-date">
-        <time datetime="2021-04-28T01:45:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="像函数的宏"><a href="#像函数的宏" class="headerlink" title="像函数的宏"></a>像函数的宏</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> cube(x) ((x)*(x)*(x))</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>宏可以带参数</li>
-</ul>
-<p>比如 以下程序</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> cube(x) ( (x)*(x)*(x) )</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, cube(<span class="number">5</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>125</p>
-</blockquote>
-<p>那么它实际的含义是 ：👇</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;       </span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ((<span class="number">5</span>)*(<span class="number">5</span>)*(<span class="number">5</span>)));<span class="comment">//也就是那个括号里的全部都替代这里</span></span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>明显，那个cube（5）的位置呢被替换成了( (x)*(x)*(x) )</li>
-</ul>
-<p>cube() 里面也可以是变量哦！</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> cube(x) ((x)*(x)*(x))</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, cube(i));<span class="comment">//⚠️注意这里把里面替换成了i</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 👆它等价于👇</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="type">int</span> i;</span><br><span class="line"> <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ((i)*(i)*(i)));<span class="comment">//全都替换成了 i </span></span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="如果是一个表达式"><a href="#如果是一个表达式" class="headerlink" title="如果是一个表达式"></a>如果是一个表达式</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RADTODEG1(x) ( x * 57.29578 )</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RADTODEG2(x) (x) * 57.29578 </span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, RADTODEG1(<span class="number">5</span>+<span class="number">2</span>));<span class="comment">//目的是 7 * 57.29578 = 400多</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, <span class="number">180</span>/RADTODEG2(<span class="number">1</span>));<span class="comment">//目的是 180 / 57.29578 = 3.多</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>实际运行结果：</p>
-<p>119.591560<br>10313.240400		</p>
-</blockquote>
-<p>为什么结果有出入？我们来看看它里是什么状况</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, ( <span class="number">5</span>+<span class="number">2</span> * <span class="number">57.29578</span> ));<span class="comment">//实际上是 2先乘然后才加的5</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%f\n&quot;</span>, <span class="number">180</span>/(<span class="number">1</span>) * <span class="number">57.29578</span>);<span class="comment">// 180 先除1 然后才乘的57 </span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<p>正确的写法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> RADTODEG2(x) ((x) * 57.29578 )</span></span><br></pre></td></tr></table></figure>
-
-<p>外面有括号，里面也得有括号。</p>
-<p>反正就记住，所有的<strong>参数</strong>的地方<strong>都加括号</strong></p>
-<p>在宏定义的时候，千万不要加分号</p>
-<p>如果你加了分号，那个结尾的分号会被一起带入你调用宏的地方，于是你的程序就会出现两个分号！结果就错了。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言理论部分//" class="article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/28/%E5%AE%8F/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
@@ -1489,11 +1489,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1525,6 +1525,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
               </li>
              
@@ -1537,15 +1541,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1565,11 +1569,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1637,19 +1641,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
+                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1851,7 +1851,7 @@
 <script type="text/javascript" src="/plugins/activate-power-mode/activate-power-mode.js"></script>
 <script>
   POWERMODE.colorful = true; // make power mode colorful
-  POWERMODE.shake = false; // turn off shake
+  POWERMODE.shake = true; // turn off shake
   document.body.addEventListener('input', POWERMODE);
 </script>
 

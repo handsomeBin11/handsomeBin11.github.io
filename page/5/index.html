@@ -80,8 +80,6 @@
 			
 				<li><a href="/" >主页</a></li>
 			
-				<li><a href="/categories/index.html" >分类</a></li>
-			
 				<li><a href="/archives/index.html" >归档</a></li>
 			
 			</ul>
@@ -164,8 +162,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -195,14 +191,12 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/categories/index.html">分类</a></li>
-		        
-					<li style="width: 33.333333333333336%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 50%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -219,6 +213,97 @@
           </div>
           <div id="js-content" class="content-ll">
             
+
+  
+    <article id="post-用C-编写通讯录管理系统(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F(1)/">用C++编写通讯录管理系统</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F(1)/" class="archive-article-date">
+        <time datetime="2022-01-22T16:02:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-23</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>闲来无事，用c++编写了一个管理系统～</p>
+<p>该程序只是用到了c++基础阶段的内容来完成的！后续会更新为面向对象的方式编写。</p>
+<p>设计思路如下👇：</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G6ZhzY"><img src="https://www.helloimg.com/images/2022/01/23/G6ZhzY.png" alt="G6ZhzY.png"></a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">//设计联系人结构体</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX  1000  <span class="comment">//方便日后扩展</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">int</span> m_Sex; <span class="comment">// 1 男 2 女</span></span><br><span class="line">    <span class="type">int</span> m_Age;</span><br><span class="line">    std::string m_number;</span><br><span class="line">    std::string m_adress;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//设计通讯录结构体</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Adressbooks</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Person</span> personArray[MAX]; <span class="comment">//存放通讯录的每个person类型的数据的数组</span></span><br><span class="line">    <span class="type">int</span> m_Size;<span class="comment">//通讯录有多少人</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showMenu</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">addPerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showPerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">delePerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">isExit</span><span class="params">( Adressbooks *pAdressbooks,std::string name )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">findPerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">modifyPerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">cleanAllPerson</span><span class="params">(Adressbooks *pAdressbooks)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Adressbooks abs; <span class="comment">//整个通讯录类型的变量</span></span><br><span class="line">    abs.m_Size = <span class="number">0</span>;<span class="comment">//初始化通讯录里面的人</span></span><br><span class="line">    <span class="comment">//显示菜单</span></span><br><span class="line">    <span class="type">int</span> select = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="built_in">showMenu</span>();</span><br><span class="line">        std::cin &gt;&gt; select;</span><br><span class="line">        <span class="keyword">switch</span> (select) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">addPerson</span>( &amp;abs );<span class="comment">//传递地址</span></span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//添加联系人</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="built_in">showPerson</span>(&amp;abs); <span class="comment">//显示联系人</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="built_in">delePerson</span>( &amp;abs );<span class="comment">//删除</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="built_in">findPerson</span>(&amp;abs);</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//查找联系人</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="built_in">modifyPerson</span>(&amp;abs);</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//修改联系人</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">                <span class="built_in">cleanAllPerson</span>( &amp;abs );</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//清空联系人</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;欢迎您下次使用！&quot;</span> &lt;&lt;std::endl;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//直接退出通讯录</span></span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//退出通讯录4</span></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">cleanAllPerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    pAdressbooks-&gt;m_Size = <span class="number">0</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;通讯录已清空&quot;</span> &lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">modifyPerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    std::string name;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入你要修改的姓名&quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; name;</span><br><span class="line">    <span class="type">int</span> flag = <span class="built_in">isExit</span>( pAdressbooks,name);</span><br><span class="line">    <span class="keyword">if</span> ( flag != <span class="number">-1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//姓名</span></span><br><span class="line">        std::string Nname;</span><br><span class="line">        std::cin &gt;&gt; Nname;</span><br><span class="line">        pAdressbooks-&gt;personArray[flag].name = Nname;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> sex = <span class="number">0</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入性别：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; 1 - 男  2 - 女&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="comment">//性别</span></span><br><span class="line">        std::cin &gt;&gt; sex;</span><br><span class="line">        <span class="keyword">while</span> ( <span class="literal">true</span> ) &#123;</span><br><span class="line">            <span class="keyword">if</span> (sex == <span class="number">1</span> || sex == <span class="number">2</span>) &#123;</span><br><span class="line">                pAdressbooks-&gt;personArray[flag].m_Sex = sex;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//年龄</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入年龄：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">int</span> age = <span class="number">0</span>;</span><br><span class="line">        std::cin &gt;&gt; age;</span><br><span class="line">        pAdressbooks-&gt;personArray[flag].m_Age = age;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//联系电话</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入联系电话 ：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::string phone = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        std::cin &gt;&gt; phone;</span><br><span class="line">        pAdressbooks-&gt;personArray[flag].m_number = phone;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//家庭住址</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入家庭住址： &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::string  address;</span><br><span class="line">        std::cin &gt;&gt; address;</span><br><span class="line">        pAdressbooks-&gt;personArray[flag].m_adress = address;</span><br><span class="line"></span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;查无此人！！！你找错了&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">findPerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    std::string Per_name;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;你要找谁？：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cin &gt;&gt; Per_name;</span><br><span class="line">    <span class="type">int</span> flag = <span class="built_in">isExit</span>(pAdressbooks,Per_name);</span><br><span class="line">    <span class="keyword">if</span> ( flag != <span class="number">-1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;姓名：&quot;</span> &lt;&lt; pAdressbooks-&gt;personArray[flag].name &lt;&lt; <span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;性别：&quot;</span> &lt;&lt; pAdressbooks-&gt;personArray[flag].m_Sex &lt;&lt; <span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;年龄：&quot;</span> &lt;&lt; pAdressbooks-&gt;personArray[flag].m_Age &lt;&lt; <span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;电话：&quot;</span> &lt;&lt; pAdressbooks-&gt;personArray[flag].m_number &lt;&lt; <span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;住址：&quot;</span> &lt;&lt; pAdressbooks-&gt;personArray[flag].m_adress &lt;&lt;<span class="string">&quot;\t&quot;</span> ;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;查找成功!!!!!!!!!&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;查无此人！！！你找错了&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">delePerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    std::string Per_name;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入要删除的姓名：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cin &gt;&gt; Per_name;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> flag = <span class="built_in">isExit</span>( pAdressbooks,Per_name );<span class="comment">//把值给flag</span></span><br><span class="line">    <span class="keyword">if</span> ( flag != <span class="number">-1</span> ) <span class="comment">//线性表的删除元素操作</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = flag ; i &lt; pAdressbooks-&gt;m_Size ;  i++) &#123;</span><br><span class="line">            pAdressbooks-&gt;personArray[i]=pAdressbooks-&gt;personArray[i+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        pAdressbooks-&gt;m_Size--;<span class="comment">//记得要减少</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;删除成功！！！！&quot;</span> &lt;&lt;std::endl;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;查无此人！！！你找错了&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//检测联系人是否存在的功能</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">isExit</span><span class="params">( Adressbooks *pAdressbooks , std::string Pname )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; pAdressbooks-&gt;m_Size; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( pAdressbooks-&gt;personArray[i].name == Pname )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> i; <span class="comment">//找到了返回缩影</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//找不到返回-1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//显示所有联系人</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showPerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//判断是否为空</span></span><br><span class="line">    <span class="keyword">if</span> ( pAdressbooks-&gt;m_Size == <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;当前没有卵联系人了！&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; pAdressbooks-&gt;m_Size; ++i) &#123;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;姓名：&quot;</span>&lt;&lt;pAdressbooks-&gt;personArray[i].name &lt;&lt;std::endl;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;性别：&quot;</span>&lt;&lt;(pAdressbooks-&gt;personArray[i].m_Sex == <span class="number">1</span> ? <span class="string">&quot;男&quot;</span> : <span class="string">&quot;女&quot;</span>) &lt;&lt;std::endl;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;年龄：&quot;</span>&lt;&lt;pAdressbooks-&gt;personArray[i].m_Age &lt;&lt;std::endl;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;电话：&quot;</span>&lt;&lt;pAdressbooks-&gt;personArray[i].m_number &lt;&lt;std::endl;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;地址：&quot;</span>&lt;&lt;pAdressbooks-&gt;personArray[i].m_adress &lt;&lt;std::endl;</span><br><span class="line">            std::cout&lt;&lt;<span class="string">&quot;------------------------------------------&quot;</span>&lt;&lt;std::endl;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">addPerson</span><span class="params">(Adressbooks *pAdressbooks)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 思路：添加联系人前先判断通讯录是否已满，如果满了就不再添加，</span></span><br><span class="line"><span class="comment">     * 未满情况将新联系人信息逐个加入到通讯录</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="keyword">if</span> ( pAdressbooks-&gt;m_Size == MAX ) <span class="comment">//判断是否为满</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cout&lt;&lt; <span class="string">&quot;我快要爆炸了！！！，您不能继续添加了&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//姓名</span></span><br><span class="line">        std::string name;</span><br><span class="line">        std::cout&lt;&lt; <span class="string">&quot;输入姓名: &quot;</span>&lt;&lt; std::endl;</span><br><span class="line">        std::cin &gt;&gt; name;</span><br><span class="line">        pAdressbooks-&gt;personArray[pAdressbooks-&gt;m_Size].name = name;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//性别</span></span><br><span class="line">        <span class="type">int</span> sex = <span class="number">0</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入性别：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot; 1 - 男  2 - 女&quot;</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            std::cin &gt;&gt; sex;</span><br><span class="line">            <span class="keyword">if</span> (sex == <span class="number">1</span> || sex == <span class="number">2</span>) <span class="comment">//如果是 1 和 2 才让进来</span></span><br><span class="line">            &#123;</span><br><span class="line">                pAdressbooks-&gt;personArray[pAdressbooks-&gt;m_Size].m_Sex = sex;</span><br><span class="line">                <span class="keyword">break</span>;<span class="comment">//如果输入正确就可以出去</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//年龄</span></span><br><span class="line">        <span class="type">int</span> age;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入你活了多少年了 : &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cin &gt;&gt; age;</span><br><span class="line">        pAdressbooks-&gt;personArray[pAdressbooks-&gt;m_Size].m_Age = age;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//联系电话</span></span><br><span class="line">        std::string numPhone;</span><br><span class="line">        std::cout&lt;&lt; <span class="string">&quot;输入你电话号码！&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cin &gt;&gt; numPhone;</span><br><span class="line">        pAdressbooks-&gt;personArray[pAdressbooks-&gt;m_Size].m_number = numPhone;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//地址</span></span><br><span class="line">        std::string Adress;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;输入你的地址 ：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cin &gt;&gt; Adress;</span><br><span class="line">        pAdressbooks-&gt;personArray[pAdressbooks-&gt;m_Size].m_adress = Adress;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//更新通讯录人数</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;添加成功 !&quot;</span> &lt;&lt;std::endl;</span><br><span class="line">        pAdressbooks-&gt;m_Size++;</span><br><span class="line">        clearerr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showMenu</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;***************************&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  1、添加联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  2、显示联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  3、删除联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  4、查找联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  5、修改联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  6、清空联系人  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;*****  0、退出通讯录  *****&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;***************************&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/01/23/%E7%94%A8C-%E7%BC%96%E5%86%99%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F(1)/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
 
   
     <article id="post-用C-编写通讯录管理系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
@@ -1094,132 +1179,6 @@
 
 
   
-    <article id="post-12-路径总和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/">12. 路径总和</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/" class="archive-article-date">
-        <time datetime="2021-12-10T13:35:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。</p>
-<p>叶子节点 是指没有子节点的节点。</p>
-<p>示例 1：</p>
-<p>输入：root &#x3D; [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum &#x3D; 22<br>输出：true<br>解释：等于目标和的根节点到叶节点路径如上图所示。<br>示例 2：</p>
-<p>输入：root &#x3D; [1,2,3], targetSum &#x3D; 5<br>输出：false<br>解释：树中存在两条根节点到叶子节点的路径：<br>(1 –&gt; 2): 和为 3<br>(1 –&gt; 3): 和为 4<br>不存在 sum &#x3D; 5 的根节点到叶子节点的路径。<br>示例 3：</p>
-<p>输入：root &#x3D; [], targetSum &#x3D; 0<br>输出：false<br>解释：由于树是空的，所以不存在根节点到叶子节点的路径。</p>
-<p>提示：</p>
-<p>树中节点的数目在范围 [0, 5000] 内<br>-1000 &lt;&#x3D; Node.val &lt;&#x3D; 1000<br>-1000 &lt;&#x3D; targetSum &lt;&#x3D; 1000</p>
-<p>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/path-sum">https://leetcode-cn.com/problems/path-sum</a></p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>题目的意思就说，给你一个路径sum，从根到叶子让你看看有没有那条路经上的结点加起来&#x3D;给的sum</p>
-<p>所以我的大体思路就是，前序遍历也就是DFS遍历深度遍历整课树，如果遇到一个结点就从sum 里面扣除当前结点的值。如果当发现走到叶子结点的时候当前的sum恰好为0的话就是说明符合题目所给的路径。</p>
-<ul>
-<li>检测当前root节点是不是空</li>
-<li>检测当前是不是叶子结点（所有子树为NULL），如果是的话，看看是否是0</li>
-<li>深度遍历左树并且-当前值 || 深度遍历右树-当前值</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">hasPathSum</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="type">int</span> targetSum)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( root == <span class="literal">NULL</span> )</span><br><span class="line">	&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root -&gt; right == <span class="literal">NULL</span> ) <span class="comment">//左右子树为空说明到叶子了</span></span><br><span class="line">	&#123;</span><br><span class="line">			<span class="keyword">return</span> (root-&gt;val-targetSum)==<span class="number">0</span>; <span class="comment">//看看是不是减没了</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> (hasPathSum( root -&gt; left , targetSum - root-&gt;val) || hasPathSum( root -&gt; right, targetSum - root-&gt;val ));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-12-路径总和(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1317,6 +1276,132 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C(1)/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-12-路径总和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/">12. 路径总和</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/" class="archive-article-date">
+        <time datetime="2021-12-10T13:35:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-10</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。</p>
+<p>叶子节点 是指没有子节点的节点。</p>
+<p>示例 1：</p>
+<p>输入：root &#x3D; [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum &#x3D; 22<br>输出：true<br>解释：等于目标和的根节点到叶节点路径如上图所示。<br>示例 2：</p>
+<p>输入：root &#x3D; [1,2,3], targetSum &#x3D; 5<br>输出：false<br>解释：树中存在两条根节点到叶子节点的路径：<br>(1 –&gt; 2): 和为 3<br>(1 –&gt; 3): 和为 4<br>不存在 sum &#x3D; 5 的根节点到叶子节点的路径。<br>示例 3：</p>
+<p>输入：root &#x3D; [], targetSum &#x3D; 0<br>输出：false<br>解释：由于树是空的，所以不存在根节点到叶子节点的路径。</p>
+<p>提示：</p>
+<p>树中节点的数目在范围 [0, 5000] 内<br>-1000 &lt;&#x3D; Node.val &lt;&#x3D; 1000<br>-1000 &lt;&#x3D; targetSum &lt;&#x3D; 1000</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/path-sum">https://leetcode-cn.com/problems/path-sum</a></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>题目的意思就说，给你一个路径sum，从根到叶子让你看看有没有那条路经上的结点加起来&#x3D;给的sum</p>
+<p>所以我的大体思路就是，前序遍历也就是DFS遍历深度遍历整课树，如果遇到一个结点就从sum 里面扣除当前结点的值。如果当发现走到叶子结点的时候当前的sum恰好为0的话就是说明符合题目所给的路径。</p>
+<ul>
+<li>检测当前root节点是不是空</li>
+<li>检测当前是不是叶子结点（所有子树为NULL），如果是的话，看看是否是0</li>
+<li>深度遍历左树并且-当前值 || 深度遍历右树-当前值</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">hasPathSum</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="type">int</span> targetSum)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( root == <span class="literal">NULL</span> )</span><br><span class="line">	&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( root-&gt;left == <span class="literal">NULL</span> &amp;&amp; root -&gt; right == <span class="literal">NULL</span> ) <span class="comment">//左右子树为空说明到叶子了</span></span><br><span class="line">	&#123;</span><br><span class="line">			<span class="keyword">return</span> (root-&gt;val-targetSum)==<span class="number">0</span>; <span class="comment">//看看是不是减没了</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> (hasPathSum( root -&gt; left , targetSum - root-&gt;val) || hasPathSum( root -&gt; right, targetSum - root-&gt;val ));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/12/10/12-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/">展开全文 >></a>
     </p>
     
 
@@ -1598,121 +1683,6 @@
 
 
   
-    <article id="post-110-平衡二叉树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/12/07/110-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/">110. 平衡二叉树</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/12/07/110-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/" class="archive-article-date">
-        <time datetime="2021-12-07T12:12:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>给定一个二叉树，判断它是否是高度平衡的二叉树。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/balanced-binary-tree/">https://leetcode-cn.com/problems/balanced-binary-tree/</a></p>
-<p>本题中，一棵高度平衡二叉树定义为：</p>
-<blockquote>
-<p>一个二叉树<em>每个节点</em> 的左右两个子树的高度差的绝对值不超过 1 。</p>
-</blockquote>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>用自地向上的思路会更合适，调用函数的次数最少，大体用后序遍历的方案，先左后右再根</p>
-<ol>
-<li>先判断当前结点是不是空</li>
-<li>先遍历左树，再遍历右树 将左右树的高度保存到两个int变量里</li>
-<li>如果左-右树的深度 &gt;1 或者 左树 &#x3D;&#x3D;-1 或者 右树 &#x3D;&#x3D; -1 则返回 -1</li>
-<li>否则的话 返回左-右的绝对值+1</li>
-</ol>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">height</span><span class="params">( <span class="keyword">struct</span> TreeNode *root )</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> ( root == <span class="literal">NULL</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> leftHigh = height( root -&gt; left );</span><br><span class="line">	<span class="type">int</span> rightHigh = height( root -&gt; right );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( <span class="built_in">fabs</span>( leftHigh-rightHigh) &gt; <span class="number">1</span> || leftHigh == <span class="number">-1</span> || rightHigh == <span class="number">-1</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//表示返回</span></span><br><span class="line">	&#125;<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> fmax( leftHigh , rightHigh )+<span class="number">1</span>; <span class="comment">//算最大深度</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isBalanced</span><span class="params">(<span class="keyword">struct</span> TreeNode* root)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> height(root) &gt;= <span class="number">0</span>; <span class="comment">//高度如果大于0任何值就能返回真，如果是-1表示不平衡就返回假的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/12/07/110-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1886,11 +1856,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1922,6 +1892,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
               </li>
              
@@ -1934,15 +1908,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">王道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1962,11 +1936,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2034,19 +2008,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
+                <a href="javascript:void(0)" class="js-tag color5">C语言理论部分自增自减运算符</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
+                <a href="javascript:void(0)" class="js-tag color4">心理学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2248,7 +2218,7 @@
 <script type="text/javascript" src="/plugins/activate-power-mode/activate-power-mode.js"></script>
 <script>
   POWERMODE.colorful = true; // make power mode colorful
-  POWERMODE.shake = false; // turn off shake
+  POWERMODE.shake = true; // turn off shake
   document.body.addEventListener('input', POWERMODE);
 </script>
 
