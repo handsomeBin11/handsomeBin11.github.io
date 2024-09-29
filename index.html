@@ -240,6 +240,9 @@
     
     <h1 id="交易微服务"><a href="#交易微服务" class="headerlink" title="交易微服务"></a>交易微服务</h1><h2 id="交易流程的设计"><a href="#交易流程的设计" class="headerlink" title="交易流程的设计"></a>交易流程的设计</h2><p><img src="https://pic.imgdb.cn/item/66f36aeff21886ccc0744e88.jpg"></p>
 <p><img src="https://pic.imgdb.cn/item/66f36f1ff21886ccc077e084.jpg"></p>
+<blockquote>
+<p>当用户付款完成，第三方支付平台会给支付微服务通知（支付平台会给当前系统的支付微服务</p>
+</blockquote>
 <h2 id="✍️关于二维码的生成"><a href="#✍️关于二维码的生成" class="headerlink" title="✍️关于二维码的生成"></a>✍️关于二维码的生成</h2><p>最开始我是在后台利用hutool工具类直接生成的二维码图片，然后把base64返回给前端，但是<strong>并发量</strong>高了发支付服务有些卡。🤦‍♂️原因是所有的二维码都在<strong>后台生成</strong>，而且传输的内容<strong>还多</strong></p>
 <p><strong>解决方法：后端不再生成二维码，直接把路径返回给前端，前端有内置的工具类。</strong></p>
 <h3 id="关于安全"><a href="#关于安全" class="headerlink" title="关于安全"></a>关于安全</h3><p>首先配置支付宝的给的<strong>公钥</strong> 应用的<strong>私钥</strong> ， 由于支付宝是第三方，系统在调用支付宝的时候要保证传递时数据的安全。</p>
@@ -1521,15 +1524,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++提高篇</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">编程语言学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1613,15 +1616,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">

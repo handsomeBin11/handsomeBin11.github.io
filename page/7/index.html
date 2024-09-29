@@ -1065,155 +1065,6 @@
 
 
   
-    <article id="post-栈的顺序存储结构实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/11/13/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">栈的顺序存储结构实现</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/11/13/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-        <time datetime="2021-11-13T06:01:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="栈的简介"><a href="#栈的简介" class="headerlink" title="栈的简介"></a>栈的简介</h3><p>栈是一种<strong>后进先出</strong>的结构Last in first out （LIFIO），网页的前进与后退🔙就是用的该结构，它可以抽象为以下这种结构。</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G5MpAP"><img src="https://www.helloimg.com/images/2021/11/13/G5MpAP.md.jpg" alt="G5MpAP.md.jpg"></a></p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G5M8kA"><img src="https://www.helloimg.com/images/2021/11/13/G5M8kA.md.jpg" alt="G5M8kA.md.jpg"></a></p>
-<p>有个指针top时刻指向栈的顶端。</p>
-<p>说白了栈的顺序存储就是用的线性表，只不过是一种受到限制的线性表，也就是只能在一端进行操作。对于这种特性，把不用频繁操作的那一端作栈低（也就是数组的0号位置）。</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G525kK"><img src="https://www.helloimg.com/images/2021/11/13/G525kK.jpg" alt="G525kK.jpg"></a></p>
-<hr>
-<h3 id="栈的结构定义"><a href="#栈的结构定义" class="headerlink" title="栈的结构定义"></a>栈的结构定义</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">        SElemType data[MAXSIZE];</span><br><span class="line">        <span class="type">int</span> top; <span class="comment">/* 用于栈顶指针 */</span></span><br><span class="line">&#125;SqStack;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="Push操作"><a href="#Push操作" class="headerlink" title="Push操作"></a>Push操作</h3><p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G52Glo"><img src="https://www.helloimg.com/images/2021/11/13/G52Glo.jpg" alt="G52Glo.jpg"></a></p>
-<ul>
-<li>判断是否栈满</li>
-<li>栈顶指针++</li>
-<li>栈顶指针的位置上放入值</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">Push</span><span class="params">(SqStack *S,SElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">       <span class="keyword">if</span> ( S-&gt;top == MAXSIZE<span class="number">-1</span> )<span class="comment">//先看看满没满</span></span><br><span class="line">       &#123;</span><br><span class="line">                <span class="keyword">return</span> ERROR;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       S-&gt;top++;</span><br><span class="line">       S-&gt;data[S-&gt;top] = e;</span><br><span class="line">       <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="Pop-操作"><a href="#Pop-操作" class="headerlink" title="Pop 操作"></a>Pop 操作</h3><p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G5wR49"><img src="https://www.helloimg.com/images/2021/11/13/G5wR49.jpg" alt="G5wR49.jpg"></a></p>
-<ul>
-<li>先看看是否为空？</li>
-<li>把栈顶元素先拿出来</li>
-<li>top–</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">Pop</span><span class="params">( SqStack *S, SElemType *e )</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> ( S-&gt;top == <span class="number">-1</span> )<span class="comment">//栈里没有元素</span></span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">return</span> ERROR;</span><br><span class="line">        &#125;</span><br><span class="line">        *e = S-&gt;data[S-&gt;top];<span class="comment">//栈顶元素值交出来</span></span><br><span class="line">        S-&gt;top--;<span class="comment">//栈顶元素--</span></span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="得到栈顶元素"><a href="#得到栈顶元素" class="headerlink" title="得到栈顶元素"></a>得到栈顶元素</h3><ul>
-<li>先判断是否是空栈</li>
-<li>如果不是就返回栈顶的值</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">GetTop</span><span class="params">( SqStack S, SElemType *e )</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> ( S.top == <span class="number">-1</span> )<span class="comment">//代表栈里没有值</span></span><br><span class="line">        &#123;</span><br><span class="line">                 <span class="keyword">return</span> ERROR;</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">                *e = S.data[S.top];<span class="comment">//否则返回值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="返回个数"><a href="#返回个数" class="headerlink" title="返回个数"></a>返回个数</h3><ul>
-<li>个数其实就是栈顶+1 （比如，现在top指向3的位置，意味着0～3号位置上都有值，总共4个 ）</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">StackLength</span><span class="params">( SqStack S )</span> </span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">return</span> S.top+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="判断是否为空"><a href="#判断是否为空" class="headerlink" title="判断是否为空"></a>判断是否为空</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">StackEmpty</span><span class="params">(SqStack S)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> (S.top==<span class="number">-1</span>)</span><br><span class="line">                <span class="keyword">return</span> TRUE;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="遍历整个栈"><a href="#遍历整个栈" class="headerlink" title="遍历整个栈"></a>遍历整个栈</h3><ul>
-<li>先设个变量i &#x3D; 0</li>
-<li>当i &lt;&#x3D; top 值时输出</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">StackTraverse</span><span class="params">( SqStack S )</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> ( i &lt;= S-&gt;top )</span><br><span class="line">        &#123;</span><br><span class="line">                visit( S.data[i++] );<span class="comment">//从栈的低端开始</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;math.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;time.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TRUE 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FALSE 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSIZE 20 <span class="comment">/* 存储空间初始分配量 */</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Status;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> SElemType; <span class="comment">/* SElemType类型根据实际情况而定，这里假设为int */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 顺序栈结构 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">        SElemType data[MAXSIZE];</span><br><span class="line">        <span class="type">int</span> top; <span class="comment">/* 用于栈顶指针 */</span></span><br><span class="line">&#125;SqStack;</span><br><span class="line"></span><br><span class="line">Status <span class="title function_">visit</span><span class="params">(SElemType c)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,c);</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*  构造一个空栈S */</span></span><br><span class="line">Status <span class="title function_">InitStack</span><span class="params">(SqStack *S)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">/* S.data=(SElemType *)malloc(MAXSIZE*sizeof(SElemType)); */</span></span><br><span class="line">        S-&gt;top=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 把S置为空栈 */</span></span><br><span class="line">Status <span class="title function_">ClearStack</span><span class="params">(SqStack *S)</span></span><br><span class="line">&#123;</span><br><span class="line">        S-&gt;top=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 若栈S为空栈，则返回TRUE，否则返回FALSE */</span></span><br><span class="line">Status <span class="title function_">StackEmpty</span><span class="params">(SqStack S)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> (S.top==<span class="number">-1</span>)</span><br><span class="line">                <span class="keyword">return</span> TRUE;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 返回S的元素个数，即栈的长度 */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">StackLength</span><span class="params">(SqStack S)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">return</span> S.top+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 若栈不空，则用e返回S的栈顶元素，并返回OK；否则返回ERROR */</span></span><br><span class="line">Status <span class="title function_">GetTop</span><span class="params">(SqStack S,SElemType *e)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> (S.top==<span class="number">-1</span>)</span><br><span class="line">                <span class="keyword">return</span> ERROR;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                *e=S.data[S.top];</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 插入元素e为新的栈顶元素 */</span></span><br><span class="line">Status <span class="title function_">Push</span><span class="params">(SqStack *S,SElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span>(S-&gt;top == MAXSIZE <span class="number">-1</span>) <span class="comment">/* 栈满 */</span></span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">return</span> ERROR;</span><br><span class="line">        &#125;</span><br><span class="line">        S-&gt;top++;                <span class="comment">/* 栈顶指针增加一 */</span></span><br><span class="line">        S-&gt;data[S-&gt;top]=e;  <span class="comment">/* 将新插入元素赋值给栈顶空间 */</span></span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 若栈不空，则删除S的栈顶元素，用e返回其值，并返回OK；否则返回ERROR */</span></span><br><span class="line">Status <span class="title function_">Pop</span><span class="params">(SqStack *S,SElemType *e)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span>(S-&gt;top==<span class="number">-1</span>)</span><br><span class="line">                <span class="keyword">return</span> ERROR;</span><br><span class="line">        *e=S-&gt;data[S-&gt;top];    <span class="comment">/* 将要删除的栈顶元素赋值给e */</span></span><br><span class="line">        S-&gt;top--;                <span class="comment">/* 栈顶指针减一 */</span></span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 从栈底到栈顶依次对栈中每个元素显示 */</span></span><br><span class="line">Status <span class="title function_">StackTraverse</span><span class="params">(SqStack S)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        i=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;=S.top)</span><br><span class="line">        &#123;</span><br><span class="line">                visit(S.data[i++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> j;</span><br><span class="line">        SqStack s;</span><br><span class="line">        <span class="type">int</span> e;</span><br><span class="line">        <span class="keyword">if</span>(InitStack(&amp;s)==OK)</span><br><span class="line">                <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=<span class="number">10</span>;j++)</span><br><span class="line">                        Push(&amp;s,j);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;栈中元素依次为：&quot;</span>);</span><br><span class="line">        StackTraverse(s);</span><br><span class="line">        Pop(&amp;s,&amp;e);</span><br><span class="line">        Pop(&amp;s,&amp;e);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;弹出的栈顶元素 e=%d\n&quot;</span>,e);</span><br><span class="line">        Push(&amp;s, <span class="number">14</span>);</span><br><span class="line">        StackTraverse(s);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;栈空否：%d(1:空 0:否)\n&quot;</span>,StackEmpty(s));</span><br><span class="line">        GetTop(s,&amp;e);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;栈顶元素 e=%d 栈的长度为%d\n&quot;</span>,e,StackLength(s));</span><br><span class="line">        ClearStack(&amp;s);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;清空栈后，栈空否：%d(1:空 0:否)\n&quot;</span>,StackEmpty(s));</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/13/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-栈的顺序存储结构实现(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1334,6 +1185,155 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/11/13/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0(1)/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-栈的顺序存储结构实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/13/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">栈的顺序存储结构实现</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/13/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
+        <time datetime="2021-11-13T06:01:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="栈的简介"><a href="#栈的简介" class="headerlink" title="栈的简介"></a>栈的简介</h3><p>栈是一种<strong>后进先出</strong>的结构Last in first out （LIFIO），网页的前进与后退🔙就是用的该结构，它可以抽象为以下这种结构。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G5MpAP"><img src="https://www.helloimg.com/images/2021/11/13/G5MpAP.md.jpg" alt="G5MpAP.md.jpg"></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G5M8kA"><img src="https://www.helloimg.com/images/2021/11/13/G5M8kA.md.jpg" alt="G5M8kA.md.jpg"></a></p>
+<p>有个指针top时刻指向栈的顶端。</p>
+<p>说白了栈的顺序存储就是用的线性表，只不过是一种受到限制的线性表，也就是只能在一端进行操作。对于这种特性，把不用频繁操作的那一端作栈低（也就是数组的0号位置）。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G525kK"><img src="https://www.helloimg.com/images/2021/11/13/G525kK.jpg" alt="G525kK.jpg"></a></p>
+<hr>
+<h3 id="栈的结构定义"><a href="#栈的结构定义" class="headerlink" title="栈的结构定义"></a>栈的结构定义</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">        SElemType data[MAXSIZE];</span><br><span class="line">        <span class="type">int</span> top; <span class="comment">/* 用于栈顶指针 */</span></span><br><span class="line">&#125;SqStack;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Push操作"><a href="#Push操作" class="headerlink" title="Push操作"></a>Push操作</h3><p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G52Glo"><img src="https://www.helloimg.com/images/2021/11/13/G52Glo.jpg" alt="G52Glo.jpg"></a></p>
+<ul>
+<li>判断是否栈满</li>
+<li>栈顶指针++</li>
+<li>栈顶指针的位置上放入值</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">Push</span><span class="params">(SqStack *S,SElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">       <span class="keyword">if</span> ( S-&gt;top == MAXSIZE<span class="number">-1</span> )<span class="comment">//先看看满没满</span></span><br><span class="line">       &#123;</span><br><span class="line">                <span class="keyword">return</span> ERROR;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       S-&gt;top++;</span><br><span class="line">       S-&gt;data[S-&gt;top] = e;</span><br><span class="line">       <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Pop-操作"><a href="#Pop-操作" class="headerlink" title="Pop 操作"></a>Pop 操作</h3><p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/G5wR49"><img src="https://www.helloimg.com/images/2021/11/13/G5wR49.jpg" alt="G5wR49.jpg"></a></p>
+<ul>
+<li>先看看是否为空？</li>
+<li>把栈顶元素先拿出来</li>
+<li>top–</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">Pop</span><span class="params">( SqStack *S, SElemType *e )</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> ( S-&gt;top == <span class="number">-1</span> )<span class="comment">//栈里没有元素</span></span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">return</span> ERROR;</span><br><span class="line">        &#125;</span><br><span class="line">        *e = S-&gt;data[S-&gt;top];<span class="comment">//栈顶元素值交出来</span></span><br><span class="line">        S-&gt;top--;<span class="comment">//栈顶元素--</span></span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="得到栈顶元素"><a href="#得到栈顶元素" class="headerlink" title="得到栈顶元素"></a>得到栈顶元素</h3><ul>
+<li>先判断是否是空栈</li>
+<li>如果不是就返回栈顶的值</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">GetTop</span><span class="params">( SqStack S, SElemType *e )</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> ( S.top == <span class="number">-1</span> )<span class="comment">//代表栈里没有值</span></span><br><span class="line">        &#123;</span><br><span class="line">                 <span class="keyword">return</span> ERROR;</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">                *e = S.data[S.top];<span class="comment">//否则返回值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="返回个数"><a href="#返回个数" class="headerlink" title="返回个数"></a>返回个数</h3><ul>
+<li>个数其实就是栈顶+1 （比如，现在top指向3的位置，意味着0～3号位置上都有值，总共4个 ）</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">StackLength</span><span class="params">( SqStack S )</span> </span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">return</span> S.top+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="判断是否为空"><a href="#判断是否为空" class="headerlink" title="判断是否为空"></a>判断是否为空</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">StackEmpty</span><span class="params">(SqStack S)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> (S.top==<span class="number">-1</span>)</span><br><span class="line">                <span class="keyword">return</span> TRUE;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="遍历整个栈"><a href="#遍历整个栈" class="headerlink" title="遍历整个栈"></a>遍历整个栈</h3><ul>
+<li>先设个变量i &#x3D; 0</li>
+<li>当i &lt;&#x3D; top 值时输出</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">StackTraverse</span><span class="params">( SqStack S )</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> ( i &lt;= S-&gt;top )</span><br><span class="line">        &#123;</span><br><span class="line">                visit( S.data[i++] );<span class="comment">//从栈的低端开始</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;math.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;time.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TRUE 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FALSE 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSIZE 20 <span class="comment">/* 存储空间初始分配量 */</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> Status;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> SElemType; <span class="comment">/* SElemType类型根据实际情况而定，这里假设为int */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 顺序栈结构 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">        SElemType data[MAXSIZE];</span><br><span class="line">        <span class="type">int</span> top; <span class="comment">/* 用于栈顶指针 */</span></span><br><span class="line">&#125;SqStack;</span><br><span class="line"></span><br><span class="line">Status <span class="title function_">visit</span><span class="params">(SElemType c)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,c);</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*  构造一个空栈S */</span></span><br><span class="line">Status <span class="title function_">InitStack</span><span class="params">(SqStack *S)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">/* S.data=(SElemType *)malloc(MAXSIZE*sizeof(SElemType)); */</span></span><br><span class="line">        S-&gt;top=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 把S置为空栈 */</span></span><br><span class="line">Status <span class="title function_">ClearStack</span><span class="params">(SqStack *S)</span></span><br><span class="line">&#123;</span><br><span class="line">        S-&gt;top=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 若栈S为空栈，则返回TRUE，否则返回FALSE */</span></span><br><span class="line">Status <span class="title function_">StackEmpty</span><span class="params">(SqStack S)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> (S.top==<span class="number">-1</span>)</span><br><span class="line">                <span class="keyword">return</span> TRUE;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 返回S的元素个数，即栈的长度 */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">StackLength</span><span class="params">(SqStack S)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">return</span> S.top+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 若栈不空，则用e返回S的栈顶元素，并返回OK；否则返回ERROR */</span></span><br><span class="line">Status <span class="title function_">GetTop</span><span class="params">(SqStack S,SElemType *e)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> (S.top==<span class="number">-1</span>)</span><br><span class="line">                <span class="keyword">return</span> ERROR;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                *e=S.data[S.top];</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 插入元素e为新的栈顶元素 */</span></span><br><span class="line">Status <span class="title function_">Push</span><span class="params">(SqStack *S,SElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span>(S-&gt;top == MAXSIZE <span class="number">-1</span>) <span class="comment">/* 栈满 */</span></span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">return</span> ERROR;</span><br><span class="line">        &#125;</span><br><span class="line">        S-&gt;top++;                <span class="comment">/* 栈顶指针增加一 */</span></span><br><span class="line">        S-&gt;data[S-&gt;top]=e;  <span class="comment">/* 将新插入元素赋值给栈顶空间 */</span></span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 若栈不空，则删除S的栈顶元素，用e返回其值，并返回OK；否则返回ERROR */</span></span><br><span class="line">Status <span class="title function_">Pop</span><span class="params">(SqStack *S,SElemType *e)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span>(S-&gt;top==<span class="number">-1</span>)</span><br><span class="line">                <span class="keyword">return</span> ERROR;</span><br><span class="line">        *e=S-&gt;data[S-&gt;top];    <span class="comment">/* 将要删除的栈顶元素赋值给e */</span></span><br><span class="line">        S-&gt;top--;                <span class="comment">/* 栈顶指针减一 */</span></span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 从栈底到栈顶依次对栈中每个元素显示 */</span></span><br><span class="line">Status <span class="title function_">StackTraverse</span><span class="params">(SqStack S)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        i=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;=S.top)</span><br><span class="line">        &#123;</span><br><span class="line">                visit(S.data[i++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> j;</span><br><span class="line">        SqStack s;</span><br><span class="line">        <span class="type">int</span> e;</span><br><span class="line">        <span class="keyword">if</span>(InitStack(&amp;s)==OK)</span><br><span class="line">                <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=<span class="number">10</span>;j++)</span><br><span class="line">                        Push(&amp;s,j);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;栈中元素依次为：&quot;</span>);</span><br><span class="line">        StackTraverse(s);</span><br><span class="line">        Pop(&amp;s,&amp;e);</span><br><span class="line">        Pop(&amp;s,&amp;e);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;弹出的栈顶元素 e=%d\n&quot;</span>,e);</span><br><span class="line">        Push(&amp;s, <span class="number">14</span>);</span><br><span class="line">        StackTraverse(s);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;栈空否：%d(1:空 0:否)\n&quot;</span>,StackEmpty(s));</span><br><span class="line">        GetTop(s,&amp;e);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;栈顶元素 e=%d 栈的长度为%d\n&quot;</span>,e,StackLength(s));</span><br><span class="line">        ClearStack(&amp;s);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;清空栈后，栈空否：%d(1:空 0:否)\n&quot;</span>,StackEmpty(s));</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/13/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
     </p>
     
 
@@ -1774,15 +1774,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++提高篇</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">编程语言学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1866,15 +1866,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">

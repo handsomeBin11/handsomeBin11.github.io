@@ -357,145 +357,6 @@
 
 
   
-    <article id="post-蓝桥杯2014年第五届真题-分糖果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/06/%E8%93%9D%E6%A1%A5%E6%9D%AF2014%E5%B9%B4%E7%AC%AC%E4%BA%94%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%88%86%E7%B3%96%E6%9E%9C/">蓝桥杯2014年第五届真题-分糖果</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/04/06/%E8%93%9D%E6%A1%A5%E6%9D%AF2014%E5%B9%B4%E7%AC%AC%E4%BA%94%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%88%86%E7%B3%96%E6%9E%9C/" class="archive-article-date">
-        <time datetime="2022-04-06T12:06:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <ul>
-<li>题目描述</li>
-</ul>
-<p>有n个小朋友围坐成一圈。老师给每个小朋友随机发偶数个糖果，然后进行下面的游戏：</p>
-<p>每个小朋友都把自己的糖果分一半给左手边的孩子。 </p>
-<p>一轮分糖后，拥有奇数颗糖的孩子由老师补给1个糖果，从而变成偶数。 </p>
-<p>反复进行这个游戏，直到所有小朋友的糖果数都相同为止。 </p>
-<p>你的任务是预测在已知的初始糖果情形下，老师一共需要补发多少个糖果。 </p>
-<ul>
-<li>输入</li>
-</ul>
-<p>程序首先读入一个整数N(2&lt; N&lt; 100)，表示小朋友的人数。<br>接着是一行用空格分开的N个偶数（每个偶数不大于1000，不小于2） </p>
-<ul>
-<li>输出</li>
-</ul>
-<p>要求程序输出一个整数，表示老师需要补发的糖果数。</p>
-<p>样例输入复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3 </span><br><span class="line">2 2 4 </span><br></pre></td></tr></table></figure>
-
-<p>样例输出复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>可以把问题转化为数组的问题，把围成的一圈拉开成一条直线。【每个小朋友都把自己的糖果分一半给左手边的孩子】。有点像处理队列的时候防止浪费时候用的循环队列，就是把队头和队尾连接起来。</p>
-<p>这里同理：只需要注意数组的头部尾部的处理即可。看图：</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RsCp4v"><img src="https://www.helloimg.com/images/2022/04/06/RsCp4v.jpg" alt="RsCp4v.jpg"></a></p>
-<p>把数组末尾的数字保存起来，然后从前不断的叠加到后面去。然后再把temp加到第一个去。perfect！</p>
-<blockquote>
-<p>ps: 后一个保存起来目的就是为了防止被叠掉。</p>
-</blockquote>
-<ul>
-<li>确保没有重复的,有就break</li>
-<li>每个人减半</li>
-<li>每个人给左手边</li>
-<li>检查一下是否满足条件</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAX = <span class="number">101</span>;<span class="comment">//这里必须调整为const</span></span><br><span class="line"><span class="type">int</span> child_Arr[MAX];</span><br><span class="line"><span class="type">int</span> cnt_add_teacher;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> N,even_num;</span><br><span class="line">    cin &gt;&gt; N;<span class="comment">//输入小朋友人数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; child_Arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">//先确保没有重复的</span></span><br><span class="line">        <span class="type">bool</span> flag = <span class="literal">true</span>;<span class="comment">//假设为真</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>( child_Arr[<span class="number">0</span>] != child_Arr[i] )</span><br><span class="line">            &#123;</span><br><span class="line">                flag = <span class="literal">false</span>;<span class="comment">//如果不等于就保持false的状态</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;<span class="comment">//如果有就跳出</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//每个人减半</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">            child_Arr[i]/=<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//每个人给左手边</span></span><br><span class="line">        <span class="type">int</span> temp = child_Arr[N<span class="number">-1</span>];<span class="comment">//最后一个先拿出去，以防被覆盖</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = N<span class="number">-1</span>; i &gt; <span class="number">0</span>  ; --i) &#123;<span class="comment">//从后往前</span></span><br><span class="line">            <span class="comment">//每个人加到前一个去</span></span><br><span class="line">            child_Arr[i]+=child_Arr[i<span class="number">-1</span>];<span class="comment">//前一个加到后一个去</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//结束后赋值前一个</span></span><br><span class="line">        child_Arr[<span class="number">0</span>] += temp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//检查一下是否满足条件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> ( child_Arr[i]%<span class="number">2</span> != <span class="number">0</span> )<span class="comment">//不是偶数的孩子</span></span><br><span class="line">            &#123;</span><br><span class="line">                child_Arr[i]++;<span class="comment">//补一个</span></span><br><span class="line">                cnt_add_teacher++;<span class="comment">//记录一下当前补的数</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; cnt_add_teacher &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">蓝桥杯</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数组遍历-数组-蓝桥杯//" class="article-tag-list-link color2">数组遍历,数组,蓝桥杯</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/06/%E8%93%9D%E6%A1%A5%E6%9D%AF2014%E5%B9%B4%E7%AC%AC%E4%BA%94%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%88%86%E7%B3%96%E6%9E%9C/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-蓝桥杯2014年第五届真题-分糖果(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -606,6 +467,145 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/04/06/%E8%93%9D%E6%A1%A5%E6%9D%AF2014%E5%B9%B4%E7%AC%AC%E4%BA%94%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%88%86%E7%B3%96%E6%9E%9C(1)/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-蓝桥杯2014年第五届真题-分糖果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/04/06/%E8%93%9D%E6%A1%A5%E6%9D%AF2014%E5%B9%B4%E7%AC%AC%E4%BA%94%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%88%86%E7%B3%96%E6%9E%9C/">蓝桥杯2014年第五届真题-分糖果</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/04/06/%E8%93%9D%E6%A1%A5%E6%9D%AF2014%E5%B9%B4%E7%AC%AC%E4%BA%94%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%88%86%E7%B3%96%E6%9E%9C/" class="archive-article-date">
+        <time datetime="2022-04-06T12:06:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-06</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <ul>
+<li>题目描述</li>
+</ul>
+<p>有n个小朋友围坐成一圈。老师给每个小朋友随机发偶数个糖果，然后进行下面的游戏：</p>
+<p>每个小朋友都把自己的糖果分一半给左手边的孩子。 </p>
+<p>一轮分糖后，拥有奇数颗糖的孩子由老师补给1个糖果，从而变成偶数。 </p>
+<p>反复进行这个游戏，直到所有小朋友的糖果数都相同为止。 </p>
+<p>你的任务是预测在已知的初始糖果情形下，老师一共需要补发多少个糖果。 </p>
+<ul>
+<li>输入</li>
+</ul>
+<p>程序首先读入一个整数N(2&lt; N&lt; 100)，表示小朋友的人数。<br>接着是一行用空格分开的N个偶数（每个偶数不大于1000，不小于2） </p>
+<ul>
+<li>输出</li>
+</ul>
+<p>要求程序输出一个整数，表示老师需要补发的糖果数。</p>
+<p>样例输入复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3 </span><br><span class="line">2 2 4 </span><br></pre></td></tr></table></figure>
+
+<p>样例输出复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>可以把问题转化为数组的问题，把围成的一圈拉开成一条直线。【每个小朋友都把自己的糖果分一半给左手边的孩子】。有点像处理队列的时候防止浪费时候用的循环队列，就是把队头和队尾连接起来。</p>
+<p>这里同理：只需要注意数组的头部尾部的处理即可。看图：</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RsCp4v"><img src="https://www.helloimg.com/images/2022/04/06/RsCp4v.jpg" alt="RsCp4v.jpg"></a></p>
+<p>把数组末尾的数字保存起来，然后从前不断的叠加到后面去。然后再把temp加到第一个去。perfect！</p>
+<blockquote>
+<p>ps: 后一个保存起来目的就是为了防止被叠掉。</p>
+</blockquote>
+<ul>
+<li>确保没有重复的,有就break</li>
+<li>每个人减半</li>
+<li>每个人给左手边</li>
+<li>检查一下是否满足条件</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAX = <span class="number">101</span>;<span class="comment">//这里必须调整为const</span></span><br><span class="line"><span class="type">int</span> child_Arr[MAX];</span><br><span class="line"><span class="type">int</span> cnt_add_teacher;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> N,even_num;</span><br><span class="line">    cin &gt;&gt; N;<span class="comment">//输入小朋友人数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; child_Arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">//先确保没有重复的</span></span><br><span class="line">        <span class="type">bool</span> flag = <span class="literal">true</span>;<span class="comment">//假设为真</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>( child_Arr[<span class="number">0</span>] != child_Arr[i] )</span><br><span class="line">            &#123;</span><br><span class="line">                flag = <span class="literal">false</span>;<span class="comment">//如果不等于就保持false的状态</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;<span class="comment">//如果有就跳出</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//每个人减半</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">            child_Arr[i]/=<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//每个人给左手边</span></span><br><span class="line">        <span class="type">int</span> temp = child_Arr[N<span class="number">-1</span>];<span class="comment">//最后一个先拿出去，以防被覆盖</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = N<span class="number">-1</span>; i &gt; <span class="number">0</span>  ; --i) &#123;<span class="comment">//从后往前</span></span><br><span class="line">            <span class="comment">//每个人加到前一个去</span></span><br><span class="line">            child_Arr[i]+=child_Arr[i<span class="number">-1</span>];<span class="comment">//前一个加到后一个去</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//结束后赋值前一个</span></span><br><span class="line">        child_Arr[<span class="number">0</span>] += temp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//检查一下是否满足条件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> ( child_Arr[i]%<span class="number">2</span> != <span class="number">0</span> )<span class="comment">//不是偶数的孩子</span></span><br><span class="line">            &#123;</span><br><span class="line">                child_Arr[i]++;<span class="comment">//补一个</span></span><br><span class="line">                cnt_add_teacher++;<span class="comment">//记录一下当前补的数</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; cnt_add_teacher &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">蓝桥杯</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数组遍历-数组-蓝桥杯//" class="article-tag-list-link color2">数组遍历,数组,蓝桥杯</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/04/06/%E8%93%9D%E6%A1%A5%E6%9D%AF2014%E5%B9%B4%E7%AC%AC%E4%BA%94%E5%B1%8A%E7%9C%9F%E9%A2%98-%E5%88%86%E7%B3%96%E6%9E%9C/">展开全文 >></a>
     </p>
     
 
@@ -907,138 +907,6 @@
 
 
   
-    <article id="post-穿越雷区" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA/">穿越雷区</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA/" class="archive-article-date">
-        <time datetime="2022-04-01T14:16:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-01</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>X星的坦克战车很奇怪，它必须交替地穿越正能量辐射区和负能量辐射区才能保持正常运转，否则将报废。<br>某坦克需要从A区到B区去（A，B区本身是安全区，没有正能量或负能量特征），怎样走才能路径最短？</p>
-<p>已知的地图是一个方阵，上面用字母标出了A，B区，其它区都标了正号或负号分别表示正负能量辐射区。<br>例如：<br>A + - + -<br>- + - - +<br>- + + + -<br>+ - + - +<br>B + - + -</p>
-<p>坦克车只能水平或垂直方向上移动到相邻的区。</p>
-<p>输入</p>
-<p>输入第一行是一个整数n，表示方阵的大小， 4&lt;&#x3D;n&lt;100<br>接下来是n行，每行有n个数据，可能是A，B，+，-中的某一个，中间用空格分开。<br>A，B都只出现一次。</p>
-<p>输出</p>
-<p>要求输出一个整数，表示坦克从A区到B区的最少移动步数。<br>如果没有方案，则输出-1</p>
-<p>样例输入复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">A + - + -</span><br><span class="line">- + - - +</span><br><span class="line">- + + + -</span><br><span class="line">+ - + - +</span><br><span class="line">B + - + -</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>最优路径问题一般采用BFS or DFS 。如果体量大的话BFS会更有效。  </p>
-<p>这里用到的是BFS的思路。主要的判断方案是，如果发现当前的坐标和之前待访问的不同时，代表是正负能量场。</p>
-<p>主要谈到的是方向问题：如图</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RJtuu0"><img src="https://www.helloimg.com/images/2022/04/01/RJtuu0.jpg" alt="RJtuu0.jpg"></a></p>
-<ul>
-<li>x 的变化为 下，左，右，上。我们以（2，2）当作中点，往下走X的变化就是X+1 ，往左走就是X+0，往右走也是X+0，往上走时X-1。故定义数组为{1,0,0,-1}</li>
-<li>y 的变化同理</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> controlX[<span class="number">4</span>] = &#123;<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> controlY[<span class="number">4</span>] = &#123; <span class="number">0</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">char</span> Map_all[<span class="number">105</span>][<span class="number">105</span>];<span class="comment">//存地图</span></span><br><span class="line"><span class="type">int</span> visited[<span class="number">105</span>][<span class="number">105</span>];<span class="comment">//标记数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//构建类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="type">int</span> y;</span><br><span class="line">    <span class="type">int</span> walk;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Point</span>(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> walk) : <span class="built_in">x</span>(x), <span class="built_in">y</span>(y), <span class="built_in">walk</span>(walk) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> Start_X,Start_Y;</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            cin&gt;&gt;Map_all[i][j];<span class="comment">//输入地图</span></span><br><span class="line">            <span class="keyword">if</span> ( Map_all[i][j] == <span class="string">&#x27;A&#x27;</span>)<span class="comment">//当为起点的时候，定位坐标系。</span></span><br><span class="line">            &#123;</span><br><span class="line">                Start_X=i;</span><br><span class="line">                Start_Y=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">BFS</span>(Start_X,Start_Y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    queue&lt;Point&gt; Qt;</span><br><span class="line"></span><br><span class="line">    Qt.<span class="built_in">push</span>(<span class="built_in">Point</span>(x,y,<span class="number">0</span>));<span class="comment">//先入队再说</span></span><br><span class="line">    visited[x][y] = <span class="number">1</span>;<span class="comment">//标记为访问过，作用就是一会判断是否访问过了</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ( !Qt.<span class="built_in">empty</span>() )<span class="comment">//队列不为空时候</span></span><br><span class="line">    &#123;</span><br><span class="line">        Point temp=Qt.<span class="built_in">front</span>();<span class="comment">//先拿到队头</span></span><br><span class="line">        Qt.<span class="built_in">pop</span>();<span class="comment">// 出队</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( Map_all[temp.x][temp.y] == <span class="string">&#x27;B&#x27;</span>)<span class="comment">//如果此时的x，y符合条件就出去</span></span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; temp.walk &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历四个方向</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            <span class="type">int</span> temp_X = temp.x+controlX[i];<span class="comment">//当前结点加上方向值</span></span><br><span class="line">            <span class="type">int</span> temp_Y = temp.y+controlY[i];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ( temp_X&gt;=<span class="number">1</span> &amp;&amp; temp_Y&gt;=<span class="number">1</span> &amp;&amp; temp_X&lt;=n &amp;&amp; temp_Y&lt;=n &amp;&amp; !visited[temp_X][temp_Y] &amp;&amp; Map_all[temp_X][temp_Y]!=Map_all[temp.x][temp.y])<span class="comment">//当上一次不相等的时候</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//标记访问过</span></span><br><span class="line">                visited[temp_X][temp_Y] = <span class="number">1</span>;<span class="comment">//探索到的变为1</span></span><br><span class="line">                Qt.<span class="built_in">push</span>(<span class="built_in">Point</span>(temp_X,temp_Y,temp.walk+<span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="number">-1</span> &lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">蓝桥杯</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">图的遍历</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/图的遍历-BFS-DFS-蓝桥杯//" class="article-tag-list-link color2">图的遍历,BFS,DFS,蓝桥杯</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-穿越雷区(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1142,6 +1010,138 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA(1)/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-穿越雷区" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA/">穿越雷区</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA/" class="archive-article-date">
+        <time datetime="2022-04-01T14:16:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>X星的坦克战车很奇怪，它必须交替地穿越正能量辐射区和负能量辐射区才能保持正常运转，否则将报废。<br>某坦克需要从A区到B区去（A，B区本身是安全区，没有正能量或负能量特征），怎样走才能路径最短？</p>
+<p>已知的地图是一个方阵，上面用字母标出了A，B区，其它区都标了正号或负号分别表示正负能量辐射区。<br>例如：<br>A + - + -<br>- + - - +<br>- + + + -<br>+ - + - +<br>B + - + -</p>
+<p>坦克车只能水平或垂直方向上移动到相邻的区。</p>
+<p>输入</p>
+<p>输入第一行是一个整数n，表示方阵的大小， 4&lt;&#x3D;n&lt;100<br>接下来是n行，每行有n个数据，可能是A，B，+，-中的某一个，中间用空格分开。<br>A，B都只出现一次。</p>
+<p>输出</p>
+<p>要求输出一个整数，表示坦克从A区到B区的最少移动步数。<br>如果没有方案，则输出-1</p>
+<p>样例输入复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">A + - + -</span><br><span class="line">- + - - +</span><br><span class="line">- + + + -</span><br><span class="line">+ - + - +</span><br><span class="line">B + - + -</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>最优路径问题一般采用BFS or DFS 。如果体量大的话BFS会更有效。  </p>
+<p>这里用到的是BFS的思路。主要的判断方案是，如果发现当前的坐标和之前待访问的不同时，代表是正负能量场。</p>
+<p>主要谈到的是方向问题：如图</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/RJtuu0"><img src="https://www.helloimg.com/images/2022/04/01/RJtuu0.jpg" alt="RJtuu0.jpg"></a></p>
+<ul>
+<li>x 的变化为 下，左，右，上。我们以（2，2）当作中点，往下走X的变化就是X+1 ，往左走就是X+0，往右走也是X+0，往上走时X-1。故定义数组为{1,0,0,-1}</li>
+<li>y 的变化同理</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> controlX[<span class="number">4</span>] = &#123;<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> controlY[<span class="number">4</span>] = &#123; <span class="number">0</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">char</span> Map_all[<span class="number">105</span>][<span class="number">105</span>];<span class="comment">//存地图</span></span><br><span class="line"><span class="type">int</span> visited[<span class="number">105</span>][<span class="number">105</span>];<span class="comment">//标记数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//构建类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="type">int</span> y;</span><br><span class="line">    <span class="type">int</span> walk;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Point</span>(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> walk) : <span class="built_in">x</span>(x), <span class="built_in">y</span>(y), <span class="built_in">walk</span>(walk) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> Start_X,Start_Y;</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            cin&gt;&gt;Map_all[i][j];<span class="comment">//输入地图</span></span><br><span class="line">            <span class="keyword">if</span> ( Map_all[i][j] == <span class="string">&#x27;A&#x27;</span>)<span class="comment">//当为起点的时候，定位坐标系。</span></span><br><span class="line">            &#123;</span><br><span class="line">                Start_X=i;</span><br><span class="line">                Start_Y=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">BFS</span>(Start_X,Start_Y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    queue&lt;Point&gt; Qt;</span><br><span class="line"></span><br><span class="line">    Qt.<span class="built_in">push</span>(<span class="built_in">Point</span>(x,y,<span class="number">0</span>));<span class="comment">//先入队再说</span></span><br><span class="line">    visited[x][y] = <span class="number">1</span>;<span class="comment">//标记为访问过，作用就是一会判断是否访问过了</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ( !Qt.<span class="built_in">empty</span>() )<span class="comment">//队列不为空时候</span></span><br><span class="line">    &#123;</span><br><span class="line">        Point temp=Qt.<span class="built_in">front</span>();<span class="comment">//先拿到队头</span></span><br><span class="line">        Qt.<span class="built_in">pop</span>();<span class="comment">// 出队</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( Map_all[temp.x][temp.y] == <span class="string">&#x27;B&#x27;</span>)<span class="comment">//如果此时的x，y符合条件就出去</span></span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; temp.walk &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历四个方向</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            <span class="type">int</span> temp_X = temp.x+controlX[i];<span class="comment">//当前结点加上方向值</span></span><br><span class="line">            <span class="type">int</span> temp_Y = temp.y+controlY[i];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ( temp_X&gt;=<span class="number">1</span> &amp;&amp; temp_Y&gt;=<span class="number">1</span> &amp;&amp; temp_X&lt;=n &amp;&amp; temp_Y&lt;=n &amp;&amp; !visited[temp_X][temp_Y] &amp;&amp; Map_all[temp_X][temp_Y]!=Map_all[temp.x][temp.y])<span class="comment">//当上一次不相等的时候</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//标记访问过</span></span><br><span class="line">                visited[temp_X][temp_Y] = <span class="number">1</span>;<span class="comment">//探索到的变为1</span></span><br><span class="line">                Qt.<span class="built_in">push</span>(<span class="built_in">Point</span>(temp_X,temp_Y,temp.walk+<span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="number">-1</span> &lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">蓝桥杯</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">图的遍历</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/图的遍历-BFS-DFS-蓝桥杯//" class="article-tag-list-link color2">图的遍历,BFS,DFS,蓝桥杯</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/04/01/%E7%A9%BF%E8%B6%8A%E9%9B%B7%E5%8C%BA/">展开全文 >></a>
     </p>
     
 
@@ -1620,15 +1620,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++提高篇</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">编程语言学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1712,15 +1712,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">查找算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">双向链表操作</a>
               </li>
              
               <li class="article-tag-list-item">
