@@ -209,6 +209,116 @@
             
 
   
+    <article id="post-如何把单链表改造为循环链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/03/10/%E5%A6%82%E4%BD%95%E6%8A%8A%E5%8D%95%E9%93%BE%E8%A1%A8%E6%94%B9%E9%80%A0%E4%B8%BA%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/">如何把单链表改造为循环链表</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/03/10/%E5%A6%82%E4%BD%95%E6%8A%8A%E5%8D%95%E9%93%BE%E8%A1%A8%E6%94%B9%E9%80%A0%E4%B8%BA%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" class="archive-article-date">
+        <time datetime="2021-03-10T10:02:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-10</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="获得元素"><a href="#获得元素" class="headerlink" title="获得元素"></a>获得元素</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">LinkList p;</span><br><span class="line">    p = (*L)-&gt;next;<span class="comment">//让p指向L链表的第一个节点</span></span><br><span class="line">    <span class="type">int</span> j = <span class="number">1</span>;<span class="comment">//计数器</span></span><br><span class="line">    <span class="keyword">while</span>( (p!=(*L)) &amp;&amp; j&lt;i)       🤔       <span class="keyword">while</span> (p &amp;&amp; j&lt;i)   </span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;<span class="comment">//p不断向后迭代</span></span><br><span class="line">        ++j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( (p==(*L)) || j &gt; i )      🤔       <span class="keyword">if</span> ( !p || j&gt;i )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *e = p-&gt;data;<span class="comment">//获取当前i节点的数据</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">LinkList p,s;</span><br><span class="line">   p = *L;<span class="comment">//p从头结点开始</span></span><br><span class="line">   <span class="type">int</span> j=<span class="number">1</span>;</span><br><span class="line">   s = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">   s-&gt;data = e;</span><br><span class="line">   <span class="keyword">while</span>( (p-&gt;next!=(*L)) &amp;&amp; j&lt;i )  🤔     <span class="keyword">while</span> (p &amp;&amp; j &lt; i)</span><br><span class="line">   &#123;</span><br><span class="line">       p = p-&gt;next;<span class="comment">//向后迭代</span></span><br><span class="line">       ++j;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> ( p==(*L) &amp;&amp; j&lt;i )       🤔          <span class="keyword">if</span> (!p || j &gt; i)    </span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">return</span> ERROR;</span><br><span class="line">   &#125;</span><br><span class="line">  <span class="comment">//重点来了⚠️</span></span><br><span class="line">   s-&gt;next=p-&gt;next;</span><br><span class="line">   p-&gt;next=s;</span><br><span class="line">   <span class="keyword">return</span> OK;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">LinkList p,q;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">1</span>;</span><br><span class="line">    p = *L;</span><br><span class="line">    <span class="keyword">while</span>( (p-&gt;next!=(*L)) &amp;&amp; j&lt;i )    🤔   <span class="keyword">while</span> (p-&gt;next &amp;&amp; j &lt; i)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        ++j;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( p-&gt;next==(*L))                 🤔 <span class="keyword">if</span> (!(p-&gt;next) || j &gt; i) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">    q = p-&gt;next;</span><br><span class="line">    p-&gt;next=q-&gt;next;</span><br><span class="line">    *e = q-&gt;data;   </span><br><span class="line">    <span class="built_in">free</span>(q);</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br></pre></td></tr></table></figure>
+
+<h3 id="主要区别在初始化上"><a href="#主要区别在初始化上" class="headerlink" title="主要区别在初始化上"></a>主要区别在初始化上</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">InitList</span><span class="params">( LinkList *L)</span></span><br><span class="line">&#123;</span><br><span class="line">    *L = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    <span class="keyword">if</span> ( !(*L))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//注意，前驱后即都是自己</span></span><br><span class="line">    (*L)-&gt;next = (*L);          🤔     (*L)-&gt;next=<span class="literal">NULL</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">CreateListHead</span><span class="params">( LinkList *L,<span class="type">int</span> n )</span><span class="comment">//随机产生n个元素的值</span></span><br><span class="line">&#123;</span><br><span class="line">    LinkList pN;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">   *L = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));<span class="comment">//生成一个新的表头</span></span><br><span class="line">   (*L)-&gt;next = (*L);</span><br><span class="line">    LinkList p=(*L)-&gt;next;      🤔     (*L)-&gt;next = <span class="literal">NULL</span>;    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//形成新的节点</span></span><br><span class="line">        pN = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">        <span class="comment">//赋值</span></span><br><span class="line">        pN-&gt;data = rand()%<span class="number">100</span>+<span class="number">1</span>;</span><br><span class="line">        pN-&gt;next = (*L)-&gt;next;</span><br><span class="line">        (*L)-&gt;next = pN;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="尾插法"><a href="#尾插法" class="headerlink" title="尾插法"></a>尾插法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">oid <span class="title function_">CreateListTail</span><span class="params">(LinkList *L,<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    LinkList p,r,pN;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="comment">//创造新的节点</span></span><br><span class="line">    *L = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">     r = *L;<span class="comment">//r是指向最后一个节点的指针</span></span><br><span class="line">     <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="comment">//创造新的节点</span></span><br><span class="line">         pN = (Node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">         pN-&gt;data = rand()%<span class="number">100</span>+<span class="number">1</span>;</span><br><span class="line">         r-&gt;next=pN;</span><br><span class="line">         r=pN;<span class="comment">//pn就是那个末尾</span></span><br><span class="line">     &#125;</span><br><span class="line">   r-&gt;next = *(L);            🤔     r-&gt;next = <span class="literal">NULL</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">单循环链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/单循环链表//" class="article-tag-list-link color1">单循环链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/03/10/%E5%A6%82%E4%BD%95%E6%8A%8A%E5%8D%95%E9%93%BE%E8%A1%A8%E6%94%B9%E9%80%A0%E4%B8%BA%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-双向链表的重要操作分解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1152,105 +1262,6 @@ int main(int argc, char const *argv[])
 
 
   
-    <article id="post-插入排序详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/02/19/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E8%AF%A6%E8%A7%A3/">插入排序详解</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/02/19/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-        <time datetime="2021-02-19T04:56:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-19</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">InsertSort</span><span class="params">(Sqlist *L)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i,j;<span class="comment">//循环变量</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= L-&gt;length; ++i)<span class="comment">//默认第一☝️已经排好了，所以从第二个开始一直到末尾🔚</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( L-&gt;r[i] &lt; L-&gt;r[i<span class="number">-1</span>] )<span class="comment">//后面一个如果小就逮往前换对吧</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//先把那个小的交给哨兵</span></span><br><span class="line">            L-&gt;r[<span class="number">0</span>] = L-&gt;r[i];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (j = i<span class="number">-1</span>; L-&gt;r[<span class="number">0</span>]&lt;L-&gt;r[j] ; j--)<span class="comment">//i-1是因为从前往后覆盖</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//覆盖</span></span><br><span class="line">                L-&gt;r[j+<span class="number">1</span>] = L-&gt;r[j];<span class="comment">//前面的 不断的覆盖 后面的</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//出来循环说明当前位置不符合了，说明在这个位置的下一个</span></span><br><span class="line">            L-&gt;r[j+<span class="number">1</span>] = L-&gt;r[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2021/02/19/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E8%AF%A6%E8%A7%A3/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/排序算法//" class="article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/02/19/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/15/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/17/">Next &amp;raquo;</a>
@@ -1412,6 +1423,10 @@ int main(int argc, char const *argv[])
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++提高篇</a>
               </li>
              
@@ -1420,15 +1435,11 @@ int main(int argc, char const *argv[])
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1536,11 +1547,11 @@ int main(int argc, char const *argv[])
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1585,6 +1596,14 @@ int main(int argc, char const *argv[])
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">心理学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Neo4j</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">图数据库</a>
               </li>
              
               <li class="article-tag-list-item">
