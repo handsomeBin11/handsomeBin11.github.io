@@ -209,6 +209,121 @@
             
 
   
+    <article id="post-JAVA网络编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/09/03/JAVA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">JAVA网络编程</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/09/03/JAVA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="archive-article-date">
+        <time datetime="2024-09-03T15:04:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><h3 id="单发连接"><a href="#单发连接" class="headerlink" title="单发连接"></a>单发连接</h3><p><strong>客户端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//目标是： 客户端实现</span></span><br><span class="line">        <span class="comment">//1 . 创建一个发送端对象 --人</span></span><br><span class="line">        <span class="type">DatagramSocket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个数据包对象封装要发送的数据，韭菜盘子，装韭菜</span></span><br><span class="line">        <span class="type">byte</span>[] bytes = <span class="string">&quot;我是客户端，请好好学习，高薪就业&quot;</span>.getBytes();<span class="comment">//先写成数组</span></span><br><span class="line">        <span class="type">DatagramPacket</span> <span class="variable">packet</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramPacket</span>(bytes, bytes.length, InetAddress.getLocalHost(), <span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//发送这个数据包(把韭菜抛出去)</span></span><br><span class="line">        socket.send(packet);</span><br><span class="line"></span><br><span class="line">        socket.close();<span class="comment">//管道关闭</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>服务端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Server</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;============服务器启动成功了============&quot;</span>);</span><br><span class="line">        <span class="comment">//1、创建接受端对象 --&gt; 人</span></span><br><span class="line">        <span class="type">DatagramSocket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>(<span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、创建一个数 据包对象，负责接受数据 ---&gt; 空盘子</span></span><br><span class="line">        <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">64</span>];</span><br><span class="line">        <span class="type">DatagramPacket</span> <span class="variable">packet</span> <span class="operator">=</span> <span class="keyword">new</span>  <span class="title class_">DatagramPacket</span>(buffer, buffer.length);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、开始使用数据包接受数据</span></span><br><span class="line">        socket.receive(packet);</span><br><span class="line">        <span class="comment">//为了把剩下的无用的东西都不显示，需要裁剪一下</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> packet.getLength();<span class="comment">//得到了实际拿到的长度</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//4、看接受的数据</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">rs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(buffer,<span class="number">0</span>,length);<span class="comment">//从0 到 长度的位置截取</span></span><br><span class="line">        System.out.println(<span class="string">&quot;服务端收到&quot;</span>+rs);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多发多收"><a href="#多发多收" class="headerlink" title="多发多收"></a>多发多收</h3><p><strong>客户端</strong></p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//目标是： 客户端实现</span></span><br><span class="line">        <span class="comment">//1 . 创建一个发送端对象 --人</span></span><br><span class="line">        <span class="type">DatagramSocket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>();</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span>  <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;请输入：&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> sc.nextLine();<span class="comment">//接受到数组</span></span><br><span class="line">            <span class="comment">//如果等于exit的时候就退出循环</span></span><br><span class="line">            <span class="keyword">if</span> (msg.equals(<span class="string">&quot;exit&quot;</span>))&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;退出！！&quot;</span>);</span><br><span class="line">                <span class="comment">//关流</span></span><br><span class="line">                socket.close();</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//创建一个数据包对象封装要发送的数据，韭菜盘子，装韭菜</span></span><br><span class="line">            <span class="type">byte</span>[] bytes = msg.getBytes();<span class="comment">//先写成数组</span></span><br><span class="line">            <span class="type">DatagramPacket</span> <span class="variable">packet</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramPacket</span>(bytes, bytes.length, InetAddress.getLocalHost(), <span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//发送这个数据包(把韭菜抛出去)</span></span><br><span class="line">            socket.send(packet);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>服务端</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Server</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;============服务器启动成功了============&quot;</span>);</span><br><span class="line">        <span class="comment">//1、创建接受端对象 --&gt; 人</span></span><br><span class="line">        <span class="type">DatagramSocket</span> <span class="variable">socket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DatagramSocket</span>(<span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、创建一个数 据包对象，负责接受数据 ---&gt; 空盘子</span></span><br><span class="line">        <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">64</span>];</span><br><span class="line">        <span class="type">DatagramPacket</span> <span class="variable">packet</span> <span class="operator">=</span> <span class="keyword">new</span>  <span class="title class_">DatagramPacket</span>(buffer, buffer.length);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="comment">//3、开始使用数据包接受数据</span></span><br><span class="line">            socket.receive(packet);</span><br><span class="line">            <span class="comment">//为了不回把剩下的么用的东西都显示完成需要裁剪一下</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> packet.getLength();<span class="comment">//得到了实际拿到的长度</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//顺便拿一下客户端的的ip地址和端口</span></span><br><span class="line">            System.out.println(<span class="string">&quot;对方ip&quot;</span>+packet.getAddress().getHostAddress());</span><br><span class="line">            System.out.println(<span class="string">&quot;对方端口&quot;</span>+packet.getPort());</span><br><span class="line">            <span class="comment">//4、看接受的数据</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">rs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(buffer,<span class="number">0</span>,length);<span class="comment">//从0 到 长度的位置截取</span></span><br><span class="line">            System.out.println(<span class="string">&quot;服务端收到：&quot;</span>+rs);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2>
+    
+    <a class="article-more-a" href="/2024/09/03/JAVA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JAVA基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JAVA基础//" class="article-tag-list-link color2">JAVA基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/09/03/JAVA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JS事件案例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -945,134 +1060,6 @@
 
 
   
-    <article id="post-刷题统计(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/15/%E5%88%B7%E9%A2%98%E7%BB%9F%E8%AE%A1(1)/">刷题统计</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/04/15/%E5%88%B7%E9%A2%98%E7%BB%9F%E8%AE%A1(1)/" class="archive-article-date">
-        <time datetime="2022-04-15T12:23:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>##【问题描述】</p>
-<p>小明决定从下周一开始努力刷题准备蓝桥杯竞赛。他计划周一至周五每天</p>
-<p>做 <em>a</em> 道题目，周六和周日每天做 <em>b</em> 道题目。请你帮小明计算，按照计划他将在</p>
-<p>第几天实现做题数大于等于 <em>n</em> 题？</p>
-<p>【输入格式】</p>
-<p>输入一行包含三个整数 <em>a</em>, <em>b</em> 和 <em>n</em>.</p>
-<p>【输出格式】</p>
-<p>输出一个整数代表天数。</p>
-<p>【样例输入】</p>
-<p>10 20 99</p>
-<p>【样例输出】</p>
-<p>8</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
-<li><p>算出一周 到 周五  5 天做a道，周末做 b 道。 那么我们可以先算出<strong>每周能做多少道</strong>。</p>
-</li>
-<li><p>知道总共能做多少道，然后拿总的目标    <strong>n &#x2F; 每周能做多少道</strong>  可以算出最多能做几周 。然后 乘 7 代表最多能做多少个整周的天数。</p>
-</li>
-<li><p>然后   n % 每周能做多少道  &#x3D;&#x3D; 余下几个零散的天数，然后下一步进行分类。</p>
-</li>
-<li><p>用一个循环在 多少个整周的天数的基础上一天一天加</p>
-</li>
-<li><p>如果 等于 6 ，7 的时候就在余数里面扣出 b 天</p>
-</li>
-<li><p>如果 不是的话 就扣出 a天。</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> day,a,b,n;</span><br><span class="line"><span class="type">int</span> a_Week;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; a &gt;&gt; b &gt;&gt; n;</span><br><span class="line">    <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//计算出一周总共能完成多少</span></span><br><span class="line">    a_Week = a*<span class="number">5</span>+b*<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 总共 / 一周 == 共有几周  --&gt; 再乘7 就是最多多少周</span></span><br><span class="line">    result += <span class="number">7</span> * (n/a_Week);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//算余数</span></span><br><span class="line">    n = n % a_Week;<span class="comment">//算出余多少天，然后再根据情况分类给 工作日 还是 周末</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ( n &gt;= <span class="number">0</span> ) <span class="comment">//n 为余多少天</span></span><br><span class="line">    &#123;</span><br><span class="line">        ++result; <span class="comment">//不管是那天是 学 a 道题 还是b 道 题，先加上一天再说</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( day == <span class="number">5</span> ||  day == <span class="number">6</span> )<span class="comment">//  如果是周末的情况</span></span><br><span class="line">        &#123;</span><br><span class="line">            n -= b; <span class="comment">//从余数中扣除b道题</span></span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;<span class="comment">//否则就是周一到周五的情况，每天学a 道题</span></span><br><span class="line">            n -= a; <span class="comment">//从余数中扣除a道题</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        day = (day+<span class="number">1</span>) % <span class="number">7</span>;<span class="comment">//以一周为一个轮回</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">蓝桥杯</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">普通类型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/蓝桥杯-普通类型//" class="article-tag-list-link color4">蓝桥杯,普通类型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/15/%E5%88%B7%E9%A2%98%E7%BB%9F%E8%AE%A1(1)/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-刷题统计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1201,7 +1188,7 @@
 
 
   
-    <article id="post-2022蓝桥杯真题《顺子日期》(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-刷题统计(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -1209,7 +1196,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2022/04/10/2022%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%9F%E9%A2%98%E3%80%8A%E9%A1%BA%E5%AD%90%E6%97%A5%E6%9C%9F%E3%80%8B(1)/">2022蓝桥杯真题《顺子日期》</a>
+	  <a class="article-title" href="/2022/04/15/%E5%88%B7%E9%A2%98%E7%BB%9F%E8%AE%A1(1)/">刷题统计</a>
 	
     </h1>
   
@@ -1217,8 +1204,8 @@
 
   
   
-<a href="/2022/04/10/2022%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%9F%E9%A2%98%E3%80%8A%E9%A1%BA%E5%AD%90%E6%97%A5%E6%9C%9F%E3%80%8B(1)/" class="archive-article-date">
-        <time datetime="2022-04-10T13:27:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-10</time>
+<a href="/2022/04/15/%E5%88%B7%E9%A2%98%E7%BB%9F%E8%AE%A1(1)/" class="archive-article-date">
+        <time datetime="2022-04-15T12:23:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-15</time>
 </a>
 
   
@@ -1230,19 +1217,33 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>小明特别喜欢顺子。顺子指的就是连续的三个数字：123、456 等。顺子日</p>
-<p>期指的就是在日期的 <strong>yyyymmdd</strong> 表示法中，存在任意连续的三位数是一个顺</p>
-<p>子的日期。例如 20220123 就是一个顺子日期，因为它出现了一个顺子：123； </p>
-<p>而 20221023 则不是一个顺子日期，它一个顺子也没有。小明想知道在整个 2022</p>
-<p>年份中，一共有多少个顺子日期。</p>
-<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>思路： 先搞定后四位弄成字符串组合上2022 然后对于整体进行检查是否满足条件</p>
-<ul>
-<li>先解决后四位的问题，2022<strong>0123</strong>。月好说，每个月有多少天事先定义一个const的数组出来，一会 循环调用即可，省去了在代码中构思一个月有几天的问题。</li>
-<li>后四位如何解决？ 弄一个函数，将月和日拆分送进去。构成字符串，然后检查，如果两位，那就反转一下成为正常顺序，如果是一位前面补0。</li>
+    <p>##【问题描述】</p>
+<p>小明决定从下周一开始努力刷题准备蓝桥杯竞赛。他计划周一至周五每天</p>
+<p>做 <em>a</em> 道题目，周六和周日每天做 <em>b</em> 道题目。请你帮小明计算，按照计划他将在</p>
+<p>第几天实现做题数大于等于 <em>n</em> 题？</p>
+<p>【输入格式】</p>
+<p>输入一行包含三个整数 <em>a</em>, <em>b</em> 和 <em>n</em>.</p>
+<p>【输出格式】</p>
+<p>输出一个整数代表天数。</p>
+<p>【样例输入】</p>
+<p>10 20 99</p>
+<p>【样例输出】</p>
+<p>8</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<li><p>算出一周 到 周五  5 天做a道，周末做 b 道。 那么我们可以先算出<strong>每周能做多少道</strong>。</p>
+</li>
+<li><p>知道总共能做多少道，然后拿总的目标    <strong>n &#x2F; 每周能做多少道</strong>  可以算出最多能做几周 。然后 乘 7 代表最多能做多少个整周的天数。</p>
+</li>
+<li><p>然后   n % 每周能做多少道  &#x3D;&#x3D; 余下几个零散的天数，然后下一步进行分类。</p>
+</li>
+<li><p>用一个循环在 多少个整周的天数的基础上一天一天加</p>
+</li>
+<li><p>如果 等于 6 ，7 的时候就在余数里面扣出 b 天</p>
+</li>
+<li><p>如果 不是的话 就扣出 a天。</p>
+</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  main.cpp</span></span><br><span class="line"><span class="comment">//  顺子日期</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Bing on 2022/4/10.</span></span><br><span class="line"><span class="comment">//  Copyright © 2022 Bing. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//定义一个一年每个月表示的数组，注意2022年是闰年 2月28天</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> month[] = &#123; <span class="number">0</span>, <span class="number">31</span>, <span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>&#125;;</span><br><span class="line"><span class="function">string <span class="title">toString</span><span class="params">( <span class="type">int</span> n )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string ret = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">while</span> ( n )<span class="comment">//n不为0时</span></span><br><span class="line">    &#123;</span><br><span class="line">        ret += n%<span class="number">10</span> + <span class="string">&#x27;0&#x27;</span>;<span class="comment">//拿到最后一位并上&#x27;0&#x27;成为字符串</span></span><br><span class="line">        n/=<span class="number">10</span>; <span class="comment">//撇去最后一位</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//此时 顺序是反的 --&gt; 比如 12  -&gt;  21</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( ret.<span class="built_in">size</span>() &gt;= <span class="number">2</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">reverse</span>( ret.<span class="built_in">begin</span>() , ret.<span class="built_in">end</span>());</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        ret = <span class="string">&quot;0&quot;</span> + ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">checkNum</span><span class="params">(string date)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; date.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( date[i] == date[i<span class="number">-1</span>]+<span class="number">1</span> &amp;&amp; date[i]+<span class="number">1</span> == date[i+<span class="number">1</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    string year = <span class="string">&quot;2022&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历月，遍历日</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> mon = <span class="number">1</span>; mon &lt;= <span class="number">12</span>; ++mon) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> dy = <span class="number">1</span>; dy &lt;= month[mon] ; ++dy) &#123;<span class="comment">//遍历当月有几天</span></span><br><span class="line">            <span class="comment">//把年月日拼接为一整个字符串</span></span><br><span class="line">            string s = year+ <span class="built_in">toString</span>(mon)+<span class="built_in">toString</span>(dy);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//检查</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">checkNum</span>(s))</span><br><span class="line">            &#123;</span><br><span class="line">                cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">               count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; count &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> day,a,b,n;</span><br><span class="line"><span class="type">int</span> a_Week;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; a &gt;&gt; b &gt;&gt; n;</span><br><span class="line">    <span class="type">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//计算出一周总共能完成多少</span></span><br><span class="line">    a_Week = a*<span class="number">5</span>+b*<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 总共 / 一周 == 共有几周  --&gt; 再乘7 就是最多多少周</span></span><br><span class="line">    result += <span class="number">7</span> * (n/a_Week);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//算余数</span></span><br><span class="line">    n = n % a_Week;<span class="comment">//算出余多少天，然后再根据情况分类给 工作日 还是 周末</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ( n &gt;= <span class="number">0</span> ) <span class="comment">//n 为余多少天</span></span><br><span class="line">    &#123;</span><br><span class="line">        ++result; <span class="comment">//不管是那天是 学 a 道题 还是b 道 题，先加上一天再说</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( day == <span class="number">5</span> ||  day == <span class="number">6</span> )<span class="comment">//  如果是周末的情况</span></span><br><span class="line">        &#123;</span><br><span class="line">            n -= b; <span class="comment">//从余数中扣除b道题</span></span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;<span class="comment">//否则就是周一到周五的情况，每天学a 道题</span></span><br><span class="line">            n -= a; <span class="comment">//从余数中扣除a道题</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        day = (day+<span class="number">1</span>) % <span class="number">7</span>;<span class="comment">//以一周为一个轮回</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
     
@@ -1285,7 +1286,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/10/2022%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%9F%E9%A2%98%E3%80%8A%E9%A1%BA%E5%AD%90%E6%97%A5%E6%9C%9F%E3%80%8B(1)/">展开全文 >></a>
+      <a class="article-more-a" href="/2022/04/15/%E5%88%B7%E9%A2%98%E7%BB%9F%E8%AE%A1(1)/">展开全文 >></a>
     </p>
     
 
@@ -1488,11 +1489,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1600,15 +1601,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--指针</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计思想</a>
               </li>
              
               <li class="article-tag-list-item">

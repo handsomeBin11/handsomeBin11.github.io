@@ -320,6 +320,117 @@
 
 
   
+    <article id="post-怒干KMP算法的next数组问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98/">怒干KMP算法的next数组问题</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+        <time datetime="2021-11-25T07:11:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-25</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>想必很多同学跟我一样被KMP算法当中的最关键的next数组所困扰。我在理解的时候可是伤了很多脑细胞，而我在翻阅资料的时候很多教材和博客中这块一笔带过，next这里恰恰才是KMP的精髓，所以我将从底层挖掘它的基本原理。当我真正get到的时候，瞬间豁然开朗，头脑中冒出一堆 妙啊～～在此，膜拜🙏三位大神 D.E.Knuth,J.H.Morris和V.R.Pratt 。这种思想打破了传动暴力匹配时候的时间消耗，能快速把字串回溯到准确的位置上，省掉了很多无用功。</p>
+<h3 id="我们来先看代码"><a href="#我们来先看代码" class="headerlink" title="我们来先看代码"></a>我们来先看代码</h3><blockquote>
+<p>这里我采用三位大神的论文中阐述的 next 数组下标从0开始。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">get_next</span><span class="params">(String T, <span class="type">int</span> *next)</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i,k;</span><br><span class="line">	i = <span class="number">1</span>,k = <span class="number">0</span>;</span><br><span class="line"> 	next[<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//初始化为1</span></span><br><span class="line"> 	<span class="keyword">while</span>( i &lt; T[<span class="number">0</span>] )<span class="comment">//T[0]存储的是长度，也即是i还没走到头的时候</span></span><br><span class="line"> 	&#123;</span><br><span class="line"> 		<span class="keyword">if</span> ( k = <span class="number">0</span> || T[i] == T[j])<span class="comment">//如果相等或者k回溯到0时候进来</span></span><br><span class="line"> 		&#123;</span><br><span class="line"> 			k++;</span><br><span class="line"> 			j++</span><br><span class="line"> 			next[i] = k;</span><br><span class="line"> 		&#125;<span class="keyword">else</span></span><br><span class="line"> 		&#123;</span><br><span class="line"> 			k = next[k];</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当时这里k &#x3D; next[k]; 我就感到很困惑。。。不过看了我下面的解释你很快就会理解。</p>
+</blockquote>
+<p>如果你想要理解的更快的话，我建议你像我一样跟着代码自己手算一遍。</p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GZjjHC"><img src="https://www.helloimg.com/images/2021/11/25/GZjjHC.jpg" alt="GZjjHC.jpg"></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GZjhPS"><img src="https://www.helloimg.com/images/2021/11/25/GZjhPS.jpg" alt="GZjhPS.jpg"></a></p>
+<p>⚠️：从图中的规律可以观察到，i 是会不断向前走，k在不匹配i的时候会回溯。那么上图中的k 从 4 回溯到了 2 这是什么原理呢？</p>
+    
+    <a class="article-more-a" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-链队列(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1474,131 +1585,6 @@
 
 
   
-    <article id="post-单循环链表的尾指针实现及链接两个链表(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/11/05/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B0%BE%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8F%8A%E9%93%BE%E6%8E%A5%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8(1)/">单循环链表的尾指针实现及链接两个链表</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/11/05/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B0%BE%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8F%8A%E9%93%BE%E6%8E%A5%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8(1)/" class="archive-article-date">
-        <time datetime="2021-11-05T02:36:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="为何要用尾指针？"><a href="#为何要用尾指针？" class="headerlink" title="为何要用尾指针？"></a>为何要用尾指针？</h3><hr>
-<h4 id="1-时间效率问题"><a href="#1-时间效率问题" class="headerlink" title="1. 时间效率问题"></a>1. 时间效率问题</h4><p>即便是到了循环链表，从任意结点出发能都能访问到整个链表。但是还有一点不是很perfect！那就是</p>
-<ul>
-<li>当访问第一个结点是<strong>O(1）</strong></li>
-<li>当访问最后结点却是<strong>O(n)</strong></li>
-</ul>
-<p>那怎么能修改呢？可以用尾指针！</p>
-<ul>
-<li><p>用尾指针指向最后一个结点</p>
-<ul>
-<li><p>当访问第一个结点显然是  <strong>rear -&gt; next -&gt; next</strong></p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CfXTGr"><img src="https://www.helloimg.com/images/2021/11/05/CfXTGr.jpg" alt="CfXTGr.jpg"></a></p>
-</li>
-<li><p>当上面👆这样改之后，当访问最后一个结点的时候其时间复杂度尾变成了 O(1)，比之前的来的高效的多！</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-两个链表相接变得容易！"><a href="#2-两个链表相接变得容易！" class="headerlink" title="2.两个链表相接变得容易！"></a>2.两个链表相接变得容易！</h4><p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CfXUO9"><img src="https://www.helloimg.com/images/2021/11/05/CfXUO9.jpg" alt="CfXUO9.jpg"></a></p>
-<p>相接的方法是： </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p = rearA -&gt; next;</span><br><span class="line">rearA -&gt; next = rearA -&gt; next -&gt; next;</span><br><span class="line">q = rear-&gt;next; <span class="comment">//因为一会要把第二个链表的头结点释放掉</span></span><br><span class="line">rearB -&gt; next = p;</span><br><span class="line"><span class="built_in">free</span>(q);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><hr>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ctype.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;math.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;time.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> TRUE 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> FALSE 0</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> MAXSIZE 20</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> TRUE 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> FALSE 0</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> MAXSIZE 20 <span class="comment">/* 存储空间初始分配量 */</span></span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> Status;<span class="comment">/* Status是函数的类型,其值是函数结果状态代码，如OK等 */</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> ElemType;<span class="comment">/* ElemType类型根据实际情况而定，这里假设为int */</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> ElemType;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> Status;<span class="comment">/* Status是函数的类型,其值是函数结果状态代码，如OK等 */</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> ElemType;<span class="comment">/* ElemType类型根据实际情况而定，这里假设为int */</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">  &#123;</span></span><br><span class="line">      ElemType data;<span class="comment">//数据</span></span><br><span class="line">      <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> * <span class="title">next</span>;</span><span class="comment">//下一个节点</span></span><br><span class="line">  &#125;Node;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">LinkList</span>;</span></span><br><span class="line">  Status <span class="title function_">InitList</span><span class="params">( LinkList *L)</span></span><br><span class="line">  &#123;</span><br><span class="line">      *L = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">      <span class="keyword">if</span> ( !(*L))</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">return</span> ERROR;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//注意，前驱后即都是自己</span></span><br><span class="line">      (*L)-&gt;next = (*L);</span><br><span class="line">      <span class="keyword">return</span> OK;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">const</span> Status <span class="title function_">ListTraverse</span><span class="params">(LinkList *L)</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList p = (*L)-&gt;next;<span class="comment">//p是第一个节点</span></span><br><span class="line">      <span class="keyword">while</span>(p!=(*L))</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,p-&gt;data);</span><br><span class="line">          p=p-&gt;next;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> OK;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  LinkList <span class="title function_">CreateListTail</span><span class="params">(LinkList *L,<span class="type">int</span> n)</span><span class="comment">//注意这里，我要把最后的结点返回到调用者哪里</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList p,rear,pN;</span><br><span class="line">      srand(time(<span class="number">0</span>));</span><br><span class="line">      <span class="comment">//创造新的节点</span></span><br><span class="line">      *L = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">       rear = *L;<span class="comment">//rear拿到指向最后一个节点的指针</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="comment">//创造新的节点</span></span><br><span class="line">           pN = (Node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">           pN-&gt;data = rand()%<span class="number">100</span>+<span class="number">1</span>;</span><br><span class="line">           rear-&gt;next = pN;</span><br><span class="line">           rear = pN;<span class="comment">//pn就是那个末尾,rear要重新成为那个末尾</span></span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">       rear-&gt;next = *(L);<span class="comment">//构成循环链表</span></span><br><span class="line">       <span class="keyword">return</span> rear;<span class="comment">//返回到调用者最后一个结点</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> <span class="title function_">ClearList</span><span class="params">( LinkList *L)</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList p,q;</span><br><span class="line">      p=(*L)-&gt;next;<span class="comment">//p指向第一个节点</span></span><br><span class="line">      <span class="keyword">while</span>(p!=(*L))</span><br><span class="line">      &#123;</span><br><span class="line">          q=p-&gt;next;</span><br><span class="line">          <span class="built_in">free</span>(p);</span><br><span class="line">          p=q;<span class="comment">//q交给下一个p才能继续往下</span></span><br><span class="line">      &#125;</span><br><span class="line">      (*L)-&gt;next = (*L);</span><br><span class="line">      <span class="keyword">return</span> OK;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">Status <span class="title function_">IsEmpty</span><span class="params">( LinkList L )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ( L-&gt;next != L ) &#123;<span class="comment">//不等于等于 不是空的！</span></span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> TRUE;<span class="comment">//是空的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这是一个能让两个链表合并成一个的功能</span></span><br><span class="line">Status <span class="title function_">Match_List</span><span class="params">( LinkList rear1, LinkList rear2 )</span></span><br><span class="line">&#123;</span><br><span class="line">    LinkList p,q;</span><br><span class="line">    <span class="keyword">if</span> ( !IsEmpty(rear1-&gt;next) &amp;&amp; !IsEmpty(rear2-&gt;next) )<span class="comment">//rear-&gt;next 其实就是头结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        p = rear1-&gt;next;</span><br><span class="line">        rear1-&gt;next =  rear2-&gt;next-&gt;next;</span><br><span class="line">        q = rear2-&gt;next;<span class="comment">//为了一会要释放用</span></span><br><span class="line">        rear2-&gt;next = p;</span><br><span class="line">        <span class="built_in">free</span>(q);<span class="comment">//释放掉头结点</span></span><br><span class="line">        <span class="keyword">return</span>  OK;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList L1 = <span class="literal">NULL</span>;</span><br><span class="line">      LinkList L2 = <span class="literal">NULL</span>;</span><br><span class="line">      <span class="type">int</span> i = InitList(&amp;L1);</span><br><span class="line">      <span class="type">int</span> j = InitList(&amp;L2);</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;初始化后：ListLength(L) = %d \n&quot;</span>, ListLength(&amp;L1));</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;初始化后：ListLength(L) = %d \n&quot;</span>, ListLength(&amp;L2));</span><br><span class="line">      LinkList rear1 =  CreateListTail(&amp;L1, <span class="number">5</span>);<span class="comment">//创建顺便拿到最后一个结点</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2000000000</span>;i++)<span class="comment">//这个地方如果不延时，两个链表的数据会相同！</span></span><br><span class="line">      &#123;</span><br><span class="line">      </span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      LinkList rear2 =  CreateListTail(&amp;L2, <span class="number">5</span>);<span class="comment">//同理</span></span><br><span class="line">      ListTraverse(&amp;L1);</span><br><span class="line">      ListTraverse(&amp;L2);</span><br><span class="line">      </span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;----------------------拟合两个链表！-----------------------\n&quot;</span>);</span><br><span class="line">      Match_List(rear1, rear2);</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;结果为：\n&quot;</span>);</span><br><span class="line">      ListTraverse(&amp;L1);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/05/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B0%BE%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8F%8A%E9%93%BE%E6%8E%A5%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8(1)/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
@@ -1772,11 +1758,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1884,15 +1870,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--指针</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计思想</a>
               </li>
              
               <li class="article-tag-list-item">

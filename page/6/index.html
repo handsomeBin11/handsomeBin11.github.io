@@ -209,6 +209,132 @@
             
 
   
+    <article id="post-111-二叉树的最小深度(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/12/09/111-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6(1)/">111. 二叉树的最小深度</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/12/09/111-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6(1)/" class="archive-article-date">
+        <time datetime="2021-12-09T02:32:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>给定一个二叉树，找出其最小深度。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/">https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/</a></p>
+<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
+<p><strong>说明：</strong>叶子节点是指没有子节点的节点。</p>
+<p> 示例 1：</p>
+<p>输入：root &#x3D; [3,9,20,null,null,15,7]<br>输出：2<br>示例 2：</p>
+<p>输入：root &#x3D; [2,null,3,null,4,null,5,null,6]<br>输出：5</p>
+<p>提示：</p>
+<p>树中节点数的范围在 [0, 105] 内<br>-1000 &lt;&#x3D; Node.val &lt;&#x3D; 1000</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>根据题目中所给的，最小深度是从根节点到最近叶子节点的最短路径上的<strong>节点数量</strong>。</p>
+<p>这里注意加粗的<strong>结点数量</strong>，假设左树有一个分支且分就一个结点，你这里需要把结点数+1，因为有根结点</p>
+<ul>
+<li>先判断根的结点是不是空 —-&gt; 如果是的话就return 0</li>
+<li>再判断该根下的左右子树是否同时为空 —&gt; 同时空就返回 1代表最小深度为1 </li>
+<li>如果左树存在 则递归遍历左树 并且刷新最小值</li>
+<li>如果右树存在 则递归遍历右树 并且刷新最小值</li>
+<li>返回最小值+1</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     struct TreeNode *right;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	最小深度就是从根到最近的	叶子结点的 “结点个数”</span></span><br><span class="line"><span class="comment">	1. 先判断root是否为为空--&gt;re 0</span></span><br><span class="line"><span class="comment">	2. 判断左右是不是同时为空 --&gt; re 1</span></span><br><span class="line"><span class="comment">	3. 初始化一个 min_int</span></span><br><span class="line"><span class="comment">	4. 递归调用左右树 fmin 把最小值返回给min_int函数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">minDepth</span><span class="params">(<span class="keyword">struct</span> TreeNode* root)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( root == <span class="literal">NULL</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;	 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( root -&gt; left == <span class="literal">NULL</span>  &amp;&amp; root -&gt; right == <span class="literal">NULL</span> ) <span class="comment">// 如果左右子树同时为空则树的高度为1 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> min_high = INT_MAX; <span class="comment">//初始化</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( root -&gt; left != <span class="literal">NULL</span> ) <span class="comment">//如果左树不为空 深度遍历左树</span></span><br><span class="line">	&#123;</span><br><span class="line">		min_high = fmin( minDepth(root-&gt;left) , min_high); <span class="comment">//在已知的最小和左树的最小的选出一个最小的</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( root -&gt; right != <span class="literal">NULL</span> ) <span class="comment">//如果右树不为空，深度遍历右树</span></span><br><span class="line">	&#123;</span><br><span class="line">		min_high = fmin( minDepth(root-&gt;right) , min_high); <span class="comment">//在已知的最小和右树的最小的选出一个最小的</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> min_high+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Leetcode-树专题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Leetcode树专题//" class="article-tag-list-link color2">Leetcode树专题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/12/09/111-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6(1)/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-111-二叉树的最小深度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1243,117 +1369,6 @@
 
 
   
-    <article id="post-怒干KMP算法的next数组问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98/">怒干KMP算法的next数组问题</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-        <time datetime="2021-11-25T07:11:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-25</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>想必很多同学跟我一样被KMP算法当中的最关键的next数组所困扰。我在理解的时候可是伤了很多脑细胞，而我在翻阅资料的时候很多教材和博客中这块一笔带过，next这里恰恰才是KMP的精髓，所以我将从底层挖掘它的基本原理。当我真正get到的时候，瞬间豁然开朗，头脑中冒出一堆 妙啊～～在此，膜拜🙏三位大神 D.E.Knuth,J.H.Morris和V.R.Pratt 。这种思想打破了传动暴力匹配时候的时间消耗，能快速把字串回溯到准确的位置上，省掉了很多无用功。</p>
-<h3 id="我们来先看代码"><a href="#我们来先看代码" class="headerlink" title="我们来先看代码"></a>我们来先看代码</h3><blockquote>
-<p>这里我采用三位大神的论文中阐述的 next 数组下标从0开始。</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">get_next</span><span class="params">(String T, <span class="type">int</span> *next)</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i,k;</span><br><span class="line">	i = <span class="number">1</span>,k = <span class="number">0</span>;</span><br><span class="line"> 	next[<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//初始化为1</span></span><br><span class="line"> 	<span class="keyword">while</span>( i &lt; T[<span class="number">0</span>] )<span class="comment">//T[0]存储的是长度，也即是i还没走到头的时候</span></span><br><span class="line"> 	&#123;</span><br><span class="line"> 		<span class="keyword">if</span> ( k = <span class="number">0</span> || T[i] == T[j])<span class="comment">//如果相等或者k回溯到0时候进来</span></span><br><span class="line"> 		&#123;</span><br><span class="line"> 			k++;</span><br><span class="line"> 			j++</span><br><span class="line"> 			next[i] = k;</span><br><span class="line"> 		&#125;<span class="keyword">else</span></span><br><span class="line"> 		&#123;</span><br><span class="line"> 			k = next[k];</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>当时这里k &#x3D; next[k]; 我就感到很困惑。。。不过看了我下面的解释你很快就会理解。</p>
-</blockquote>
-<p>如果你想要理解的更快的话，我建议你像我一样跟着代码自己手算一遍。</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GZjjHC"><img src="https://www.helloimg.com/images/2021/11/25/GZjjHC.jpg" alt="GZjjHC.jpg"></a></p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/GZjhPS"><img src="https://www.helloimg.com/images/2021/11/25/GZjhPS.jpg" alt="GZjhPS.jpg"></a></p>
-<p>⚠️：从图中的规律可以观察到，i 是会不断向前走，k在不匹配i的时候会回溯。那么上图中的k 从 4 回溯到了 2 这是什么原理呢？</p>
-    
-    <a class="article-more-a" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/25/%E6%80%92%E5%B9%B2KMP%E7%AE%97%E6%B3%95%E7%9A%84next%E6%95%B0%E7%BB%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
@@ -1527,11 +1542,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--全集</a>
+                <a href="javascript:void(0)" class="js-tag color2">JAVA基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1639,15 +1654,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--指针</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计思想</a>
               </li>
              
               <li class="article-tag-list-item">
