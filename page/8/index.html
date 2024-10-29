@@ -209,798 +209,6 @@
             
 
   
-    <article id="post-单循环链表的尾指针实现及链接两个链表(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/11/05/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B0%BE%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8F%8A%E9%93%BE%E6%8E%A5%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8(1)/">单循环链表的尾指针实现及链接两个链表</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/11/05/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B0%BE%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8F%8A%E9%93%BE%E6%8E%A5%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8(1)/" class="archive-article-date">
-        <time datetime="2021-11-05T02:36:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="为何要用尾指针？"><a href="#为何要用尾指针？" class="headerlink" title="为何要用尾指针？"></a>为何要用尾指针？</h3><hr>
-<h4 id="1-时间效率问题"><a href="#1-时间效率问题" class="headerlink" title="1. 时间效率问题"></a>1. 时间效率问题</h4><p>即便是到了循环链表，从任意结点出发能都能访问到整个链表。但是还有一点不是很perfect！那就是</p>
-<ul>
-<li>当访问第一个结点是<strong>O(1）</strong></li>
-<li>当访问最后结点却是<strong>O(n)</strong></li>
-</ul>
-<p>那怎么能修改呢？可以用尾指针！</p>
-<ul>
-<li><p>用尾指针指向最后一个结点</p>
-<ul>
-<li><p>当访问第一个结点显然是  <strong>rear -&gt; next -&gt; next</strong></p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CfXTGr"><img src="https://www.helloimg.com/images/2021/11/05/CfXTGr.jpg" alt="CfXTGr.jpg"></a></p>
-</li>
-<li><p>当上面👆这样改之后，当访问最后一个结点的时候其时间复杂度尾变成了 O(1)，比之前的来的高效的多！</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-两个链表相接变得容易！"><a href="#2-两个链表相接变得容易！" class="headerlink" title="2.两个链表相接变得容易！"></a>2.两个链表相接变得容易！</h4><p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CfXUO9"><img src="https://www.helloimg.com/images/2021/11/05/CfXUO9.jpg" alt="CfXUO9.jpg"></a></p>
-<p>相接的方法是： </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p = rearA -&gt; next;</span><br><span class="line">rearA -&gt; next = rearA -&gt; next -&gt; next;</span><br><span class="line">q = rear-&gt;next; <span class="comment">//因为一会要把第二个链表的头结点释放掉</span></span><br><span class="line">rearB -&gt; next = p;</span><br><span class="line"><span class="built_in">free</span>(q);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><hr>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ctype.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;math.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;time.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> TRUE 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> FALSE 0</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> MAXSIZE 20</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> TRUE 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> FALSE 0</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> MAXSIZE 20 <span class="comment">/* 存储空间初始分配量 */</span></span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> Status;<span class="comment">/* Status是函数的类型,其值是函数结果状态代码，如OK等 */</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> ElemType;<span class="comment">/* ElemType类型根据实际情况而定，这里假设为int */</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> ElemType;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> Status;<span class="comment">/* Status是函数的类型,其值是函数结果状态代码，如OK等 */</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> ElemType;<span class="comment">/* ElemType类型根据实际情况而定，这里假设为int */</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">  &#123;</span></span><br><span class="line">      ElemType data;<span class="comment">//数据</span></span><br><span class="line">      <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> * <span class="title">next</span>;</span><span class="comment">//下一个节点</span></span><br><span class="line">  &#125;Node;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">LinkList</span>;</span></span><br><span class="line">  Status <span class="title function_">InitList</span><span class="params">( LinkList *L)</span></span><br><span class="line">  &#123;</span><br><span class="line">      *L = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">      <span class="keyword">if</span> ( !(*L))</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">return</span> ERROR;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//注意，前驱后即都是自己</span></span><br><span class="line">      (*L)-&gt;next = (*L);</span><br><span class="line">      <span class="keyword">return</span> OK;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">const</span> Status <span class="title function_">ListTraverse</span><span class="params">(LinkList *L)</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList p = (*L)-&gt;next;<span class="comment">//p是第一个节点</span></span><br><span class="line">      <span class="keyword">while</span>(p!=(*L))</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,p-&gt;data);</span><br><span class="line">          p=p-&gt;next;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> OK;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  LinkList <span class="title function_">CreateListTail</span><span class="params">(LinkList *L,<span class="type">int</span> n)</span><span class="comment">//注意这里，我要把最后的结点返回到调用者哪里</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList p,rear,pN;</span><br><span class="line">      srand(time(<span class="number">0</span>));</span><br><span class="line">      <span class="comment">//创造新的节点</span></span><br><span class="line">      *L = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">       rear = *L;<span class="comment">//rear拿到指向最后一个节点的指针</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="comment">//创造新的节点</span></span><br><span class="line">           pN = (Node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">           pN-&gt;data = rand()%<span class="number">100</span>+<span class="number">1</span>;</span><br><span class="line">           rear-&gt;next = pN;</span><br><span class="line">           rear = pN;<span class="comment">//pn就是那个末尾,rear要重新成为那个末尾</span></span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">       rear-&gt;next = *(L);<span class="comment">//构成循环链表</span></span><br><span class="line">       <span class="keyword">return</span> rear;<span class="comment">//返回到调用者最后一个结点</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> <span class="title function_">ClearList</span><span class="params">( LinkList *L)</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList p,q;</span><br><span class="line">      p=(*L)-&gt;next;<span class="comment">//p指向第一个节点</span></span><br><span class="line">      <span class="keyword">while</span>(p!=(*L))</span><br><span class="line">      &#123;</span><br><span class="line">          q=p-&gt;next;</span><br><span class="line">          <span class="built_in">free</span>(p);</span><br><span class="line">          p=q;<span class="comment">//q交给下一个p才能继续往下</span></span><br><span class="line">      &#125;</span><br><span class="line">      (*L)-&gt;next = (*L);</span><br><span class="line">      <span class="keyword">return</span> OK;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">Status <span class="title function_">IsEmpty</span><span class="params">( LinkList L )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ( L-&gt;next != L ) &#123;<span class="comment">//不等于等于 不是空的！</span></span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> TRUE;<span class="comment">//是空的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这是一个能让两个链表合并成一个的功能</span></span><br><span class="line">Status <span class="title function_">Match_List</span><span class="params">( LinkList rear1, LinkList rear2 )</span></span><br><span class="line">&#123;</span><br><span class="line">    LinkList p,q;</span><br><span class="line">    <span class="keyword">if</span> ( !IsEmpty(rear1-&gt;next) &amp;&amp; !IsEmpty(rear2-&gt;next) )<span class="comment">//rear-&gt;next 其实就是头结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        p = rear1-&gt;next;</span><br><span class="line">        rear1-&gt;next =  rear2-&gt;next-&gt;next;</span><br><span class="line">        q = rear2-&gt;next;<span class="comment">//为了一会要释放用</span></span><br><span class="line">        rear2-&gt;next = p;</span><br><span class="line">        <span class="built_in">free</span>(q);<span class="comment">//释放掉头结点</span></span><br><span class="line">        <span class="keyword">return</span>  OK;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList L1 = <span class="literal">NULL</span>;</span><br><span class="line">      LinkList L2 = <span class="literal">NULL</span>;</span><br><span class="line">      <span class="type">int</span> i = InitList(&amp;L1);</span><br><span class="line">      <span class="type">int</span> j = InitList(&amp;L2);</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;初始化后：ListLength(L) = %d \n&quot;</span>, ListLength(&amp;L1));</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;初始化后：ListLength(L) = %d \n&quot;</span>, ListLength(&amp;L2));</span><br><span class="line">      LinkList rear1 =  CreateListTail(&amp;L1, <span class="number">5</span>);<span class="comment">//创建顺便拿到最后一个结点</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2000000000</span>;i++)<span class="comment">//这个地方如果不延时，两个链表的数据会相同！</span></span><br><span class="line">      &#123;</span><br><span class="line">      </span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      LinkList rear2 =  CreateListTail(&amp;L2, <span class="number">5</span>);<span class="comment">//同理</span></span><br><span class="line">      ListTraverse(&amp;L1);</span><br><span class="line">      ListTraverse(&amp;L2);</span><br><span class="line">      </span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;----------------------拟合两个链表！-----------------------\n&quot;</span>);</span><br><span class="line">      Match_List(rear1, rear2);</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;结果为：\n&quot;</span>);</span><br><span class="line">      ListTraverse(&amp;L1);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/05/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B0%BE%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8F%8A%E9%93%BE%E6%8E%A5%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8(1)/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-单循环链表的尾指针实现及链接两个链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/11/05/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B0%BE%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8F%8A%E9%93%BE%E6%8E%A5%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8/">单循环链表的尾指针实现及链接两个链表</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/11/05/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B0%BE%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8F%8A%E9%93%BE%E6%8E%A5%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8/" class="archive-article-date">
-        <time datetime="2021-11-05T02:36:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="为何要用尾指针？"><a href="#为何要用尾指针？" class="headerlink" title="为何要用尾指针？"></a>为何要用尾指针？</h3><hr>
-<h4 id="1-时间效率问题"><a href="#1-时间效率问题" class="headerlink" title="1. 时间效率问题"></a>1. 时间效率问题</h4><p>即便是到了循环链表，从任意结点出发能都能访问到整个链表。但是还有一点不是很perfect！那就是</p>
-<ul>
-<li>当访问第一个结点是<strong>O(1）</strong></li>
-<li>当访问最后结点却是<strong>O(n)</strong></li>
-</ul>
-<p>那怎么能修改呢？可以用尾指针！</p>
-<ul>
-<li><p>用尾指针指向最后一个结点</p>
-<ul>
-<li><p>当访问第一个结点显然是  <strong>rear -&gt; next -&gt; next</strong></p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CfXTGr"><img src="https://www.helloimg.com/images/2021/11/05/CfXTGr.jpg" alt="CfXTGr.jpg"></a></p>
-</li>
-<li><p>当上面👆这样改之后，当访问最后一个结点的时候其时间复杂度尾变成了 O(1)，比之前的来的高效的多！</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-两个链表相接变得容易！"><a href="#2-两个链表相接变得容易！" class="headerlink" title="2.两个链表相接变得容易！"></a>2.两个链表相接变得容易！</h4><p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CfXUO9"><img src="https://www.helloimg.com/images/2021/11/05/CfXUO9.jpg" alt="CfXUO9.jpg"></a></p>
-<p>相接的方法是： </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p = rearA -&gt; next;</span><br><span class="line">rearA -&gt; next = rearA -&gt; next -&gt; next;</span><br><span class="line">q = rear-&gt;next; <span class="comment">//因为一会要把第二个链表的头结点释放掉</span></span><br><span class="line">rearB -&gt; next = p;</span><br><span class="line"><span class="built_in">free</span>(q);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><hr>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ctype.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;math.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;time.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> TRUE 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> FALSE 0</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> MAXSIZE 20</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdio.h&quot;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdlib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> OK 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> ERROR 0</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> TRUE 1</span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> FALSE 0</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> MAXSIZE 20 <span class="comment">/* 存储空间初始分配量 */</span></span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> Status;<span class="comment">/* Status是函数的类型,其值是函数结果状态代码，如OK等 */</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> ElemType;<span class="comment">/* ElemType类型根据实际情况而定，这里假设为int */</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> ElemType;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> Status;<span class="comment">/* Status是函数的类型,其值是函数结果状态代码，如OK等 */</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">int</span> ElemType;<span class="comment">/* ElemType类型根据实际情况而定，这里假设为int */</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">  &#123;</span></span><br><span class="line">      ElemType data;<span class="comment">//数据</span></span><br><span class="line">      <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> * <span class="title">next</span>;</span><span class="comment">//下一个节点</span></span><br><span class="line">  &#125;Node;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">LinkList</span>;</span></span><br><span class="line">  Status <span class="title function_">InitList</span><span class="params">( LinkList *L)</span></span><br><span class="line">  &#123;</span><br><span class="line">      *L = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">      <span class="keyword">if</span> ( !(*L))</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">return</span> ERROR;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//注意，前驱后即都是自己</span></span><br><span class="line">      (*L)-&gt;next = (*L);</span><br><span class="line">      <span class="keyword">return</span> OK;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">const</span> Status <span class="title function_">ListTraverse</span><span class="params">(LinkList *L)</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList p = (*L)-&gt;next;<span class="comment">//p是第一个节点</span></span><br><span class="line">      <span class="keyword">while</span>(p!=(*L))</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,p-&gt;data);</span><br><span class="line">          p=p-&gt;next;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> OK;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  LinkList <span class="title function_">CreateListTail</span><span class="params">(LinkList *L,<span class="type">int</span> n)</span><span class="comment">//注意这里，我要把最后的结点返回到调用者哪里</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList p,rear,pN;</span><br><span class="line">      srand(time(<span class="number">0</span>));</span><br><span class="line">      <span class="comment">//创造新的节点</span></span><br><span class="line">      *L = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">       rear = *L;<span class="comment">//rear拿到指向最后一个节点的指针</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="comment">//创造新的节点</span></span><br><span class="line">           pN = (Node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">           pN-&gt;data = rand()%<span class="number">100</span>+<span class="number">1</span>;</span><br><span class="line">           rear-&gt;next = pN;</span><br><span class="line">           rear = pN;<span class="comment">//pn就是那个末尾,rear要重新成为那个末尾</span></span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">       rear-&gt;next = *(L);<span class="comment">//构成循环链表</span></span><br><span class="line">       <span class="keyword">return</span> rear;<span class="comment">//返回到调用者最后一个结点</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> <span class="title function_">ClearList</span><span class="params">( LinkList *L)</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList p,q;</span><br><span class="line">      p=(*L)-&gt;next;<span class="comment">//p指向第一个节点</span></span><br><span class="line">      <span class="keyword">while</span>(p!=(*L))</span><br><span class="line">      &#123;</span><br><span class="line">          q=p-&gt;next;</span><br><span class="line">          <span class="built_in">free</span>(p);</span><br><span class="line">          p=q;<span class="comment">//q交给下一个p才能继续往下</span></span><br><span class="line">      &#125;</span><br><span class="line">      (*L)-&gt;next = (*L);</span><br><span class="line">      <span class="keyword">return</span> OK;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">Status <span class="title function_">IsEmpty</span><span class="params">( LinkList L )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ( L-&gt;next != L ) &#123;<span class="comment">//不等于等于 不是空的！</span></span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> TRUE;<span class="comment">//是空的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这是一个能让两个链表合并成一个的功能</span></span><br><span class="line">Status <span class="title function_">Match_List</span><span class="params">( LinkList rear1, LinkList rear2 )</span></span><br><span class="line">&#123;</span><br><span class="line">    LinkList p,q;</span><br><span class="line">    <span class="keyword">if</span> ( !IsEmpty(rear1-&gt;next) &amp;&amp; !IsEmpty(rear2-&gt;next) )<span class="comment">//rear-&gt;next 其实就是头结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        p = rear1-&gt;next;</span><br><span class="line">        rear1-&gt;next =  rear2-&gt;next-&gt;next;</span><br><span class="line">        q = rear2-&gt;next;<span class="comment">//为了一会要释放用</span></span><br><span class="line">        rear2-&gt;next = p;</span><br><span class="line">        <span class="built_in">free</span>(q);<span class="comment">//释放掉头结点</span></span><br><span class="line">        <span class="keyword">return</span>  OK;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">  &#123;</span><br><span class="line">      LinkList L1 = <span class="literal">NULL</span>;</span><br><span class="line">      LinkList L2 = <span class="literal">NULL</span>;</span><br><span class="line">      <span class="type">int</span> i = InitList(&amp;L1);</span><br><span class="line">      <span class="type">int</span> j = InitList(&amp;L2);</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;初始化后：ListLength(L) = %d \n&quot;</span>, ListLength(&amp;L1));</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;初始化后：ListLength(L) = %d \n&quot;</span>, ListLength(&amp;L2));</span><br><span class="line">      LinkList rear1 =  CreateListTail(&amp;L1, <span class="number">5</span>);<span class="comment">//创建顺便拿到最后一个结点</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2000000000</span>;i++)<span class="comment">//这个地方如果不延时，两个链表的数据会相同！</span></span><br><span class="line">      &#123;</span><br><span class="line">      </span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      LinkList rear2 =  CreateListTail(&amp;L2, <span class="number">5</span>);<span class="comment">//同理</span></span><br><span class="line">      ListTraverse(&amp;L1);</span><br><span class="line">      ListTraverse(&amp;L2);</span><br><span class="line">      </span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;----------------------拟合两个链表！-----------------------\n&quot;</span>);</span><br><span class="line">      Match_List(rear1, rear2);</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;结果为：\n&quot;</span>);</span><br><span class="line">      ListTraverse(&amp;L1);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/05/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B0%BE%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0%E5%8F%8A%E9%93%BE%E6%8E%A5%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-得分（Score，ACM-ICPC-Seoul-2005，UVa1585(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/26/%E5%BE%97%E5%88%86%EF%BC%88Score%EF%BC%8CACM-ICPC-Seoul-2005%EF%BC%8CUVa1585(1)/">得分（Score，ACM/ICPC Seoul 2005，UVa1585)</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/26/%E5%BE%97%E5%88%86%EF%BC%88Score%EF%BC%8CACM-ICPC-Seoul-2005%EF%BC%8CUVa1585(1)/" class="archive-article-date">
-        <time datetime="2021-10-26T13:06:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-26</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给出一个由O和X组成的串（长度为1~80），统计得分。每个O的得分为目前练习一出现的O的个数，X的得分为0。例如，OOXXOXXOOO的得分为1+2+0+0+1+0+0+1+2+3</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><hr>
-<ul>
-<li>首先定义一个字符数组来保存输入进来的字符</li>
-<li>用一个循环遍历该字符数组，可以用到strlen来做循环终止的条件</li>
-<li>判断是否是 ‘O’,如果是 令 计数器+1，并且累加到sum里面去，如果不是’O’，则需要归0计数器。</li>
-</ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><hr>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> max 80</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*  ooxxoxxooo  */</span></span><br><span class="line">    <span class="type">char</span> s[<span class="number">80</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s);</span><br><span class="line">    <span class="type">int</span> i=<span class="number">0</span>,cntO = <span class="number">0</span>, sum = <span class="number">0</span>;<span class="comment">//cnt用来记录O出现的个数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(s); ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[i] == <span class="string">&#x27;O&#x27;</span> )<span class="comment">//判断语句进来主要判断o的个数</span></span><br><span class="line">        &#123;</span><br><span class="line">            cntO++;<span class="comment">//先计数</span></span><br><span class="line">            sum+=cntO;</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            cntO = <span class="number">0</span>;<span class="comment">//否则归0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">竞赛</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/竞赛//" class="article-tag-list-link color3">竞赛</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/26/%E5%BE%97%E5%88%86%EF%BC%88Score%EF%BC%8CACM-ICPC-Seoul-2005%EF%BC%8CUVa1585(1)/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-得分（Score，ACM-ICPC-Seoul-2005，UVa1585" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/26/%E5%BE%97%E5%88%86%EF%BC%88Score%EF%BC%8CACM-ICPC-Seoul-2005%EF%BC%8CUVa1585/">得分（Score，ACM/ICPC Seoul 2005，UVa1585)</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/26/%E5%BE%97%E5%88%86%EF%BC%88Score%EF%BC%8CACM-ICPC-Seoul-2005%EF%BC%8CUVa1585/" class="archive-article-date">
-        <time datetime="2021-10-26T13:06:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-26</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给出一个由O和X组成的串（长度为1~80），统计得分。每个O的得分为目前练习一出现的O的个数，X的得分为0。例如，OOXXOXXOOO的得分为1+2+0+0+1+0+0+1+2+3</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><hr>
-<ul>
-<li>首先定义一个字符数组来保存输入进来的字符</li>
-<li>用一个循环遍历该字符数组，可以用到strlen来做循环终止的条件</li>
-<li>判断是否是 ‘O’,如果是 令 计数器+1，并且累加到sum里面去，如果不是’O’，则需要归0计数器。</li>
-</ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><hr>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> max 80</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*  ooxxoxxooo  */</span></span><br><span class="line">    <span class="type">char</span> s[<span class="number">80</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s);</span><br><span class="line">    <span class="type">int</span> i=<span class="number">0</span>,cntO = <span class="number">0</span>, sum = <span class="number">0</span>;<span class="comment">//cnt用来记录O出现的个数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(s); ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[i] == <span class="string">&#x27;O&#x27;</span> )<span class="comment">//判断语句进来主要判断o的个数</span></span><br><span class="line">        &#123;</span><br><span class="line">            cntO++;<span class="comment">//先计数</span></span><br><span class="line">            sum+=cntO;</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            cntO = <span class="number">0</span>;<span class="comment">//否则归0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">竞赛</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/竞赛//" class="article-tag-list-link color3">竞赛</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/26/%E5%BE%97%E5%88%86%EF%BC%88Score%EF%BC%8CACM-ICPC-Seoul-2005%EF%BC%8CUVa1585/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-环状序列-Circular-Sequence(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/23/%E7%8E%AF%E7%8A%B6%E5%BA%8F%E5%88%97-Circular-Sequence(1)/">环状序列 Circular Sequence</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/23/%E7%8E%AF%E7%8A%B6%E5%BA%8F%E5%88%97-Circular-Sequence(1)/" class="archive-article-date">
-        <time datetime="2021-10-23T07:25:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>长度为n的环状串有n种表示法，分别为从某个位置开始顺时针得到。例如，图3-4的环状串有10种表示：CGAGTCAGCT，GAGTCAGCTC，AGTCAGCTCG等。在这些表示法中，字典序最小的称为”最小表示”。<br>输入一个长度为n（n≤100）的环状DNA串（只包含A、C、G、T这4种字符）的一种表示法，你的任务是输出该环状串的最小表示。例如，CTCC的最小表示是CCCT， CGAGTCAGCT的最小表示为AGCTCGAGTC。</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CKHuTY"><img src="https://www.helloimg.com/images/2021/10/23/CKHuTY.png" alt="CKHuTY.png"></a></p>
-<h3 id="什么是字典最小表示"><a href="#什么是字典最小表示" class="headerlink" title="什么是字典最小表示"></a>什么是字典最小表示</h3><blockquote>
-<p>【分析】<br>本题出现了一个新概念:字典序。所谓字典序，就是字符串在字典中的顺序。一般地， 对于两个字符串，从第一个字符开始比较，当某一个位置的字符不同时，该位置字符较小的 串，字典序较小(例如，abc比bcd小);如果其中一个字符串已经没有更多字符，但另一个 字符串还没结束，则较短的字符串的字典序较小(例如，hi比history小)。字典序的概念可 以推广到任意序列，例如，序列1, 2, 4, 7比1, 2, 5小。</p>
-</blockquote>
-<hr>
-<p>自己的思路： 也就是我们要选取一个闭环从任意位置开始的字母的组合比大小。举个例子🌰：如果说我们需要排<strong>GCTAG</strong> ,那我们就可以用下图来表示</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CKbSWK"><img src="https://www.helloimg.com/images/2021/10/23/CKbSWK.jpg" alt="CKbSWK.jpg"></a></p>
-<p>显然有<strong>5</strong>种情况，我们要取里面字典序列最小的。由上面的分析的一句话“<strong>第一个字符开始比较，当某一个位置的字符不同时，该位置字符较小的串</strong>”可以得出，如果我们都从第一个字符开始比较，A开头的那一串为所有串种的最小。</p>
-<ul>
-<li><p>所以我能写出一个函数用来做一个比较。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">less</span><span class="params">( <span class="type">const</span> <span class="type">char</span> *s ,<span class="type">int</span> p , <span class="type">int</span> q )</span><span class="comment">//用来判别前后两个字符的关系</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="built_in">strlen</span>( s ); </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n ; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[(p+i)%n] != s[(q+i)%n] )<span class="comment">//当后一个和前一个字符不相等时候进入判断语句</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> s[(p+i)%n] &lt; s[(q+i)%n];<span class="comment">//当后一个比前一个字符来的小的话返回1否则返回0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//表示相等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="完整的程序"><a href="#完整的程序" class="headerlink" title="完整的程序"></a>完整的程序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 105</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">less</span><span class="params">( <span class="type">const</span> <span class="type">char</span> *s ,<span class="type">int</span> p , <span class="type">int</span> q)</span><span class="comment">//用来判别前后两个字符的关系</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="built_in">strlen</span>( s );</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n ; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[(p+i)%n] != s[(q+i)%n] )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> s[(p+i)%n] &lt; s[(q+i)%n];<span class="comment">//如果前一个小于后一个就返回1进行交换</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//表示相等</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    <span class="type">char</span> s[maxn];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>( T-- )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>( <span class="string">&quot;%s&quot;</span>,s );</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> n = <span class="built_in">strlen</span>(s);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ( less(s,i,ans) )<span class="comment">//如果后面的比前面的还小就进来</span></span><br><span class="line">            &#123;</span><br><span class="line">                 ans = i;   <span class="comment">//把小的那个作为新的ans（也就是小的），然后在ans的基础上往后看有没有比ans更小的</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//输出</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">putchar</span>(s[(i+ans)%n]);<span class="comment">//从ans开始往后逐个环形输出（环形输出）</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">竞赛</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/竞赛//" class="article-tag-list-link color3">竞赛</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/23/%E7%8E%AF%E7%8A%B6%E5%BA%8F%E5%88%97-Circular-Sequence(1)/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-环状序列-Circular-Sequence" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/23/%E7%8E%AF%E7%8A%B6%E5%BA%8F%E5%88%97-Circular-Sequence/">环状序列 Circular Sequence</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/23/%E7%8E%AF%E7%8A%B6%E5%BA%8F%E5%88%97-Circular-Sequence/" class="archive-article-date">
-        <time datetime="2021-10-23T07:25:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>长度为n的环状串有n种表示法，分别为从某个位置开始顺时针得到。例如，图3-4的环状串有10种表示：CGAGTCAGCT，GAGTCAGCTC，AGTCAGCTCG等。在这些表示法中，字典序最小的称为”最小表示”。<br>输入一个长度为n（n≤100）的环状DNA串（只包含A、C、G、T这4种字符）的一种表示法，你的任务是输出该环状串的最小表示。例如，CTCC的最小表示是CCCT， CGAGTCAGCT的最小表示为AGCTCGAGTC。</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CKHuTY"><img src="https://www.helloimg.com/images/2021/10/23/CKHuTY.png" alt="CKHuTY.png"></a></p>
-<h3 id="什么是字典最小表示"><a href="#什么是字典最小表示" class="headerlink" title="什么是字典最小表示"></a>什么是字典最小表示</h3><blockquote>
-<p>【分析】<br>本题出现了一个新概念:字典序。所谓字典序，就是字符串在字典中的顺序。一般地， 对于两个字符串，从第一个字符开始比较，当某一个位置的字符不同时，该位置字符较小的 串，字典序较小(例如，abc比bcd小);如果其中一个字符串已经没有更多字符，但另一个 字符串还没结束，则较短的字符串的字典序较小(例如，hi比history小)。字典序的概念可 以推广到任意序列，例如，序列1, 2, 4, 7比1, 2, 5小。</p>
-</blockquote>
-<hr>
-<p>自己的思路： 也就是我们要选取一个闭环从任意位置开始的字母的组合比大小。举个例子🌰：如果说我们需要排<strong>GCTAG</strong> ,那我们就可以用下图来表示</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/CKbSWK"><img src="https://www.helloimg.com/images/2021/10/23/CKbSWK.jpg" alt="CKbSWK.jpg"></a></p>
-<p>显然有<strong>5</strong>种情况，我们要取里面字典序列最小的。由上面的分析的一句话“<strong>第一个字符开始比较，当某一个位置的字符不同时，该位置字符较小的串</strong>”可以得出，如果我们都从第一个字符开始比较，A开头的那一串为所有串种的最小。</p>
-<ul>
-<li><p>所以我能写出一个函数用来做一个比较。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">less</span><span class="params">( <span class="type">const</span> <span class="type">char</span> *s ,<span class="type">int</span> p , <span class="type">int</span> q )</span><span class="comment">//用来判别前后两个字符的关系</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="built_in">strlen</span>( s ); </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n ; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[(p+i)%n] != s[(q+i)%n] )<span class="comment">//当后一个和前一个字符不相等时候进入判断语句</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> s[(p+i)%n] &lt; s[(q+i)%n];<span class="comment">//当后一个比前一个字符来的小的话返回1否则返回0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//表示相等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="完整的程序"><a href="#完整的程序" class="headerlink" title="完整的程序"></a>完整的程序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 105</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">less</span><span class="params">( <span class="type">const</span> <span class="type">char</span> *s ,<span class="type">int</span> p , <span class="type">int</span> q)</span><span class="comment">//用来判别前后两个字符的关系</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="built_in">strlen</span>( s );</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n ; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[(p+i)%n] != s[(q+i)%n] )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> s[(p+i)%n] &lt; s[(q+i)%n];<span class="comment">//如果前一个小于后一个就返回1进行交换</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//表示相等</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    <span class="type">char</span> s[maxn];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>( T-- )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>( <span class="string">&quot;%s&quot;</span>,s );</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> n = <span class="built_in">strlen</span>(s);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ( less(s,i,ans) )<span class="comment">//如果后面的比前面的还小就进来</span></span><br><span class="line">            &#123;</span><br><span class="line">                 ans = i;   <span class="comment">//把小的那个作为新的ans（也就是小的），然后在ans的基础上往后看有没有比ans更小的</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//输出</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">putchar</span>(s[(i+ans)%n]);<span class="comment">//从ans开始往后逐个环形输出（环形输出）</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">竞赛</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/竞赛//" class="article-tag-list-link color3">竞赛</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/23/%E7%8E%AF%E7%8A%B6%E5%BA%8F%E5%88%97-Circular-Sequence/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数字加密" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/06/%E6%95%B0%E5%AD%97%E5%8A%A0%E5%AF%86/">数字加密</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/06/%E6%95%B0%E5%AD%97%E5%8A%A0%E5%AF%86/" class="archive-article-date">
-        <time datetime="2021-06-06T15:44:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>实验7-1-9 数字加密 (15 分)</p>
-<p>输入一个四位数，将其加密后输出。方法是将该数每一位上的数字加9，然后除以10取余，做为该位上的新数字，最后将千位和十位上的数字互换，百位和个位上的数字互换，组成加密后的新四位数。例如输入1257，经过加9取余后得到新数字0146，再经过两次换位后得到4601。</p>
-<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出一个四位的整数x，即要求被加密的数。</p>
-<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中按照格式“The encrypted number is V”输出加密后得到的新数V。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1257</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The encrypted number is 4601</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> number;</span><br><span class="line">   <span class="type">int</span> i=<span class="number">3</span>;<span class="comment">//i等于3是为了让倒着拆的数字放在数组里是正的</span></span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;number);</span><br><span class="line">   <span class="type">int</span> arr[<span class="number">4</span>];</span><br><span class="line">   <span class="comment">//将每一位数字+9 除10取余</span></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="comment">//先进行每一位数字的拆分送入到数组中去</span></span><br><span class="line">   <span class="keyword">while</span> ( i != <span class="number">-1</span> )</span><br><span class="line">   &#123;</span><br><span class="line">      arr[i] = number%<span class="number">10</span>;</span><br><span class="line">      number/=<span class="number">10</span>;</span><br><span class="line">      i--;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//每一位数字要进行的操作</span></span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">   &#123;</span><br><span class="line">     arr[i] = (arr[i]+<span class="number">9</span>)%<span class="number">10</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">//互换,利用数组简单的下标的思想</span></span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> ; i++)</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="type">int</span> t = arr[i];</span><br><span class="line">     arr[i]=arr[i+<span class="number">2</span>];</span><br><span class="line">     arr[i+<span class="number">2</span>] = t;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//输出</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;The encrypted number is &quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,arr[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/06/%E6%95%B0%E5%AD%97%E5%8A%A0%E5%AF%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-字符串排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1321,6 +529,797 @@
 
 
   
+    <article id="post-找最长的字符串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/03/%E6%89%BE%E6%9C%80%E9%95%BF%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/">找最长的字符串</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/03/%E6%89%BE%E6%9C%80%E9%95%BF%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="archive-article-date">
+        <time datetime="2021-06-03T13:17:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>实验8-2-2 找最长的字符串 (15 分)</p>
+<p>本题要求编写程序，针对输入的N个字符串，输出其中最长的字符串。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出正整数N；随后N行，每行给出一个长度小于80的非空字符串，其中不会出现换行符，空格，制表符。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中用以下格式输出最长的字符串：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The longest is: 最长的字符串</span><br></pre></td></tr></table></figure>
+
+<p>如果字符串的长度相同，则输出先输入的字符串。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">li</span><br><span class="line">wang</span><br><span class="line">zhang</span><br><span class="line">jin</span><br><span class="line">xiang</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The longest is: zhang</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> OldStr[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line">  <span class="type">char</span> NewStr[<span class="number">100</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> n;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  <span class="comment">//输入</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">     <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, OldStr[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//处理</span></span><br><span class="line">  <span class="comment">//将第一个数组赋值给new</span></span><br><span class="line">  <span class="built_in">strcpy</span>(NewStr,OldStr[<span class="number">0</span>]);</span><br><span class="line">  <span class="comment">//遍历每一个一维数组,并且用strlen作为比较</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> ( <span class="built_in">strlen</span>(OldStr[i]) &gt; <span class="built_in">strlen</span>(NewStr)  )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">strcpy</span>( NewStr, OldStr[i] );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//输出</span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;The longest is: %s&quot;</span>,NewStr);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意⚠️： 用 %s 可以直接输出二维数组里的一维数组！</p>
+</blockquote>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/03/%E6%89%BE%E6%9C%80%E9%95%BF%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-统计大写辅音字母" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/02/%E7%BB%9F%E8%AE%A1%E5%A4%A7%E5%86%99%E8%BE%85%E9%9F%B3%E5%AD%97%E6%AF%8D/">统计大写辅音字母</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/02/%E7%BB%9F%E8%AE%A1%E5%A4%A7%E5%86%99%E8%BE%85%E9%9F%B3%E5%AD%97%E6%AF%8D/" class="archive-article-date">
+        <time datetime="2021-06-02T14:35:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-02</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>实验7-3-3 统计大写辅音字母 (15 分)</p>
+<p>英文辅音字母是除<code>A</code>、<code>E</code>、<code>I</code>、<code>O</code>、<code>U</code>以外的字母。本题要求编写程序，统计给定字符串中<strong>大写</strong>辅音字母的个数。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出一个不超过80个字符、并以回车结束的字符串。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>输出在一行中给出字符串中大写辅音字母的个数。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HELLO World!</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>本题分别判断单个字符</p>
+<p>所以用getchar 函数 循环条件为换行时候就停止读入</p>
+<p>没读一个元素就放到数组中去，并且记录次数</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> chs[<span class="number">80</span>];</span><br><span class="line">  <span class="type">char</span> c;</span><br><span class="line">  <span class="type">int</span> len=<span class="number">0</span>,cnt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  c = getchar();<span class="comment">//先读入</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; c != <span class="string">&#x27;\n&#x27;</span> ; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">    chs[i] = ch;<span class="comment">//把那个字符串放入字符数组中去</span></span><br><span class="line">    len++;<span class="comment">//个数++</span></span><br><span class="line">    c = getchar();<span class="comment">//又读了一个</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">//遍历这个数组</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len ; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">if</span> ( chs[i] &gt;= <span class="string">&#x27;A&#x27;</span> &amp;&amp; chs[i] &lt;= <span class="string">&#x27;Z&#x27;</span> )<span class="comment">//再大写范围里</span></span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">if</span> ( chs[i] != <span class="string">&#x27;A&#x27;</span> || chs[i] !=<span class="string">&#x27;E&#x27;</span> || chs[i] != <span class="string">&#x27;I&#x27;</span> chs[i] != <span class="string">&#x27;U&#x27;</span> chs[i] != <span class="string">&#x27;O&#x27;</span>)</span><br><span class="line">          &#123;</span><br><span class="line">              cnt++;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,cnt);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/02/%E7%BB%9F%E8%AE%A1%E5%A4%A7%E5%86%99%E8%BE%85%E9%9F%B3%E5%AD%97%E6%AF%8D/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-组个最小数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/02/%E7%BB%84%E4%B8%AA%E6%9C%80%E5%B0%8F%E6%95%B0/">组个最小数</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/02/%E7%BB%84%E4%B8%AA%E6%9C%80%E5%B0%8F%E6%95%B0/" class="archive-article-date">
+        <time datetime="2021-06-02T13:53:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-02</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>给定数字0-9各若干个。你可以以任意顺序排列这些数字，但必须全部使用。目标是使得最后得到的数尽可能小（注意0不能做首位）。例如：给定两个0，两个1，三个5，一个8，我们得到的最小的数就是10015558。</p>
+<p>现给定数字，请编写程序输出能够组成的最小的数。</p>
+<p>输入格式：<br>输入在一行中给出10个非负整数，顺序表示我们拥有数字0、数字1、……数字9的个数。整数间用一个空格分隔。10个数字的总个数不超过50，且至少拥有1个非0的数字。</p>
+<p>输出格式：<br>在一行中输出能够组成的最小的数。</p>
+<p>输入样例：<br>2 2 0 0 0 3 0 0 1 0</p>
+<p>输出样例：<br>10015558</p>
+<blockquote>
+<p>思路：</p>
+<ol>
+<li>其实就是桶排序的思路</li>
+<li>题目所说的意思相当于有 0～9是个编号的桶，用户输入每个编号里放了几个🚩</li>
+<li>根据桶排序的思路，从第一个桶开始往后遍历，发现当前编号的桶里有🚩的时候就输出桶编号。有几个就输出几次。</li>
+</ol>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> flagCnt[<span class="number">11</span>]= &#123;<span class="number">0</span>,&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//读所有数据</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">     <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;flagCnt[i]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">//先输出除了第一个桶的后面桶里有元素的编号---目的保证第一个不是0</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> ( i &gt; <span class="number">0</span> &amp;&amp; flagCnt[i] != <span class="number">0</span> ) </span><br><span class="line">    &#123;</span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,i);<span class="comment">//输出那个编号</span></span><br><span class="line">         flagCnt[i]--;<span class="comment">//输出完之后拿走一个🚩</span></span><br><span class="line">         <span class="comment">//输出完之后立即break</span></span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">//现在顺序输出即可</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">while</span> ( flagCnt[i] != <span class="number">0</span> ) &#123;<span class="comment">//当桶里的🚩还有的时候输出对应桶编号</span></span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,i);</span><br><span class="line">       flagCnt[i]--;<span class="comment">//用完记得把桶里🚩--</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/02/%E7%BB%84%E4%B8%AA%E6%9C%80%E5%B0%8F%E6%95%B0/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-藏头诗" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/02/%E8%97%8F%E5%A4%B4%E8%AF%97/">藏头诗</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/02/%E8%97%8F%E5%A4%B4%E8%AF%97/" class="archive-article-date">
+        <time datetime="2021-06-02T12:12:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-02</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p> 实验11-1-7 藏头诗 (15 分)</p>
+<p>本题要求编写一个解密藏头诗的程序。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入为一首中文藏头诗，一共四句，每句一行。注意：一个汉字占两个字节。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>取出每句的第一个汉字并连接在一起形成一个字符串并输出。同时在末尾输入一个换行符。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一叶轻舟向东流</span><br><span class="line">帆稍轻握杨柳手</span><br><span class="line">风纤碧波微起舞</span><br><span class="line">顺水任从雅客流</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一帆风顺</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> a[<span class="number">50</span>];</span><br><span class="line">    <span class="type">char</span> b[<span class="number">9</span>];</span><br><span class="line">    <span class="type">int</span> i, j = <span class="number">0</span>, k;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        gets(a);<span class="comment">//输入每行诗 gets读到换行符为止</span></span><br><span class="line">        <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)<span class="comment">//注意一个汉字占两个字节所以说是循环两次才能变成一个汉字</span></span><br><span class="line">            b[j++] = a[k];<span class="comment">//将每行诗第一个字存入数组B</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(b)    ;<span class="comment">//输出数组B</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/02/%E8%97%8F%E5%A4%B4%E8%AF%97/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-找出总分最高的学生" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/01/%E6%89%BE%E5%87%BA%E6%80%BB%E5%88%86%E6%9C%80%E9%AB%98%E7%9A%84%E5%AD%A6%E7%94%9F/">找出总分最高的学生</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/01/%E6%89%BE%E5%87%BA%E6%80%BB%E5%88%86%E6%9C%80%E9%AB%98%E7%9A%84%E5%AD%A6%E7%94%9F/" class="archive-article-date">
+        <time datetime="2021-06-01T12:57:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>实验9-7 找出总分最高的学生 (15 分)</p>
+<p>给定N个学生的基本信息，包括学号（由5个数字组成的字符串）、姓名（长度小于10的不包含空白字符的非空字符串）和3门课程的成绩（[0,100]区间内的整数），要求输出总分最高学生的姓名、学号和总分。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出正整数N（≤10）。随后N行，每行给出一位学生的信息，格式为“学号 姓名 成绩1 成绩2 成绩3”，中间以空格分隔。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出总分最高学生的姓名、学号和总分，间隔一个空格。题目保证这样的学生是唯一的。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">00001 huanglan 78 83 75</span><br><span class="line">00002 wanghai 76 80 77</span><br><span class="line">00003 shenqiang 87 83 76</span><br><span class="line">10001 zhangfeng 92 88 78</span><br><span class="line">21987 zhangmeng 80 82 75</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zhangfeng 10001 258</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span>&#123;</span></span><br><span class="line">  <span class="type">char</span> StuNub[<span class="number">12</span>];</span><br><span class="line">  <span class="type">char</span> name[<span class="number">12</span>];</span><br><span class="line">  <span class="type">int</span> score[<span class="number">12</span>];</span><br><span class="line">&#125;Student[<span class="number">12</span>];</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> n;</span><br><span class="line">   <span class="type">int</span> sum[<span class="number">10</span>];</span><br><span class="line">   <span class="type">int</span> max;</span><br><span class="line">   <span class="type">int</span> tmp;</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%s %s&quot;</span>, Student[i].StuNub,Student[i].name);</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;Student[i].score[j]);</span><br><span class="line">        sum[i]+=Student[i].score[j];<span class="comment">//并把当前这个同学的成绩加到当前同学的分数里面去</span></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  max = sum[<span class="number">0</span>];</span><br><span class="line">  <span class="type">int</span> k;</span><br><span class="line">   <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; n; k++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( sum[k] &gt; max   ) &#123;</span><br><span class="line">            max = sum[k];</span><br><span class="line">            tmp=k;<span class="comment">//把最大小下标保存起来一会用</span></span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//k即最大同学小表</span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%s %s %d\n&quot;</span>,Student[tmp].name,Student[tmp].StuNub,max);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/01/%E6%89%BE%E5%87%BA%E6%80%BB%E5%88%86%E6%9C%80%E9%AB%98%E7%9A%84%E5%AD%A6%E7%94%9F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-判断上三角矩阵" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/05/31/%E5%88%A4%E6%96%AD%E4%B8%8A%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5/">判断上三角矩阵</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/05/31/%E5%88%A4%E6%96%AD%E4%B8%8A%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5/" class="archive-article-date">
+        <time datetime="2021-05-31T14:18:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-31</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>实验7-2-5 判断上三角矩阵 (15 分)</p>
+<p>上三角矩阵指主对角线以下的元素都为0的矩阵；主对角线为从矩阵的左上角至右下角的连线。</p>
+<p>本题要求编写程序，判断一个给定的方阵是否上三角矩阵。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出一个正整数<em>T</em>，为待测矩阵的个数。接下来给出<em>T</em>个矩阵的信息：每个矩阵信息的第一行给出一个不超过10的正整数<em>n</em>。随后<em>n</em>行，每行给出<em>n</em>个整数，其间以空格分隔。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>每个矩阵的判断结果占一行。如果输入的矩阵是上三角矩阵，输出“YES”，否则输出“NO”。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">3</span><br><span class="line">1 2 3</span><br><span class="line">0 4 5</span><br><span class="line">0 0 6</span><br><span class="line">2</span><br><span class="line">1 0</span><br><span class="line">-8 2</span><br><span class="line">3</span><br><span class="line">1 2 3</span><br><span class="line">1 4 5</span><br><span class="line">0 -1 6</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">NO</span><br><span class="line">NO</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BuonWK"><img src="https://www.helloimg.com/images/2021/05/31/BuonWK.jpg" alt="BuonWK.jpg"></a></p>
+<ul>
+<li>观察发现： 下三角矩阵只需要保证      i(行标)  &gt; j (列标) 就是下三角的下标</li>
+<li>我的判断条件直接就是。 i &gt; j   &amp;&amp;  当前这个元素不为0  —&gt; 当前不是下三角</li>
+<li>同样 如果你要算下三角矩阵，也就是上边全是0 那就 <strong>i&lt;j</strong>  即可</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n,n1;<span class="comment">//</span></span><br><span class="line">    <span class="type">int</span> arr[<span class="number">10</span>][<span class="number">10</span>];</span><br><span class="line">    <span class="type">int</span> flagARR[<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="type">int</span> flag = <span class="number">1</span>;<span class="comment">//假设为是上三角</span></span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n1);<span class="comment">//输入当前矩阵的行</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n1; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n1; j++) &#123;</span><br><span class="line">          <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;arr[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">        </span><br><span class="line">      <span class="comment">//检查是否是三角</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n1; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n1; j++) &#123;</span><br><span class="line">          <span class="keyword">if</span> ( i &gt; j &amp;&amp; arr[i][j]!=<span class="number">0</span>)  &#123;</span><br><span class="line">              flag = <span class="number">0</span>;<span class="comment">//但凡有一个非零代表就不是了</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//循环完成之后代表记录当前的数组</span></span><br><span class="line">    flagARR[i] = flag;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">     <span class="keyword">if</span> (  flagARR[i] == <span class="number">1</span> )</span><br><span class="line">     &#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);</span><br><span class="line">     &#125;<span class="keyword">else</span></span><br><span class="line">     &#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/05/31/%E5%88%A4%E6%96%AD%E4%B8%8A%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-求一批整数中出现最多的个位数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/05/30/%E6%B1%82%E4%B8%80%E6%89%B9%E6%95%B4%E6%95%B0%E4%B8%AD%E5%87%BA%E7%8E%B0%E6%9C%80%E5%A4%9A%E7%9A%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E5%AD%97/">求一批整数中出现最多的个位数字</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/05/30/%E6%B1%82%E4%B8%80%E6%89%B9%E6%95%B4%E6%95%B0%E4%B8%AD%E5%87%BA%E7%8E%B0%E6%9C%80%E5%A4%9A%E7%9A%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E5%AD%97/" class="archive-article-date">
+        <time datetime="2021-05-29T20:30:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-30</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>实验7-1-6 求一批整数中出现最多的个位数字 (20 分)</p>
+<p>给定一批整数，分析每个整数的每一位数字，求出现次数最多的个位数字。例如给定3个整数1234、2345、3456，其中出现最多次数的数字是3和4，均出现了3次。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第1行中给出正整数<em>N</em>（≤1000），在第二行中给出<em>N</em>个不超过整型范围的非负整数，数字间以空格分隔。 </p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中按格式“M: n1 n2 …”输出，其中M是最大次数，n1、n2、……为出现次数最多的个位数字，按从小到大的顺序排列。数字间以空格分隔，但末尾不得有多余空格。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1234 2345 3456</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3: 3 4</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>思路就是：</p>
+<ul>
+<li>因为拆解出来是0-9 这几个数，所以我们用桶排序的算法</li>
+<li>先初始化10个数组 0-9全为0</li>
+<li>每次拆出来的数 放入arr[i]++ 给对应的桶里放一个数</li>
+<li>直到拆的数&#x3D;0的时候停止🤚</li>
+<li>再利用一个循环跑一遍桶排序的数组，找出次数最大的那个，也就是要比较是桶里面🚩的数量最多的赋值给max</li>
+<li>循环一遍找到max对应的桶的编号。也就是数组的下标。代表了数组对应元素。</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> n;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">  <span class="type">int</span> arr[n],t;</span><br><span class="line">  <span class="type">int</span> ArrfirstNum[n];</span><br><span class="line">  <span class="type">int</span> Tongpai[<span class="number">10</span>] = &#123;<span class="number">0</span>,&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;arr[i]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 拆解 -- 存放</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">        <span class="comment">//拆当前这个数</span></span><br><span class="line">        <span class="keyword">while</span>( arr[i]!= <span class="number">0</span> )</span><br><span class="line">        &#123;</span><br><span class="line">           t = arr[i]%<span class="number">10</span>; <span class="comment">//拆个位</span></span><br><span class="line">           Tongpai[t]++;<span class="comment">//对应位置上的元素++</span></span><br><span class="line">           arr[i]/=<span class="number">10</span>;<span class="comment">//抹掉最后一位</span></span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> max = <span class="number">-1</span>;</span><br><span class="line">  <span class="comment">//找最大----桶里面的🚩的数量</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">if</span> ( Tongpai[i] &gt; max )</span><br><span class="line">      &#123;</span><br><span class="line">          max = Tongpai[i];</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//先输出最大输出最大</span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d:&quot;</span>, max);<span class="comment">//输出次数---桶里的🚩就是最大出现的次数</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">//输出桶的编号---也就是出现的次数</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">     <span class="keyword">if</span> ( Tongpai[i] == max )<span class="comment">//如果位置上的🚩的个数比当前max</span></span><br><span class="line">     &#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot; %d&quot;</span>, i);<span class="comment">//输出那个桶的编号，桶的编号就是最大值</span></span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/05/30/%E6%B1%82%E4%B8%80%E6%89%B9%E6%95%B4%E6%95%B0%E4%B8%AD%E5%87%BA%E7%8E%B0%E6%9C%80%E5%A4%9A%E7%9A%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E5%AD%97/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/9/">Next &amp;raquo;</a>
@@ -1482,15 +1481,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++提高篇</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">编程语言学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1530,19 +1529,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C语言编程题</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">C语言错题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1606,19 +1601,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--指针</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计思想</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--指针</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1659,18 +1650,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">心理学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Neo4j</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">图数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目总结</a>
               </li>
              
               <li class="article-tag-list-item">

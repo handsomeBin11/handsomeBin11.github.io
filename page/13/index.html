@@ -209,940 +209,6 @@
             
 
   
-    <article id="post-求最小值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/23/%E6%B1%82%E6%9C%80%E5%B0%8F%E5%80%BC/">求最小值</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/23/%E6%B1%82%E6%9C%80%E5%B0%8F%E5%80%BC/" class="archive-article-date">
-        <time datetime="2021-04-22T16:26:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>本题要求编写程序，找出给定一系列整数中的最小值。</p>
-<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中首先给出一个正整数<em>n</em>，之后是<em>n</em>个整数，其间以空格分隔。</p>
-<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中按照“min &#x3D; 最小值”的格式输出<em>n</em>个整数中的最小值。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 -2 -123 100 0</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">min = -123</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n,num,min;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="type">int</span> arr[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">      arr[i] = num;</span><br><span class="line">    &#125;</span><br><span class="line">    min = arr[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[i] &lt;  min ) &#123;</span><br><span class="line">        min = arr[i];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;min = %d\n&quot;</span>,min);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>根据输入的那个n —也就是你要输入几个数字找最小</li>
-<li>因为知道末尾的范围，故用for 记录输入的每一个值</li>
-<li>在循环外另数组的第一个最小</li>
-<li>利用循环遍历<ul>
-<li>如果发现有比min还小的值，替换。</li>
-</ul>
-</li>
-<li>输出那个min</li>
-</ul>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/23/%E6%B1%82%E6%9C%80%E5%B0%8F%E5%80%BC/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-求奇数和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/23/%E6%B1%82%E5%A5%87%E6%95%B0%E5%92%8C/">求奇数和</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/23/%E6%B1%82%E5%A5%87%E6%95%B0%E5%92%8C/" class="archive-article-date">
-        <time datetime="2021-04-22T16:25:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>本题要求计算给定的一系列正整数中奇数的和。</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在一行中给出一系列正整数，其间以空格分隔。当读到零或负整数时，表示输入结束，该数字不要处理。</p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行中输出正整数序列中奇数的和。</p>
-<h3 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8 7 4 3 70 5 6 101 -1</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">116</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> n;</span><br><span class="line">  <span class="type">int</span> sum =<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">do</span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">       <span class="keyword">if</span> ( n&gt;<span class="number">0</span> &amp;&amp; n%<span class="number">2</span>==<span class="number">1</span> )</span><br><span class="line">       &#123;</span><br><span class="line">          sum+=n;</span><br><span class="line">       &#125;</span><br><span class="line">  &#125; <span class="keyword">while</span>(n &gt; <span class="number">0</span>);<span class="comment">//当&gt;0时能继续循环</span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,sum);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/23/%E6%B1%82%E5%A5%87%E6%95%B0%E5%92%8C/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多级指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/22/%E5%A4%9A%E7%BA%A7%E6%8C%87%E9%92%88/">多级指针</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/22/%E5%A4%9A%E7%BA%A7%E6%8C%87%E9%92%88/" class="archive-article-date">
-        <time datetime="2021-04-22T15:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="什么是多维指针？"><a href="#什么是多维指针？" class="headerlink" title="什么是多维指针？"></a>什么是多维指针？</h3><h4 id="如何得到那个地址？"><a href="#如何得到那个地址？" class="headerlink" title="如何得到那个地址？"></a>如何得到那个地址？</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">10</span>;<span class="comment">//i首先是个整形的变量 </span></span><br><span class="line">  </span><br><span class="line">	<span class="type">int</span> *p = &amp;i;<span class="comment">//int类型的指针变量p 取得了i的地址</span></span><br><span class="line">	<span class="type">int</span> **q = &amp;p;<span class="comment">//int类型的指针变量q 取得了p的地址</span></span><br><span class="line">	<span class="type">int</span> ***r = &amp;q;<span class="comment">//int类型的指针变量r 取得了p的地址</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们画个图来看看究竟发生了什么？👇</p>
-<p><img src="https://www.helloimg.com/images/2021/04/21/B805fK.png" alt="B805fK.png"></p>
-<ol>
-<li>i 是int类型的</li>
-<li>p 存放的是 i 的地址，p就应该是 int *类型的。即p能存放 int 类型<strong>变量</strong>的地址。</li>
-<li>q 存放了 p的地址， p又是 int * 类型的。故，q 能存放是 int 类型指针变量的地址。所以是 (int * )  *</li>
-<li>r 存放了 q的地址， q又是 能存放  int ** 类型的，故，r能存放 int 类型变量(p)的指针变量（q）的指针变量的地址。</li>
-</ol>
-<p>题问：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//r 是否能存 i的地址？</span></span><br><span class="line"><span class="comment">// no ！！！！！</span></span><br><span class="line">r 只能存法 <span class="type">int</span> ** 类型的变量的地址。</span><br><span class="line"><span class="comment">//q能存放 i的地址吗？</span></span><br><span class="line">  <span class="comment">//no!!@!!</span></span><br><span class="line">  </span><br><span class="line"> q 只能 存放 <span class="type">int</span> * 类型的变量的地址。</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="如何拿到多级指针里面的值？"><a href="#如何拿到多级指针里面的值？" class="headerlink" title="如何拿到多级指针里面的值？"></a>如何拿到多级指针里面的值？</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;***r = %d\n&quot;</span>,***r);<span class="comment">//***r = 10 </span></span><br></pre></td></tr></table></figure>
-
-<p>由下图可知：</p>
-<p><img src="https://www.helloimg.com/images/2021/04/21/B8wyw1.png" alt="B8wyw1.png"></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">		* r 就相当于那个q变量存放的内容 ，q里存放的2000H</span></span><br><span class="line"><span class="comment">		    - 原理就是根据r里存放的3000H找到该位置上的变量q，接着拿到q里存放的2000H这个内容。</span></span><br><span class="line"><span class="comment">		** r就相当于那个p变量存放的内容 ，p里面存放的是1000H</span></span><br><span class="line"><span class="comment">				- 原理就是根据q里存放的2000H找到该位置上的变量p，接着拿到p里存放的2000H这个内容。</span></span><br><span class="line"><span class="comment">		*** r就当于那个i变量存放的内容 ， i里面存放的是10。</span></span><br><span class="line"><span class="comment">				- 原理就是根据p里存放的1000H找到该位置上的变量i，接着拿到i里存放的10这个内容。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">f</span><span class="params">( <span class="type">int</span> **q )</span><span class="comment">//这里就应该用 *（*p）来接收。</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//*q 就是 p</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">g</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line">  <span class="type">int</span> * p = &amp;i;</span><br><span class="line">  f( &amp;p );<span class="comment">//p是int * 类型的变量。 &amp;p 就是  int **</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言理论部分//" class="article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/22/%E5%A4%9A%E7%BA%A7%E6%8C%87%E9%92%88/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-指针和多维数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/22/%E6%8C%87%E9%92%88%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/">指针和多维数组</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/22/%E6%8C%87%E9%92%88%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" class="archive-article-date">
-        <time datetime="2021-04-22T15:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>先看一段代码👇</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> zippo[<span class="number">4</span>][<span class="number">2</span>] = &#123; &#123;<span class="number">2</span>,<span class="number">4</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">6</span>,<span class="number">8</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">1</span>,<span class="number">3</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">5</span>,<span class="number">7</span>&#125;,</span><br><span class="line">                       &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; zippo = %p\n&quot;</span>,zippo);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;zippo[0] = %p\n&quot;</span>,&amp;zippo[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;zippo[0][0] = %p\n&quot;</span>,&amp;zippo[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>zippo &#x3D; 0x7ffee5fc3b50<br>&amp;zippo[0] &#x3D; 0x7ffee5fc3b50<br>&amp;zippo[0][0] &#x3D; 0x7ffee5fc3b50</p>
-<p>惊奇的发现地址一样！</p>
-</blockquote>
-<ul>
-<li>根据数组的知识，Zippo 数组名就是该数组的首地址。</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKB606"><img src="https://www.helloimg.com/images/2021/04/22/BKB606.png" alt="BKB606.png"></a></p>
-<ul>
-<li>根据上图可见，&amp;zippo[0] （蓝色）其实是一个<strong>含有两个元素的小数组</strong>。那么根据我们的理论，既然是数组，它的表示方法就是<strong>首个元素的地址</strong>，它的地址是那个（黄色）那个位置元素的地址。</li>
-<li>zippo 是整个二维数组的名，它的地址又恰好与那个小的一维数组zippo[0] 地址重合</li>
-<li>自然，那个黄色框框里的(也就是存放2那个元素)位置的地址为&amp;zippo[0][0]</li>
-</ul>
-<p>👌，那我们最终🉑️推出，zippo &#x3D; &amp;zippo[0] &#x3D; &amp;zippo[0][0] &#x3D; 0x7ffee83eab50</p>
-<p>—-&gt; 进一步推理</p>
-<ul>
-<li>对于整个二维数组zippo来讲，他含有4个 1维的数组，每个一维的数组里面又含有2个元素。所以对于zippo的第一个元素就表示<strong>占用了</strong>两个大小的 int  对象<strong>的地址</strong>。</li>
-<li>而对于zippo[0] 来讲，他只是一个<strong>占有</strong>一个元素的<strong>的地址。</strong></li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; zippo = %p , zippo + 1  = %p\n&quot;</span>,zippo,zippo+<span class="number">1</span>);                    </span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; zippo[0] = %p , zippo[0] + 1  = %p\n&quot;</span>,zippo[<span class="number">0</span>],zippo[<span class="number">0</span>]+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>​     zippo &#x3D; 0x7ffee83eab50 ,     zippo + 1  &#x3D; 0x7ffee83eab58<br> zippo[0] &#x3D; 0x7ffee83eab50 , zippo[0] + 1  &#x3D; 0x7ffee83eab54</p>
-</blockquote>
-<p>从👆那个输出结果可以看出，当我们+1 之后，zippo 和 zippo[0]的结果是截然不同的,但是开始位置是相同的。</p>
-<ul>
-<li>zippo + 1 一下跳了<strong>两个</strong>int —-&gt; 8. 说明 zippo 是占有<strong>两个int</strong>对象的地址 </li>
-<li>zippo[0] +1 一下跳了<strong>一个</strong>int —-&gt; 4 说明 zippo[0] 是占有<strong>一个int</strong>对象的地址。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; *zippo = %p , &amp;zippo[0][0]= %p\n&quot;</span>,*zippo,&amp;zippo[<span class="number">0</span>][<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>*zippo       &#x3D;  0x7ffee9c4fb50 ,  </p>
-<p>&amp;zippo[0][0]&#x3D; 0x7ffee9c4fb50</p>
-</blockquote>
-<p>​			因为*zippo 代表取了一层地址，相当于是里面小数组的第一个地址也就是 zippo[0][0]（首地址）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; *(zippo[0])= %d , &amp;zippo[0][0]= %d\n&quot;</span>,*(zippo[<span class="number">0</span>]),zippo[<span class="number">0</span>][<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>*(zippo[0])&#x3D; 2 , &amp;zippo[0][0]&#x3D; 2</p>
-</blockquote>
-<ul>
-<li>因为zippo[0]代表着是小数组里面的首个元素的地址，* 它 就是取它地址上的值，那当然是 2啦。</li>
-</ul>
-<p>————-&gt;所以说，如果我们想通过指针取得地址上的值我们需要👇</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot; *(zippo[0])= %d , zippo[0][0]= %d, **zippo = %d\n&quot;</span>,*(zippo[<span class="number">0</span>]),zippo[<span class="number">0</span>][<span class="number">0</span>],**zippo);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>*(zippo[0])&#x3D; 2 , zippo[0][0]&#x3D; 2, **zippo &#x3D; 2</p>
-</blockquote>
-<ul>
-<li>需要取两层 * ,<ul>
-<li>第一层 *代表小数组的第一个元素的地址</li>
-<li>再取一层 *  代表小数组里面的第一个位置上存放的值。</li>
-</ul>
-</li>
-</ul>
-<h4 id="烧脑时刻！"><a href="#烧脑时刻！" class="headerlink" title="烧脑时刻！"></a>烧脑时刻！</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> zippo[<span class="number">4</span>][<span class="number">2</span>] = &#123; &#123;<span class="number">2</span>,<span class="number">4</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">6</span>,<span class="number">8</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">1</span>,<span class="number">3</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">5</span>,<span class="number">7</span>&#125;,</span><br><span class="line">                       &#125;;</span><br><span class="line"></span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;zippo[2][1]= %d\n&quot;</span>,zippo[<span class="number">2</span>][<span class="number">1</span>]);</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;*(*(zippo+2)+1) = %d\n&quot;</span>,*(*(zippo+<span class="number">2</span>)+<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>zippo[2][1]        &#x3D; 3<br>*(*(zippo+2)+1) &#x3D; 3</p>
-<p>*(*(zippo+2)+1) 同样也能得到那个3!!!!!! ⚠️</p>
-</blockquote>
-<p>要想了解里面的原理我们需要逐个拆开，看看它的真面目！</p>
-<ol>
-<li>zippo</li>
-</ol>
-<p>​       <a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKCo1b"><img src="https://www.helloimg.com/images/2021/04/22/BKCo1b.md.png" alt="BKCo1b.md.png"> </a></p>
-<ol start="2">
-<li><p>zippo+2</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKCFlo"><img src="https://www.helloimg.com/images/2021/04/22/BKCFlo.md.png" alt="BKCFlo.md.png"></a></p>
-</li>
-<li><p>*(zippo+2)+1</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKC3LC"><img src="https://www.helloimg.com/images/2021/04/22/BKC3LC.md.png" alt="BKC3LC.md.png"></a></p>
-</li>
-<li><p>*(*(zippo+2)+1)</p>
-<p><a target="_blank" rel="noopener" href="https://www.helloimg.com/image/BKC1RS"><img src="https://www.helloimg.com/images/2021/04/22/BKC1RS.md.png" alt="BKC1RS.md.png"></a></p>
-</li>
-</ol>
-<h3 id="指向对维数组的指针"><a href="#指向对维数组的指针" class="headerlink" title="指向对维数组的指针"></a>指向对维数组的指针</h3><p>如何声明一个指针变量，用来指向一个二维数组？</p>
-<ul>
-<li>如果单纯只用 int ，那么如上 的zippo。int 只能与 zippo[0]匹配，而说明该类型指向一个 int类型的值。但是zippo是首元素的地址，它里面内含 两个int类型值的一维数组。</li>
-<li>因此我们定义一个指针变量，它得用来指向<strong>两个int类型的数组</strong>而不是指向一个int类型值。</li>
-</ul>
-<p>因此我们用如下手段：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> ( *pz )[<span class="number">2</span>];<span class="comment">// []它的优先级高，所以前面得加括号！</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>表示用来指向<strong>两个 int类型值</strong>的<strong>数组</strong>的指针。</p>
-</blockquote>
-<p>根据这个，能写出下面这个程序</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> zippo[<span class="number">4</span>][<span class="number">2</span>] = &#123; &#123;<span class="number">2</span>,<span class="number">4</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">6</span>,<span class="number">8</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">1</span>,<span class="number">3</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">5</span>,<span class="number">7</span>&#125;,</span><br><span class="line">                       &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> (*pz)[<span class="number">2</span>];<span class="comment">//声明一个指向两个int 类型值的数组的指针变量</span></span><br><span class="line"></span><br><span class="line">    pz = zippo;<span class="comment">//pz指向了那个zippo，因此我们能直接操作那个zippo</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot; pz = %p\n&quot;</span>,pz);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;pz[0] = %p\n&quot;</span>,&amp;pz[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;pz[0][0] = %p\n&quot;</span>,&amp;pz[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*(*(pz+2)) = %d\n&quot;</span>,*(*(pz+<span class="number">2</span>)));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>pz &#x3D; 0x7ffee1a31b50<br>&amp;pz[0] &#x3D; 0x7ffee1a31b50<br>&amp;pz[0][0] &#x3D; 0x7ffee1a31b50<br>*(*(pz+2))&#x3D; 1</p>
-</blockquote>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言理论部分//" class="article-tag-list-link color3">C语言理论部分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/22/%E6%8C%87%E9%92%88%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-最大公约数和最小公倍数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/20/%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E5%92%8C%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0/">最大公约数和最小公倍数</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/20/%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E5%92%8C%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0/" class="archive-article-date">
-        <time datetime="2021-04-20T12:47:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-20</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>实验4-1-1 最大公约数和最小公倍数 (15 分)</p>
-<p>本题要求两个给定正整数的最大公约数和最小公倍数。</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在一行中给出两个正整数M和N（≤1000）。</p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行中顺序输出M和N的最大公约数和最小公倍数，两数字间以1空格分隔。</p>
-<h3 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">511 292</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">73 2044</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> m,n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;m,&amp;n);</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="comment">//所谓的最大公约数就是 同时能被一个数整除，最大的那个</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = m; i &gt; <span class="number">0</span> ; i--)<span class="comment">//从m 或者 n任意位置开始</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( m%i == <span class="number">0</span> &amp;&amp;  n % i == <span class="number">0</span> ) &#123;<span class="comment">//m对i n对i 都取余数看看，如果都能除尽</span></span><br><span class="line">            <span class="comment">//就是最大的那个，因为我们是从后往前走的</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//最小公倍数 = 两整数的乘积÷最大公约数</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,i,(m*n)/i);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>最小公倍数 &#x3D; 两整数的乘积÷最大公约数</li>
-<li>最大公约数<ol>
-<li>从m 和 n任意一个数开始 （赋值给i）</li>
-<li>倒着来，也就是i&#x3D;m或 n 如果i还大于0的情况就继续，说明找到</li>
-<li>判断– m  和  n i是否能同时被那个i整除</li>
-<li>如果满足条件就是最大的那一个（因为倒着来的）然后break出去</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<p>⚠️：循环变量i </p>
-<ul>
-<li>如果要在这种情况 要break出去，如果你只在循环体里 int i的话出去输出的时候会失效，因为生存周期的问题。</li>
-<li>最好要在外面把那个i先定一好，定义成全局的。</li>
-</ul>
-</blockquote>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/20/%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0%E5%92%8C%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-计算油费" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/20/%E8%AE%A1%E7%AE%97%E6%B2%B9%E8%B4%B9/">计算油费</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/20/%E8%AE%A1%E7%AE%97%E6%B2%B9%E8%B4%B9/" class="archive-article-date">
-        <time datetime="2021-04-20T11:25:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-20</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>实验3-11 计算油费 (15 分)</p>
-<p>现在90号汽油6.95元&#x2F;升、93号汽油7.44元&#x2F;升、97号汽油7.93元&#x2F;升。为吸引顾客，某自动加油站推出了“自助服务”和“协助服务”两个服务等级，分别可得到5%和3%的折扣。</p>
-<p>本题要求编写程序，根据输入顾客的加油量a，汽油品种b（90、93或97）和服务类型c（m - 自助，e - 协助），计算并输出应付款。</p>
-<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出两个整数和一个字符，分别表示顾客的加油量a，汽油品种b（90、93或97）和服务类型c（m - 自助，e - 协助）。</p>
-<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出应付款额，保留小数点后2位。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">40 97 m</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">301.34</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> total;<span class="comment">//返回给顾客的总价</span></span><br><span class="line">    <span class="type">double</span> Iptgas,numGas;<span class="comment">//输入油量 和 要加几号汽油</span></span><br><span class="line">    <span class="type">char</span> <span class="class"><span class="keyword">class</span>;</span><span class="comment">//什么类型</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lf %lf %c&quot;</span>,&amp;Iptgas,&amp;numGas,&amp;class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( class == <span class="string">&#x27;m&#x27;</span> )<span class="comment">//自助的情况如果是m - 自助 的情况</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( numGas == <span class="number">90</span> ) &#123; </span><br><span class="line">            total = Iptgas * <span class="number">6.95</span>*<span class="number">0.95</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>( numGas == <span class="number">93</span> )</span><br><span class="line">        &#123;</span><br><span class="line">             total = Iptgas * <span class="number">7.44</span>*<span class="number">0.95</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>( numGas == <span class="number">97</span> )</span><br><span class="line">        &#123;</span><br><span class="line">             total = Iptgas * <span class="number">7.93</span>*<span class="number">0.95</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( class == <span class="string">&#x27;e&#x27;</span> ) <span class="comment">//否则如果是要 e - 协助的情况</span></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> ( numGas == <span class="number">90</span> ) &#123;</span><br><span class="line">              total = Iptgas * <span class="number">6.95</span>*<span class="number">0.97</span>;</span><br><span class="line">          &#125;<span class="keyword">else</span> <span class="keyword">if</span>( numGas == <span class="number">93</span> )</span><br><span class="line">          &#123;</span><br><span class="line">                total = Iptgas * <span class="number">7.44</span>*<span class="number">0.97</span>;</span><br><span class="line">           &#125;<span class="keyword">else</span> <span class="keyword">if</span>( numGas == <span class="number">97</span> )</span><br><span class="line">           &#123;</span><br><span class="line">                total = Iptgas * <span class="number">7.93</span>*<span class="number">0.97</span>;</span><br><span class="line">           &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,total);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>代码逻辑很清楚：分两种情况，其中每一种情况分别对应 90 93 97 来分别讨论。</p>
-<p>但是遇⚠️注意题目中设了陷阱   </p>
-<ul>
-<li>得到5%和3%的折扣</li>
-</ul>
-<p><strong>要区分得到折扣和打多少折是不一样的</strong></p>
-<ul>
-<li><p>得到折扣相当于说： </p>
-</li>
-<li><p>原价 -（原价  ✖️ 得到多少折扣 ） 也可以是 </p>
-</li>
-<li><p>原价 * （1- 得多少折扣）——–&gt; 本题就是用的这种方法</p>
-</li>
-<li><p>打多少折是可以直接 ：   原价 * 打多少折</p>
-</li>
-</ul>
-</blockquote>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/20/%E8%AE%A1%E7%AE%97%E6%B2%B9%E8%B4%B9/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-高速公路超速处罚" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/19/%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF%E8%B6%85%E9%80%9F%E5%A4%84%E7%BD%9A/">高速公路超速处罚</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/19/%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF%E8%B6%85%E9%80%9F%E5%A4%84%E7%BD%9A/" class="archive-article-date">
-        <time datetime="2021-04-19T11:06:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-19</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>实验3-10 高速公路超速处罚 (15 分)</p>
-<p>按照规定，在高速公路上行使的机动车，达到或超出本车道限速的10%则处200元罚款；若达到或超出50%，就要吊销驾驶证。请编写程序根据车速和限速自动判别对该机动车的处理。</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在一行中给出2个正整数，分别对应车速和限速，其间以空格分隔。</p>
-<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行中输出处理意见：若属于正常行驶，则输出“OK”；若应处罚款，则输出“Exceed x%. Ticket 200”；若应吊销驾驶证，则输出“Exceed x%. License Revoked”。其中x是超速的百分比，精确到整数。 </p>
-<h3 id="输入样例1"><a href="#输入样例1" class="headerlink" title="输入样例1:"></a>输入样例1:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">65 60</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例1"><a href="#输出样例1" class="headerlink" title="输出样例1:"></a>输出样例1:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OK</span><br></pre></td></tr></table></figure>
-
-<h3 id="输入样例2"><a href="#输入样例2" class="headerlink" title="输入样例2:"></a>输入样例2:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">110 100</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例2"><a href="#输出样例2" class="headerlink" title="输出样例2:"></a>输出样例2:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exceed 10%. Ticket 200</span><br></pre></td></tr></table></figure>
-
-<h3 id="输入样例3"><a href="#输入样例3" class="headerlink" title="输入样例3:"></a>输入样例3:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">200 120</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出样例3"><a href="#输出样例3" class="headerlink" title="输出样例3:"></a>输出样例3:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exceed 67%. License Revoked</span><br></pre></td></tr></table></figure>
-
-
-
-<p>程序如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//在高速公路上行使的机动车，达到或超出本车道限速的10%则处200元罚款；若达到或超出50%，就要吊销驾驶证。</span></span><br><span class="line"></span><br><span class="line">  <span class="type">float</span> speed,LimtSped,Puls;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%f %f&quot;</span>, &amp;speed,&amp;LimtSped);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//先计算多百分之几？</span></span><br><span class="line"></span><br><span class="line">  Puls = (speed - LimtSped)/LimtSped * <span class="number">100</span> ;<span class="comment">//记得要乘100 转换成百分制，要不然是 0.几</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( Puls &gt;= <span class="number">50</span>  )</span><br><span class="line">  &#123; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Exceed %.0f%%. License Revoked&quot;</span>,Puls);<span class="comment">//% 用 %%来表示</span></span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(  Puls &gt;= <span class="number">10</span>)</span><br><span class="line">  &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;Exceed %.0f%%. Ticket 200\n&quot;</span>,Puls);<span class="comment">//% 用 %%来表示</span></span><br><span class="line"></span><br><span class="line">  &#125;<span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;OK\n&quot;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><p>写程序时，遇到几个基础的问题</p>
-<ol>
-<li><p>复习一下谁比谁多百分之几（🤦‍♂️小学问题哈）</p>
-<blockquote>
-<p>（大的谁-小的谁）&#x2F;比字 后面的谁。</p>
-</blockquote>
-<p>举例子本题中，问比限速超出了多少</p>
-<p>也就是说 （你的速度 - 限速）&#x2F;限速 （限速就是比字后面的）</p>
-</li>
-<li><p>在printf里要想表达 % ，得用 %%</p>
-</li>
-<li><p>%.0f 的意思是，小数点后保留0位小数，并且四舍五入</p>
-<p>  1.4的话就是  1 </p>
-<p>  1.7 就是   2</p>
-</li>
-</ol>
-</li>
-<li><p>还有个大问题</p>
-<p>起初我把条件写反了，这样</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( Puls &gt;= <span class="number">10</span> )</span><br><span class="line"> &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;Exceed %.0f%%. Ticket 200\n&quot;</span>,Puls);<span class="comment">//% 用 %%来表示</span></span><br><span class="line"> &#125;<span class="keyword">else</span> <span class="keyword">if</span>( Puls &gt;= <span class="number">50</span> )</span><br><span class="line"> &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;Exceed %.0f%%. License Revoked&quot;</span>,Puls);<span class="comment">//% 用 %%来表示</span></span><br><span class="line">  </span><br><span class="line"> &#125;<span class="keyword">else</span></span><br><span class="line"> &#123;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;OK\n&quot;</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样写有个严重的错误，如果你的车速超过了50%，我的程序先走那个 &gt;&#x3D;10 的，然后就结束了不会再进底下的 else if 里。故，导致程序的错误。</p>
-<p>改进就是，先判断小范围的，再判断大范围的。也就是先看看满不满足 &gt;&#x3D;50 的，如果不满足，再看看是&gt;&#x3D;10</p>
-<p>要是整反了，那就一直在大范围里。</p>
-</li>
-</ul>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/19/%E9%AB%98%E9%80%9F%E5%85%AC%E8%B7%AF%E8%B6%85%E9%80%9F%E5%A4%84%E7%BD%9A/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-三天打鱼两天晒网" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1821,6 +887,815 @@ struct point p1,p2;
 
 
   
+    <article id="post-冒泡排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/04/13/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/04/13/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+        <time datetime="2021-04-13T13:23:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-13</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="情况一：内循环正序"><a href="#情况一：内循环正序" class="headerlink" title="情况一：内循环正序"></a>情况一：内循环正序</h3><p>原理图如下：</p>
+<p><img src="https://ae01.alicdn.com/kf/Ufc4c54376e734a18ae30dba0fe896a22E.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/U3c14a79519f744eda5041c4135bb6e0fy.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/U08c8d803114a485f88173eeccad59a9aA.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/Udee9cade9d024c82a5d2d9a5541057e01.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/Ucd656c7d876444c6ba5e2926a6a4d132V.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/U7e1dddbf64f5484c8807908ea0ad97e1v.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/U681bc84c61ec4999b0181492a09f926cb.jpg"></p>
+<p><img src="https://ae01.alicdn.com/kf/U767d7922396f49e09592a83b58f9cf55S.jpg"></p>
+<ul>
+<li><p>看图可以看出小轮也就是j那轮循环 一开始就是n-1 n-2 n-3 n-4   而 1 2 3 4 增长的特性满足i每次递增的特性，所以 为 n - i</p>
+</li>
+<li><p>大轮循环就是天蓝色框的，显然，图中有5个数，只需要循环 4次。所以得出结论：<strong>n 个数字只需要 n-1轮外循环即可</strong>。</p>
+<p>由此可以写出以下程序</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line"> &#123;</span><br><span class="line">   <span class="type">int</span> arr[] = &#123;<span class="number">23</span>,<span class="number">533</span>,<span class="number">1</span>,<span class="number">46</span>,<span class="number">324</span>,<span class="number">5</span>,<span class="number">89</span>,<span class="number">21</span>&#125;;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">7</span>; i++)<span class="comment">//n个只需要n-1轮</span></span><br><span class="line">   &#123;</span><br><span class="line">     <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">8</span>-i; j++) &#123; <span class="comment">// n - i 轮</span></span><br><span class="line"><span class="comment">//         printf(&quot;i = %d,j = %d\n&quot;,i,j);</span></span><br><span class="line">       <span class="keyword">if</span> ( arr[j<span class="number">-1</span>] &gt; arr[j] ) &#123;</span><br><span class="line">         <span class="type">int</span> t = arr[j];</span><br><span class="line">         arr[j] = arr[j<span class="number">-1</span>];</span><br><span class="line">         arr[j<span class="number">-1</span>] = t;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">7</span>; i++) &#123;<span class="comment">//数组是从0开始存的，所以下标要从0开始输出。⚠️</span></span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,arr[i]);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">     </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="情况二：内循环倒叙"><a href="#情况二：内循环倒叙" class="headerlink" title="情况二：内循环倒叙"></a>情况二：内循环倒叙</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> arr[] = &#123;<span class="number">23</span>,<span class="number">533</span>,<span class="number">1</span>,<span class="number">46</span>,<span class="number">324</span>,<span class="number">5</span>,<span class="number">89</span>,<span class="number">21</span>&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) <span class="comment">//同样外层循环 n-1轮</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">7</span>; j &gt;= i; j--) &#123;<span class="comment">//内层循环 n-i</span></span><br><span class="line">      <span class="keyword">if</span> ( arr[j<span class="number">-1</span>] &gt; arr[j] ) &#123;</span><br><span class="line">        <span class="type">int</span> t = arr[j<span class="number">-1</span>];</span><br><span class="line">        arr[j<span class="number">-1</span>] = arr[j];</span><br><span class="line">        arr[j] = t;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,arr[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下是每轮循环中输出 i 和 j的值的变换</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span>,j = <span class="number">7</span>       <span class="number">7</span>次小循环 = <span class="number">7</span> - i（<span class="number">0</span>）</span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">6</span></span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">5</span></span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">4</span></span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">3</span></span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">2</span></span><br><span class="line">i = <span class="number">0</span>,j = <span class="number">1</span></span><br><span class="line"> ----------------  ☝️第一大轮 </span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">7</span>       <span class="number">6</span>次小循环 = <span class="number">7</span> - i（<span class="number">1</span>）</span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">6</span></span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">5</span></span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">4</span></span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">3</span></span><br><span class="line">i = <span class="number">1</span>,j = <span class="number">2</span></span><br><span class="line">--------------       第二大轮</span><br><span class="line">i = <span class="number">2</span>,j = <span class="number">7</span>        <span class="number">5</span>次小循环 = <span class="number">7</span> - i（<span class="number">2</span>）</span><br><span class="line">i = <span class="number">2</span>,j = <span class="number">6</span></span><br><span class="line">i = <span class="number">2</span>,j = <span class="number">5</span></span><br><span class="line">i = <span class="number">2</span>,j = <span class="number">4</span></span><br><span class="line">i = <span class="number">2</span>,j = <span class="number">3</span></span><br><span class="line">--------------       第三大轮</span><br><span class="line">i = <span class="number">3</span>,j = <span class="number">7</span>        <span class="number">4</span>次小循环 = <span class="number">7</span> - i（<span class="number">3</span>）</span><br><span class="line">i = <span class="number">3</span>,j = <span class="number">6</span></span><br><span class="line">i = <span class="number">3</span>,j = <span class="number">5</span></span><br><span class="line">i = <span class="number">3</span>,j = <span class="number">4</span></span><br><span class="line">--------------       第四大轮</span><br><span class="line">i = <span class="number">4</span>,j = <span class="number">7</span>        <span class="number">3</span>次小循环 = <span class="number">7</span> - i（<span class="number">4</span>）</span><br><span class="line">i = <span class="number">4</span>,j = <span class="number">6</span></span><br><span class="line">i = <span class="number">4</span>,j = <span class="number">5</span></span><br><span class="line">--------------       第五大轮</span><br><span class="line">i = <span class="number">5</span>,j = <span class="number">7</span>        <span class="number">2</span>次小循环 = <span class="number">7</span> - i（<span class="number">5</span>）</span><br><span class="line">i = <span class="number">5</span>,j = <span class="number">6</span></span><br><span class="line">--------------      第六大轮 = <span class="number">7</span> -  i（<span class="number">6</span>）</span><br><span class="line">i = <span class="number">6</span>,j = <span class="number">7</span>         <span class="number">1</span>次小循环</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>内层循环倒着来，恰好满足外层没轮加值，内层每次减值，所以只需写 j &gt;&#x3D; i </p>
+</blockquote>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/04/13/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-折半查找" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/04/13/%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE/">折半查找</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/04/13/%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE/" class="archive-article-date">
+        <time datetime="2021-04-12T22:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-13</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;      <span class="comment">//前提是数组必须是排好序的</span></span><br><span class="line">     <span class="type">int</span> a[] = &#123;<span class="number">0</span>,<span class="number">2</span>,<span class="number">20</span>,<span class="number">24</span>,<span class="number">30</span>,<span class="number">68</span>,<span class="number">70</span>,<span class="number">300</span>,<span class="number">301</span>&#125;;<span class="comment">//首位放0是为了从1开始数</span></span><br><span class="line">      </span><br><span class="line">     <span class="type">int</span> mid;<span class="comment">//保存中间值</span></span><br><span class="line">     <span class="type">int</span> low = <span class="number">1</span>,height = <span class="number">8</span>;<span class="comment">//左下标和右下标</span></span><br><span class="line"></span><br><span class="line">     <span class="type">int</span> key;<span class="comment">//你要搜的那个元素</span></span><br><span class="line"></span><br><span class="line">     <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;key);</span><br><span class="line">    </span><br><span class="line">     <span class="keyword">while</span> ( low &lt;= height ) <span class="comment">//当俩下标还没遇见的时候</span></span><br><span class="line">     &#123;</span><br><span class="line">         mid =(height + low)/<span class="number">2</span>;<span class="comment">//每一轮都拿到中间值</span></span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> ( key &lt; a[mid] )<span class="comment">//要找的如果比中间值小说明在左端</span></span><br><span class="line">         &#123;</span><br><span class="line">            height= mid<span class="number">-1</span>;<span class="comment">//移动height到mid的左边</span></span><br><span class="line">         &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( key &gt; a[mid] ) &#123; <span class="comment">//否则如果在右边</span></span><br><span class="line">              low = mid + <span class="number">1</span>;</span><br><span class="line">         &#125;<span class="keyword">else</span></span><br><span class="line">         &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,mid);<span class="comment">//返回那个位置标号</span></span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://www.hualigs.cn/image/6074ca6d1ed3e.jpg"></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题-算法//" class="article-tag-list-link color5">C语言编程题,算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/04/13/%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-判断闰年" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/04/11/%E5%88%A4%E6%96%AD%E9%97%B0%E5%B9%B4/">判断闰年</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/04/11/%E5%88%A4%E6%96%AD%E9%97%B0%E5%B9%B4/" class="archive-article-date">
+        <time datetime="2021-04-11T09:11:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>遇到这么一个题哈，问不能判断闰年的是那个程序？其中的一个程序是这样的</p>
+<p>判断是不是闰年的方法</p>
+<ol>
+<li>能被400整除</li>
+<li>能被4 整除 <strong>且</strong> 不能被100整除<ul>
+<li>以上两个满足条件之一就🉑️</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> year;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;year);</span><br><span class="line">    <span class="keyword">if</span> ( year %<span class="number">400</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;是&quot;</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( year %<span class="number">100</span> != <span class="number">0</span> )<span class="comment">//⚠️注意这里不能被整出，如果2000进来就直接跳出去</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (year %<span class="number">4</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;是&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;不是&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>看这个题，发现当 整数年的时候 ，如果我们输入2000 3000 1000 的话程序应该输出‘不是’</p>
+<p>但这个程序在 else if 哪里 进不去。结果就是程序直接啥也没有输出！！！！！所以这个程序就是错的。</p>
+</blockquote>
+<p>顺便来看下正常人写的闰年程序！</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> year;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;year);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( year == <span class="number">400</span> || (year %<span class="number">4</span> == <span class="number">0</span> &amp;&amp; year%<span class="number">100</span>!=<span class="number">0</span>)  ) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;是！\n&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;不是！\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C语言错题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言错题//" class="article-tag-list-link color1">C语言错题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/04/11/%E5%88%A4%E6%96%AD%E9%97%B0%E5%B9%B4/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-统计字符" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/04/10/%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6/">统计字符</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/04/10/%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6/" class="archive-article-date">
+        <time datetime="2021-04-10T12:54:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本题要求编写程序，输入10个字符，统计其中英文字母、空格或回车、数字字符和其他字符的个数。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入为10个字符。最后一个回车表示输入结束，不算在内。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *  本题要求编写程序，输入10个字符，统计其中英文字母、空格或回车、数字字符和其他字符的个数。</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line">  <span class="type">char</span> c;</span><br><span class="line">  <span class="type">int</span> l = <span class="number">0</span>,b= <span class="number">0</span>,d=<span class="number">0</span>,o=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) </span><br><span class="line">  &#123;</span><br><span class="line">    c = getchar();<span class="comment">//拿到一个字符</span></span><br><span class="line">    <span class="keyword">if</span> ( c == <span class="string">&#x27; &#x27;</span> || c == <span class="string">&#x27;\n&#x27;</span> ) <span class="comment">//如果等于回车或者 空格</span></span><br><span class="line">    &#123; </span><br><span class="line">       b++;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>( c &lt;= <span class="string">&#x27;9&#x27;</span> &amp;&amp; c &gt;= <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">       d++;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>( (c &lt;=<span class="string">&#x27;z&#x27;</span> &amp;&amp; c &gt;= <span class="string">&#x27;a&#x27;</span>) ||(c &lt;=<span class="string">&#x27;Z&#x27;</span> &amp;&amp; c &gt;= <span class="string">&#x27;A&#x27;</span>))</span><br><span class="line">    &#123;</span><br><span class="line">      l++;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      o++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;letter = %d, blank = %d, digit = %d, other = %d\n&quot;</span>,l,b,d,o);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>初始化 计数器为 0，一会要累加。（这是一个好习惯。）</li>
+<li>因为涉及到要输入10个字符所以要循环10次，也就是 for 0-9</li>
+<li>利用getchar函数，拿到一个字符。</li>
+<li>利用多重判读条件<ul>
+<li>如果是 ‘空格 或者 回车 则相应的计数器++</li>
+<li>否则如果是 字符0  - 字符9   则相应的计数器++</li>
+<li>再否则如果 再 小写字母 a-z  <strong>或者</strong>  大写字母 A - Z 之间的 则相应的计数器++</li>
+<li>其他情况就是  则相应的计数器++</li>
+</ul>
+</li>
+</ul>
+<p>最后打印输出</p>
+<h3 id="putchar-与-getchar-？"><a href="#putchar-与-getchar-？" class="headerlink" title="putchar 与 getchar ？"></a>putchar 与 getchar ？</h3><h4 id="putchar"><a href="#putchar" class="headerlink" title="putchar"></a>putchar</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">putchar</span><span class="params">( <span class="type">int</span> c )</span> <span class="comment">// 可以看的到其实它接收的是int 返回🔙的也是int </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>向标准输出<strong>写一个</strong>字符</li>
+<li>返回的是写了几个字符，如果你的不能用了 返回EOF（-1）表示写失败。</li>
+</ul>
+<h4 id="getchar"><a href="#getchar" class="headerlink" title="getchar"></a>getchar</h4><ul>
+<li><pre><code class="c">int getchar( void ) //注意⚠️返回是int
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 从标准输入读入一个字符</span><br><span class="line"></span><br><span class="line">- 返回的那个 int  是为了返回 EOF（-1）</span><br><span class="line"></span><br><span class="line">我们写一个程序来看看</span><br><span class="line"></span><br><span class="line">~~~c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main(int argc, char const* argv[])</span><br><span class="line">&#123;</span><br><span class="line">   int ch;</span><br><span class="line">  //看看它什么时候给我们EOF</span><br><span class="line">   while ( (ch = getchar()) != EOF ) &#123;//判断它是不是EOF</span><br><span class="line">     putchar(ch); //输入until 碰见EOF的时候会停止循环</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   printf(&quot;EOF\n&quot;);//不是的话我就输出了</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>我真帅<br>我真帅<br>你好<br>你好<br>hi<br>hi<br>sorry<br>sorry<br>-1<br>-1<br>EOF<br>EOF<br>我去<br>我去<br>EOF — 直到我按 crtl  + D 出现了EOF</p>
+</blockquote>
+<p>偶数个是计算机返回给我的，我们可以看出，无论输入啥，它都能返回，没有停止。按crtl  + D 时，他才推出并且返回EOF</p>
+<p>这究竟发生了什么？getchar 不是只读一个吗？怎么我按回车它才会给我回应？</p>
+<p><img src="https://ae04.alicdn.com/kf/U494a65ae53674a29bd276e70f2005b6cY.jpg" alt="iShot2021-04-10 20.45.15.png"></p>
+<ul>
+<li><p>你通过键盘⌨️输入 到程序的中间其实还有个程序在中间作加工员（也是一个程序），它叫shell。它会把你键盘输入进来的东西先放入一个叫缓冲区的地方。就如上图所示，123 回车 498 回车。当你调用getchar的时候，她会逐个从缓冲区的读入。当你scanf  %d的时候，他会把回车前面的视作一个整数。</p>
+</li>
+<li><p>当你按下 ctrl + D 的时候。他会把那个位置弄成 -1 ，然后才结束。</p>
+</li>
+</ul>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/04/10/%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-统计学生成绩" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/04/09/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9/">统计学生成绩</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/04/09/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9/" class="archive-article-date">
+        <time datetime="2021-04-08T16:35:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本题要求编写程序读入N个学生的百分制成绩，统计五分制成绩的分布。百分制成绩到五分制成绩的转换规则：</p>
+<ul>
+<li>大于等于90分为A；</li>
+<li>小于90且大于等于80为B；</li>
+<li>小于80且大于等于70为C；</li>
+<li>小于70且大于等于60为D；</li>
+<li>小于60为E。</li>
+</ul>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在第一行中给出一个正整数N（≤1000），即学生人数；第二行中给出N个学生的百分制成绩，其间以空格分隔。 </p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行中输出A、B、C、D、E对应的五分制成绩的人数分布，数字间以空格分隔，行末不得有多余空格。</p>
+<h3 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">77</span> <span class="number">54</span> <span class="number">92</span> <span class="number">73</span> <span class="number">60</span> <span class="number">65</span> <span class="number">69</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">0</span> <span class="number">2</span> <span class="number">3</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *    本题要求编写程序读入N个学生的百分制成绩，统计五分制成绩的分布。百分制成绩到五分制成绩的转换规则：</span></span><br><span class="line"><span class="comment">        大于等于90分为A；</span></span><br><span class="line"><span class="comment">        小于90且大于等于80为B；</span></span><br><span class="line"><span class="comment">        小于80且大于等于70为C；</span></span><br><span class="line"><span class="comment">        小于70且大于等于60为D；</span></span><br><span class="line"><span class="comment">        小于60为E。</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line">    <span class="type">int</span> N;<span class="comment">//记录学生人数</span></span><br><span class="line">    <span class="type">int</span> score;</span><br><span class="line">    <span class="type">int</span> aIndex = <span class="number">0</span>,bIndex=<span class="number">0</span>,cIndex=<span class="number">0</span>,dIndex=<span class="number">0</span>,eIndex=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> a[N];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i++) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;score);</span><br><span class="line">        a[i] = score;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> ( a[i]&gt;= <span class="number">90</span>  ) </span><br><span class="line">      &#123;</span><br><span class="line">          aIndex++;</span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span>( a[i] &gt;= <span class="number">80</span> &amp;&amp; a[i] &lt;= <span class="number">90</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        bIndex++;</span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span>( a[i] &gt;= <span class="number">70</span> &amp;&amp; a[i] &lt;= <span class="number">80</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        cIndex++;</span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span>( a[i] &gt;= <span class="number">60</span> &amp;&amp; a[i] &lt;= <span class="number">70</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        dIndex++;</span><br><span class="line">      &#125;<span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">        eIndex++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d %d\n&quot;</span>,aIndex,bIndex,cIndex,dIndex,eIndex);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/04/09/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-计算个人所得税" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/04/09/%E8%AE%A1%E7%AE%97%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E/">计算个人所得税</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/04/09/%E8%AE%A1%E7%AE%97%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E/" class="archive-article-date">
+        <time datetime="2021-04-08T16:33:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>假设个人所得税为：税率×(工资−1600)。请编写程序计算应缴的所得税，其中税率定义为：</p>
+<ul>
+<li>当工资不超过1600时，税率为0；</li>
+<li>当工资在区间(1600, 2500]时，税率为5%；</li>
+<li>当工资在区间(2500, 3500]时，税率为10%；</li>
+<li>当工资在区间(3500, 4500]时，税率为15%；</li>
+<li>当工资超过4500时，税率为20%。</li>
+</ul>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入在一行中给出非负工资。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>在一行输出个人所得税，精确到小数点后2位。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *    假设个人所得税为：税率×(工资−1600)。请编写程序计算应缴的所得税，其中税率定义为：</span></span><br><span class="line"><span class="comment">        当工资不超过1600时，税率为0；</span></span><br><span class="line"><span class="comment">        当工资在区间(1600, 2500]时，税率为5%；</span></span><br><span class="line"><span class="comment">        当工资在区间(2500, 3500]时，税率为10%；</span></span><br><span class="line"><span class="comment">        当工资在区间(3500, 4500]时，税率为15%；</span></span><br><span class="line"><span class="comment">        当工资超过4500时，税率为20%。</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line"></span><br><span class="line">     <span class="type">double</span> salr;</span><br><span class="line">     <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>, &amp;salr);</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> ( salr &lt; <span class="number">1600</span> ) </span><br><span class="line">     &#123;</span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.</span>);</span><br><span class="line">     &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( salr &gt;= <span class="number">1600</span> &amp;&amp; salr &lt;= <span class="number">2500</span> )</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.05</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;<span class="keyword">else</span> <span class="keyword">if</span> ( salr &gt;= <span class="number">2500</span> &amp;&amp; salr &lt;= <span class="number">3500</span> )</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.1</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;<span class="keyword">else</span> <span class="keyword">if</span>( salr &gt;= <span class="number">3500</span> &amp;&amp; salr &lt;= <span class="number">4500</span> )</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.15</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,<span class="number">0.2</span>*(salr - <span class="number">1600</span>));</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/04/09/%E8%AE%A1%E7%AE%97%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-输出三角形的周长和面积" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/04/09/%E8%BE%93%E5%87%BA%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E5%91%A8%E9%95%BF%E5%92%8C%E9%9D%A2%E7%A7%AF/">输出三角形的周长和面积</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/04/09/%E8%BE%93%E5%87%BA%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E5%91%A8%E9%95%BF%E5%92%8C%E9%9D%A2%E7%A7%AF/" class="archive-article-date">
+        <time datetime="2021-04-08T16:32:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本题要求编写程序，根据输入的三角形的三条边<em>a</em>、<em>b</em>、<em>c</em>，计算并输出面积和周长。注意：在一个三角形中， 任意两边之和大于第三边。三角形面积计算公式：<em>a<strong>r</strong>e**a</em>&#x3D;√<em>s</em>(<em>s</em>−<em>a</em>)(<em>s</em>−<em>b</em>)(<em>s</em>−<em>c</em>)，其中<em>s</em>&#x3D;(<em>a</em>+<em>b</em>+<em>c</em>)&#x2F;2。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入为3个正整数，分别代表三角形的3条边<em>a</em>、<em>b</em>、<em>c</em>。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>如果输入的边能构成一个三角形，则在一行内，按照</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">area = 面积; perimeter = 周长</span><br></pre></td></tr></table></figure>
+
+<p>的格式输出，保留两位小数。否则，输出</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">These sides <span class="keyword">do</span> not correspond to a valid triangle</span><br></pre></td></tr></table></figure>
+
+<h3 id="输入样例1："><a href="#输入样例1：" class="headerlink" title="输入样例1："></a>输入样例1：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span> <span class="number">5</span> <span class="number">3</span>c</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例1："><a href="#输出样例1：" class="headerlink" title="输出样例1："></a>输出样例1：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">area = <span class="number">7.15</span>; perimeter = <span class="number">13.00</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输入样例2："><a href="#输入样例2：" class="headerlink" title="输入样例2："></a>输入样例2：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">4</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例2："><a href="#输出样例2：" class="headerlink" title="输出样例2："></a>输出样例2：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">These sides <span class="keyword">do</span> not correspond to a valid triangle</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     *     本题要求编写程序，根据输入的三角形的三条边a、b、c，计算并输出面积和周长。注意：在一个三角形中，</span></span><br><span class="line"><span class="comment">     *     任意两边之和大于第三边。三角形面积计算公式</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="type">int</span> a,b,c;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;a,&amp;b,&amp;c);</span><br><span class="line">    <span class="type">double</span> perimeter;<span class="comment">//周长</span></span><br><span class="line">    <span class="type">double</span> s;</span><br><span class="line">    <span class="type">double</span> area;</span><br><span class="line">    <span class="keyword">if</span> ( (a+b) &lt;= c || (a+c) &lt;= b || (b+c) &lt;=  a )</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;These sides do not correspond to a valid triangle\n&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        perimeter=a+b+c;</span><br><span class="line">        s = (a+b+c)/<span class="number">2.0</span>;<span class="comment">//这里必须写2.0 不然会抛弃小数点给s ,13 / 2 = 6整数之间的c除法</span></span><br><span class="line">        area = <span class="built_in">sqrt</span>( s*(s-a)*(s-b)*(s-c) );</span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;area = %.2lf; perimeter = %.2lf\n&quot;</span>,area,perimeter);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意⚠️：任意两边之和大于第三边，那么反向思考：如果存在任意两边之和<strong>小于等于</strong>第三边，那么就说明这个三角不成立。</li>
+</ul>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C语言编程题目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/C语言编程题//" class="article-tag-list-link color2">C语言编程题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/04/09/%E8%BE%93%E5%87%BA%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E5%91%A8%E9%95%BF%E5%92%8C%E9%9D%A2%E7%A7%AF/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/12/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/14/">Next &amp;raquo;</a>
@@ -1982,15 +1857,15 @@ struct point p1,p2;
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++提高篇</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">编程语言学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2030,19 +1905,15 @@ struct point p1,p2;
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JAVAWEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C语言编程题</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">C语言错题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C语言理论部分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2106,19 +1977,15 @@ struct point p1,p2;
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--指针</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计思想</a>
+                <a href="javascript:void(0)" class="js-tag color2">C语言理论部分--指针</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2159,18 +2026,6 @@ struct point p1,p2;
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">心理学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Neo4j</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">图数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目总结</a>
               </li>
              
               <li class="article-tag-list-item">
